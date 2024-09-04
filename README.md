@@ -1,3 +1,3 @@
-# Hextra Starter Template
+# Stacksr
 
 Stacksr Website.
