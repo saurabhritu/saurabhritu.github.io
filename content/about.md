@@ -3,4 +3,4 @@ title: About
 type: about
 ---
 
-This is the about page.
+A Stacksr blog, Life, STEM, Science, Technology, Engineering, Mathematics.

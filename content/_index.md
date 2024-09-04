@@ -1,9 +1,9 @@
 ---
-title: My Site
+title: Stacksr
 toc: false
 ---
 
-This is the landing page.
+Stacksr : blog, Life, STEM.
 
 ## Explore
 
@@ -14,4 +14,4 @@ This is the landing page.
 
 ## Documentation
 
-For more information, visit [Hextra](https://imfing.github.io/hextra).
+For more information, visit [Stacksr](https://www.stacksr.com).
