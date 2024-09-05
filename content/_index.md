@@ -1,17 +1,13 @@
 ---
-title: Stacksr
+title: 
 toc: false
 ---
 
-Stacksr : blog, Life, STEM.
+![landscape](/images/branding/Arc.gif.gif)
 
 ## Explore
 
 {{< cards >}}
-  {{< card link="docs" title="Docs" icon="book-open" >}}
+  {{< card link="blog" title="Blog" icon="book-open" >}}
   {{< card link="about" title="About" icon="user" >}}
 {{< /cards >}}
-
-## Documentation
-
-For more information, visit [Stacksr](https://www.stacksr.com).

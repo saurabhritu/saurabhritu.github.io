@@ -1,5 +1,6 @@
 # Hugo configuration file
-title: Stacksr
+baseURL: "https://stacksr.com/"
+title: # Stacksr
 
 # import hextra as module
 module:
@@ -16,41 +17,79 @@ markup:
   highlight:
     noClasses: false
 
+enableInlineShortcodes: true
+
 menu:
   main:
-    - name: Docs
-      pageRef: /docs
-      weight: 1
+    # - name: Docs
+    #   pageRef: /docs
+    #   weight: 1
+    - name: Blog
+      pageRef: /blog
+      weight: 2
     - name: About
       pageRef: /about
-      weight: 2
-    - name: Contact ↗
-      url: "https://github.com/saurabhritu"
       weight: 3
+    # - name: Contact ↗
+    #   url: "https://github.com/saurabhritu"
+    #   weight: 4
     - name: Search
-      weight: 4
+      weight: 5
       params:
         type: search
     - name: GitHub
-      weight: 5
+      weight: 6
       url: "https://github.com/saurabhritu"
       params:
         icon: github
     - name: Twitter
-      weight: 6
+      weight: 7
       url: "https://twitter.com/_SaurabhRitu"
       params:
         icon: x-twitter
 
 params:
+
+  description: Stacksr, Blog, Life, STEM.
+
+  page:
+  # full (100%), wide (90rem), normal (1280px)
+    width: wide
+
   navbar:
     displayTitle: true
-    displayLogo: false
+    displayLogo: true
+    logo:
+      path: images/branding/stacksr_logo_no_bg-dark.png
+      dark: images/branding/stacksr_logo_no_bg.png
+      link: /
+      width: 150
+      height: 150
+    # width: normal
 
   footer:
-    displayCopyright: false
+    displayCopyright: true
     displayPoweredBy: true
+    # width: normal
 
   editURL:
     enable: true
-    base: "https://github.com/imfing/hextra-starter-template/edit/main/content"
+    base: "https://github.com/saurabhritu/saurabhritu.github.io/edit/main"
+  
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+
+  #   # Search
+  # search:
+  #   enable: true
+  #   type: flexsearch
+
+  #   flexsearch:
+  #     # index page by: content | summary | heading | title
+  #     index: content
+
+# services:
+#   googleAnalytics:
+#     ID: G-MEASUREMENT_ID
