@@ -1,6 +1,6 @@
 # Hugo configuration file
 baseURL: "https://stacksr.com/"
-title: Stacksr
+title: # Stacksr
 
 # import hextra as module
 module:
