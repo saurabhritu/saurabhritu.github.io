@@ -1,0 +1,15 @@
+{{- $link := .Get "link" -}}
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
+{{- $class := .Get "class" }}
+{{- $style := .Get "style" -}}
+
+
+<a
+  {{ if $link }}href="{{ $href }}"{{ end }}
+  class="{{ $class }} not-prose sr-inline-flex sr-items-center sr-rounded-full sr-gap-2 sr-px-3 sr-py-1 sr-text-xs sr-text-gray-600 dark:sr-text-gray-400 sr-bg-gray-100 dark:sr-bg-neutral-800 dark:sr-border-neutral-800 sr-border hover:sr-border-gray-400 dark:hover:sr-text-gray-50 dark:hover:sr-border-gray-600 sr-transition-all sr-ease-in sr-duration-200"
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+  {{ if $external }}target="_blank" rel="noreferrer"{{ end -}}
+>
+  {{ .Inner | markdownify }}
+</a>

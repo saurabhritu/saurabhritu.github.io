@@ -1,0 +1,12 @@
+{{- $cols := .Get "cols" | default 3 -}}
+{{- $style := .Get "style" | default "" -}}
+
+{{- $css := printf "--stacksr-feature-grid-cols: %v; %s" $cols $style -}}
+
+
+<div
+  class="stacksr-feature-grid sr-grid sm:max-lg:sr-grid-cols-2 max-sm:sr-grid-cols-1 sr-gap-4 sr-w-full not-prose"
+  {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
+>
+  {{ .Inner }}
+</div>

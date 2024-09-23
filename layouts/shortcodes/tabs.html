@@ -1,0 +1,28 @@
+{{- $items := split (.Get "items") "," -}}
+{{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
+
+{{- if not $items -}}
+  {{ errorf "no items provided" }}
+{{- end -}}
+
+<div class="stacksr-scrollbar sr-overflow-x-auto sr-overflow-y-hidden sr-overscroll-x-contain">
+  <div class="sr-mt-4 sr-flex sr-w-max sr-min-w-full sr-border-b sr-border-gray-200 sr-pb-px dark:sr-border-neutral-800">
+    {{- range $i, $item := $items -}}
+      <button
+        class="stacksr-tabs-toggle data-[state=selected]:sr-border-primary-500 data-[state=selected]:sr-text-primary-600 sr-mr-2 sr-rounded-t sr-p-2 sr-font-medium sr-leading-5 sr-transition-colors -sr-mb-0.5 sr-select-none sr-border-b-2 sr-border-transparent sr-text-gray-600 hover:sr-border-gray-200 hover:sr-text-black dark:sr-text-gray-200 dark:hover:sr-border-neutral-800 dark:hover:sr-text-white"
+        role="tab"
+        type="button"
+        aria-controls="tabs-panel-{{ $i }}"
+        {{- if eq $i $defaultIndex }} aria-selected="true" {{ end -}}
+        {{- if eq $i $defaultIndex }} tabindex="0" {{ end -}}
+        {{- if eq $i $defaultIndex }} data-state="selected"{{ end -}}
+      >
+        {{- $item -}}
+      </button>
+    {{- end -}}
+  </div>
+</div>
+<div>
+  {{- .Inner -}}
+</div>
+{{- /* Drop trailing newlines */ -}}

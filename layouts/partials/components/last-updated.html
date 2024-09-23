@@ -1,0 +1,12 @@
+{{- $lastUpdated := (T "lastUpdated") | default "Last updated on" -}}
+
+{{- if site.Params.displayUpdatedDate -}}
+  {{- with .Lastmod -}}
+    {{ $datetime := (time.Format "2006-01-02T15:04:05.000Z" .) }}
+    <div class="sr-mt-12 sr-mb-8 sr-block sr-text-xs sr-text-gray-500 ltr:sr-text-right rtl:sr-text-left dark:sr-text-gray-400">{{ $lastUpdated }} <time datetime="{{ $datetime }}">{{ partial "utils/format-date" . }}</time></div>
+  {{- else -}}
+    <div class="sr-mt-16"></div>
+  {{- end -}}
+{{- else -}}
+  <div class="sr-mt-16"></div>
+{{- end -}}

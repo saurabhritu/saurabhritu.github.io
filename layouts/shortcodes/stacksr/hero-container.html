@@ -1,0 +1,38 @@
+{{- $class := .Get "class" -}}
+{{- $cols := .Get "cols" | default 2 -}}
+{{- $image := .Get "image" -}}
+{{- $imageCard := .Get "imageCard" | default false -}}
+{{- $imageClass := .Get "imageClass" -}}
+{{- $imageLink := .Get "imageLink" -}}
+{{- $imageLinkExternal := hasPrefix $imageLink "http" -}}
+{{- $imageStyle := .Get "imageStyle" -}}
+{{- $imageTitle := .Get "imageTitle" -}}
+{{- $imageWidth := .Get "imageWidth" | default 350 -}}
+{{- $imageHeight := .Get "imageHeight" | default 350 -}}
+{{- $style := .Get "style" -}}
+
+{{- $css := printf "--stacksr-feature-grid-cols: %v; %s" $cols $style -}}
+{{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
+{{- if hasPrefix $image "/" -}}
+  {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+
+<div
+  class="{{ $class }} stacksr-feature-grid sr-grid sm:max-lg:sr-grid-cols-2 max-sm:sr-grid-cols-1 sr-gap-4 sr-w-full not-prose"
+  {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
+>
+  <div class="sr-w-full">
+    {{ .Inner }}
+  </div>
+  {{- with $image }}
+  <div class="sr-mx-auto">
+    <a
+      {{ with $imageLink }}href="{{ $href }}" {{ with $imageLinkExternal }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
+      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
+      class="{{ $imageClass }} {{ if $imageCard }}stacksr-feature-card not-prose sr-block sr-relative sr-p-6 sr-overflow-hidden sr-rounded-3xl sr-border sr-border-gray-200 hover:sr-border-gray-300 dark:sr-border-neutral-800 dark:hover:sr-border-neutral-700 before:sr-pointer-events-none before:sr-absolute before:sr-inset-0 before:sr-bg-glass-gradient{{ end }}"
+    >
+      <img src="{{ $image }}" width="{{ $imageWidth }}" height="{{ $imageHeight }}" {{ with $imageTitle }}alt="{{ $imageTitle }}"{{ end }}/>
+    </a>
+  </div>
+  {{ end -}}
+</div>

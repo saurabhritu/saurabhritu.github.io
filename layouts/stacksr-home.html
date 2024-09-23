@@ -1,0 +1,10 @@
+{{ define "main" }}
+  <div class='sr-mx-auto sr-flex {{ partial "utils/page-width" . }}'>
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
+    <div class="sr-w-full sr-break-words sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-pb-8 sr-pt-8 md:sr-pt-12 sr-pl-[max(env(safe-area-inset-left),1.5rem)] sr-pr-[max(env(safe-area-inset-left),1.5rem)]">
+      <div class="sr-flex sr-flex-col sr-items-start">
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,37 @@
+{{ $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" }}
+{{ $type := .Get "type" | default "default" }}
+{{/* If emoji is not set, use the emoji from dict */}}
+{{ $emoji := .Get "emoji" }}
+{{ if eq $emoji "" }}
+  {{ $emoji = index $calloutEmojiDict $type }}
+{{ end }}
+{{/* Also allow using "icon" */}}
+{{ $icon := .Get "icon" }}
+
+{{ $defaultClass := "sr-border-orange-100 sr-bg-orange-50 sr-text-orange-800 dark:sr-border-orange-400/30 dark:sr-bg-orange-400/20 dark:sr-text-orange-300" }}
+{{ $infoClass := "sr-border-blue-200 sr-bg-blue-100 sr-text-blue-900 dark:sr-border-blue-200/30 dark:sr-bg-blue-900/30 dark:sr-text-blue-200" }}
+{{ $warningClass := "sr-border-yellow-100 sr-bg-yellow-50 sr-text-yellow-900 dark:sr-border-yellow-200/30 dark:sr-bg-yellow-700/30 dark:sr-text-yellow-200" }}
+{{ $errorClass := "sr-border-red-200 sr-bg-red-100 sr-text-red-900 dark:sr-border-red-200/30 dark:sr-bg-red-900/30 dark:sr-text-red-200" }}
+
+{{ $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) }}
+
+
+<div class="sr-overflow-x-auto sr-mt-6 sr-flex sr-rounded-lg sr-border sr-py-2 ltr:sr-pr-4 rtl:sr-pl-4 contrast-more:sr-border-current contrast-more:dark:sr-border-current {{ $class }}">
+  <div class="ltr:sr-pl-3 ltr:sr-pr-2 rtl:sr-pr-3 rtl:sr-pl-2">
+    {{- with $emoji -}}
+      <div class="sr-select-none sr-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        {{ . }}
+      </div>
+    {{- else -}}
+      {{- with $icon }}
+        {{ partial "utils/icon.html" (dict "name" . "attributes" `height=1.2em class="sr-inline-block sr-align-middle"`) -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+
+  <div class="sr-w-full sr-min-w-0 sr-leading-7">
+    <div class="sr-mt-6 sr-leading-7 first:sr-mt-0">
+      {{ .InnerDeindent | markdownify }}
+    </div>
+  </div>
+</div>

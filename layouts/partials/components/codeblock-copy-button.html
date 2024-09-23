@@ -1,0 +1,15 @@
+{{/* TODO: remove filename variable */}}
+{{- $filename := .filename | default "" -}}
+{{- $display := site.Params.highlight.copy.display | default "hover" -}}
+{{- $copyCode := (T "copyCode") | default "Copy code" -}}
+
+
+<div class="stacksr-code-copy-btn-container {{ if eq $display `hover` }}sr-opacity-0{{ end }} sr-transition group-hover/code:sr-opacity-100 sr-flex sr-gap-1 sr-absolute sr-m-[11px] sr-right-0 {{ if $filename }}sr-top-8{{ else }}sr-top-0{{ end }}">
+  <button
+    class="stacksr-code-copy-btn sr-group/copybtn sr-transition-all active:sr-opacity-50 sr-bg-primary-700/5 sr-border sr-border-black/5 sr-text-gray-600 hover:sr-text-gray-900 sr-rounded-md sr-p-1.5 dark:sr-bg-primary-300/10 dark:sr-border-white/10 dark:sr-text-gray-400 dark:hover:sr-text-gray-50"
+    title="{{ $copyCode }}"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:sr-hidden sr-pointer-events-none sr-h-4 sr-w-4"></div>
+    <div class="success-icon sr-hidden group-[.copied]/copybtn:sr-block sr-pointer-events-none sr-h-4 sr-w-4"></div>
+  </button>
+</div>

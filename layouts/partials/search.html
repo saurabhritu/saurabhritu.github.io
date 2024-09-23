@@ -1,0 +1,26 @@
+{{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
+
+
+<div class="search-wrapper sr-relative md:sr-w-64">
+  <div class="sr-relative sr-flex sr-items-center sr-text-gray-900 contrast-more:sr-text-gray-800 dark:sr-text-gray-300 contrast-more:dark:sr-text-gray-300">
+    <input
+      placeholder="{{ $placeholder }}"
+      class="search-input sr-block sr-w-full sr-appearance-none sr-rounded-lg sr-px-3 sr-py-2 sr-transition-colors sr-text-base sr-leading-tight md:sr-text-sm sr-bg-black/[.05] dark:sr-bg-gray-50/10 focus:sr-bg-white dark:focus:sr-bg-dark placeholder:sr-text-gray-500 dark:placeholder:sr-text-gray-400 contrast-more:sr-border contrast-more:sr-border-current"
+      type="search"
+      value=""
+      spellcheck="false"
+    />
+    <kbd
+      class="sr-absolute sr-my-1.5 sr-select-none ltr:sr-right-1.5 rtl:sr-left-1.5 sr-h-5 sr-rounded sr-bg-white sr-px-1.5 sr-font-mono sr-text-[10px] sr-font-medium sr-text-gray-500 sr-border dark:sr-border-gray-100/20 dark:sr-bg-dark/50 contrast-more:sr-border-current contrast-more:sr-text-current contrast-more:dark:sr-border-current sr-items-center sr-gap-1 sr-transition-opacity sr-pointer-events-none sr-hidden sm:sr-flex"
+    >
+      CTRL K
+    </kbd>
+  </div>
+
+  <div>
+    <ul
+      class="search-results stacksr-scrollbar sr-hidden sr-border sr-border-gray-200 sr-bg-white sr-text-gray-100 dark:sr-border-neutral-800 dark:sr-bg-neutral-900 sr-absolute sr-top-full sr-z-20 sr-mt-2 sr-overflow-auto sr-overscroll-contain sr-rounded-xl sr-py-2.5 sr-shadow-xl sr-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:sr-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] sr-inset-x-0 ltr:md:sr-left-auto rtl:md:sr-right-auto contrast-more:sr-border contrast-more:sr-border-gray-900 contrast-more:dark:sr-border-gray-50 sr-w-screen sr-min-h-[100px] sr-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      style="transition: max-height 0.2s ease 0s;"
+    ></ul>
+  </div>
+</div>

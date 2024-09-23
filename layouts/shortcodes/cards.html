@@ -1,0 +1,5 @@
+{{- $cols := .Get "cols" | default 3 -}}
+
+<div class="stacksr-cards sr-mt-4 sr-gap-4 sr-grid not-prose" style="--stacksr-cards-grid-cols: {{ $cols }};">
+  {{- .Inner -}}
+</div>

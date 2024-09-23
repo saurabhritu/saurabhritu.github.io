@@ -1,0 +1,44 @@
+{{- $page := .context -}}
+
+{{- $grow := .grow -}}
+{{- $hideLabel := .hideLabel | default true -}}
+
+{{- $changeLanguage := (T "changeLanguage") | default "Change language" -}}
+
+{{- if hugo.IsMultilingual -}}
+  <div class="sr-flex sr-justify-items-start {{ if $grow }}sr-grow{{ end }}">
+    <button
+      title="{{ $changeLanguage }}"
+      data-state="closed"
+      class="language-switcher sr-h-7 sr-rounded-md sr-px-2 sr-text-left sr-text-xs sr-font-medium sr-text-gray-600 sr-transition-colors dark:sr-text-gray-400 hover:sr-bg-gray-100 hover:sr-text-gray-900 dark:hover:sr-bg-primary-100/5 dark:hover:sr-text-gray-50 sr-grow"
+      type="button"
+      aria-label="{{ $changeLanguage }}"
+    >
+      <div class="sr-flex sr-items-center sr-gap-2 sr-capitalize">
+        {{- partial "utils/icon" (dict "name" "globe-alt" "attributes" "height=12") -}}
+        {{- if not $hideLabel }}<span>{{ site.Language.LanguageName }}</span>{{ end -}}
+      </div>
+    </button>
+    <ul
+      class="language-options sr-hidden sr-z-20 sr-max-h-64 sr-overflow-auto sr-rounded-md sr-ring-1 sr-ring-black/5 sr-bg-white sr-py-1 sr-text-sm sr-shadow-lg dark:sr-ring-white/20 dark:sr-bg-neutral-800"
+      style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
+    >
+      {{ range site.Languages }}
+        {{ $link := partial "utils/lang-link" (dict "lang" .Lang "context" $page) }}
+        <li class="sr-flex sr-flex-col">
+          <a
+            href="{{ $link }}"
+            class="sr-text-gray-800 dark:sr-text-gray-100 hover:sr-bg-primary-50 hover:sr-text-primary-600 hover:dark:sr-bg-primary-500/10 hover:dark:sr-text-primary-600 sr-relative sr-cursor-pointer sr-whitespace-nowrap sr-py-1.5 sr-transition-colors ltr:sr-pl-3 ltr:sr-pr-9 rtl:sr-pr-3 rtl:sr-pl-9"
+          >
+            {{- .LanguageName -}}
+            {{- if eq .LanguageName site.Language.LanguageName -}}
+              <span class="sr-absolute sr-inset-y-0 sr-flex sr-items-center ltr:sr-right-3 rtl:sr-left-3">
+                {{- partial "utils/icon" (dict "name" "check" "attributes" "height=1em width=1em") -}}
+              </span>
+            {{- end -}}
+          </a>
+        </li>
+      {{ end -}}
+    </ul>
+  </div>
+{{- end -}}

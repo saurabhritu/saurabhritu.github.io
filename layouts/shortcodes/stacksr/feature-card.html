@@ -1,0 +1,36 @@
+{{- $title := .Get "title" -}}
+{{- $subtitle := .Get "subtitle" -}}
+{{- $class := .Get "class" -}}
+{{- $image := .Get "image" -}}
+{{- $imageClass := .Get "imageClass" -}}
+{{- $style := .Get "style" -}}
+{{- $icon := .Get "icon" -}}
+{{- $link := .Get "link" -}}
+
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+
+{{- if hasPrefix $image "/" -}}
+  {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+
+<a
+  {{ with $link }}href="{{ $href }}" {{ with $external }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+  class="{{ $class }} stacksr-feature-card not-prose sr-block sr-relative sr-overflow-hidden sr-rounded-3xl sr-border sr-border-gray-200 hover:sr-border-gray-300 dark:sr-border-neutral-800 dark:hover:sr-border-neutral-700 before:sr-pointer-events-none before:sr-absolute before:sr-inset-0 before:sr-bg-glass-gradient"
+>
+  <div class="sr-relative sr-w-full sr-p-6">
+    <h3 class="sr-text-2xl sr-font-medium sr-leading-6 sr-mb-2 sr-flex sr-items-center">
+      {{ with $icon -}}
+        <span class="sr-pr-2">
+          {{- partial "utils/icon.html" (dict "name" . "attributes" "height=1.5rem") -}}
+        </span>
+      {{ end -}}
+      <span>{{ $title }}</span>
+    </h3>
+    <p class="sr-text-gray-500 dark:sr-text-gray-400 sr-text-sm sr-leading-6">{{ $subtitle | markdownify }}</p>
+  </div>
+  {{- with $image -}}
+    <img src="{{ . }}" class="sr-absolute sr-max-w-none {{ $imageClass }}" alt="{{ $title }}" />
+  {{- end -}}
+</a>
