@@ -1,0 +1,42 @@
+{
+  "author": "Saurabh Ritu",
+  "comments": {
+    "dependencies": {},
+    "devDependencies": {
+      "@fullhuman/postcss-purgecss": "project",
+      "@tailwindcss/nesting": "project",
+      "@tailwindcss/typography": "project",
+      "autoprefixer": "project",
+      "postcss": "project",
+      "postcss-cli": "project",
+      "postcss-import": "project",
+      "prettier": "project",
+      "prettier-plugin-go-template": "project",
+      "tailwindcss": "project"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^6.0.0",
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@tailwindcss/typography": "0.5.15",
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.4.47",
+    "postcss-cli": "11.0.0",
+    "postcss-import": "^16.1.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-go-template": "^0.0.15",
+    "tailwindcss": "3.4.12"
+  },
+  "license": "MIT",
+  "main": "postcss.config.js",
+  "name": "design-sense",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "build:css": "npx postcss --config postcss.config.js --env production assets/css/styles.css -o assets/css/compiled/main.css"
+  },
+  "version": "1.0.0"
+}

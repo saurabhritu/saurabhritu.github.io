@@ -1,0 +1,12 @@
+{{ define "main" }}
+  <div class="sr-mx-auto sr-flex sr-max-w-[90rem]">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+    <article class="sr-w-full sr-break-words sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-pt-4 sr-pb-8 sr-pl-[max(env(safe-area-inset-left),1.5rem)] sr-pr-[max(env(safe-area-inset-left),1.5rem)]">
+      <br class="sr-mt-1.5 sr-text-sm" />
+      <h1 class="sr-text-center sr-mt-2 sr-text-4xl sr-font-bold sr-tracking-tight sr-text-slate-900 dark:sr-text-slate-100">{{ .Title }}</h1>
+      <div class="content">
+        {{ .Content }}
+      </div>
+    </article>
+  </div>
+{{ end }}

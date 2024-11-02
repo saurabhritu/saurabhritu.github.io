@@ -1,0 +1,7 @@
+
+.stacksr-footer {
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(345deg, var(--red), transparent 98%);
+    border-image-slice: 1;
+    width:100%;
+  }

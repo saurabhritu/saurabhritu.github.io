@@ -1,0 +1,9 @@
+{{- $style := .Get "style" -}}
+
+
+<h1
+  class="not-prose sr-text-4xl sr-font-bold sr-leading-none sr-tracking-tighter md:sr-text-5xl sr-py-2 sr-bg-clip-text sr-text-transparent sr-bg-gradient-to-r sr-from-gray-900 sr-to-gray-600 dark:sr-from-gray-100 dark:sr-to-gray-400"
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+>
+  {{ .Inner | markdownify }}
+</h1>

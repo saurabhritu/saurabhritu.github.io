@@ -1,0 +1,84 @@
+<div class="timeline-container sr-bg-white dark:sr-bg-dark">
+  <!-- Add a toggle button to collapse/expand the whole timeline -->
+  <button class="timeline-toggle-all" onclick="toggleTimeline()">
+    <h2 id="timeline-toggle-text">▲</h2>
+  </button>
+</div>
+
+  <div id="timeline" class="timeline" style="display: none;"> <!-- Expanded by default -->
+    {{- $contentType := .Get "contentType" | default "" -}}
+
+    {{ range (where .Site.RegularPages "Type" $contentType).GroupByDate "2006" }}
+      <div class="timeline-year sr-bg-white dark:sr-bg-dark">
+        <button class="timeline-toggle" onclick="toggleYear('{{ .Key }}')">
+          <h2>{{ .Key }}</h2>
+        </button>
+      </div>
+
+      <div id="year-{{ .Key }}" class="timeline-months sr-flex-auto" style="display: block;"> <!-- Expanded by default -->
+        {{ $year := .Key }}
+        {{ range .Pages.GroupByDate "Jan" }} <!-- Group by month -->
+          <div class="timeline-month sr-bg-white dark:sr-bg-dark">
+            <button class="month-toggle" onclick="toggleMonth('{{ $year }}-{{ .Key }}')">
+              <h3>{{ .Key }}</h3>
+            </button>
+          </div>
+
+          <div id="month-{{ $year }}-{{ .Key }}" class="timeline-blogs" style="display: block;"> <!-- Expanded by default -->
+            {{ range .Pages }}
+              <div class="timeline-item">
+                <div class="timeline-date">{{ .Date.Format "Jan 2" }}</div>
+                <a href="{{ .RelPermalink }}" class="timeline-point-link">
+                  <div class="timeline-point"></div>
+                </a>
+                <div class="timeline-content">
+                  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                  <!-- Zoomable Image -->
+                  <p>{{ .Summary | truncate 150 "..." }}</p>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+
+<!-- Script for toggling the timeline and individual years/months -->
+<script>
+  function toggleYear(year) {
+    const element = document.getElementById(`year-${year}`);
+    if (element.style.display === "none") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  }
+
+  function toggleMonth(month) {
+    const element = document.getElementById(`month-${month}`);
+    if (element.style.display === "none") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  }
+
+  function toggleTimeline() {
+    const timeline = document.getElementById("timeline");
+    const toggleText = document.getElementById("timeline-toggle-text");
+    
+    // Animate the arrow rotation
+    if (timeline.style.display === "none") {
+      timeline.style.display = "block";
+      toggleText.textContent = "▲";
+      toggleText.classList.remove('rotate-down');
+      toggleText.classList.add('rotate-up');
+    } else {
+      timeline.style.display = "none";
+      toggleText.textContent = "▼";
+      toggleText.classList.remove('rotate-up');
+      toggleText.classList.add('rotate-down');
+    }
+  }
+</script>

@@ -1,0 +1,15 @@
+{{- if (default true .Params.breadcrumbs) }}
+  <div class="sr-mt-1.5 sr-flex sr-items-center sr-gap-1 sr-overflow-hidden sr-text-sm sr-text-gray-500 dark:sr-text-gray-400 contrast-more:sr-text-current">
+    {{- range .Ancestors.Reverse }}
+      {{- if not .IsHome }}
+        <div class="sr-whitespace-nowrap sr-transition-colors sr-min-w-[24px] sr-overflow-hidden sr-text-ellipsis hover:sr-text-gray-900 dark:hover:sr-text-gray-100">
+          <a href="{{ .RelPermalink }}">{{- partial "utils/title" . -}}</a>
+        </div>
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"sr-w-3.5 sr-shrink-0 rtl:-sr-rotate-180\"") -}}
+      {{ end -}}
+    {{ end -}}
+    <div class="sr-whitespace-nowrap sr-transition-colors sr-font-medium sr-text-gray-700 contrast-more:sr-font-bold contrast-more:sr-text-current dark:sr-text-gray-100 contrast-more:dark:sr-text-current">
+      {{- partial "utils/title" . -}}
+    </div>
+  </div>
+{{ end -}}

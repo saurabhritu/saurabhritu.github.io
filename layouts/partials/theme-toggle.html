@@ -1,0 +1,22 @@
+{{- $hideLabel := .hideLabel | default false -}}
+
+{{- $changeTheme := (T "changeTheme") | default "Change theme" -}}
+{{- $light := (T "light") | default "Light" -}}
+{{- $dark := (T "dark") | default "Dark" -}}
+
+{{ $linkClassHoverEffect := "sr-transition-all sr-duration-200 sr-transform hover:sr-scale-110" }}
+
+<button
+  title="{{ $changeTheme }}"
+  data-theme="light"
+  class="theme-toggle sr-group sr-h-7 sr-rounded-md sr-px-2 sr-text-left sr-text-xs sr-font-medium sr-text-gray-600 sr-transition-colors dark:sr-text-gray-400 hover:sr-bg-gray-100 hover:sr-text-gray-900 dark:hover:sr-bg-primary-100/5 dark:hover:sr-text-gray-50"
+  type="button"
+  aria-label="{{ $changeTheme }}"
+>
+  <div class="sr-flex sr-items-center sr-gap-2 sr-capitalize {{ $linkClassHoverEffect }}">
+    {{- partial "utils/icon.html" (dict "name" "light-bulb" "attributes" "height=15 class=\"group-data-[theme=light]:sr-hidden\"") -}}
+    {{- if not $hideLabel }}<span class="group-data-[theme=light]:sr-hidden">{{ $light }}</span>{{ end -}}
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=15 class=\"group-data-[theme=dark]:sr-hidden\"") -}}
+    {{- if not $hideLabel }}<span class="group-data-[theme=dark]:sr-hidden">{{ $dark }}</span>{{ end -}}
+  </div>
+</button>

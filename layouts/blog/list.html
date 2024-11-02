@@ -1,0 +1,57 @@
+{{ define "main" }}
+  {{/*  {{- $readMore := (T "readMore") | default "Dive In →" -}}  */}}
+  {{- $readMore := "Learn More →" -}}
+  <div class="sr-mx-auto sr-flex {{ partial `utils/page-width` . }}">
+    {{ partial "sidebar.html" (dict "context" . ) }}
+    <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
+        <br class="sr-mt-1.5 sr-text-sm" />
+        <h1 class="sr-text-center sr-mt-2 sr-text-4xl sr-font-bold sr-tracking-tight sr-text-slate-900 dark:sr-text-slate-100">{{ .Title }}</h1>
+        <div class="content">{{ .Content }}</div>
+
+        <!-- Image Grid Layout -->
+        <div class="sr-grid sr-grid-cols-1 md:sr-grid-cols-2 lg:sr-grid-cols-3 sr-gap-6 sr-mt-6">
+          {{- $pages := partial "utils/sort-pages" (dict "page" . "by" site.Params.blog.list.sortBy "order" site.Params.blog.list.sortOrder) -}}
+          
+          {{- range $pages }}
+          <div class="stacksr-border-gradient-right sr-group sr-relative sr-overflow-hidden sr-transition-transform sr-transform hover:sr-scale-105 sr-duration-300">
+            <!-- Zoomable Image -->
+            <a href="{{ .RelPermalink }}">
+            {{ with .Params.image }}
+            <div class="sr-w-full sr-h-48 sr-bg-cover sr-bg-center sr-relative sr-overflow-hidden">
+              <img class="sr-w-full sr-h-full sr-object-cover sr-transition-transform sr-transform hover:sr-scale-110 sr-duration-300" src="{{ . }}" alt="{{ $.Title }}">
+            </div>
+            {{ end }}
+            </a>
+
+            <!-- Blog Title and Description -->
+            <div class="sr-p-4">
+              <h3 class="sr-font-semibold sr-mt-4 sr-text-2xl hover:sr-text-red-500">
+                <a class="sr-block sr-font-semibold sr-mt-8 sr-text-2xl" href="{{ .RelPermalink }}">{{ .Title }}</a>
+              </h3>
+              
+              <p class="sr-opacity-50 sr-text-sm sr-mt-1 sr-leading-7">{{ partial "utils/format-date" .Date }}</p>
+
+              <!-- Read More Link -->
+              <p class="sr-opacity-80 sr-mt-1 sr-leading-7">
+                <a class="sr-text-[color:hsl(var(--primary-hue),50%,50%)] hover:sr-text-red-500 sr-decoration-from-font" href="{{ .RelPermalink }}">
+                  {{- $readMore -}}
+                </a>
+              </p>
+
+              <div class="sr-max-h-16 sr-overflow-hidden sr-relative sr-transition-all sr-duration-500 group-hover:sr-max-h-40">
+                <p class="sr-opacity-80 sr-leading-7 sr-translate-y-full group-hover:sr-translate-y-0 sr-transition-transform sr-duration-500 sr-ease-in-out">
+                  {{- partial "utils/page-description" . -}}
+                </p>
+              </div>
+
+            </div>
+          </div>
+          {{ end }}
+        </div>
+        </main>
+      </main>
+    </article>
+    <div class="max-xl:sr-hidden sr-h-0 sr-w-64 sr-shrink-0"></div>
+  </div>
+{{- end }}

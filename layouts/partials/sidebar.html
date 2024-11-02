@@ -1,0 +1,179 @@
+{{- $context := .context -}}
+
+{{- $disableSidebar := .disableSidebar | default false -}}
+{{- $displayPlaceholder := .displayPlaceholder | default false -}}
+
+{{- $sidebarClass := cond $disableSidebar (cond $displayPlaceholder "md:sr-hidden xl:sr-block" "md:sr-hidden") "md:sr-sticky" -}}
+
+{{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
+{{- $pageURL := $context.RelPermalink -}}
+
+{{/* EXPERIMENTAL */}}
+{{- if .context.Params.sidebar.hide -}}
+  {{- $disableSidebar = true -}}
+  {{- $displayPlaceholder = true -}}
+{{- end -}}
+
+{{/*imp: required for mobile menu*/}}
+<div class="mobile-menu-overlay [transition:background-color_1.5s_ease] sr-fixed sr-inset-0 sr-z-10 sr-bg-black/80 dark:sr-bg-black/60 sr-hidden"></div>
+
+<aside class="sidebar-container sr-flex sr-flex-col print:sr-hidden md:sr-top-16 md:sr-shrink-0 md:sr-w-64 md:sr-self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
+  <!-- Search bar on small screen -->
+  <div class="sr-px-4 sr-pt-4 md:sr-hidden">
+    {{ partial "search.html" }}
+  </div>
+  <div class="stacksr-border-gradient-right stacksr-scrollbar sr-overflow-y-auto sr-overflow-x-hidden sr-p-4 sr-grow md:sr-h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+    <ul class="sr-flex sr-flex-col sr-gap-1 md:sr-hidden">
+      <!-- Nav -->
+      {{ template "sidebar-main" (dict "context" site.Home "pageURL" $pageURL "page" $context "toc" true) -}}
+      {{ template "sidebar-footer" }}
+    </ul>
+
+    <!-- Sidebar on large screen -->
+    {{- if $disableSidebar -}}
+      {{- if $displayPlaceholder }}<div class="max-xl:sr-hidden sr-h-0 sr-w-64 sr-shrink-0"></div>{{ end -}}
+      {{ .context.Scratch.Set "enableFooterSwitches" true }}
+    {{- else -}}
+      <ul class="sr-flex sr-flex-col sr-gap-1 max-md:sr-hidden">
+        {{ template "sidebar-main" (dict "context" $navRoot "page" $context  "pageURL" $pageURL) }}
+        {{ template "sidebar-footer" }}
+      </ul>
+    {{ end -}}
+  </div>
+  {{/* Hide theme switch when sidebar is disabled */}}
+  {{ $switchesClass := cond $disableSidebar "md:sr-hidden" "" -}}
+  {{ $displayThemeToggle := (site.Params.theme.displayToggle | default true) -}}
+
+  {{ if or hugo.IsMultilingual $displayThemeToggle }}
+    <div class="{{ $switchesClass }} {{ with hugo.IsMultilingual }}sr-justify-end{{ end }} sr-sticky sr-bottom-0 sr-bg-white dark:sr-bg-dark sr-mx-4 sr-py-4 sr-shadow-[0_-12px_16px_#fff] sr-flex sr-items-center sr-gap-2 dark:sr-border-neutral-800 dark:sr-shadow-[0_-12px_16px_#111] contrast-more:sr-border-neutral-400 contrast-more:sr-shadow-none contrast-more:dark:sr-shadow-none sr-border-t" data-toggle-animation="show">
+      {{- with hugo.IsMultilingual -}}
+        {{- partial "language-switch" (dict "context" $context "grow" true) -}}
+        {{- with $displayThemeToggle }}{{ partial "theme-toggle" (dict "hideLabel" true) }}{{ end -}}
+      {{- else -}}
+        {{- with $displayThemeToggle -}}
+          {{/*  <div class="sr-flex sr-grow sr-flex-col">{{ partial "theme-toggle" }}</div>  */}}
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end -}}
+</aside>
+
+{{- define "sidebar-main" -}}
+  {{ template "sidebar-tree" (dict "context" .context "level" 0 "page" .page "pageURL" .pageURL "toc" (.toc | default false)) }}
+{{- end -}}
+
+{{- define "sidebar-tree" -}}
+  {{- if ge .level 4 -}}
+    {{- return -}}
+  {{- end -}}
+
+  {{- $context := .context -}}
+  {{- $page := .page }}
+  {{- $pageURL := .page.RelPermalink -}}
+  {{- $level := .level -}}
+  {{- $toc := .toc | default false -}}
+
+  {{- with $items := union .context.RegularPages .context.Sections -}}
+    {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
+    {{- if eq $level 0 -}}
+      {{- range $items.ByWeight }}
+        {{- if .Params.sidebar.separator -}}
+          <li class="[word-break:break-word] sr-mt-5 sr-mb-2 sr-px-2 sr-py-1.5 sr-text-sm sr-font-semibold sr-text-gray-900 first:sr-mt-0 dark:sr-text-gray-100">
+            <span class="sr-cursor-default">{{ partial "utils/title" . }}</span>
+          </li>
+        {{- else -}}
+          {{- $active := eq $pageURL .RelPermalink -}}
+          {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
+          <li class="{{ if $shouldOpen }}open{{ end }}">
+            {{- $linkTitle := partial "utils/title" . -}}
+            {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
+            {{- if and $toc $active -}}
+              {{- template "sidebar-toc" dict "page" . -}}
+            {{- end -}}
+            {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
+          </li>
+        {{- end -}}
+      {{- end -}}
+    {{- else -}}
+      <div class="ltr:sr-pr-0 sr-overflow-hidden">
+        <ul class='sr-relative sr-flex sr-flex-col sr-gap-1 before:sr-absolute before:sr-inset-y-1 before:sr-w-px before:sr-bg-gray-200 before:sr-content-[""] ltr:sr-ml-3 ltr:sr-pl-3 ltr:before:sr-left-0 rtl:sr-mr-3 rtl:sr-pr-3 rtl:before:sr-right-0 dark:before:sr-bg-neutral-800'>
+          {{- range $items.ByWeight }}
+            {{- $active := eq $pageURL .RelPermalink -}}
+            {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
+            {{- $linkTitle := partial "utils/title" . -}}
+            <li class="sr-flex sr-flex-col {{ if $shouldOpen }}open{{ end }}">
+              {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
+              {{- if and $toc $active -}}
+                {{ template "sidebar-toc" dict "page" . }}
+              {{- end }}
+              {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
+            </li>
+          {{- end -}}
+        </ul>
+      </div>
+    {{- end -}}
+  {{- end }}
+{{- end -}}
+
+{{- define "sidebar-toc" -}}
+  {{ $page := .page }}
+  {{ with $page.Fragments.Headings }}
+    <ul class='sr-flex sr-flex-col sr-gap-1 sr-relative before:sr-absolute before:sr-inset-y-1 before:sr-w-px before:sr-bg-gray-200 before:sr-content-[""] dark:before:sr-bg-neutral-800 ltr:sr-pl-3 ltr:before:sr-left-0 rtl:sr-pr-3 rtl:before:sr-right-0 ltr:sr-ml-3 rtl:sr-mr-3'>
+      {{- range . }}
+        {{- with .Headings }}
+          {{- range . -}}
+            <li>
+              <a
+                href="#{{ anchorize .ID }}"
+                class="sr-flex sr-rounded sr-px-2 sr-py-1.5 sr-text-sm sr-transition-colors [word-break:break-word] sr-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:sr-border sr-gap-2 before:sr-opacity-25 before:sr-content-['#'] sr-text-gray-500 hover:sr-bg-gray-100 hover:sr-text-gray-900 dark:sr-text-neutral-400 dark:hover:sr-bg-primary-100/5 dark:hover:sr-text-gray-50 contrast-more:sr-text-gray-900 contrast-more:dark:sr-text-gray-50 contrast-more:sr-border-transparent contrast-more:hover:sr-border-gray-900 contrast-more:dark:hover:sr-border-gray-50"
+              >
+                {{- .Title -}}
+              </a>
+            </li>
+          {{ end -}}
+        {{ end -}}
+      {{ end -}}
+    </ul>
+  {{ end }}
+{{- end -}}
+
+{{- define "sidebar-footer" -}}
+  {{- range site.Menus.sidebar -}}
+    {{- $name := or (T .Identifier) .Name -}}
+    {{ if eq .Params.type "separator" }}
+      <li class="[word-break:break-word] sr-mt-5 sr-mb-2 sr-px-2 sr-py-1.5 sr-text-sm sr-font-semibold sr-text-gray-900 first:sr-mt-0 dark:sr-text-gray-100">
+        <span class="sr-cursor-default">{{ $name }}</span>
+      </li>
+    {{ else }}
+      <li>{{ template "sidebar-item-link" dict "active" false "title" $name "link" (.URL | relLangURL) }}</li>
+    {{ end }}
+  {{- end -}}
+{{- end -}}
+
+{{- define "sidebar-item-link" -}}
+  {{- $external := strings.HasPrefix .link "http" -}}
+  {{- $open := .open | default true -}}
+  <a
+    class="sr-flex sr-items-center sr-justify-between sr-gap-2 sr-cursor-pointer sr-rounded sr-px-2 sr-py-1.5 sr-text-base sr-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+    {{- if .active }}
+      sidebar-active-item sr-bg-primary-100 sr-font-semibold sr-text-primary-800 contrast-more:sr-border contrast-more:sr-border-primary-500 dark:sr-bg-primary-400/10 dark:sr-text-primary-600 contrast-more:dark:sr-border-primary-500
+    {{- else }}
+      sr-text-gray-500 hover:sr-bg-gray-100 hover:sr-text-gray-900 contrast-more:sr-border contrast-more:sr-border-transparent contrast-more:sr-text-gray-900 contrast-more:hover:sr-border-gray-900 dark:sr-text-neutral-400 dark:hover:sr-bg-primary-100/5 dark:hover:sr-text-gray-50 contrast-more:dark:sr-text-gray-50 contrast-more:dark:hover:sr-border-gray-50
+    {{- end -}}"
+    href="{{ .link }}"
+    {{ if $external }}target="_blank" rel="noreferer"{{ end }}
+  >
+    {{- .title -}}
+    {{- with .context }}
+      {{- if or .RegularPages .Sections }}
+        <span class="stacksr-sidebar-collapsible-button">
+          {{- template "sidebar-collapsible-button" -}}
+        </span>
+      {{- end }}
+    {{ end -}}
+  </a>
+{{- end -}}
+
+{{- define "sidebar-collapsible-button" -}}
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="sr-h-[18px] sr-min-w-[18px] sr-rounded-sm sr-p-0.5 hover:sr-bg-gray-800/5 dark:hover:sr-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="sr-origin-center sr-transition-transform rtl:-sr-rotate-180"></path></svg>
+{{- end -}}

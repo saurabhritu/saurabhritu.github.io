@@ -1,0 +1,82 @@
+<div class="sheen-container">
+    <div class="sheen-text">
+      <p>Shining</p>
+    </div>
+    
+    <div class="sheen-button">
+    <a href="https://google.com/">
+      <button anim="sheen">Click me</button>
+    </a>
+    </div>
+
+</div>
+
+
+
+<style>
+@import url("https://unpkg.com/open-props@1.6.17/easings.min.css");
+
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
+}
+
+
+
+[anim="sheen"]:not(.toggled)::after {
+  animation: sheen var(--ease-elastic-in-1) 1s infinite;
+}
+
+[anim="sheen"]::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: var(--red-sheen);
+  transform: rotateZ(60deg) translate(-5em, 7.5em);
+}
+
+:root {
+    --black: hsl(0, 0%, 13%);
+    --dark: hsl(12, 32%, 2%);
+    --gray: hsl(0, 0%, 70%);
+    --white: hsl(0, 0%, 96%);
+    --red: hsl(12, 90%, 63%);
+    --red-shadow: hsl(12, 100%, 60%);
+    --red-sheen: linear-gradient(
+      to bottom,
+      hsl(12, 90%, 43%),
+      hsla(12, 40%, 70%, 0.5) 50%,
+      hsl(12, 93%, 23%)
+    );
+  }
+
+.sheen-text p {
+text-transform: uppercase;
+letter-spacing: 0.06em;
+color: var(--gray);
+font-size: 0.875rem;
+}
+
+
+
+.sheen-button button {
+  all: unset;
+  /* background-color: var(--black); */
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--red);
+  box-shadow: 0 0 4px var(--red-shadow);
+  cursor: pointer;
+  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+}
+
+</style>

@@ -1,0 +1,67 @@
+{{- $page := .page -}}
+{{- $link := .link -}}
+{{- $title := .title -}}
+{{- $icon := .icon -}}
+{{- $subtitle := .subtitle -}}
+{{- $image := .image -}}
+{{- $width := .width -}}
+{{- $height := .height -}}
+{{- $imageStyle := .imageStyle -}}
+{{- $tag := .tag -}}
+{{- $tagType := .tagType -}}
+
+{{ $linkClass := "hover:sr-border-gray-300 sr-bg-transparent sr-shadow-sm dark:sr-border-neutral-800 hover:sr-bg-slate-50 hover:sr-shadow-md dark:hover:sr-border-neutral-700 dark:hover:sr-bg-neutral-900" }}
+{{- with $image -}}
+  {{ $linkClass = "hover:sr-border-gray-300 sr-bg-gray-100 sr-shadow dark:sr-border-neutral-700 dark:sr-bg-neutral-800 dark:sr-text-gray-50 hover:sr-shadow-lg dark:hover:sr-border-neutral-500 dark:hover:sr-bg-neutral-700" }}
+{{- end -}}
+
+{{- $external := strings.HasPrefix $link "http" -}}
+{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+
+<a
+  class="stacksr-card sr-group sr-flex sr-flex-col sr-justify-start sr-overflow-hidden sr-rounded-lg sr-border sr-border-gray-200 sr-text-current sr-no-underline dark:sr-shadow-none hover:sr-shadow-gray-100 dark:hover:sr-shadow-none sr-shadow-gray-100 active:sr-shadow-sm active:sr-shadow-gray-200 sr-transition-all sr-duration-200 sr-transform hover:sr-scale-105 {{ $linkClass }}"
+  {{- if $link -}}
+    href="{{ $href }}"
+    {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
+  {{- end -}}
+>
+  {{- with $image -}}
+    <img
+      alt="{{ $title }}"
+      class="stacksr-card-image"
+      loading="lazy"
+      decoding="async"
+      src="{{ $image | safeURL }}"
+      {{ with $width }}width="{{ . }}"{{ end }}
+      {{ with $height }}height="{{ . }}"{{ end }}
+      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
+    />
+  {{- end -}}
+
+  {{- $padding := "sr-p-4" -}}
+  {{- with $subtitle -}}
+    {{- $padding = "sr-pt-4 sr-px-4" -}}
+  {{- end -}}
+
+
+  <span class="stacksr-card-icon sr-flex sr-font-semibold sr-items-start sr-gap-2 {{ $padding }} sr-text-gray-700 hover:sr-text-gray-900 dark:sr-text-neutral-200 dark:hover:sr-text-neutral-50">
+    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
+    {{- $title -}}
+  </span>
+  {{- with $subtitle -}}
+    <div class="stacksr-card-subtitle sr-line-clamp-3 sr-text-sm sr-font-normal sr-text-gray-500 dark:sr-text-gray-400 sr-px-4 sr-mb-4 sr-mt-2">{{- $subtitle | markdownify -}}</div>
+  {{- end -}}
+
+  {{- if $tag }}
+    {{ $defaultClass := "sr-text-gray-600 sr-text-xxs sr-bg-gray-100 dark:sr-bg-neutral-800 dark:sr-text-neutral-200" }}
+    {{ $warningClass := "sr-border-yellow-100 sr-bg-yellow-50 sr-text-yellow-900 dark:sr-border-yellow-200/30 dark:sr-bg-yellow-700/30 dark:sr-text-yellow-200" }}
+    {{ $infoClass := "sr-border-blue-200 sr-bg-blue-100 sr-text-blue-900 dark:sr-border-blue-200/30 dark:sr-bg-blue-900/30 dark:sr-text-blue-200" }}
+    {{ $errorClass := "sr-border-red-200 sr-bg-red-100 sr-text-red-900 dark:sr-border-red-200/30 dark:sr-bg-red-900/30 dark:sr-text-red-200" }}
+
+    {{ $tagClass := cond (eq $tagType "info") $infoClass (cond (eq $tagType "warning") $warningClass (cond (eq $tagType "error") $errorClass $defaultClass)) }}
+    <div class="stacksr-card-tag">
+      <span class="sr-inline-block sr-rounded-full sr-px-2.5 sr-leading-6 {{ $tagClass }}">{{ $tag }}</span>
+    </div>
+  {{- end -}}
+</a>
+{{- /* Strip trailing newline. */ -}}

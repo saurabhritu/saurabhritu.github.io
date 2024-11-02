@@ -1,0 +1,49 @@
+{{/*  <p>Copyright {{ now.Year }}. All rights reserved.</p>  */}}
+
+{{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
+{{- $displayThemeToggle := site.Params.theme.displayToggle | default true -}}
+
+{{- $copyright := (T "copyright") | default "© 2024 Stacksr." -}}
+{{- $poweredBy := (T "poweredBy") | default "Powered by Stacksr" -}}
+
+{{- $footerWidth := "sr-max-w-screen-xl" -}}
+{{- with .Site.Params.footer.width -}}
+  {{ if eq . "wide" -}}
+    {{ $footerWidth = "sr-max-w-[90rem]" -}}
+  {{ else if eq . "full" -}}
+    {{ $footerWidth = "max-w-full" -}}
+  {{ end -}}
+{{- end -}}
+
+
+<footer class="stacksr-footer sr-bg-gray-100 sr-pb-[env(safe-area-inset-bottom)] dark:sr-bg-neutral-900 print:sr-bg-transparent">
+  {{- if $enableFooterSwitches -}}
+    <div class="sr-mx-auto sr-flex sr-gap-2 sr-py-2 sr-px-4 {{ $footerWidth }}">
+      {{- partial "language-switch.html" (dict "context" .) -}}
+      {{/*  {{- with $displayThemeToggle }}{{ partial "theme-toggle.html" }}{{ end -}}  */}}
+    </div>
+    {{- if or hugo.IsMultilingual $displayThemeToggle -}}
+      <hr class="dark:sr-border-neutral-800" />
+    {{- end -}}
+  {{- end -}}
+  <div
+    class="{{ $footerWidth }} sr-mx-auto sr-flex sr-justify-center sr-py-12 sr-pl-[max(env(safe-area-inset-left),1.5rem)] sr-pr-[max(env(safe-area-inset-right),1.5rem)] sr-text-gray-600 dark:sr-text-gray-400 md:sr-justify-start"
+  >
+    <div class="sr-flex sr-w-full sr-flex-col sr-items-center sm:sr-items-start">
+      {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="sr-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
+      {{- if .Site.Params.footer.displayCopyright }}<div class="sr-mt-6 sr-text-xs">{{ $copyright | markdownify }}</div>{{ end }}
+    </div>
+  </div>
+</footer>
+
+{{- define "theme-credit" -}}
+  <a class="sr-flex sr-text-sm sr-items-center sr-gap-1 sr-text-current" target="_blank" rel="noopener noreferrer" title="stacksr GitHub Homepage" href="https://github.com/imfing/stacksr">
+    <span>
+      {{- . | markdownify -}}
+      {{- if strings.Contains . "stacksr" -}}
+        {{- partial "utils/icon.html" (dict "name" "stacksr" "attributes" `height=1em class="sr-inline-block ltr:sr-ml-1 rtl:sr-mr-1 sr-align-[-2.5px]"`) -}}
+      {{- end -}}
+    </span>
+  </a>
+{{- end -}}
+

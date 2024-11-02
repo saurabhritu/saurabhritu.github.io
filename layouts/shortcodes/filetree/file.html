@@ -1,0 +1,8 @@
+{{- $name := .Get "name" -}}
+
+<li class="sr-flex sr-list-none">
+  <span class="sr-inline-flex sr-cursor-default sr-items-center sr-py-1">
+    {{- partial "utils/icon" (dict "name" "document-text" "attributes" "width=1em") -}}
+    <span class="ltr:sr-ml-1 rtl:sr-mr-1">{{ $name | markdownify }}</span>
+  </span>
+</li>

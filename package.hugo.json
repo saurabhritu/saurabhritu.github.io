@@ -1,0 +1,27 @@
+{
+    "license": "MIT",
+    "name": "design-sense",
+    "version": "1.0.0",
+    "main": "postcss.config.js",
+    "author": "Saurabh Ritu",
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
+    "devDependencies": {
+      "@fullhuman/postcss-purgecss": "^6.0.0",
+      "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+      "@tailwindcss/typography": "0.5.15",
+      "autoprefixer": "^10.3.1",
+      "postcss": "^8.4.47",
+      "postcss-cli": "11.0.0",
+      "postcss-import": "^16.1.0",
+      "prettier": "^3.3.3",
+      "prettier-plugin-go-template": "^0.0.15",
+      "tailwindcss": "3.4.12"
+    },
+    "scripts": {
+      "build:css": "npx postcss --config postcss.config.js --env production assets/css/styles.css -o assets/css/compiled/main.css"
+    }
+  }
+  

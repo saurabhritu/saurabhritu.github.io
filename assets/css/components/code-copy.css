@@ -1,0 +1,7 @@
+@supports (
+  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
+  .stacksr-code-copy-btn {
+    @apply sr-backdrop-blur-md sr-bg-opacity-[.85] dark:sr-bg-opacity-80;
+  }
+}

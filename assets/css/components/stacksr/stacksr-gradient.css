@@ -1,0 +1,42 @@
+/**/
+
+.stacksr-bg-gradient {
+    border: 1px solid transparent;
+    border-image: linear-gradient(345deg, var(--red), transparent 98%);
+    width:100%;
+  }
+  
+  .stacksr-border-gradient {
+    border: 1px solid transparent;
+    border-image: linear-gradient(345deg, var(--red), transparent 98%);
+    border-image-slice: 1;
+    width:100%;
+  }
+  
+  .stacksr-border-gradient-top {
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(15deg, var(--red), transparent 98%);
+    border-image-slice: 1;
+    width:100%;
+  }
+  
+  .stacksr-border-gradient-bottom {
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(15deg, var(--red), transparent 98%);
+    border-image-slice: 1;
+    width:100%;
+  }
+  
+  .stacksr-border-gradient-left {
+    border-left: 1px solid transparent;
+    border-image: linear-gradient(15deg, var(--red), transparent 98%);
+    border-image-slice: 1;
+    width:100%;
+  }
+  
+  .stacksr-border-gradient-right {
+    border-right: 1px solid transparent;
+    border-image: linear-gradient(150deg, var(--red), transparent 98%);
+    border-image-slice: 1;
+    width:100%;
+  }

@@ -1,0 +1,53 @@
+/* Code syntax highlight */
+@import "chroma/light.css";
+@import "chroma/dark.css";
+
+.stacksr-code-block {
+  @apply sr-text-[.9em] sr-leading-5;
+
+  pre {
+    @apply sr-text-[.9em] sr-bg-primary-700/5 sr-overflow-x-auto sr-font-medium sr-subpixel-antialiased dark:sr-bg-primary-300/10 contrast-more:sr-border contrast-more:sr-border-primary-900/20 contrast-more:sr-contrast-150 contrast-more:dark:sr-border-primary-100/40;
+  }
+
+  .filename {
+    @apply sr-absolute sr-top-0 sr-z-[1] sr-w-full sr-truncate sr-rounded-t-xl sr-bg-primary-700/5 sr-py-2 sr-px-4 sr-text-xs sr-text-gray-700 dark:sr-bg-primary-300/10 dark:sr-text-gray-200;
+  }
+
+  .filename + pre:not(.lntable pre) {
+    /* Override padding for code blocks with filename but no highlight */
+    @apply sr-pt-12;
+  }
+}
+
+.stacksr-code-block pre:not(.lntable pre) {
+  @apply sr-px-4 sr-mb-4 sr-py-4 sr-rounded-xl;
+}
+
+.stacksr-code-block div:nth-of-type(2) pre {
+  @apply sr-pt-12 sr-pb-4;
+}
+
+.chroma {
+  .lntable {
+    @apply sr-m-0 sr-block sr-w-auto sr-overflow-auto sr-rounded-xl;
+
+    pre {
+      @apply sr-pt-4 sr-pb-4;
+    }
+  }
+  .ln,
+  .lnt:not(.hl > .lnt),
+  .hl:not(.line) {
+    @apply sr-pl-4 sr-pr-4 sr-min-w-[2.6rem] sr-text-neutral-600 dark:sr-text-neutral-300;
+  }
+  .lntd {
+    @apply sr-p-0 sr-align-top;
+  }
+  .lntd:last-of-type {
+    @apply sr-w-full;
+  }
+  /* LineHighlight */
+  .hl {
+    @apply sr-block sr-w-full sr-bg-primary-800/10;
+  }
+}

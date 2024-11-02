@@ -1,0 +1,73 @@
+{{- $logoPath := .Site.Params.navbar.logo.path | default "images/logo.svg" -}}
+{{- $logoLink := .Site.Params.navbar.logo.link | default .Site.Home.RelPermalink -}}
+{{- $logoWidth := .Site.Params.navbar.logo.width | default "20" -}}
+{{- $logoHeight := .Site.Params.navbar.logo.height | default "20" -}}
+{{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
+
+{{ $linkClassHoverEffect := "sr-transition-all sr-duration-200 sr-transform hover:sr-scale-110" }}
+
+{{- $navWidth := "sr-max-w-[90rem]" -}}
+{{- with .Site.Params.navbar.width -}}
+  {{ if eq . "normal" -}}
+    {{ $navWidth = "sr-max-w-screen-xl" -}}
+  {{ else if eq . "full" -}}
+    {{ $navWidth = "max-w-full" -}}
+  {{ end -}}
+{{- end -}}
+
+<div class="nav-container sr-sticky sr-top-0 sr-z-20 sr-w-full sr-bg-transparent print:sr-hidden">
+  <div class="nav-container-blur sr-pointer-events-none sr-absolute sr-z-[-1] sr-h-full sr-w-full sr-bg-white dark:sr-bg-dark sr-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:sr-shadow-[0_0_0_1px_#000] dark:sr-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:sr-shadow-[0_0_0_1px_#fff]"></div>
+  
+  <nav class="sr-mx-auto sr-flex sr-items-center sr-justify-end sr-gap-2 sr-h-16 sr-px-6 {{ $navWidth }}">
+    <a class="sr-flex sr-items-center hover:sr-opacity-75 ltr:sr-mr-auto rtl:sr-ml-auto" href="{{ $logoLink }}">
+      {{- if (.Site.Params.navbar.displayLogo | default true) }}
+        <img class="sr-block dark:sr-hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="sr-hidden dark:sr-block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+      {{- end }}
+      {{- if (.Site.Params.navbar.displayTitle | default true) }}
+        <span class="sr-mx-2 sr-font-extrabold sr-inline sr-select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
+      {{- end }}
+    </a>
+    
+    {{- $currentPage := . -}}
+    {{- range .Site.Menus.main -}}
+      {{- if eq .Params.type "search" -}}
+      {{/*  Theme Toggle  */}}
+      <div class="sr-flex sr-flex-col {{ $linkClassHoverEffect }}">{{ partial "theme-toggle" }}</div>
+        {{- partial "search.html" (dict "params" .Params) -}}
+      {{- else -}}
+        {{- $link := .URL -}}
+        {{- $external := strings.HasPrefix $link "http" -}}
+        {{- with .PageRef -}}
+          {{- if hasPrefix . "/" -}}
+            {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{/* Display icon menu item */}}
+        {{- if .Params.icon -}}
+          {{- $rel := cond (eq .Params.icon "mastodon") "noreferer me" "noreferer" }}
+          <a class="sr-p-2 sr-text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
+            {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
+            <span class="sr-sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
+          </a>
+        {{- else -}}
+          {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
+          {{- $activeClass := cond $active "sr-font-medium" "sr-text-gray-600 hover:sr-text-red-500 dark:sr-text-gray-400 dark:hover:sr-text-red-500" -}}
+          <a
+            title="{{ or (T .Identifier) .Name | safeHTML }}"
+            href="{{ $link }}"
+            {{ if $external }}target="_blank" rel="noreferer"{{ end }}
+            class="sr-text-base contrast-more:sr-text-gray-700 contrast-more:dark:sr-text-gray-100 sr-relative -sr-ml-2 sr-hidden sr-whitespace-nowrap sr-p-2 md:sr-inline-block {{ $activeClass }} "
+          >
+            <span class="sr-text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
+          </a>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    <button type="button" aria-label="Menu" class="hamburger-menu -sr-mr-2 sr-rounded sr-p-2 active:sr-bg-gray-400/20 md:sr-hidden">
+      {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
+    </button>
+  </nav>
+</div>

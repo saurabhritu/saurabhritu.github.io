@@ -1,0 +1,11 @@
+# Hugo output
+public/
+resources/
+.hugo_build.lock
+
+# Editor
+.vscode/
+
+# npm
+node_modules/
+package-lock.json

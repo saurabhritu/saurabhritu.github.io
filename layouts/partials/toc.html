@@ -1,0 +1,81 @@
+{{/* Table of Contents */}}
+{{/* TODO: toc bottom part should be able to hide */}}
+{{- $toc := .Params.toc | default true -}}
+{{- $onThisPage := (T "onThisPage") | default "On this page"}}
+{{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
+{{- $backToTop := (T "backToTop") | default "Scroll to top" -}}
+
+<nav class="stacksr-toc sr-order-last sr-hidden sr-w-64 sr-shrink-0 xl:sr-block print:sr-hidden sr-px-4" aria-label="table of contents">
+  {{- if $toc }}
+    <div class="stacksr-border-gradient-left stacksr-scrollbar sr-sticky sr-top-16 sr-overflow-y-auto sr-pl-4 sr-pr-4 sr-pt-6 sr-text-sm [hyphens:auto] sr-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:sr--mr-4 rtl:sr--ml-4">
+      {{- with .Fragments.Headings -}}
+        <p class="sr-mb-4 sr-font-semibold sr-tracking-tight">{{ $onThisPage }}</p>
+        {{- range . -}}
+          <ul>
+            {{- with .Headings -}}{{ template "toc-subheading" (dict "headings" . "level" 0) }}{{- end -}}
+          </ul>
+        {{- end -}}
+      {{- end -}}
+
+      {{- $borderClass := "sr-mt-8 sr-border-t sr-bg-white sr-pt-8 sr-shadow-[0_-12px_16px_white] dark:sr-bg-dark dark:sr-shadow-[0_-12px_16px_#111]" -}}
+      {{- if not .Fragments.Headings -}}
+        {{- $borderClass = "" -}}
+      {{- end -}}
+
+      {{/* TOC bottom part */}}
+      <div class="{{ $borderClass }} sr-sticky sr-bottom-0 sr-flex sr-flex-col sr-items-start sr-gap-2 sr-pb-8 dark:sr-border-neutral-800 contrast-more:sr-border-t contrast-more:sr-border-neutral-400 contrast-more:sr-shadow-none contrast-more:dark:sr-border-neutral-400">
+        {{- if site.Params.editURL.enable -}}
+          {{- $editURL := site.Params.editURL.base | default "" -}}
+          {{- with .Params.editURL -}}
+            {{/* if `editURL` is set in the front matter */}}
+            {{- $editURL = . -}}
+          {{- else -}}
+            {{- with .File -}}
+              {{/* `.FileInfo.Meta.SourceRoot` is a Hugo internal field, e.g. `/path/to/repo/content/en/` */}}
+              {{- $sourceDir := replace (strings.TrimPrefix .FileInfo.Meta.BaseDir .FileInfo.Meta.SourceRoot) "\\" "/" -}}
+              {{- $sourceDir = strings.TrimPrefix "/content" $sourceDir -}}
+              {{- $path := replace .Path "\\" "/" -}}
+              {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
+            {{- end -}}
+          {{- end -}}
+          <a class="sr-text-xs sr-font-medium sr-text-gray-500 hover:sr-text-gray-900 dark:sr-text-gray-400 dark:hover:sr-text-gray-100 contrast-more:sr-text-gray-800 contrast-more:dark:sr-text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
+        {{- end -}}
+        {{/* Scroll To Top */}}
+        <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="sr-transition-all sr-duration-75 sr-opacity-0 sr-text-xs sr-font-medium sr-text-gray-500 hover:sr-text-gray-900 dark:sr-text-gray-400 dark:hover:sr-text-gray-100 contrast-more:sr-text-gray-800 contrast-more:dark:sr-text-gray-50">
+          <span>
+            {{- $backToTop -}}
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sr-inline ltr:sr-ml-1 rtl:sr-mr-1 sr-h-3.5 sr-w-3.5 sr-border sr-rounded-full sr-border-gray-500 hover:sr-border-gray-900 dark:sr-border-gray-400 dark:hover:sr-border-gray-100 contrast-more:sr-border-gray-800 contrast-more:dark:sr-border-gray-50">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  {{ end -}}
+</nav>
+
+{{/* TOC subheadings component. This is a recursive component that renders a list of headings. */}}
+{{- define "toc-subheading" -}}
+  {{- $headings := .headings -}}
+  {{- $level := .level -}}
+  {{- if ge $level 6 -}}
+    {{ return }}
+  {{- end -}}
+
+  {{- $padding := (mul $level 4) -}}
+  {{- $class := cond (eq $level 0) "sr-font-semibold" (printf "ltr:sr-pl-%d rtl:sr-pr-%d" $padding $padding) -}}
+
+  {{- range $headings }}
+    {{- if .Title }}
+      <li class="sr-my-2 sr-scroll-my-6 sr-scroll-py-6">
+        <a class="{{ $class }} sr-inline-block sr-text-gray-500 hover:sr-text-gray-900 dark:sr-text-gray-400 dark:hover:sr-text-gray-300 contrast-more:sr-text-gray-900 contrast-more:sr-underline contrast-more:dark:sr-text-gray-50 sr-w-full sr-break-words" href="#{{ anchorize .ID }}">
+          {{- .Title | safeHTML | plainify | htmlUnescape }}
+        </a>
+      </li>
+    {{- end -}}
+    {{- with .Headings -}}
+      {{ template "toc-subheading" (dict "headings" . "level" (add $level 1)) }}
+    {{- end -}}
+
+  {{- end -}}
+{{- end -}}

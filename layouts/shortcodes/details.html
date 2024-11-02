@@ -1,0 +1,11 @@
+{{- $title := .Get "title" | default "" -}}
+{{- $closed := eq (.Get "closed") "true" | default false -}}
+
+<details class="last-of-type:sr-mb-0 sr-rounded-lg sr-bg-neutral-50 dark:sr-bg-neutral-800 sr-p-2 sr-mt-4 sr-group" {{ if not $closed }}open{{ end }}>
+  <summary class="sr-flex sr-items-center sr-cursor-pointer sr-select-none sr-list-none sr-p-1 sr-rounded sr-transition-colors hover:sr-bg-gray-100 dark:hover:sr-bg-neutral-800 before:sr-mr-1 before:sr-inline-block before:sr-transition-transform before:sr-content-[''] dark:before:sr-invert rtl:before:sr-rotate-180 group-open:before:sr-rotate-90">
+    <strong class="sr-text-lg">{{ $title | markdownify }}</strong>
+  </summary>
+  <div class="sr-p-2 sr-overflow-hidden">
+    {{ .InnerDeindent | markdownify }}
+  </div>
+</details>

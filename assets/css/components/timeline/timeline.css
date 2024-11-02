@@ -1,0 +1,184 @@
+/* Styling for the timeline container */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center
+}
+
+.timeline-toggle-all {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* Arrow Animation */
+#timeline-toggle-text {
+  transition: transform 0.3s ease;
+}
+
+/* Up arrow animation */
+.rotate-up {
+  transform: rotate(0deg);
+}
+
+/* Down arrow animation */
+.rotate-down {
+  transform: rotate(360deg);
+}
+
+/* Zoom-in effect on hover */
+.timeline-toggle-all:hover {
+  transform: scale(1.5);
+  transition: transform 0.3s ease;
+}
+
+  /* Hover effect for the timeline toggle button */
+.timeline-toggle-all:hover h2 {
+  color: #F05252; /* Change color on hover */
+}
+
+/* Other existing styles remain the same */
+
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(150deg, var(--red), transparent 98%);
+  background-color: transparent;/* Timeline color: grey */
+  top: 0;
+  bottom: 0;
+  z-index: 0; /* Ensure the line is behind the items */
+}
+
+.timeline-year {
+  position: relative;
+  margin: 40px 0;
+  text-align: center;
+  /* background-color: white; Ensure year section has a solid background */
+  z-index: 2; /* Bring year section above the timeline */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.timeline-year button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  /* color: #333; Default text color */
+}
+
+/* Hover effect for year section */
+.timeline-year:hover {
+  /* background-color: #f0f0f0; Change background color on hover */
+  /* color: #ef4444;  Change text color on hover #cd4c2e; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+}
+
+.timeline-month {
+  position: relative;
+  margin: 20px 0;
+  text-align: center;
+  z-index: 2; /* Bring year section above the timeline */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.timeline-month button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  /* color: #333; Default text color */
+}
+
+/* Month toggle hover effect */
+.timeline-month:hover button {
+   color: #F05252 /* #cd4c2e; Change color on hover */
+}
+
+.timeline-toggle:hover h2 {
+  color: #F05252; /* #cd4c2e; Change color on hover */
+}
+
+.month-toggle:hover h3 {
+  color: #F05252; /* Use inherited color for consistency */
+}
+
+.timeline-toggle h2,
+.month-toggle h3 {
+  margin: 0;
+  color: inherit; /* Use inherited color for consistency */
+}
+
+/* Timeline Blog Items */
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 20px 0;
+}
+
+.timeline-date {
+  width: 50%;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+.timeline-content {
+  width: 50%;
+  padding-left: 20px;
+}
+
+/* Clickable Point */
+.timeline-point-link {
+  position: absolute;
+  left: 50%;
+  top: 15px; /* Title and Point alignment */
+  transform: translateX(-43%);
+  display: inline-block;
+}
+
+.timeline-point {
+  width: 12px;
+  height: 12px;
+  background-color: grey; /* Point color: grey */
+  border-radius: 50%;
+  z-index: 2;
+  transition: background-color 0.8s ease; /* Add smooth hover effect */
+}
+
+.timeline-point-link:hover .timeline-point {
+  background-color: #F05252; /* Hover color for the point */
+}
+
+.timeline-content h3 {
+  margin: 0;
+}
+
+.timeline-content a {
+  text-decoration: none;
+  /* color: #333; Default text color */
+}
+
+.timeline-content a:hover {
+  color: #F05252; /* Hover color for the blog links */
+}
+
+.timeline-blogs {
+  transition: all 0.5s ease;
+}

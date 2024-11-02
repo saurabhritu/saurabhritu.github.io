@@ -1,0 +1,108 @@
+# Hugo configuration file
+baseURL: 'https://saurabhritu.github.io/'
+
+languageCode: en-us
+title: Stacksr
+
+markup:
+  # allow raw html
+  goldmark:
+    renderer:
+      unsafe: true
+
+  # enable stacksr syntax highlight
+  highlight:
+    noClasses: false
+
+enableInlineShortcodes: true
+
+menu:
+  main:
+    - name: Explore
+      pageRef: /docs
+      weight: 1
+    - name: Blog
+      pageRef: /blog
+      weight: 2
+    - name: About
+      pageRef: /about
+      weight: 3
+    # - name: Contact ↗
+    #   url: "https://github.com/saurabhritu"
+    #   weight: 4
+    - name: Search
+      weight: 5
+      params:
+        type: search
+    # - name: GitHub
+    #   weight: 6
+    #   url: "https://github.com/saurabhritu"
+    #   params:
+    #     icon: github
+    # - name: Twitter
+    #   weight: 7
+    #   url: "https://twitter.com/_SaurabhRitu"
+    #   params:
+    #     icon: x-twitter
+
+params:
+  description: Stacksr, Blog, Life, STEM.
+
+  page:
+  # full (100%), wide (90rem), normal (1280px)
+    width: wide
+
+  navbar:
+    displayTitle: false
+    displayLogo: true
+    logo:
+      path: images/branding/stacksr_logo_no_bg-dark.png
+      dark: images/branding/stacksr_logo_no_bg.png
+      link: /
+      width: 150
+      height: 150
+    # width: normal
+
+  footer:
+    displayCopyright: true
+    displayPoweredBy: false
+    # width: normal
+
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+
+  editURL:
+    enable: false
+    base: "https://github.com/saurabhritu/saurabhritu.github.io/edit/main/content"
+  
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+
+  # Search
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      # index page by: content | summary | heading | title
+      index: content
+      tokenize: forward
+  
+  blog:
+    list:
+      displayTags: true
+      # date | lastmod | publishDate | title | weight
+      sortBy: date
+      sortOrder: desc # or "asc"
+      
+    highlight:
+      copy:
+        enable: true
+        # hover | always
+        display: hover
+
+# services:
+#   googleAnalytics:
+#     ID: G-MEASUREMENT_ID

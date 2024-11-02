@@ -1,0 +1,57 @@
+@import "tailwind.css";
+
+/* @import "compiled/main.css"; */
+/* @import "custom.css"; */
+
+@import "typography.css";
+@import "highlight.css";
+@import "components/cards.css";
+@import "components/steps.css";
+@import "components/search.css";
+@import "components/sidebar.css";
+@import "components/navbar.css";
+@import "components/scrollbar.css";
+@import "components/code-copy.css";
+@import "components/stacksr/feature-grid.css";
+@import "components/timeline/timeline.css";
+@import "components/stacksr/stacksr-gradient.css";
+
+/* custom import addition */
+@import "components/footer.css";
+
+
+html {
+  @apply sr-text-base sr-antialiased;
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply sr-w-full sr-bg-white dark:sr-bg-dark dark:sr-text-gray-100;
+}
+
+:root {
+  --primary-hue: 0deg;
+  --primary-saturation: 40%;
+  --navbar-height: 4rem;
+  --menu-height: 3.75rem;
+  /* custom color variable */
+  --black: hsl(0, 0%, 13%);
+  --dark: hsl(12, 32%, 2%);
+  --gray: hsl(0, 0%, 70%);
+  --white: hsl(0, 0%, 96%);
+  --red: hsl(12, 90%, 63%);
+  --red-shadow: hsl(12, 100%, 60%);
+  --red-sheen: linear-gradient(
+    to bottom,
+    hsl(12, 90%, 43%),
+    hsla(12, 40%, 70%, 0.5) 50%,
+    hsl(12, 93%, 23%)
+  );
+}
+
+.dark {
+  --primary-hue: 0deg;
+  --primary-saturation: 40%;
+}
+

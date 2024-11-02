@@ -1,0 +1,17 @@
+{{- $name := .Get "name" -}}
+{{- $state := .Get "state" | default "open" }}
+
+<li class="sr-group sr-flex sr-list-none sr-flex-col">
+  <button class="stacksr-filetree-folder sr-inline-flex sr-cursor-pointer sr-items-center sr-py-1 hover:sr-opacity-60">
+    <span data-state="{{ $state }}" class="data-[state=open]:sr-hidden">
+      {{- partial "utils/icon" (dict "name" "folder" "attributes" "width=1em") -}}
+    </span>
+    <span data-state="{{ $state }}" class="data-[state=closed]:sr-hidden">
+      {{- partial "utils/icon" (dict "name" "folder-open" "attributes" "width=1em") -}}
+    </span>
+    <span class="ltr:sr-ml-1 rtl:sr-mr-1">{{ $name }}</span>
+  </button>
+  <ul data-state="{{ $state }}" class="ltr:sr-pl-5 rtl:sr-pr-5 data-[state=closed]:sr-hidden">
+    {{- .Inner -}}
+  </ul>
+</li>

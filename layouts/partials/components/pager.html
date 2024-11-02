@@ -1,0 +1,53 @@
+{{/* Article navigation on the footer of the article */}}
+
+{{- $reversePagination := .Scratch.Get "reversePagination" | default false -}}
+
+{{- $prev := cond $reversePagination .PrevInSection .NextInSection -}}
+{{- $next := cond $reversePagination .NextInSection .PrevInSection -}}
+
+{{- if eq .Params.prev false }}
+  {{- if $reversePagination }}{{ $next = false }}{{ else }}{{ $prev = false }}{{ end -}}
+{{ else }}
+  {{- with .Params.prev -}}
+    {{- with $.Site.GetPage . -}}
+      {{- if $reversePagination }}{{ $next = . }}{{ else }}{{ $prev = . }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq .Params.next false }}
+  {{- if $reversePagination }}{{ $prev = false }}{{ else }}{{ $next = false }}{{ end -}}
+{{ else }}
+  {{- with .Params.next -}}
+    {{- with $.Site.GetPage . -}}
+      {{- if $reversePagination }}{{ $prev = . }}{{ else }}{{ $next = . }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if or $prev $next -}}
+  <div class="sr-mb-8 sr-flex sr-items-center sr-border-t sr-pt-8 dark:sr-border-neutral-800 contrast-more:sr-border-neutral-400 dark:contrast-more:sr-border-neutral-400 print:sr-hidden">
+    {{- if $prev -}}
+      {{- $linkTitle := partial "utils/title" $prev -}}
+      <a
+        href="{{ $prev.RelPermalink }}"
+        title="{{ $linkTitle }}"
+        class="sr-flex sr-max-w-[50%] sr-items-center sr-gap-1 sr-py-4 sr-text-base sr-font-medium sr-text-gray-600 sr-transition-colors [word-break:break-word] hover:sr-text-primary-600 dark:sr-text-gray-300 md:sr-text-lg ltr:sr-pr-4 rtl:sr-pl-4"
+      >
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"sr-inline sr-h-5 sr-shrink-0 ltr:sr-rotate-180\"") -}}
+        {{- $linkTitle -}}
+      </a>
+    {{- end -}}
+    {{- if $next -}}
+      {{- $linkTitle := partial "utils/title" $next -}}
+      <a
+        href="{{ $next.RelPermalink }}"
+        title="{{ $linkTitle }}"
+        class="sr-flex sr-max-w-[50%] sr-items-center sr-gap-1 sr-py-4 sr-text-base sr-font-medium sr-text-gray-600 sr-transition-colors [word-break:break-word] hover:sr-text-primary-600 dark:sr-text-gray-300 md:sr-text-lg ltr:sr-ml-auto ltr:sr-pl-4 ltr:sr-text-right rtl:sr-mr-auto rtl:sr-pr-4 rtl:sr-text-left"
+      >
+        {{- $linkTitle -}}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"sr-inline sr-h-5 sr-shrink-0 rtl:-sr-rotate-180\"") -}}
+      </a>
+    {{- end -}}
+  </div>
+{{- end -}}
