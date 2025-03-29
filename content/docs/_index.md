@@ -11,7 +11,7 @@ title: Explore
 ## Let's Learn
 
 {{< cards >}}
-  {{< card link="aiot" title="AIoT" subtitle="Get Started With AIoT." icon="AIoT" >}}
+  {{< card link="aiot" title="AIoT" subtitle="Get Started With AIoT." icon="aiot" >}}
 {{< /cards >}}
 
 

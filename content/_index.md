@@ -33,7 +33,7 @@ toc: false
     subtitle="Bringing Intelligence to Every Connection."
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
     link="docs/aiot"
-    icon="AIoT"
+    icon="aiot"
   >}}
 
   {{< stacksr/feature-card
@@ -45,13 +45,6 @@ toc: false
   >}}
 
 {{< /stacksr/feature-grid >}}
-
-<!-- {{< cards >}}
-  {{< card link="blog" title="Blog" icon="book-open" >}}
-  {{< card link="docs" title="Documents" icon="document" >}}
-  {{< card link="about" title="About" icon="user" >}}
-  {{< card link="AIoT" title="AIoT" icon="AIoT" >}}
-{{< /cards >}} -->
 
 <!-- <br> -->
 <!-- {{< stacksr/stacksr-line >}} -->
