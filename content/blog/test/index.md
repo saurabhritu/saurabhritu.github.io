@@ -12,7 +12,7 @@ genres: ["tutorial"]
 series: ["get-started"]
 
 excludeSearch: true
-draft: true
+draft: false
 ---
 
 ### In this blog, I am going to tell you how to integrate c++ driver in c firmware. </br>

@@ -12,7 +12,7 @@ genres: ["tutorial"]
 series: ["get-started"]
 
 excludeSearch: true
-draft: true
+draft: false
 ---
 
 In this blog, I am going to show you sample examples for adding content. </br>
@@ -67,6 +67,9 @@ Markdown is **supported**.
 
 > [!TIP]
 > Useful Information
+
+> [!WARNING]
+> this is warning
 
 <br>
 

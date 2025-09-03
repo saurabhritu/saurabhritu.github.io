@@ -1,4 +1,4 @@
-{{/*  {{- if not (in (slice "note" "tip" "important" "warning" "caution") .AlertType) -}}
+{{- if not (in (slice "note" "tip" "important" "warning" "caution") .AlertType) -}}
   {{- warnf "Alert type %s is not supported" .AlertType -}}
 {{- end -}}
 
@@ -6,42 +6,4 @@
 {{- $alertType := .AlertType -}}
 {{- $alertTitle := .AlertTitle -}}
 
-{{- partial "components/github-style-alert" (dict "content" $content "alertType" $alertType "alertTitle" $alertTitle) -}}  */}}
-
-{{/* 
-  Custom blockquote render hook to turn blockquotes into alerts. 
-  Usage in Markdown:
-  
-  > warning
-  > This is a warning alert.
-
-  Supported types: note, tip, important, warning, caution
-*/}}
-
-{{/* 
-  Custom blockquote render hook to turn blockquotes into alerts. 
-  Usage in Markdown:
-  
-  > warning
-  > This is a warning alert.
-*/}}
-
-{{- $lines := split .Text "\n" -}}
-{{- $firstLine := trim (index $lines 0) " " -}}
-{{- $validTypes := slice "note" "tip" "important" "warning" "caution" -}}
-
-{{- if in $validTypes (lower $firstLine) -}}
-  {{- $alertType := lower $firstLine -}}
-  {{- $alertTitle := title $alertType -}}
-  {{- $content := delimit (after 1 $lines) "\n" -}}
-
-  <div class="alert alert-{{ $alertType }}">
-    <strong>{{ $alertTitle }}</strong>
-    <div>{{ $content | safeHTML }}</div>
-  </div>
-{{- else -}}
-  <blockquote>
-    {{ .Text | safeHTML }}
-  </blockquote>
-{{- end -}}
-
+{{- partial "components/github-style-alert" (dict "content" $content "alertType" $alertType "alertTitle" $alertTitle) -}}
