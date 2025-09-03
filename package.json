@@ -39,6 +39,9 @@
   },
   "version": "1.0.0",
   "description": "Stacksr Website.",
+  "overrides": {
+  "string-width-cjs": "npm:string-width@4.2.3"
+  },
   "dependencies": {
     "ansi-regex": "^6.1.0",
     "ansi-styles": "^6.2.1",

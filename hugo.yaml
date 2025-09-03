@@ -113,31 +113,3 @@ params:
 # services:
 #   googleAnalytics:
 #     ID: G-MEASUREMENT_ID
-
-# configuration 
-module:
-  hugoVersion:
-    extended: true
-    min: "0.116.0"
-  mounts:
-    - source: "assets"
-      target: "assets"
-    - source: "hugo_stats.json"
-      target: "assets/watching/hugo_stats.json"
-
-build:
-  publish: "public"
-  command: "hugo --gc --minify -b ${DEPLOY_PRIME_URL}"
-  writeStats: true
-  cachebusters:
-    - source: "assets/watching/hugo_stats\\.json"
-      target: "styles\\.css"
-    - source: "(postcss|tailwind)\\.config\\.js"
-      target: "css"
-    - source: "assets/.*\\.(js|ts|jsx|tsx)"
-      target: "js"
-    - source: "assets/.*\\.(.*)$"
-      target: "$1"
-
-  environment:
-  HUGO_VERSION: "0.148.1"
