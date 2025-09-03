@@ -1,7 +1,8 @@
 ---
 title: Integrating C++ Drivers into C-Based Firmware
 date: 2025-09-03T02:00:46+05:30
-
+images: ["/images/temp/c_cpp_wrapper.png"]
+featured_image: ["/images/temp/c_cpp_wrapper.png"]
 authors:
   - name: Saurabh Ritu
     link: https://github.com/saurabhritu
