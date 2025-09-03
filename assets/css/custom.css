@@ -13,6 +13,21 @@
   }
 }
 
+.chip {
+  display: inline-block;
+  /* background: #ff8800; */
+  color: #374151;
+  padding: 0.10rem 0.75rem;
+  /* margin: 0.25rem; */
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+.chip:hover {
+  background: #969ca5;
+}
+
+
 
 
 

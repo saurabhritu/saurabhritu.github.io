@@ -1,6 +1,6 @@
 [module]
   [module.hugoVersion]
-    extended = false
+    extended = true
     min = "0.116.0"
   [[module.mounts]]
     source = "assets"
@@ -28,4 +28,4 @@
     target = "$1"
 
 [build.environment]
-HUGO_VERSION = "0.132.2"
+HUGO_VERSION = "0.148.1"

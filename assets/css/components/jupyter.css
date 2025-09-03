@@ -1,0 +1,17 @@
+.stacksr-jupyter-code-cell {
+  scrollbar-gutter: auto;
+
+  @apply sr:mt-6;
+
+  .hextra-jupyter-code-cell-outputs-container {
+    @apply sr:text-xs sr:overflow-hidden;
+
+    .hextra-jupyter-code-cell-outputs {
+      @apply sr:overflow-auto sr:max-h-[50vh];
+
+      pre {
+        @apply sr:text-xs sr:overflow-auto sr:max-w-full;
+      }
+    }
+  }
+}

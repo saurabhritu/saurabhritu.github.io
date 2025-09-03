@@ -1,4 +1,16 @@
 {{ define "main" }}
+  {{/*  <ul>
+    {{ range $taxonomy, $terms := .Site.Taxonomies }}
+      <li><a href="{{ printf "/%s/" $taxonomy | relURL }}">{{ $taxonomy | title }}</a></li>
+    {{ end }}
+  </ul>  */}}
+
+  {{/*  <ul>
+    {{ range $taxonomy, $terms := .Site.Taxonomies }}
+      <li>{{ $taxonomy }} → {{ len $terms }}</li>
+    {{ end }}
+  </ul>  */}}
+
   {{/*  {{- $readMore := (T "readMore") | default "Dive In →" -}}  */}}
   {{- $readMore := "Learn More →" -}}
   <div class="sr-mx-auto sr-flex {{ partial `utils/page-width` . }}">
@@ -8,7 +20,7 @@
         <br class="sr-mt-1.5 sr-text-sm" />
         <h1 class="sr-text-center sr-mt-2 sr-text-4xl sr-font-bold sr-tracking-tight sr-text-slate-900 dark:sr-text-slate-100">{{ .Title }}</h1>
         <div class="content">{{ .Content }}</div>
-
+        
         <!-- Image Grid Layout -->
         <div class="sr-grid sr-grid-cols-1 md:sr-grid-cols-2 lg:sr-grid-cols-3 sr-gap-6 sr-mt-6">
           {{- $pages := partial "utils/sort-pages" (dict "page" . "by" site.Params.blog.list.sortBy "order" site.Params.blog.list.sortOrder) -}}

@@ -2,6 +2,7 @@
   <div class="sr-mx-auto sr-flex {{ partial `utils/page-width` . }}">
     {{ partial "sidebar.html" (dict "context" . ) }}
     {{ partial "toc.html" . }}
+    
     <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
         {{ partial "breadcrumb.html" . }}
@@ -38,6 +39,15 @@
         <div class="content">
           {{ .Content }}
         </div>
+
+        {{ with .GetTerms "tags" }}
+          <div class="sr-mt-12 sr-flex sr-gap-2 sr-flex-wrap">
+            {{ range . }}
+              <a class="chip" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+
         {{ partial "components/last-updated.html" . }}
         {{ .Scratch.Set "reversePagination" true }}
         {{ partial "components/pager.html" . }}

@@ -49,6 +49,40 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
           </svg>
         </button>
+
+        {{/* Get taxonomies */}}
+        {{ with .GetTerms "tags" }}
+          <div class="sr-flex sr-gap-2 sr-flex-wrap">
+            {{ range . }}
+              <a class="chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ with .GetTerms "categories" }}
+          <div class="sr-flex sr-gap-2 sr-flex-wrap">
+            {{ range . }}
+              <a class="chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ with .GetTerms "genres" }}
+          <div class="sr-flex sr-gap-2 sr-flex-wrap">
+            {{ range . }}
+              <a class="chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ with .GetTerms "series" }}
+          <div class="sr-flex sr-gap-2 sr-flex-wrap">
+            {{ range . }}
+              <a class="chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+
       </div>
     </div>
   {{ end -}}
