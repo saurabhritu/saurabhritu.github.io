@@ -1,6 +1,7 @@
 ---
 title: Integrating C++ Drivers into C-Based Firmware
 date: 2025-09-03T02:00:46+05:30
+
 authors:
   - name: Saurabh Ritu
     link: https://github.com/saurabhritu
@@ -13,6 +14,10 @@ genres: ["solution"]
 excludeSearch: true
 draft: false
 ---
+
+<!-- ![C_CPP_Wrapper](/images/temp/c_cpp_wrapper.png) -->
+
+<img src="/images/temp/c_cpp_wrapper.png" alt="C_CPP_Wrapper" height="50%" width="50%">
 
 ### Story
 Imagine this scenario: you are working on a firmware project written entirely in C. Midway through development, your team finds a new sensor that is 10× cheaper than the current one. Naturally, management wants it integrated into the next hardware version.
