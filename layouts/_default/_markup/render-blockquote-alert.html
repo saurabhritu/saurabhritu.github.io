@@ -18,6 +18,14 @@
   Supported types: note, tip, important, warning, caution
 */}}
 
+{{/* 
+  Custom blockquote render hook to turn blockquotes into alerts. 
+  Usage in Markdown:
+  
+  > warning
+  > This is a warning alert.
+*/}}
+
 {{- $lines := split .Text "\n" -}}
 {{- $firstLine := trim (index $lines 0) " " -}}
 {{- $validTypes := slice "note" "tip" "important" "warning" "caution" -}}
@@ -29,10 +37,11 @@
 
   <div class="alert alert-{{ $alertType }}">
     <strong>{{ $alertTitle }}</strong>
-    <div>{{ $content | markdownify }}</div>
+    <div>{{ $content | safeHTML }}</div>
   </div>
 {{- else -}}
   <blockquote>
-    {{ .Text | markdownify }}
+    {{ .Text | safeHTML }}
   </blockquote>
 {{- end -}}
+
