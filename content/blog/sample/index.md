@@ -12,7 +12,7 @@ genres: ["tutorial"]
 series: ["get-started"]
 
 excludeSearch: true
-draft: false
+draft: true
 ---
 
 In this blog, I am going to show you sample examples for adding content. </br>
