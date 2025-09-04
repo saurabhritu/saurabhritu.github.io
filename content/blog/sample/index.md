@@ -20,6 +20,9 @@ These are the basic and generic method whcih is frequently used by most blog con
 
 These are code snipet format.
 
+>[!NOTE]
+> use index.md in place of _index.md to render toc in blogs and other content.
+
 <code> pkg update && pkg upgrade </code>
 
 ``` g++ main.cpp -o main ```

@@ -25,9 +25,9 @@ taxonomies:
 
 menu:
   main:
-    - name: Explore
-      pageRef: /docs
-      weight: 1
+    # - name: Explore
+    #   pageRef: /docs
+    #   weight: 1
     - name: Blog
       pageRef: /blog
       weight: 2

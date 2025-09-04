@@ -11,11 +11,10 @@ categories: ["c_cpp", "firmware", "driver"]
 tags: ["c", "c++", "sensor"]
 genres: ["solution"]
 
-excludeSearch: true
-draft: false
+excludeSearch: false
 ---
 
-<img src="/images/temp/c_cpp_wrapper.png" alt="C_CPP_Wrapper" height="50%" width="50%">
+<img src="/images/temp/c_cpp_wrapper.png" alt="C_CPP_Wrapper" height="100%" width="100%">
 
 ### Story
 Imagine this scenario: you are working on a firmware project written entirely in C. Midway through development, your team finds a new sensor that is 10× cheaper than the current one. Naturally, management wants it integrated into the next hardware version.

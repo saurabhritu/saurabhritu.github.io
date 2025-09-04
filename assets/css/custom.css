@@ -28,6 +28,20 @@
 }
 
 
+/* Define the animation sequence */
+@keyframes fade-animation {
+  0% { opacity: 0; } /* Start completely transparent */
+  50% { opacity: 1; } /* Fade to fully visible */
+  100% { opacity: 0; } /* Fade back to transparent */
+}
+
+/* Apply the animation to the HTML element */
+.animated-text {
+  animation: fade-animation 3s infinite; /* 3 seconds, infinite loop */
+  font-family: sans-serif;
+  text-align: center;
+}
+
 
 
 

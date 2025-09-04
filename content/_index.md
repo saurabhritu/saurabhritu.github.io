@@ -28,13 +28,13 @@ toc: false
 
 {{< stacksr/feature-grid >}}
 
-  {{< stacksr/feature-card
+  <!-- {{< stacksr/feature-card
     title="AIoT"
     subtitle="Bringing Intelligence to Every Connection."
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
     link="docs/aiot"
     icon="aiot"
-  >}}
+  >}} -->
 
   {{< stacksr/feature-card
     title="Blog"
