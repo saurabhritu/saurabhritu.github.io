@@ -1,115 +1,90 @@
-# Hugo configuration file
-baseURL: 'https://saurabhritu.github.io/'
+baseURL: "https://stacksr.com/"
+languageCode: "en-us"
+title: "Stacksr"
 
-languageCode: en-us
-title: Stacksr
+params:
+  description: "Knowledge Base — Learn Emerging Technology."
+  heroTitle: "Learn Emerging\nTechnology."
+  heroSubtitle: "Explore with confidence — deep dives into embedded systems, AIoT, and open-source engineering."
+  email: "firstrankforall@gmail.com"
+  githubURL: "https://github.com/saurabhritu"
+  defaultImage: "/images/showcase-cpp-linkage.png"
 
-markup:
-  # allow raw html
-  goldmark:
-    renderer:
-      unsafe: true
+  categories:
+    - name: "AIoT"
+      description: "AI meets IoT. Edge inference, sensor fusion, and connected devices."
+      url: "/docs/aiot"
+      icon: |
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="26" width="28" height="8" rx="1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 26v-6a6 6 0 0 1 12 0v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="13" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 30h4M26 30h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
 
-  # enable stacksr syntax highlight
-  highlight:
-    noClasses: false
+    - name: "Embedded Systems"
+      description: "Firmware, drivers, RTOS, and low-level protocols for reliable products."
+      url: "/docs/embedded-systems"
+      icon: |
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 14h16M12 20h16M12 26h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
 
-enableInlineShortcodes: true
+    # - name: "Open Source"
+    #   description: "Tools and frameworks from the open-source ecosystem for next-gen products."
+    #   url: "/docs/open-source"
+    #   icon: |
+    #     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M20 7v6M20 27v6M7 20h6M27 20h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/></svg>
 
-taxonomies:
-  category: categories
-  tag: tags
-  series: series
-  genre: genres
+    # - name: "Robotics"
+    #   description: "Autonomous machines, motion control, and perception systems for the industrial edge."
+    #   url: "/docs/robotics"
+    #   icon: |
+    #     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
 
+    # - name: "Drones"
+    #   description: "UAVs, flight controllers, and aerial telemetry systems for specialized missions."
+    #   url: "/docs/drones"
+    #   icon: |
+    #     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M10 10 7 7" /><path d="m10 14-3 3" /><path d="m14 10 3-3" /><path d="m14 14 3 3" /><path d="M14.205 4.139a4 4 0 1 1 5.439 5.863" /><path d="M19.637 14a4 4 0 1 1-5.432 5.868" /><path d="M4.367 10a4 4 0 1 1 5.438-5.862" /><path d="M9.795 19.862a4 4 0 1 1-5.429-5.873" /><rect x="10" y="8" width="4" height="8" rx="1" /></svg>
+
+    # - name: "Quantum Computing"
+    #   description: "Next-gen computing paradigms, quantum algorithms, and the future of cryptography."
+    #   url: "/docs/quantum-computing"
+    #   icon: |
+    #     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="1" /><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" /><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" /></svg>
+
+  about:
+    stats:
+      - value: "10+"
+        name: Articles
+      - value: "3"
+        name: Topics
+      - value: "1"
+        name: Author
+    stack:
+      - "ESP32 / ESP-IDF"
+      - "FreeRTOS / Zephyr"
+      - "C / C++"
+      - "Python"
+      - "Linux"
+      - "Open Source"
 
 menu:
   main:
-    # - name: Explore
-    #   pageRef: /docs
-    #   weight: 1
-    - name: Blog
-      pageRef: /blog
-      weight: 2
-    - name: About
-      pageRef: /about
-      weight: 3
-    # - name: Contact ↗
-    #   url: "https://github.com/saurabhritu"
-    #   weight: 4
-    - name: Search
-      weight: 5
-      params:
-        type: search
-    # - name: GitHub
-    #   weight: 6
-    #   url: "https://github.com/saurabhritu"
-    #   params:
-    #     icon: github
-    # - name: Twitter
-    #   weight: 7
-    #   url: "https://twitter.com/_SaurabhRitu"
-    #   params:
-    #     icon: x-twitter
+    - name: "Blog"
+      url: "/blog/"
+      weight: 10
+    - name: "Explore"
+      url: "/docs/"
+      weight: 20
+    - name: "About"
+      url: "/about/"
+      weight: 30
 
-params:
-  description: Stacksr, Blog, Life, STEM.
-
-  page:
-  # full (100%), wide (90rem), normal (1280px)
-    width: wide
-
-  navbar:
-    displayTitle: false
-    displayLogo: true
-    logo:
-      path: images/branding/stacksr_logo_no_bg-dark.png
-      dark: images/branding/stacksr_logo_no_bg.png
-      link: /
-      width: 150
-      height: 150
-    # width: normal
-
-  footer:
-    displayCopyright: true
-    displayPoweredBy: false
-    # width: normal
-
-  displayUpdatedDate: true
-  dateFormat: "January 2, 2006"
-
-  editURL:
-    enable: false
-    base: "https://github.com/saurabhritu/saurabhritu.github.io/edit/main/content"
-  
-  theme:
-    # light | dark | system
-    default: system
-    displayToggle: true
-
-  # Search
-  search:
-    enable: true
-    type: flexsearch
-
-    flexsearch:
-      # index page by: content | summary | heading | title
-      index: content
-      tokenize: forward
-  
-  blog:
-    list:
-      displayTags: true
-      # date | lastmod | publishDate | title | weight
-      sortBy: date
-      sortOrder: desc # or "asc"
-      
-    highlight:
-      copy:
+markup:
+  highlight:
+    style: "dracula"
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
         enable: true
-        # hover | always
-        display: hover
-
-# services:
-#   googleAnalytics:
-#     ID: G-MEASUREMENT_ID
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]

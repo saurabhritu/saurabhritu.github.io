@@ -1,18 +1,147 @@
 {{ define "main" }}
-  <div class='sr-mx-auto sr-flex {{ partial "utils/page-width" . }}'>
-    {{ partial "sidebar.html" (dict "context" .) }}
-    {{ partial "toc.html" . }}
-    <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
-        {{ partial "breadcrumb.html" . }}
-        <div class="content">
-          <h1>{{ .Title }}</h1>
-          {{ .Content }}
-        </div>
-        {{ partial "components/last-updated.html" . }}
-        {{ partial "components/pager.html" . }}
-        {{ partial "components/comments.html" . }}
-      </main>
-    </article>
+
+<section class="page-hero">
+  <div class="container reveal">
+    <p class="section-label">KNOWLEDGE BASE</p>
+    <h1 class="section-title" style="margin-top:0.5rem;">
+      {{ if .IsSection }}{{ .Title }}{{ else }}Explore{{ end }}
+    </h1>
+    <p style="color:var(--clr-text-muted);margin-top:0.75rem;max-width:560px;font-size:1.05rem;">
+      {{ with .Params.description }}{{ . }}{{ else }}
+      Structured guides, references, and deep-dives — organized by topic.
+      {{ end }}
+    </p>
   </div>
+</section>
+
+{{ if eq .RelPermalink "/docs/" }}
+  <div class="container">
+    {{ $categories := .Site.Params.categories }}
+    {{ with $categories }}
+    <section class="section" style="padding-top: 0;">
+      <div class="section-header reveal">
+        <p class="section-label">CATEGORIES</p>
+        <h2 class="section-title">Topics</h2>
+      </div>
+      <ul class="category-grid reveal">
+        {{ range . }}
+        {{ $page := $.Site.GetPage .url }}
+        {{ with $page }}
+        <li class="category-card">
+          <a href="{{ .RelPermalink }}">
+            <div class="card-icon" aria-hidden="true">
+              {{ with (index (where $.Site.Params.categories "url" .RelPermalink) 0).icon }}
+                {{ . | safeHTML }}
+              {{ else }}
+                {{ with .Params.icon }}{{ . | safeHTML }}{{ else }}
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M12 14h16M12 20h16M12 26h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                {{ end }}
+              {{ end }}
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">{{ .Title }}</h3>
+              <p class="card-desc">
+                {{ with (index (where $.Site.Params.categories "url" .RelPermalink) 0).description }}
+                  {{ . }}
+                {{ else }}
+                  {{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | truncate 100 }}{{ end }}
+                {{ end }}
+              </p>
+            </div>
+          </a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+  </div>
+{{ else }}
+  <div class="article-layout container">
+    
+    {{/* ── Left Sidebar (Navigator) ── */}}
+    {{ partial "docs/sidebar.html" . }}
+
+    <div class="docs-main-content">
+      {{/* ── Sub-sections (e.g. /docs/aiot) ── */}}
+      {{ $sections := .Sections }}
+      {{ with $sections }}
+      <section class="section" style="padding-bottom:0; padding-top: 0;">
+        <div class="section-header reveal">
+          <p class="section-label">CATEGORIES</p>
+          <h2 class="section-title">Topics</h2>
+        </div>
+        <ul class="category-grid reveal" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+          {{ range . }}
+          <li class="category-card">
+            <a href="{{ .RelPermalink }}">
+              <div class="card-icon" aria-hidden="true">
+                {{ with .Params.icon }}{{ . | safeHTML }}{{ else }}
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M12 14h16M12 20h16M12 26h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                {{ end }}
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{ .Title }}</h3>
+              </div>
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+      {{ end }}
+
+      {{/* ── Pages in this section ── */}}
+      {{ with .Pages }}
+      <section class="section" style="padding-top: var(--space-lg);">
+        {{ if $sections }}
+        <div class="section-header reveal">
+          <p class="section-label">ARTICLES</p>
+          <h2 class="section-title">In This Section</h2>
+        </div>
+        {{ end }}
+        <div class="docs-list">
+          {{ range . }}
+          <article class="docs-item reveal">
+            <a href="{{ .RelPermalink }}" class="docs-item-inner">
+              {{ if .Params.image }}
+              <div class="docs-item-image">
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+              </div>
+              {{ end }}
+              <div class="docs-item-content">
+                <div class="docs-item-meta">
+                  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="docs-item-text">
+                  <h3 class="docs-item-title">{{ .Title }}</h3>
+                  {{ if not .Params.image }}
+                  {{ with .Params.description }}<p class="docs-item-desc">{{ . | truncate 140 }}</p>{{ else }}{{ with .Summary }}<p class="docs-item-desc">{{ . | truncate 140 }}</p>{{ end }}{{ end }}
+                  {{ end }}
+                </div>
+              </div>
+            </a>
+          </article>
+          {{ end }}
+        </div>
+      </section>
+      {{ else }}
+      {{ if not $sections }}
+      <section class="section">
+        <p style="color:var(--clr-text-muted);">No content yet. Check back soon.</p>
+      </section>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+
 {{ end }}

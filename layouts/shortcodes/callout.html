@@ -1,57 +1,15 @@
-<!-- {{ $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" }}
-{{ $type := .Get "type" | default "default" }}
-{{/* If emoji is not set, use the emoji from dict */}}
-{{ $emoji := .Get "emoji" }}
-{{ if eq $emoji "" }}
-  {{ $emoji = index $calloutEmojiDict $type }}
-{{ end }}
-{{/* Also allow using "icon" */}}
-{{ $icon := .Get "icon" }}
-
-{{ $defaultClass := "sr-border-orange-100 sr-bg-orange-50 sr-text-orange-800 dark:sr-border-orange-400/30 dark:sr-bg-orange-400/20 dark:sr-text-orange-300" }}
-{{ $infoClass := "sr-border-blue-200 sr-bg-blue-100 sr-text-blue-900 dark:sr-border-blue-200/30 dark:sr-bg-blue-900/30 dark:sr-text-blue-200" }}
-{{ $warningClass := "sr-border-yellow-100 sr-bg-yellow-50 sr-text-yellow-900 dark:sr-border-yellow-200/30 dark:sr-bg-yellow-700/30 dark:sr-text-yellow-200" }}
-{{ $errorClass := "sr-border-red-200 sr-bg-red-100 sr-text-red-900 dark:sr-border-red-200/30 dark:sr-bg-red-900/30 dark:sr-text-red-200" }}
-
-{{ $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) }}
-
-
-<div class="sr-overflow-x-auto sr-mt-6 sr-flex sr-rounded-lg sr-border sr-py-2 ltr:sr-pr-4 rtl:sr-pl-4 contrast-more:sr-border-current contrast-more:dark:sr-border-current {{ $class }}">
-  <div class="ltr:sr-pl-3 ltr:sr-pr-2 rtl:sr-pr-3 rtl:sr-pl-2">
-    {{- with $emoji -}}
-      <div class="sr-select-none sr-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
-        {{ . }}
-      </div>
-    {{- else -}}
-      {{- with $icon }}
-        {{ partial "utils/icon.html" (dict "name" . "attributes" `height=1.2em class="sr-inline-block sr-align-middle"`) -}}
-      {{- end -}}
-    {{- end -}}
+{{ $type := .Get "type" | default "info" }}
+<div class="callout callout--{{ $type }}">
+  <div class="callout-icon">
+    {{ if eq $type "info" }}
+    {{- "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/></svg>" | safeHTML -}}
+    {{ else if eq $type "warning" }}
+    {{- "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/></svg>" | safeHTML -}}
+    {{ else if eq $type "error" }}
+    {{- "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/></svg>" | safeHTML -}}
+    {{ end }}
   </div>
-
-  <div class="sr-w-full sr-min-w-0 sr-leading-7">
-    <div class="sr-mt-6 sr-leading-7 first:sr-mt-0">
-      {{ .InnerDeindent | markdownify }}
-    </div>
+  <div class="callout-content">
+    {{ .Inner | markdownify }}
   </div>
-</div> -->
-
-{{- $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" -}}
-{{- $type := .Get "type" | default "default" -}}
-{{/* If emoji is not set, use the emoji from dict */}}
-{{- $emoji := .Get "emoji" -}}
-{{- if eq $emoji "" -}}
-  {{- $emoji = index $calloutEmojiDict $type -}}
-{{- end -}}
-{{/* Also allow using "icon" */}}
-{{- $icon := .Get "icon" -}}
-{{- $content := .InnerDeindent | markdownify -}}
-
-{{- $defaultClass := "sr-border-orange-100 sr-bg-orange-50 sr-text-orange-800 dark:sr-border-orange-400/30 dark:sr-bg-orange-400/20 dark:sr-text-orange-300" -}}
-{{- $infoClass := "sr-border-blue-200 sr-bg-blue-100 sr-text-blue-900 dark:sr-border-blue-200/30 dark:sr-bg-blue-900/30 dark:sr-text-blue-200" -}}
-{{- $warningClass := "sr-border-yellow-100 sr-bg-yellow-50 sr-text-yellow-900 dark:sr-border-yellow-200/30 dark:sr-bg-yellow-700/30 dark:sr-text-yellow-200" -}}
-{{- $errorClass := "sr-border-red-200 sr-bg-red-100 sr-text-red-900 dark:sr-border-red-200/30 dark:sr-bg-red-900/30 dark:sr-text-red-200" -}}
-
-{{- $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) -}}
-
-{{- partial "shortcodes/callout.html" (dict "content" $content "emoji" $emoji "icon" $icon "class" $class) -}}
+</div>

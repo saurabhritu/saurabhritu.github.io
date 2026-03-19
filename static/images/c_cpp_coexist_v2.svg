@@ -1,0 +1,47 @@
+<svg viewBox="-50 0 700 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="gradC" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00599C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#003F6B;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="gradCPP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#659AD2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3C6EB4;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Overlap glow -->
+    <radialGradient id="overlapGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="-50" y="0" width="700" height="300" fill="#0F172A"/>
+
+  <!-- C Circle -->
+  <circle cx="230" cy="150" r="90" fill="url(#gradC)" opacity="0.9"/>
+
+  <!-- C++ Circle -->
+  <circle cx="370" cy="150" r="90" fill="url(#gradCPP)" opacity="0.9"/>
+
+  <!-- Overlap Highlight -->
+  <ellipse cx="300" cy="150" rx="60" ry="80" fill="url(#overlapGlow)"/>
+
+  <!-- C Text -->
+  <text x="200" y="165" font-size="60" font-family="monospace" fill="#ffffff">C</text>
+
+  <!-- C++ Text -->
+  <text x="340" y="165" font-size="50" font-family="monospace" fill="#ffffff">C++</text>
+
+  <!-- Connection Lines (symbolizing interoperability) -->
+  <line x1="260" y1="80" x2="340" y2="80" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="260" y1="220" x2="340" y2="220" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4,4"/>
+
+  <!-- Caption -->
+  <text x="300" y="280" text-anchor="middle" font-size="16" fill="#94A3B8" font-family="sans-serif">
+    Procedural meets Object-Oriented
+  </text>
+</svg>

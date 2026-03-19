@@ -1,69 +1,109 @@
 {{ define "main" }}
-  {{/*  <ul>
-    {{ range $taxonomy, $terms := .Site.Taxonomies }}
-      <li><a href="{{ printf "/%s/" $taxonomy | relURL }}">{{ $taxonomy | title }}</a></li>
+
+<section class="page-hero">
+  <div class="container reveal">
+    <p class="section-label">WRITING</p>
+    <h1 class="section-title" style="margin-top:0.5rem;">Blog</h1>
+    <p style="color:var(--clr-text-muted);margin-top:0.75rem;max-width:480px;">
+      Deep dives into embedded systems, AIoT, and open-source engineering.
+    </p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    {{/* Tag Filter Bar */}}
+    {{ $tags := slice }}
+    {{ range .Pages }}
+      {{ if .Params.tags }}
+        {{ range .Params.tags }}
+          {{ $tags = $tags | append . }}
+        {{ end }}
+      {{ end }}
     {{ end }}
-  </ul>  */}}
+    {{ $uniqueTags := $tags | uniq | sort }}
 
-  {{/*  <ul>
-    {{ range $taxonomy, $terms := .Site.Taxonomies }}
-      <li>{{ $taxonomy }} → {{ len $terms }}</li>
-    {{ end }}
-  </ul>  */}}
+    <div class="filter-bar reveal" style="margin-bottom: 3rem;">
+      <p class="filter-label">FILTER BY TOPIC</p>
+      <div class="filter-chips">
+        <button class="filter-chip is-active" data-filter="all">All</button>
+        {{ range $uniqueTags }}
+        <button class="filter-chip" data-filter="{{ . | urlize }}">{{ . | humanize }}</button>
+        {{ end }}
+      </div>
+    </div>
 
-  {{/*  {{- $readMore := (T "readMore") | default "Dive In →" -}}  */}}
-  {{- $readMore := "Learn More →" -}}
-  <div class="sr-mx-auto sr-flex {{ partial `utils/page-width` . }}">
-    {{ partial "sidebar.html" (dict "context" . ) }}
-    <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
-        <br class="sr-mt-1.5 sr-text-sm" />
-        <h1 class="sr-text-center sr-mt-2 sr-text-4xl sr-font-bold sr-tracking-tight sr-text-slate-900 dark:sr-text-slate-100">{{ .Title }}</h1>
-        <div class="content">{{ .Content }}</div>
-        
-        <!-- Image Grid Layout -->
-        <div class="sr-grid sr-grid-cols-1 md:sr-grid-cols-2 lg:sr-grid-cols-3 sr-gap-6 sr-mt-6">
-          {{- $pages := partial "utils/sort-pages" (dict "page" . "by" site.Params.blog.list.sortBy "order" site.Params.blog.list.sortOrder) -}}
-          
-          {{- range $pages }}
-          <div class="stacksr-border-gradient-right sr-group sr-relative sr-overflow-hidden sr-transition-transform sr-transform hover:sr-scale-105 sr-duration-300">
-            <!-- Zoomable Image -->
-            <a href="{{ .RelPermalink }}">
-            {{ with .Params.image }}
-            <div class="sr-w-full sr-h-48 sr-bg-cover sr-bg-center sr-relative sr-overflow-hidden">
-              <img class="sr-w-full sr-h-full sr-object-cover sr-transition-transform sr-transform hover:sr-scale-110 sr-duration-300" src="{{ . }}" alt="{{ $.Title }}">
-            </div>
-            {{ end }}
-            </a>
-
-            <!-- Blog Title and Description -->
-            <div class="sr-p-4">
-              <h3 class="sr-font-semibold sr-mt-4 sr-text-2xl hover:sr-text-red-500">
-                <a class="sr-block sr-font-semibold sr-mt-8 sr-text-2xl" href="{{ .RelPermalink }}">{{ .Title }}</a>
-              </h3>
-              
-              <p class="sr-opacity-50 sr-text-sm sr-mt-1 sr-leading-7">{{ partial "utils/format-date" .Date }}</p>
-
-              <!-- Read More Link -->
-              <p class="sr-opacity-80 sr-mt-1 sr-leading-7">
-                <a class="sr-text-[color:hsl(var(--primary-hue),50%,50%)] hover:sr-text-red-500 sr-decoration-from-font" href="{{ .RelPermalink }}">
-                  {{- $readMore -}}
-                </a>
-              </p>
-
-              <div class="sr-max-h-16 sr-overflow-hidden sr-relative sr-transition-all sr-duration-500 group-hover:sr-max-h-40">
-                <p class="sr-opacity-80 sr-leading-7 sr-translate-y-full group-hover:sr-translate-y-0 sr-transition-transform sr-duration-500 sr-ease-in-out">
-                  {{- partial "utils/page-description" . -}}
-                </p>
-              </div>
-
-            </div>
+    {{ if .Pages }}
+    <div class="posts-grid" id="blog-grid">
+      {{ range .Pages }}
+      {{ $postTags := "" }}
+      {{ if .Params.tags }}
+        {{ range .Params.tags }}
+          {{ $postTags = printf "%s %s" $postTags (. | urlize) }}
+        {{ end }}
+      {{ end }}
+      <article class="post-card reveal" data-tags="{{ $postTags | title }}">
+        <div class="post-card-inner">
+          {{ if .Params.image }}
+          <div class="post-card-image">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
           </div>
           {{ end }}
+          <div class="post-card-content">
+            <div class="post-meta">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+            </div>
+            <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            {{ if not .Params.image }}
+            {{ with .Params.description }}<p class="post-excerpt">{{ . | truncate 160 }}</p>{{ else }}{{ with .Summary }}<p class="post-excerpt">{{ . | truncate 160 }}</p>{{ end }}{{ end }}
+            {{ end }}
+            <a href="{{ .RelPermalink }}" class="post-read-more" aria-label="Read {{ .Title }}">
+              READ MORE
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
-        </main>
-      </main>
-    </article>
-    <div class="max-xl:sr-hidden sr-h-0 sr-w-64 sr-shrink-0"></div>
+      </article>
+      {{ end }}
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const chips = document.querySelectorAll('.filter-chip');
+        const posts = document.querySelectorAll('.post-card');
+
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            // Update active state
+            chips.forEach(c => c.classList.remove('is-active'));
+            chip.classList.add('is-active');
+
+            const filter = chip.getAttribute('data-filter');
+
+            posts.forEach(post => {
+              const tags = post.getAttribute('data-tags').toLowerCase();
+              if (filter === 'all' || tags.includes(filter)) {
+                post.style.display = 'block';
+                // Trigger reveal animation again if needed or just show
+                setTimeout(() => post.style.opacity = '1', 10);
+              } else {
+                post.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
+
+    {{/* Pagination */}}
+    {{ template "_internal/pagination.html" . }}
+
+    {{ else }}
+    <p style="color:var(--clr-text-muted);">No posts yet. Check back soon.</p>
+    {{ end }}
   </div>
-{{- end }}
+</section>
+
+{{ end }}

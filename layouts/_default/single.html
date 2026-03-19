@@ -1,18 +1,43 @@
 {{ define "main" }}
-  <div class='sr-mx-auto sr-flex {{ partial "utils/page-width" . }}'>
-    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
-    {{ partial "toc.html" . }}
-    <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
-        <br class="sr-mt-1.5 sr-text-sm" />
-        <h1 class="sr-text-center sr-mt-2 sr-text-4xl sr-font-bold sr-tracking-tight sr-text-slate-900 dark:sr-text-slate-100">{{ .Title }}</h1>
-        <div class="sr-mb-16"></div>
-        <div class="content">
-          {{ .Content }}
-        </div>
-        <div class="sr-mt-16"></div>
-        {{ partial "components/comments.html" . }}
-      </main>
-    </article>
+
+{{ if eq .Params.body_class "about-page" }}
+<div class="container">
+  <div class="about-container reveal">
+    {{ .Content }}
   </div>
+</div>
+{{ else }}
+<div class="scroll-progress-container">
+  <div class="scroll-progress-bar" id="scroll-progress"></div>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("scroll-progress").style.width = scrolled + "%";
+  });
+</script>
+
+<section class="page-hero">
+  <div class="container reveal">
+    <p class="section-label">{{ .Section | upper | default "PAGE" }}</p>
+    <h1 class="section-title" style="margin-top:0.5rem;">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p style="color:var(--clr-text-muted);margin-top:0.75rem;font-size:1.05rem;">{{ . }}</p>{{ end }}
+    {{ if not .Params.hideMeta }}
+    <div class="post-meta" style="margin-top:1.25rem;">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<div class="container">
+  <article class="prose reveal">
+    {{ .Content }}
+  </article>
+</div>
+{{ end }}
+
 {{ end }}

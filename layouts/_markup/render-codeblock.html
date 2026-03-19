@@ -1,0 +1,17 @@
+{{ if eq .Type "mermaid" }}
+<pre class="mermaid" data-mermaid-src="{{ .Inner | base64Encode }}">
+  {{- .Inner | safeHTML -}}
+</pre>
+{{ else }}
+<div class="code-block">
+  {{ with .Attributes.filename }}<div class="code-filename">{{ . }}</div>{{ end }}
+  {{- $options := "noClasses=false" -}}
+  {{- with .Attributes.hl_lines -}}
+    {{- $options = printf "%s,hl_lines=%s" $options . -}}
+  {{- end -}}
+  {{- with .Attributes.linenostart -}}
+    {{- $options = printf "%s,linenostart=%s" $options . -}}
+  {{- end -}}
+  {{ transform.Highlight .Inner .Type $options }}
+</div>
+{{ end }}

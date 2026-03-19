@@ -1,18 +1,118 @@
 {{ define "main" }}
-  <div class='sr-mx-auto sr-flex {{ partial "utils/page-width" . }}'>
-    {{ partial "sidebar.html" (dict "context" .) }}
-    {{ partial "toc.html" . }}
-    <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
-        {{ partial "breadcrumb.html" . }}
-        <div class="content">
-          <h1>{{ .Title }}</h1>
-          {{ .Content }}
-        </div>
-        {{ partial "components/last-updated.html" . }}
-        {{ partial "components/pager.html" . }}
-        {{ partial "components/comments.html" . }}
-      </main>
-    </article>
+
+<section class="page-hero page-hero--article">
+  <div class="container reveal">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/docs">Docs</a>
+      {{ with .Parent }}{{ if ne .RelPermalink "/docs/" }}
+      <span aria-hidden="true">/</span>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ end }}{{ end }}
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ .Title }}</span>
+    </nav>
+    <h1 class="section-title article-title">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="article-subtitle">{{ . }}</p>{{ end }}
+    <div class="article-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .Params.readingTime }}
+      <span class="meta-sep" aria-hidden="true">·</span>
+      <span>{{ . }} min read</span>
+      {{ end }}
+      {{ range .Params.tags }}
+      <span class="tag">{{ . }}</span>
+      {{ end }}
+    </div>
   </div>
+</section>
+
+{{ if .Params.image }}
+<div class="container reveal">
+  <div class="article-hero-image docs-hero-image">
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="eager">
+  </div>
+</div>
+{{ end }}
+
+<div class="article-layout container">
+
+  {{/* ── Left Sidebar (Navigator) ── */}}
+  {{ partial "docs/sidebar.html" . }}
+
+  {{/* ── Main content ── */}}
+  <article class="prose article-content reveal">
+    {{ .Content }}
+  </article>
+
+  {{/* ── Right Sidebar (TOC) ── */}}
+  {{ if .Params.toc | default true }}
+  {{ if .TableOfContents }}
+  <aside class="article-toc" aria-label="Table of contents">
+    <p class="toc-title">ON THIS PAGE</p>
+    {{ .TableOfContents }}
+  </aside>
+  {{ end }}
+  {{ end }}
+
+</div>
+
+{{/* ── Prev / Next navigation ── */}}
+{{ if or .NextInSection .PrevInSection }}
+<nav class="article-pagination" aria-label="Article navigation">
+  <div class="container article-pagination-inner">
+    {{ with .PrevInSection }}
+    <a href="{{ .RelPermalink }}" class="pagination-link pagination-link--prev">
+      <span class="pagination-dir">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M11 7H1M5 3 1 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        PREVIOUS
+      </span>
+      <span class="pagination-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+    {{ with .NextInSection }}
+    <a href="{{ .RelPermalink }}" class="pagination-link pagination-link--next">
+      <span class="pagination-dir">
+        NEXT
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h10M9 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="pagination-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}
+
+<script>
+  // Dynamic TOC Highlighting
+  const observerOptions = {
+    root: null,
+    rootMargin: '-10% 0px -80% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      if (id && entry.isIntersecting) {
+        document.querySelectorAll('#TableOfContents a').forEach(link => {
+          link.classList.remove('is-active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('is-active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.article-content h2, .article-content h3').forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
 {{ end }}

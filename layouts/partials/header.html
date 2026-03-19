@@ -1,5 +1,75 @@
-{{/*  <h1 class=" sr-relative sr-text-lg sm:sr-text-xl md:sr-text-2xl xl:sr-text-3xl sr-bg-lime-100  dark:sr-bg-lime-700 dark:sr-text-white">{{ site.Title }}</h1>
-{{ partial "menu.html" (dict "menuID" "main" "page" .) }}  */}}
+<header class="site-header" id="site-header" role="banner">
+  <div class="container header-inner">
 
-{{- partial "navbar.html" . -}}
+    <a class="site-logo" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }} home">
+      {{- if .Site.Params.logo }}
+      <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" width="140" height="40" />
+      {{- else }}
+      <div class="logo-group">
+        <span class="logo-text"><span class="accent-slash">//</span>{{ .Site.Title }}</span>
+        <span class="logo-slogan">Be Curious</span>
+      </div>
+      {{- end }}
+    </a>
 
+    <div class="header-actions">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav"
+        aria-label="Toggle navigation">
+        <span class="burger"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+
+    <nav class="site-nav" id="site-nav" role="navigation" aria-label="Primary">
+      <ul class="nav-list">
+        {{- range .Site.Menus.main }}
+        <li class="nav-item{{ if .HasChildren }} has-children{{ end }}">
+          <a href="{{ .URL }}" class="nav-link{{ if $.IsMenuCurrent " main" . }} is-active{{ end }}">{{ .Name }}</a>
+          {{- if .HasChildren }}
+          <ul class="nav-dropdown">
+            {{- range .Children }}
+            <li><a href="{{ .URL }}" class="nav-link">{{ .Name }}</a></li>
+            {{- end }}
+          </ul>
+          {{- end }}
+        </li>
+        {{- else }}
+        <!-- Fallback nav if menus not configured -->
+        <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="/docs" class="nav-link">Explore</a></li>
+        <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+        {{- end }}
+      </ul>
+
+      {{/* ── Mobile TOC (Visible only on mobile inside nav) ── */}}
+      {{ if .TableOfContents }}
+      <div class="mobile-toc-wrapper">
+        <p class="mobile-toc-title">On This Page</p>
+        <nav class="mobile-toc">
+          {{ .TableOfContents }}
+        </nav>
+      </div>
+      {{ end }}
+
+    </nav>
+
+  </div><!-- /.header-inner -->
+</header>

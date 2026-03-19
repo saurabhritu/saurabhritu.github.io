@@ -1,14 +1,192 @@
 {{ define "main" }}
-  <div class='sr-mx-auto sr-flex {{ partial "utils/page-width" . }}'>
-    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
-    {{ partial "toc.html" . }}
-    <article class="sr-w-full sr-break-words sr-flex sr-min-h-[calc(100vh-var(--navbar-height))] sr-min-w-0 sr-justify-center sr-pb-8 sr-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main class="sr-w-full sr-min-w-0 sr-max-w-6xl sr-px-6 sr-pt-4 md:sr-px-12">
-        <h1 class="sr-text-center sr-mt-2 sr-text-4xl sr-font-bold sr-tracking-tight sr-text-slate-900 dark:sr-text-slate-100">{{ .Title }}</h1>
-        <div class="content">
-          {{ .Content }}
-        </div>
-      </main>
-    </article>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-grid-bg" aria-hidden="true">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-glow"></div>
   </div>
+  <div class="container hero-inner">
+    <div class="hero-eyebrow reveal">
+      <span class="eyebrow-dot"></span>
+      <span>BE CURIOUS</span>
+    </div>
+    <h1 class="hero-title reveal">
+      {{ with .Site.Params.heroTitle }}{{ . }}{{ else }}Learn Emerging<br />Technology.{{ end }}
+    </h1>
+    <p class="hero-sub reveal">
+      {{ with .Site.Params.heroSubtitle }}{{ . }}{{ else }}Explore with confidence — deep dives into embedded systems,
+      AIoT, and open-source engineering.{{ end }}
+    </p>
+    <div class="hero-cta reveal">
+      <a href="/blog" class="btn btn-primary">
+        <span>Read the Blog</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+      <a href="/docs" class="btn btn-ghost">Explore Knowledge Base</a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-hint" aria-hidden="true">
+    <span class="scroll-label">SCROLL</span>
+    <span class="scroll-bar"></span>
+  </div>
+</section>
+
+<!-- ─── CATEGORY TILES ─────────────────────────────────────────────────── -->
+<section class="categories section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">AREAS</p>
+      <h2 class="section-title">What We Cover</h2>
+    </div>
+    <ul class="category-grid">
+      {{ range .Site.Params.categories }}
+      <li class="category-card reveal">
+        <a href="{{ .url }}">
+          <div class="card-icon" aria-hidden="true">{{ .icon | safeHTML }}</div>
+          <div class="card-body">
+            <h3 class="card-title">{{ .name }}</h3>
+            <p class="card-desc">{{ .description }}</p>
+          </div>
+          <span class="card-arrow" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+        </a>
+      </li>
+      {{ else }}
+      <!-- Default categories if none configured in params -->
+      <li class="category-card reveal">
+        <a href="/docs/aiot">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="26" width="28" height="8" rx="1" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+              <path d="M14 26v-6a6 6 0 0 1 12 0v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              <circle cx="20" cy="13" r="4" stroke="currentColor" stroke-width="1.5" />
+              <path d="M10 30h4M26 30h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">AIoT</h3>
+            <p class="card-desc">Artificial Intelligence meets the Internet of Things. Edge inference, sensor fusion,
+              and connected devices.</p>
+          </div>
+          <span class="card-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></span>
+        </a>
+      </li>
+      <li class="category-card reveal">
+        <a href="/blog">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" stroke-width="1.5" />
+              <path d="M12 14h16M12 20h16M12 26h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Embedded Systems</h3>
+            <p class="card-desc">Firmware, drivers, RTOS, and low-level protocols — the craft of building reliable
+              embedded products.</p>
+          </div>
+          <span class="card-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></span>
+        </a>
+      </li>
+      <li class="category-card reveal">
+        <a href="/blog">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.5" />
+              <path d="M20 7v6M20 27v6M7 20h6M27 20h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+              <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Open Source</h3>
+            <p class="card-desc">Tools, frameworks, and methodologies from the open-source ecosystem powering next-gen
+              products.</p>
+          </div>
+          <span class="card-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+
+<!-- ─── BLOG SHOWCASE ───────────────────────────────────────────── -->
+{{ $posts := where .Site.RegularPages "Section" "blog" | first 4 }}
+{{ with $posts }}
+<section class="showcase section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title showcase-text">Recent Blog's:</h2>
+    </div>
+    <div class="showcase-grid">
+      {{ range . }}
+      <a href="{{ .RelPermalink }}" class="showcase-card reveal">
+        <div class="showcase-image-wrapper">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="showcase-image" loading="lazy">
+          {{ else }}
+          <div class="showcase-text-fallback">
+            {{ with .Params.description }}<p>{{ . | truncate 120 }}</p>{{ else }}{{ with .Summary }}<p>{{ . | truncate 120 }}</p>{{ end }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        <h3 class="showcase-title">{{ .Title }}</h3>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<!-- ─── CONTACT STRIP ─────────────────────────────────────────────────── -->
+<section class="contact-strip section reveal">
+  <div class="container contact-strip-inner">
+    <div class="contact-text">
+      <p class="section-label">CONTACT</p>
+      <h2 class="section-title">Get in Touch</h2>
+    </div>
+    <div class="contact-links">
+      {{ with .Site.Params.email }}
+      <a href="mailto:{{ . }}" class="contact-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5" />
+          <path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        {{ . }}
+      </a>
+      {{ end }}
+      {{ with .Site.Params.githubURL }}
+      <a href="{{ . }}" target="_blank" rel="noopener" class="contact-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path
+            d="M10 2C5.58 2 2 5.58 2 10c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.88-1.17-.88-1.17-.72-.49.05-.48.05-.48.8.06 1.22.82 1.22.82.71 1.21 1.87.86 2.33.66.07-.52.28-.86.5-1.06-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 0 1 10 6.07c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38C15.71 16.53 18 13.54 18 10c0-4.42-3.58-8-8-8z"
+            fill="currentColor" />
+        </svg>
+        GitHub
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
 {{ end }}

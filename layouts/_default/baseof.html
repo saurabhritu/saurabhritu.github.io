@@ -1,19 +1,117 @@
 <!DOCTYPE html>
-<html class="" lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<html lang="{{ .Site.LanguageCode | default "en" }}" class="no-js">
 <head>
-  {{ partial "head.html" . }}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400..700;1,400..700&family=PT+Mono&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ "/favicon.png" | relURL }}" />
+
+  <!-- OpenGraph / Social Sharing -->
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+  {{ if .Params.image }}
+    <meta property="og:image" content="{{ .Params.image | absURL }}" />
+  {{ else if .Site.Params.defaultImage }}
+    <meta property="og:image" content="{{ .Site.Params.defaultImage | absURL }}" />
+  {{ end }}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  {{ if .Params.image }}
+    <meta name="twitter:image" content="{{ .Params.image | absURL }}" />
+  {{ end }}
+
+  <!-- Main CSS -->
+  {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+
+  {{ block "head" . }}{{ end }}
 </head>
-<body>
-  <header class="sr-sticky sr-top-0 sr-z-20 sr-w-full sr-bg-transparent">
-    {{ partial "header.html" . }}
-  </header>
-  <main>
+<body class="{{ if .IsHome }}is-home{{ end }} {{ .Params.body_class }}">
+
+  {{ partial "header.html" . }}
+
+  <main id="main-content">
     {{ block "main" . }}{{ end }}
   </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
-  {{/*  {{ custom Additon }}  */}}
-  {{/*  {{ partial "scripts.html" . }}  */}}
+
+  {{ partial "footer.html" . }}
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+
+    // Theme Management
+    const themeStorageKey = 'stacksr-theme';
+    const getTheme = () => {
+      const stored = localStorage.getItem(themeStorageKey);
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    };
+
+    const setTheme = (theme) => {
+      if (theme === 'light') {
+        document.documentElement.classList.add('light-mode');
+      } else {
+        document.documentElement.classList.remove('light-mode');
+      }
+      localStorage.setItem(themeStorageKey, theme);
+    };
+
+    // Initial set
+    setTheme(getTheme());
+
+    // Toggle handler
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const current = document.documentElement.classList.contains('light-mode') ? 'light' : 'dark';
+          setTheme(current === 'light' ? 'dark' : 'light');
+        });
+      }
+
+      // Mobile nav toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const nav = document.getElementById('site-nav');
+      if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+          const open = nav.classList.toggle('is-open');
+          menuToggle.setAttribute('aria-expanded', open);
+        });
+
+        // Close menu when a link is clicked
+        nav.addEventListener('click', (e) => {
+          if (e.target.closest('a')) {
+            nav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // Scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
 </body>
 </html>

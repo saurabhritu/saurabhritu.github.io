@@ -1,0 +1,39 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00a3ad" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <rect x="50" y="150" width="200" height="200" rx="4" fill="#ffffff" stroke="#333" stroke-width="2" />
+  <rect x="50" y="150" width="200" height="40" rx="4" fill="#333" />
+  <text x="150" y="175" font-family="monospace" font-size="14" fill="white" text-anchor="middle">C Firmware (Main)</text>
+  <text x="65" y="220" font-family="monospace" font-size="12" fill="#666">main.c</text>
+  <text x="65" y="250" font-family="monospace" font-size="12" fill="#00a3ad">driver_init();</text>
+  <text x="65" y="280" font-family="monospace" font-size="12" fill="#00a3ad">driver_read();</text>
+
+  <rect x="300" y="100" width="200" height="300" rx="4" fill="#e6f6f7" stroke="#00a3ad" stroke-width="2" stroke-dasharray="5,5" />
+  <text x="400" y="130" font-family="monospace" font-size="14" fill="#00a3ad" font-weight="bold" text-anchor="middle">C Wrapper (extern "C")</text>
+  
+  <rect x="315" y="180" width="170" height="180" rx="2" fill="white" stroke="#00a3ad" stroke-width="1" />
+  <text x="325" y="205" font-family="monospace" font-size="10" fill="#333">void driver_read() {</text>
+  <text x="335" y="225" font-family="monospace" font-size="10" fill="#00a3ad">  cpp_obj->read();</text>
+  <text x="325" y="245" font-family="monospace" font-size="10" fill="#333">}</text>
+
+  <rect x="550" y="150" width="200" height="200" rx="4" fill="#ffffff" stroke="#333" stroke-width="2" />
+  <rect x="550" y="150" width="200" height="40" rx="4" fill="#00a3ad" />
+  <text x="650" y="175" font-family="monospace" font-size="14" fill="white" text-anchor="middle">C++ Driver Class</text>
+  <text x="565" y="220" font-family="monospace" font-size="12" fill="#666">Driver.cpp</text>
+  <text x="565" y="250" font-family="monospace" font-size="12" fill="#333">class Driver {</text>
+  <text x="565" y="275" font-family="monospace" font-size="12" fill="#333">  void read();</text>
+  <text x="565" y="300" font-family="monospace" font-size="12" fill="#333">};</text>
+
+  <line x1="250" y1="250" x2="290" y2="250" stroke="#00a3ad" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="500" y1="250" x2="540" y2="250" stroke="#00a3ad" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+</svg>

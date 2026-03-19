@@ -1,0 +1,43 @@
+{{ define "main" }}
+<section class="page-hero" style="background: var(--clr-bg-2); border-bottom: 1px solid var(--clr-border);">
+  <div class="container reveal">
+    <p class="section-label">CATEGORY SPACE</p>
+    <h1 class="section-title" style="margin-top:0.5rem;">{{ .Title }}</h1>
+    <p style="color:var(--clr-text-muted);margin-top:0.75rem;max-width:480px;">
+      Deep dives and curated insights into {{ .Title }}.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {{ if .Pages }}
+    <div class="posts-grid">
+      {{ range .Pages }}
+      <article class="showcase-card reveal">
+        <div class="showcase-image-wrapper">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="showcase-image">
+          {{ else }}
+          <div class="showcase-image-placeholder"></div>
+          {{ end }}
+        </div>
+        <h3 class="showcase-title">{{ .Title }}</h3>
+        <p class="post-meta" style="margin-top: 0.5rem;">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        </p>
+        <a href="{{ .RelPermalink }}" class="post-read-more" style="border: none; padding: 0; margin-top: 1rem;">
+          READ CASE STUDY
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+    {{ else }}
+    <p style="color:var(--clr-text-muted);">No posts found in this category.</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

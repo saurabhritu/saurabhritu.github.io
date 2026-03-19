@@ -1,14 +1,16 @@
 ---
-title: About
-type: about
+title: "About Stacksr"
+description: "Who we are and what we build."
+hideMeta: true
+body_class: about-page
 ---
 
-<h6 class="animated-text">Hello, World!</h6>
+![Saurabh Ritu](/images/profile_new_2025-removebg-preview.png)
 
-<img src="/images/temp/Itstimeto.png" width="500" height="500" alt="Saurabh Ritu">
+###### Hello, World!
 
-<center>
-<b> Saurabh Ritu </b> <br> An AIoT engineer turning µC, sensors, and Server headaches into smart, scalable solutions.<br>
-<br>
-<em>Be Curious!</em>
-</center>
+**Saurabh Ritu**
+
+An AIoT engineer turning µC, sensors, and Server headaches into smart, scalable solutions.
+
+*Be Curious!*
