@@ -1,12 +1,5 @@
 {{ define "main" }}
 
-{{ if eq .Params.body_class "about-page" }}
-<div class="container">
-  <div class="about-container reveal">
-    {{ .Content }}
-  </div>
-</div>
-{{ else }}
 <div class="scroll-progress-container">
   <div class="scroll-progress-bar" id="scroll-progress"></div>
 </div>
@@ -38,6 +31,5 @@
     {{ .Content }}
   </article>
 </div>
-{{ end }}
 
 {{ end }}

@@ -2,7 +2,7 @@
 title: "About Stacksr"
 description: "Who we are and what we build."
 hideMeta: true
-body_class: about-page
+type: about
 ---
 
 ![Saurabh Ritu](/images/profile_new_2025-removebg-preview.png)
