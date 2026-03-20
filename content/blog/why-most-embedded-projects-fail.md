@@ -65,11 +65,4 @@ Good embedded firmware starts with good requirements, a locked-down HW/SW interf
 
 The best embedded engineers aren't the fastest coders. They're the ones who ask the most annoying questions before touching the keyboard.
 
-***
-
-### ---
-Stay tuned & Be Curious!
-
-> [!TIP]
-> **Question for you:**  
-> What’s the biggest firmware mistake you’ve made so far?
+> Stay tuned & Be Curious!

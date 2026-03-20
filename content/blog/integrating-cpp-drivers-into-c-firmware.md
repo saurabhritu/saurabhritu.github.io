@@ -182,5 +182,5 @@ You do this by either renaming your `.c` files to `.cpp`, or by passing a specif
 
 Mixing C and C++ in embedded systems doesn't have to be a nightmare of linker errors. By using opaque pointers and a clean `extern "C"` boundary, you can leverage the massive ecosystem of modern C++ drivers while keeping your core C firmware exactly the way you like it. It saves development time, keeps the codebase modular, and most importantly, gets that new cost-effective hardware online fast.
 
-### ---
-Stay tuned & Be Curious!
+
+> Stay tuned & Be Curious!

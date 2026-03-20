@@ -106,7 +106,7 @@
         </div>
         {{ end }}
         <div class="docs-list">
-          {{ range . }}
+          {{ range sort (sort . "Date" "asc") "Params.index" "asc" }}
           <article class="docs-item reveal">
             <a href="{{ .RelPermalink }}" class="docs-item-inner">
               {{ if .Params.image }}

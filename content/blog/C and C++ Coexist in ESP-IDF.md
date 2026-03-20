@@ -13,7 +13,7 @@ readingTime: 8
 
 You found a sensor driver written in C++. Your firmware is C. ESP-IDF supports both. Surely it just works?
 
-Sometimes it does. Often it doesn't — and when it fails, the error messages are cryptic enough to send you down a two-hour rabbit hole.
+Sometimes it does. Often it doesn't - and when it fails, the error messages are cryptic enough to send you down a two-hour rabbit hole.
 
 This guide covers the practical patterns for mixing C and C++ in embedded firmware, with examples from ESP-IDF projects.
 
@@ -150,5 +150,4 @@ Keep the C/C++ boundary as thin as possible. Write a clean C API (`init`, `read`
 
 The thinner the boundary, the fewer surprises.
 
-### ---
-Stay tuned & Be Curious!
+> Stay tuned & Be Curious!

@@ -32,7 +32,7 @@ hugo version
 
 ```bash
 cd stacksr-site
-hugo server -D
+hugo server -D -p 1313 --bind 0.0.0.0 --baseURL http://localhost:1313/ --disableFastRender --noHTTPCache
 ```
 
 Open **http://localhost:1313** in your browser.

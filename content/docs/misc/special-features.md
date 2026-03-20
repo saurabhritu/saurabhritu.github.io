@@ -65,3 +65,27 @@ Here is some hidden content that is only visible when expanded.
 - Item 1
 - Item 2
 {{% /details %}}
+
+## 5. Alerts
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+## Images
+
+![protocols](/images/embedded_protocols.svg)
+
+<img src="/images/embedded_protocols.svg" alt="protocols" width="400" height="400">
+
