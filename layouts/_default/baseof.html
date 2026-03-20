@@ -15,24 +15,31 @@
   <link rel="icon" type="image/png" href="{{ "/favicon.png" | relURL }}" />
 
   <!-- OpenGraph / Social Sharing -->
+  {{- $socialImage := "" -}}
+  {{- if .Params.image -}}
+    {{- $socialImage = .Params.image | absURL -}}
+  {{- else -}}
+    {{- $imgRE := `(?i)<img\s+[^>]*src=["']([^"']+)["']` -}}
+    {{- $imgs := findRE $imgRE .Content 1 -}}
+    {{- if gt (len $imgs) 0 -}}
+      {{- $socialImage = index (findRE `src=["']([^"']+)["']` (index $imgs 0)) 0 | replaceRE `src=["']([^"']+)["']` "$1" | absURL -}}
+    {{- else if .Site.Params.defaultImage -}}
+      {{- $socialImage = .Site.Params.defaultImage | absURL -}}
+    {{- end -}}
+  {{- end -}}
+
   <meta property="og:site_name" content="{{ .Site.Title }}" />
   <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
   <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
   <meta property="og:url" content="{{ .Permalink }}" />
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
-  {{ if .Params.image }}
-    <meta property="og:image" content="{{ .Params.image | absURL }}" />
-  {{ else if .Site.Params.defaultImage }}
-    <meta property="og:image" content="{{ .Site.Params.defaultImage | absURL }}" />
-  {{ end }}
+  {{ if $socialImage }}<meta property="og:image" content="{{ $socialImage }}" />{{ end }}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
   <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-  {{ if .Params.image }}
-    <meta name="twitter:image" content="{{ .Params.image | absURL }}" />
-  {{ end }}
+  {{ if $socialImage }}<meta name="twitter:image" content="{{ $socialImage }}" />{{ end }}
 
   <!-- Main CSS -->
   {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
