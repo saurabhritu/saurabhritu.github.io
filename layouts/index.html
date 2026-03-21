@@ -143,7 +143,13 @@
       <a href="{{ .RelPermalink }}" class="showcase-card reveal">
         <div class="showcase-image-wrapper">
           {{ if .Params.image }}
-          <img src="{{ .Params.image }}" alt="{{ .Title }}" class="showcase-image" loading="lazy">
+          {{ $image := .Params.image }}
+          {{ if not (hasPrefix $image "/") }}
+            {{ with .Resources.GetMatch $image }}
+              {{ $image = .RelPermalink }}
+            {{ end }}
+          {{ end }}
+          <img src="{{ $image }}" alt="{{ .Title }}" class="showcase-image" loading="lazy">
           {{ else }}
           <div class="showcase-text-fallback">
             {{ with .Params.description }}<p>{{ . | truncate 120 }}</p>{{ else }}{{ with .Summary }}<p>{{ . | truncate 120 }}</p>{{ end }}{{ end }}

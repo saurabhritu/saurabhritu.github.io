@@ -6,7 +6,7 @@ type: about
 body_class: about-page
 ---
 
-![Saurabh Ritu](/images/profile_new_2025-removebg-preview.png)
+![Saurabh Ritu](/images/common/profile.png)
 
 ###### Hello, World!
 

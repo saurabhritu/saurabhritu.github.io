@@ -8,7 +8,7 @@ params:
   heroSubtitle: "Explore with confidence — deep dives into embedded systems, AIoT, and open-source engineering."
   email: "firstrankforall@gmail.com"
   githubURL: "https://github.com/saurabhritu"
-  defaultImage: "/images/showcase-cpp-linkage.png"
+  defaultImage: "/images/common/showcase-cpp-linkage.png"
 
   categories:
     - name: "AIoT"

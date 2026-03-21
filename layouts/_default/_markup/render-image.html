@@ -1,0 +1,21 @@
+{{- /* 
+  Markdown Render Hook for Images 
+  Handles both global static images and local Page Bundle resources.
+*/ -}}
+
+{{- $src := .Destination -}}
+{{- $img := .Page.Resources.GetMatch $src -}}
+
+{{- if $img -}}
+  {{- /* Page Bundle Resource */ -}}
+  <img src="{{ $img.RelPermalink }}" 
+       alt="{{ .Text }}" 
+       {{ with .Title }} title="{{ . }}" {{ end }} 
+       loading="lazy">
+{{- else -}}
+  {{- /* Static or External Image */ -}}
+  <img src="{{ $src | safeURL }}" 
+       alt="{{ .Text }}" 
+       {{ with .Title }} title="{{ . }}" {{ end }} 
+       loading="lazy">
+{{- end -}}

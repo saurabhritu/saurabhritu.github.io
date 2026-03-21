@@ -47,7 +47,13 @@
 {{ if .Params.image }}
 <div class="container reveal">
   <div class="article-hero-image">
-    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="eager">
+    {{ $image := .Params.image }}
+    {{ if not (hasPrefix $image "/") }}
+      {{ with .Resources.GetMatch $image }}
+        {{ $image = .RelPermalink }}
+      {{ end }}
+    {{ end }}
+    <img src="{{ $image }}" alt="{{ .Title }}" loading="eager">
   </div>
 </div>
 {{ end }}

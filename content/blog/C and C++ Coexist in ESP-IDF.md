@@ -1,9 +1,9 @@
 ---
 title: "C and C++ Coexist in ESP-IDF"
 date: 2025-03-19
-draft: false
+draft: true
 description: "Mixing C and C++ in ESP-IDF is not required but necessity sometimes forces you to do it. Here's how to do it cleanly."
-image: "/images/c_cpp_coexist_v2.svg"
+image: "/images/common/c-cpp-coexist.svg"
 categories: ["Embedded Systems"]
 tags: ["cpp", "firmware", "compilation"]
 readingTime: 8

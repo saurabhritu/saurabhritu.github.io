@@ -1,9 +1,9 @@
 ---
 title: "Why Most Embedded Projects Fail Before the First Line of Code"
 date: 2025-03-10
-draft: false
+draft: true
 description: "The real failures happen long before you open an IDE. Here's what to fix first."
-image: "/images/system_fail.svg"
+image: "images/system_fail.svg"
 categories: ["Embedded Systems"]
 tags: ["project-management"]
 readingTime: 6

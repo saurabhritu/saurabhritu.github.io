@@ -44,6 +44,6 @@ These protocols dictate how microcontrollers, sensors, and computers talk to one
 ### Protocol Explorer
 
 {{% details title="Click to reveal protocol explorer" %}}
-![protocols](/images/embedded_protocols.svg)
+![protocols](images/embedded_protocols.svg)
 {{% /details %}}
 

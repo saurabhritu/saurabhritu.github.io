@@ -46,7 +46,13 @@
         <div class="post-card-inner">
           {{ if .Params.image }}
           <div class="post-card-image">
-            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+            {{ $image := .Params.image }}
+            {{ if not (hasPrefix $image "/") }}
+              {{ with .Resources.GetMatch $image }}
+                {{ $image = .RelPermalink }}
+              {{ end }}
+            {{ end }}
+            <img src="{{ $image }}" alt="{{ .Title }}" loading="lazy">
           </div>
           {{ end }}
           <div class="post-card-content">
