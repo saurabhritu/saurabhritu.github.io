@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 420" width="100%" height="420">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-path" />
+    </marker>
+    <marker id="arrow-signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-path-signal" />
+    </marker>
+    <style>
+      /* --- LIGHT MODE (Default) --- */
+      .wire { fill: none; stroke: #475569; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-signal { fill: none; stroke: #3b82f6; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .node { fill: #475569; }
+      .node-signal { fill: #3b82f6; }
+      .pmos-box { fill: #fecdd3; stroke: #e11d48; stroke-width: 2; rx: 8; }
+      .nmos-box { fill: #bfdbfe; stroke: #2563eb; stroke-width: 2; rx: 8; }
+      .text-main { font-family: system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 14px; fill: #000000ff; }
+      .text-sub { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #64748b; }
+      .text-switch { font-family: system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 14px; fill: #0f172a; }
+      .arrow-path { fill: #475569; }
+      .arrow-path-signal { fill: #3b82f6; }
+
+      /* --- DARK MODE (Activates based on system/browser theme) --- */
+      @media (prefers-color-scheme: dark) {
+        .wire { stroke: #cbd5e1; }
+        .node { fill: #cbd5e1; }
+        .wire-signal { stroke: #60a5fa; }
+        .node-signal { fill: #60a5fa; }
+        .pmos-box { fill: #4c0519; stroke: #fb7185; }
+        .nmos-box { fill: #1e3a8a; stroke: #60a5fa; }
+        .text-main { fill: #7b6f6bff; }
+        .text-sub { fill: #94a3b8; }
+        .text-switch { fill: #ffffff; }
+        .arrow-path { fill: #cbd5e1; }
+        .arrow-path-signal { fill: #60a5fa; }
+      }
+    </style>
+  </defs>
+
+  <text x="325" y="40" class="text-main" text-anchor="middle">VCC (Power: e.g., 3.3V or 5V)</text>
+  <line x1="325" y1="50" x2="325" y2="90" class="wire" />
+
+  <rect x="250" y="90" width="150" height="70" class="pmos-box" />
+  <text x="325" y="120" class="text-switch" text-anchor="middle">PMOS (Switch 1)</text>
+  <text x="325" y="140" class="text-sub" text-anchor="middle">Turns ON when HIGH</text>
+
+  <line x1="325" y1="160" x2="325" y2="260" class="wire" />
+  <circle cx="325" cy="210" r="5" class="node" />
+
+  <rect x="250" y="260" width="150" height="70" class="nmos-box" />
+  <text x="325" y="290" class="text-switch" text-anchor="middle">NMOS (Switch 2)</text>
+  <text x="325" y="310" class="text-sub" text-anchor="middle">Turns ON when LOW</text>
+
+  <line x1="325" y1="330" x2="325" y2="370" class="wire" />
+  <text x="325" y="390" class="text-main" text-anchor="middle">GND (Ground: 0V)</text>
+
+  <line x1="325" y1="210" x2="490" y2="210" class="wire" marker-end="url(#arrow)" />
+  <text x="505" y="205" class="text-main" text-anchor="start">Physical GPIO Pin</text>
+  <text x="505" y="225" class="text-sub" text-anchor="start">(To outside world)</text>
+
+  <text x="20" y="205" class="text-main" text-anchor="start">Internal Logic Signal</text>
+  <text x="20" y="225" class="text-sub" text-anchor="start">(from Latch)</text>
+  
+  <line x1="160" y1="210" x2="210" y2="210" class="wire-signal" />
+  <circle cx="210" cy="210" r="5" class="node-signal" />
+  
+  <line x1="210" y1="210" x2="210" y2="125" class="wire-signal" />
+  <line x1="210" y1="125" x2="240" y2="125" class="wire-signal" marker-end="url(#arrow-signal)" />
+
+  <line x1="210" y1="210" x2="210" y2="295" class="wire-signal" />
+  <line x1="210" y1="295" x2="240" y2="295" class="wire-signal" marker-end="url(#arrow-signal)" />
+</svg>

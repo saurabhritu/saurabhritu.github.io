@@ -18,7 +18,7 @@
   {{ $current := .current }}
   {{ $depth := .depth }}
   <ul class="sidebar-list depth-{{ $depth }}">
-    {{ range sort (sort .sect.Sections "Date" "asc") "Params.index" "asc" }}
+    {{ range sort (sort .sect.Sections "Date" "asc") "Weight" "asc" }}
       {{ $active := or (eq . $current) ($current.IsDescendant .) }}
       <li class="sidebar-item {{ if .Sections }}has-children{{ end }} {{ if $active }}is-active{{ end }}">
         <div class="sidebar-link-wrapper">
@@ -39,7 +39,7 @@
       </li>
     {{ end }}
     
-    {{ range sort (sort .sect.Pages "Date" "asc") "Params.index" "asc" }}
+    {{ range sort (sort .sect.Pages "Date" "asc") "Weight" "asc" }}
       {{ if not .IsSection }}
       {{ $itemActive := eq .RelPermalink $current.RelPermalink }}
       <li class="sidebar-item depth-{{ $depth }} {{ if $itemActive }}is-current is-active{{ end }}">

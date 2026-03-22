@@ -1446,6 +1446,36 @@ button {
   margin-block: 0.3em;
 }
 
+/* ── TABLES (Hextra-style) ──────────────────────────────── */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 1.5em;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.prose th,
+.prose td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--clr-border);
+  text-align: left;
+}
+
+.prose th {
+  font-weight: 600;
+  background-color: var(--clr-bg-2);
+  color: var(--clr-text);
+}
+
+.prose tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.light-mode .prose tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
 /* ── ALERTS (GitHub-style) ──────────────────────────────── */
 .alert {
   margin-block: 2rem;

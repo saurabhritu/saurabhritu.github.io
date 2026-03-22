@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="100%" height="100%"
+     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
+
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ══════════════════════════════════════
+       TITLE
+       ══════════════════════════════════════ -->
+  <text x="440" y="30" text-anchor="middle" font-size="14" fill="#a6adc8">
+    Master wants to talk to Slave at address 0x48
+  </text>
+
+  <!-- ══════════════════════════════════════
+       SDA LABEL
+       ══════════════════════════════════════ -->
+  <text x="28" y="95" font-size="14" font-weight="bold" fill="#a6e3a1" text-anchor="middle">SDA</text>
+
+  <!-- idle line before START -->
+  <line x1="48" y1="90" x2="80" y2="90" stroke="#a6e3a1" stroke-width="2"/>
+
+  <!-- ══════════════════════════════════════
+       FRAME CELLS
+       Layout: x=80, each cell w=100, gap=4
+       START  x=80   w=80
+       0x48   x=164  w=100
+       W      x=268  w=70
+       ACK1   x=342  w=80
+       data   x=426  w=110
+       ACK2   x=540  w=80
+       STOP   x=624  w=80
+       idle   x=708  line to 760
+       ══════════════════════════════════════ -->
+
+  <!-- ── START ── -->
+  <rect x="80" y="68" width="80" height="44" rx="5"
+        fill="#1a0e0e" stroke="#f38ba8" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.00;0.04;0.14;0.18;1"
+      values="0.2;1;1;1;0.2;0.2"/>
+  </rect>
+  <text x="120" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#f38ba8">START</text>
+  <text x="120" y="103" text-anchor="middle" font-size="10" fill="#7c4a4a">SDA↓ SCL HIGH</text>
+
+  <!-- ── 0x48 ADDRESS ── -->
+  <rect x="164" y="68" width="100" height="44" rx="5"
+        fill="#0e1e2a" stroke="#89b4fa" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.14;0.18;0.28;0.32;1"
+      values="0.2;0.2;1;1;0.2;0.2"/>
+  </rect>
+  <text x="214" y="87" text-anchor="middle" font-size="14" font-weight="bold" fill="#89b4fa">0x48</text>
+  <text x="214" y="103" text-anchor="middle" font-size="10" fill="#4a6a8a">7-bit address</text>
+
+  <!-- ── W/R FLAG ── -->
+  <rect x="268" y="68" width="70" height="44" rx="5"
+        fill="#1a1a0e" stroke="#f9e2af" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.28;0.32;0.42;0.46;1"
+      values="0.2;0.2;1;1;0.2;0.2"/>
+  </rect>
+  <text x="303" y="87" text-anchor="middle" font-size="14" font-weight="bold" fill="#f9e2af">W</text>
+  <text x="303" y="103" text-anchor="middle" font-size="10" fill="#7a6a3a">0=Write 1=Read</text>
+
+  <!-- ── ACK 1 ── -->
+  <rect x="342" y="68" width="80" height="44" rx="5"
+        fill="#0e1e0e" stroke="#a6e3a1" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.42;0.46;0.56;0.60;1"
+      values="0.2;0.2;1;1;0.2;0.2"/>
+  </rect>
+  <text x="382" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#a6e3a1">ACK</text>
+  <text x="382" y="103" text-anchor="middle" font-size="10" fill="#4a7a4a">slave replies</text>
+
+  <!-- ── DATA ── -->
+  <rect x="426" y="68" width="110" height="44" rx="5"
+        fill="#0e1e2a" stroke="#cba6f7" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.56;0.60;0.70;0.74;1"
+      values="0.2;0.2;1;1;0.2;0.2"/>
+  </rect>
+  <text x="481" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#cba6f7">data...</text>
+  <text x="481" y="103" text-anchor="middle" font-size="10" fill="#6a4a8a">8-bit payload</text>
+
+  <!-- ── ACK 2 ── -->
+  <rect x="540" y="68" width="80" height="44" rx="5"
+        fill="#0e1e0e" stroke="#a6e3a1" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.70;0.74;0.84;0.88;1"
+      values="0.2;0.2;1;1;0.2;0.2"/>
+  </rect>
+  <text x="580" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#a6e3a1">ACK</text>
+  <text x="580" y="103" text-anchor="middle" font-size="10" fill="#4a7a4a">confirmed</text>
+
+  <!-- ── STOP ── -->
+  <rect x="624" y="68" width="80" height="44" rx="5"
+        fill="#1a0e0e" stroke="#f38ba8" stroke-width="1.5">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.84;0.88;0.98;1"
+      values="0.2;0.2;1;1;0.2"/>
+  </rect>
+  <text x="664" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#f38ba8">STOP</text>
+  <text x="664" y="103" text-anchor="middle" font-size="10" fill="#7c4a4a">SDA↑ SCL HIGH</text>
+
+  <!-- idle line after STOP -->
+  <line x1="704" y1="90" x2="760" y2="90" stroke="#a6e3a1" stroke-width="2"/>
+
+  <!-- ══════════════════════════════════════
+       TRAVELLING PACKET along SDA frame
+       ══════════════════════════════════════ -->
+  <circle cy="90" r="6" fill="#a6e3a1" filter="url(#glow)">
+    <animate attributeName="cx" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.07;0.21;0.35;0.49;0.63;0.77;0.91;1"
+      values="48;120;214;303;382;481;580;664;760"/>
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.02;0.95;1"
+      values="0;1;1;0"/>
+  </circle>
+
+  <!-- ══════════════════════════════════════
+       ANNOTATION LINES & CALLOUTS
+       Vertical drops from cell bottoms at y=112
+       0x48 drop: x=214
+       W drop:    x=303
+       ACK drop:  x=382
+       ══════════════════════════════════════ -->
+
+  <!-- 0x48 vertical drop -->
+  <line x1="214" y1="112" x2="214" y2="175" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3 2"/>
+  <!-- W vertical drop -->
+  <line x1="303" y1="112" x2="303" y2="195" stroke="#f9e2af" stroke-width="1" stroke-dasharray="3 2"/>
+  <!-- ACK1 vertical drop -->
+  <line x1="382" y1="112" x2="382" y2="215" stroke="#a6e3a1" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- horizontal annotation lines -->
+  <!-- 0x48 annotation: x=214→750, y=175 -->
+  <line x1="214" y1="175" x2="560" y2="175" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="565" y="179" font-size="12" fill="#89b4fa">7-bit address broadcast to ALL devices</text>
+  <text x="565" y="195" font-size="12" fill="#585b70">Only 0x48 responds — rest stay silent</text>
+
+  <!-- W annotation: y=195 -->
+  <line x1="303" y1="195" x2="560" y2="215" stroke="#f9e2af" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="565" y="219" font-size="12" fill="#f9e2af">Write (0) or Read (1) flag</text>
+
+  <!-- ACK annotation: y=215 -->
+  <line x1="382" y1="215" x2="560" y2="238" stroke="#a6e3a1" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="565" y="242" font-size="12" fill="#a6e3a1">Slave 0x48 pulls SDA low:</text>
+  <text x="565" y="258" font-size="12" fill="#a6e3a1">"I'm here! Go ahead."</text>
+
+  <!-- ══════════════════════════════════════
+       ACK SLAVE GLOW — address cell glows
+       when ACK arrives at x=382
+       ══════════════════════════════════════ -->
+  <rect x="342" y="68" width="80" height="44" rx="5"
+        fill="none" stroke="#a6e3a1" stroke-width="4" opacity="0" filter="url(#glow)">
+    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.50;0.56;0.62;0.68;1"
+      values="0;0;0.9;0.9;0;0"/>
+  </rect>
+
+  <!-- ══════════════════════════════════════
+       BOTTOM PANELS — 3 rules
+       ══════════════════════════════════════ -->
+  <rect x="40" y="280" width="800" height="120" rx="8"
+        fill="#0d0d18" stroke="#313244" stroke-width="1"/>
+
+  <!-- Half-duplex row -->
+  <rect x="52" y="292" width="14" height="14" rx="2" fill="#f9e2af"/>
+  <text x="74" y="303" font-size="13" font-weight="bold" fill="#f9e2af">Half-duplex</text>
+  <text x="190" y="303" font-size="13" fill="#a6adc8">— only ONE direction at a time (like a walkie-talkie)</text>
+
+  <!-- Open-drain row -->
+  <rect x="52" y="318" width="14" height="14" rx="2" fill="#89b4fa"/>
+  <text x="74" y="329" font-size="13" font-weight="bold" fill="#89b4fa">Open-drain lines</text>
+  <text x="234" y="329" font-size="13" fill="#a6adc8">— devices can only PULL LOW, never push HIGH</text>
+
+  <!-- Pull-up row -->
+  <rect x="52" y="344" width="14" height="14" rx="2" fill="#a6e3a1"/>
+  <text x="74" y="355" font-size="13" font-weight="bold" fill="#a6e3a1">Pull-up resistors</text>
+  <text x="228" y="355" font-size="13" fill="#a6adc8">— naturally float back to HIGH when released</text>
+
+  <!-- divider -->
+  <line x1="52" y1="372" x2="828" y2="372" stroke="#313244" stroke-width="1"/>
+  <text x="440" y="388" text-anchor="middle" font-size="12" fill="#585b70">
+    ACK = slave pulls SDA LOW for 1 bit period  |  NACK = SDA stays HIGH (slave absent or busy)
+  </text>
+
+  <!-- ══════════════════════════════════════
+       SILENT SLAVE INDICATOR
+       Two dim devices that stay silent
+       ══════════════════════════════════════ -->
+  <rect x="40" y="130" width="90" height="36" rx="4"
+        fill="#111118" stroke="#2a2a3a" stroke-width="1" opacity="0.6"/>
+  <text x="85" y="145" text-anchor="middle" font-size="11" fill="#313244">Slave 0x3C</text>
+  <text x="85" y="159" text-anchor="middle" font-size="10" fill="#313244">silent</text>
+
+  <rect x="140" y="130" width="90" height="36" rx="4"
+        fill="#111118" stroke="#2a2a3a" stroke-width="1" opacity="0.6"/>
+  <text x="185" y="145" text-anchor="middle" font-size="11" fill="#313244">Slave 0x72</text>
+  <text x="185" y="159" text-anchor="middle" font-size="10" fill="#313244">silent</text>
+
+  <!-- active slave 0x48 -->
+  <rect x="248" y="130" width="100" height="36" rx="4"
+        fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" filter="url(#glow-sm)">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" keyTimes="0;0.56;0.62" dur="5.6s" repeatCount="indefinite"/>
+  </rect>
+  <text x="298" y="145" text-anchor="middle" font-size="12" font-weight="bold" fill="#a6e3a1">Slave 0x48</text>
+  <text x="298" y="159" text-anchor="middle" font-size="11" fill="#a6e3a1">ACK ← match!</text>
+
+  <text x="375" y="148" font-size="12" fill="#45475a">... all others stay silent</text>
+
+</svg>

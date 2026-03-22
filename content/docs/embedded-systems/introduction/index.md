@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Embedded Systems"
-date: 2025-03-17
-index: 1
+# date: 2025-03-17
+weight: 10
 draft: false
 description: "Core principles of embedded development, from bare-metal to RTOS."
 tags: ["embedded", "firmware", "rtos"]

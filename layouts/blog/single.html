@@ -78,7 +78,7 @@
 {{ if or .NextInSection .PrevInSection }}
 <nav class="article-pagination" aria-label="Article navigation">
   <div class="container article-pagination-inner">
-    {{ with .PrevInSection }}
+    {{ with .NextInSection }}
     <a href="{{ .RelPermalink }}" class="pagination-link pagination-link--prev">
       <span class="pagination-dir">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M11 7H1M5 3 1 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -87,7 +87,7 @@
       <span class="pagination-title">{{ .Title }}</span>
     </a>
     {{ end }}
-    {{ with .NextInSection }}
+    {{ with .PrevInSection }}
     <a href="{{ .RelPermalink }}" class="pagination-link pagination-link--next">
       <span class="pagination-dir">
         NEXT

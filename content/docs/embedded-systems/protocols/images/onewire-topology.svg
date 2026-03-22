@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="100%" height="100%"
+     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
+
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-lg" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ══════════════════════════════════════
+       VCC RAIL  y=28
+       ══════════════════════════════════════ -->
+  <line x1="180" y1="28" x2="280" y2="28" stroke="#f9e2af" stroke-width="2"/>
+  <text x="140" y="32" font-size="13" fill="#f9e2af" text-anchor="middle">VCC</text>
+  <circle cx="180" cy="28" r="3" fill="#f9e2af"/>
+
+  <!-- ══════════════════════════════════════
+       MASTER MCU BOX  x=30 y=50 w=150 h=100
+       ══════════════════════════════════════ -->
+  <rect x="30" y="50" width="150" height="100" rx="8"
+        fill="#0e2a40" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="105" y="78" text-anchor="middle" font-size="15" font-weight="bold" fill="#89b4fa">Master</text>
+  <text x="105" y="96" text-anchor="middle" font-size="12" fill="#6c9ecf">MCU</text>
+  <text x="165" y="116" text-anchor="end" font-size="12" fill="#94e2d5">GPIO</text>
+
+  <!-- GPIO pin dot on MCU right edge -->
+  <circle cx="180" cy="112" r="5" fill="#94e2d5" filter="url(#glow)">
+    <animate attributeName="r"       values="5;8;5" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══════════════════════════════════════
+       PULL-UP RESISTOR
+       VCC drop y=28→48, resistor y=48→88, then joins data wire
+       Pull-up x=230
+       ══════════════════════════════════════ -->
+  <!-- VCC down to top of resistor -->
+  <line x1="230" y1="28" x2="230" y2="46" stroke="#f9e2af" stroke-width="1.5"/>
+  <!-- resistor body zigzag -->
+  <polyline points="230,46 222,52 238,60 222,68 238,76 230,82"
+    fill="none" stroke="#f9e2af" stroke-width="1.5"/>
+  <!-- resistor down to data wire y=112 -->
+  <line x1="230" y1="82" x2="230" y2="112" stroke="#f9e2af" stroke-width="1.5"/>
+  <!-- 4.7kΩ label -->
+  <text x="248" y="66" font-size="12" fill="#a6adc8">4.7kΩ</text>
+  <text x="248" y="80" font-size="11" fill="#585b70">pull-up</text>
+  <text x="248" y="94" font-size="11" fill="#585b70">to VCC</text>
+  <!-- junction dot at data wire -->
+  <circle cx="230" cy="112" r="4" fill="#94e2d5" filter="url(#glow)"/>
+
+  <!-- ══════════════════════════════════════
+       SINGLE DATA WIRE  y=112
+       From MCU GPIO (x=180) all the way to x=820
+       ══════════════════════════════════════ -->
+  <line x1="180" y1="112" x2="820" y2="112"
+        stroke="#94e2d5" stroke-width="3"/>
+  <text x="830" y="116" font-size="12" fill="#94e2d5">DATA</text>
+  <text x="830" y="130" font-size="11" fill="#585b70">+ VCC</text>
+
+  <!-- "Single data wire" label above wire -->
+  <text x="530" y="100" text-anchor="middle" font-size="12" fill="#45475a">single data wire — power + data on same line</text>
+
+  <!-- ══════════════════════════════════════
+       4 SENSOR COLUMNS
+       x centres: 310, 450, 590, 730
+       ══════════════════════════════════════ -->
+
+  <!-- Sensor tap drops and GND stubs -->
+  <!-- tap drop x=310 y=112→165 -->
+  <line x1="310" y1="112" x2="310" y2="162" stroke="#94e2d5" stroke-width="2"/>
+  <!-- GND resistor stub at x=310 -->
+  <line x1="310" y1="162" x2="310" y2="175" stroke="#45475a" stroke-width="1.5"/>
+  <rect x="303" y="175" width="14" height="10" rx="2" fill="#0b0c10" stroke="#45475a" stroke-width="1"/>
+  <line x1="310" y1="185" x2="310" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="298" y1="196" x2="322" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="302" y1="200" x2="318" y2="200" stroke="#45475a" stroke-width="1"/>
+  <line x1="306" y1="204" x2="314" y2="204" stroke="#45475a" stroke-width="0.5"/>
+  <text x="310" y="218" text-anchor="middle" font-size="10" fill="#45475a">GND</text>
+  <circle cx="310" cy="112" r="4" fill="#94e2d5"/>
+
+  <!-- tap x=450 -->
+  <line x1="450" y1="112" x2="450" y2="162" stroke="#94e2d5" stroke-width="2"/>
+  <line x1="450" y1="162" x2="450" y2="175" stroke="#45475a" stroke-width="1.5"/>
+  <rect x="443" y="175" width="14" height="10" rx="2" fill="#0b0c10" stroke="#45475a" stroke-width="1"/>
+  <line x1="450" y1="185" x2="450" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="438" y1="196" x2="462" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="442" y1="200" x2="458" y2="200" stroke="#45475a" stroke-width="1"/>
+  <line x1="446" y1="204" x2="454" y2="204" stroke="#45475a" stroke-width="0.5"/>
+  <text x="450" y="218" text-anchor="middle" font-size="10" fill="#45475a">GND</text>
+  <circle cx="450" cy="112" r="4" fill="#94e2d5"/>
+
+  <!-- tap x=590 -->
+  <line x1="590" y1="112" x2="590" y2="162" stroke="#94e2d5" stroke-width="2"/>
+  <line x1="590" y1="162" x2="590" y2="175" stroke="#45475a" stroke-width="1.5"/>
+  <rect x="583" y="175" width="14" height="10" rx="2" fill="#0b0c10" stroke="#45475a" stroke-width="1"/>
+  <line x1="590" y1="185" x2="590" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="578" y1="196" x2="602" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="582" y1="200" x2="598" y2="200" stroke="#45475a" stroke-width="1"/>
+  <line x1="586" y1="204" x2="594" y2="204" stroke="#45475a" stroke-width="0.5"/>
+  <text x="590" y="218" text-anchor="middle" font-size="10" fill="#45475a">GND</text>
+  <circle cx="590" cy="112" r="4" fill="#94e2d5"/>
+
+  <!-- tap x=730 -->
+  <line x1="730" y1="112" x2="730" y2="162" stroke="#94e2d5" stroke-width="2"/>
+  <line x1="730" y1="162" x2="730" y2="175" stroke="#45475a" stroke-width="1.5"/>
+  <rect x="723" y="175" width="14" height="10" rx="2" fill="#0b0c10" stroke="#45475a" stroke-width="1"/>
+  <line x1="730" y1="185" x2="730" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="718" y1="196" x2="742" y2="196" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="722" y1="200" x2="738" y2="200" stroke="#45475a" stroke-width="1"/>
+  <line x1="726" y1="204" x2="734" y2="204" stroke="#45475a" stroke-width="0.5"/>
+  <text x="730" y="218" text-anchor="middle" font-size="10" fill="#45475a">GND</text>
+  <circle cx="730" cy="112" r="4" fill="#94e2d5"/>
+
+  <!-- ══════════════════════════════════════
+       DS18B20 SENSOR BOXES  y=228 h=100
+       ══════════════════════════════════════ -->
+
+  <!-- Sensor 1 -->
+  <rect x="268" y="228" width="84" height="100" rx="6"
+        fill="#0e1e2a" stroke="#94e2d5" stroke-width="1.5"/>
+  <text x="310" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#94e2d5">DS18B20</text>
+  <text x="310" y="270" text-anchor="middle" font-size="11" fill="#45475a">ID:</text>
+  <text x="310" y="284" text-anchor="middle" font-size="11" fill="#a6adc8">A3F2...</text>
+  <!-- temp reading badge -->
+  <rect x="278" y="295" width="64" height="22" rx="3" fill="#0a2a18" stroke="#94e2d5" stroke-width="0.5">
+    <animate attributeName="stroke-width" values="0.5;2;0.5" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="310" y="311" text-anchor="middle" font-size="12" fill="#94e2d5">24.3°C</text>
+
+  <!-- Sensor 2 -->
+  <rect x="408" y="228" width="84" height="100" rx="6"
+        fill="#0e1e2a" stroke="#94e2d5" stroke-width="1.5"/>
+  <text x="450" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#94e2d5">DS18B20</text>
+  <text x="450" y="270" text-anchor="middle" font-size="11" fill="#45475a">ID:</text>
+  <text x="450" y="284" text-anchor="middle" font-size="11" fill="#a6adc8">9B1C...</text>
+  <rect x="418" y="295" width="64" height="22" rx="3" fill="#0a2a18" stroke="#94e2d5" stroke-width="0.5">
+    <animate attributeName="stroke-width" values="0.5;2;0.5" dur="4s" begin="1s" repeatCount="indefinite"/>
+  </rect>
+  <text x="450" y="311" text-anchor="middle" font-size="12" fill="#94e2d5">31.7°C</text>
+
+  <!-- Sensor 3 -->
+  <rect x="548" y="228" width="84" height="100" rx="6"
+        fill="#0e1e2a" stroke="#94e2d5" stroke-width="1.5"/>
+  <text x="590" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#94e2d5">DS18B20</text>
+  <text x="590" y="270" text-anchor="middle" font-size="11" fill="#45475a">ID:</text>
+  <text x="590" y="284" text-anchor="middle" font-size="11" fill="#a6adc8">E72A...</text>
+  <rect x="558" y="295" width="64" height="22" rx="3" fill="#0a2a18" stroke="#94e2d5" stroke-width="0.5">
+    <animate attributeName="stroke-width" values="0.5;2;0.5" dur="4s" begin="2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="590" y="311" text-anchor="middle" font-size="12" fill="#94e2d5">19.1°C</text>
+
+  <!-- Sensor 4 -->
+  <rect x="688" y="228" width="84" height="100" rx="6"
+        fill="#0e1e2a" stroke="#94e2d5" stroke-width="1.5"/>
+  <text x="730" y="252" text-anchor="middle" font-size="12" font-weight="bold" fill="#94e2d5">DS18B20</text>
+  <text x="730" y="270" text-anchor="middle" font-size="11" fill="#45475a">ID:</text>
+  <text x="730" y="284" text-anchor="middle" font-size="11" fill="#a6adc8">0048...</text>
+  <rect x="698" y="295" width="64" height="22" rx="3" fill="#0a2a18" stroke="#94e2d5" stroke-width="0.5">
+    <animate attributeName="stroke-width" values="0.5;2;0.5" dur="4s" begin="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="730" y="311" text-anchor="middle" font-size="12" fill="#94e2d5">28.9°C</text>
+
+  <!-- ══════════════════════════════════════
+       SENSOR GLOW RINGS (when polled)
+       Master queries each sensor in sequence
+       ══════════════════════════════════════ -->
+  <rect x="268" y="228" width="84" height="100" rx="6"
+        fill="none" stroke="#94e2d5" stroke-width="3" opacity="0" filter="url(#glow)">
+    <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.05;0.10;0.22;0.25;1" values="0;0;0.9;0.9;0;0"/>
+  </rect>
+  <rect x="408" y="228" width="84" height="100" rx="6"
+        fill="none" stroke="#94e2d5" stroke-width="3" opacity="0" filter="url(#glow)">
+    <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.30;0.35;0.47;0.50;1" values="0;0;0.9;0.9;0;0"/>
+  </rect>
+  <rect x="548" y="228" width="84" height="100" rx="6"
+        fill="none" stroke="#94e2d5" stroke-width="3" opacity="0" filter="url(#glow)">
+    <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.55;0.60;0.72;0.75;1" values="0;0;0.9;0.9;0;0"/>
+  </rect>
+  <rect x="688" y="228" width="84" height="100" rx="6"
+        fill="none" stroke="#94e2d5" stroke-width="3" opacity="0" filter="url(#glow)">
+    <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.80;0.85;0.97;1" values="0;0;0.9;0.9"/>
+  </rect>
+
+  <!-- ══════════════════════════════════════
+       ANIMATED DATA PACKETS on the wire
+       Master queries: pulse goes right
+       Sensor responds: pulse returns left
+       Polls sensors in sequence, 4s cycle
+       ══════════════════════════════════════ -->
+
+  <!-- Poll sensor 1: master→S1 then S1→master -->
+  <circle cy="112" r="6" fill="#94e2d5" filter="url(#glow)">
+    <animate attributeName="cx" values="180;310;310" keyTimes="0;0.5;1" dur="0.8s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="0s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="112" r="6" fill="#a6e3a1" filter="url(#glow)">
+    <animate attributeName="cx" values="310;180;180" keyTimes="0;0.5;1" dur="0.8s" begin="0.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="0.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Poll sensor 2 -->
+  <circle cy="112" r="6" fill="#94e2d5" filter="url(#glow)">
+    <animate attributeName="cx" values="180;450;450" keyTimes="0;0.5;1" dur="0.8s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="112" r="6" fill="#a6e3a1" filter="url(#glow)">
+    <animate attributeName="cx" values="450;180;180" keyTimes="0;0.5;1" dur="0.8s" begin="1.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="1.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Poll sensor 3 -->
+  <circle cy="112" r="6" fill="#94e2d5" filter="url(#glow)">
+    <animate attributeName="cx" values="180;590;590" keyTimes="0;0.5;1" dur="0.8s" begin="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="112" r="6" fill="#a6e3a1" filter="url(#glow)">
+    <animate attributeName="cx" values="590;180;180" keyTimes="0;0.5;1" dur="0.8s" begin="2.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="2.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Poll sensor 4 -->
+  <circle cy="112" r="6" fill="#94e2d5" filter="url(#glow)">
+    <animate attributeName="cx" values="180;730;730" keyTimes="0;0.5;1" dur="0.8s" begin="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="112" r="6" fill="#a6e3a1" filter="url(#glow)">
+    <animate attributeName="cx" values="730;180;180" keyTimes="0;0.5;1" dur="0.8s" begin="3.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="0.8s" begin="3.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══════════════════════════════════════
+       BOTTOM PANEL
+       ══════════════════════════════════════ -->
+  <rect x="30" y="344" width="800" height="58" rx="6"
+        fill="#0d0d18" stroke="#313244" stroke-width="1"/>
+  <text x="430" y="364" text-anchor="middle" font-size="13" fill="#a6adc8">
+    All 4 sensors share the exact same single wire — power + data combined
+  </text>
+  <text x="430" y="382" text-anchor="middle" font-size="12" fill="#585b70">
+    Master queries each sensor by 64-bit ROM ID — impossible to have address conflicts
+  </text>
+  <text x="430" y="397" text-anchor="middle" font-size="12" fill="#585b70">
+    Teal pulse = master query  ·  Green pulse = sensor response
+  </text>
+
+</svg>

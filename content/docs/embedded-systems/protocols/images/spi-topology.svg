@@ -1,0 +1,241 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" width="100%" height="100%"
+     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
+
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- arrow markers -->
+    <marker id="arr-sclk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#89b4fa"/>
+    </marker>
+    <marker id="arr-mosi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#a6e3a1"/>
+    </marker>
+    <marker id="arr-miso" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#f38ba8"/>
+    </marker>
+    <marker id="arr-cs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#f9e2af"/>
+    </marker>
+  </defs>
+
+  <!-- ══════════════════════════════════════════
+       MASTER (MCU)  — top centre
+       x=310 y=28 w=240 h=64
+       ══════════════════════════════════════════ -->
+  <rect x="310" y="28" width="240" height="64" rx="8"
+        fill="#0e2a40" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="430" y="52" text-anchor="middle" font-size="15" font-weight="bold" fill="#89b4fa">Master (MCU)</text>
+  <text x="430" y="72" text-anchor="middle" font-size="12" fill="#6c9ecf">Controller</text>
+
+  <!-- pin labels on Master bottom edge -->
+  <text x="360" y="100" text-anchor="middle" font-size="11" fill="#89b4fa">SCLK</text>
+  <text x="430" y="100" text-anchor="middle" font-size="11" fill="#a6e3a1">MOSI</text>
+  <text x="500" y="100" text-anchor="middle" font-size="11" fill="#f38ba8">MISO</text>
+
+  <!-- ══════════════════════════════════════════
+       SHARED BUS horizontal rail  y=170
+       x: 60 → 800
+       ══════════════════════════════════════════ -->
+
+  <!-- SCLK bus rail  -->
+  <line x1="60" y1="158" x2="800" y2="158" stroke="#89b4fa" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <!-- MOSI bus rail -->
+  <line x1="60" y1="172" x2="800" y2="172" stroke="#a6e3a1" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <!-- MISO bus rail -->
+  <line x1="60" y1="186" x2="800" y2="186" stroke="#f38ba8" stroke-width="1.5" stroke-dasharray="5 3"/>
+
+  <!-- shared bus label -->
+  <text x="810" y="163" font-size="11" fill="#89b4fa">SCLK</text>
+  <text x="810" y="177" font-size="11" fill="#a6e3a1">MOSI</text>
+  <text x="810" y="191" font-size="11" fill="#f38ba8">MISO</text>
+
+  <!-- bus brace label on left -->
+  <text x="44" y="172" text-anchor="end" font-size="11" fill="#45475a">shared</text>
+  <text x="44" y="185" text-anchor="end" font-size="11" fill="#45475a">bus</text>
+
+  <!-- ══════════════════════════════════════════
+       MASTER → BUS vertical drop lines
+       SCLK drop: x=360, MOSI: x=430, MISO: x=500
+       from y=92 (master bottom) to y=158/172/186
+       ══════════════════════════════════════════ -->
+  <line x1="360" y1="92" x2="360" y2="158" stroke="#89b4fa" stroke-width="1.5"/>
+  <line x1="430" y1="92" x2="430" y2="172" stroke="#a6e3a1" stroke-width="1.5"/>
+  <line x1="500" y1="92" x2="500" y2="186" stroke="#f38ba8" stroke-width="1.5"/>
+
+  <!-- ══════════════════════════════════════════
+       SLAVES — positioned at x=100, x=380, x=640
+       each slave top at y=240, h=100
+       ══════════════════════════════════════════ -->
+
+  <!-- ── Slave 1 ── x=80 w=160 -->
+  <rect x="80" y="240" width="160" height="100" rx="8"
+        fill="#1a1a2e" stroke="#45475a" stroke-width="1.5"/>
+  <text x="160" y="268" text-anchor="middle" font-size="14" font-weight="bold" fill="#cdd6f4">Slave 1</text>
+  <text x="160" y="288" text-anchor="middle" font-size="11" fill="#585b70">Peripheral</text>
+  <!-- CS label inside -->
+  <text x="108" y="318" font-size="11" fill="#f9e2af">CS</text>
+  <text x="128" y="330" font-size="10" fill="#585b70">active LOW</text>
+
+  <!-- ── Slave 2 ── x=340 w=180 -->
+  <rect x="340" y="240" width="180" height="100" rx="8"
+        fill="#1a1a2e" stroke="#45475a" stroke-width="1.5"/>
+  <text x="430" y="268" text-anchor="middle" font-size="14" font-weight="bold" fill="#cdd6f4">Slave 2</text>
+  <text x="430" y="288" text-anchor="middle" font-size="11" fill="#585b70">Peripheral</text>
+  <text x="368" y="318" font-size="11" fill="#f9e2af">CS</text>
+  <text x="388" y="330" font-size="10" fill="#585b70">active LOW</text>
+
+  <!-- ── Slave 3 ── x=600 w=160 -->
+  <rect x="600" y="240" width="160" height="100" rx="8"
+        fill="#1a1a2e" stroke="#45475a" stroke-width="1.5"/>
+  <text x="680" y="268" text-anchor="middle" font-size="14" font-weight="bold" fill="#cdd6f4">Slave 3</text>
+  <text x="680" y="288" text-anchor="middle" font-size="11" fill="#585b70">Peripheral</text>
+  <text x="628" y="318" font-size="11" fill="#f9e2af">CS</text>
+  <text x="648" y="330" font-size="10" fill="#585b70">active LOW</text>
+
+  <!-- ══════════════════════════════════════════
+       BUS → SLAVE vertical drops
+       Each slave taps all 3 bus rails
+       ══════════════════════════════════════════ -->
+
+  <!-- Slave 1 bus connections at x=160 -->
+  <line x1="160" y1="158" x2="160" y2="240" stroke="#89b4fa" stroke-width="1.5"/>
+  <line x1="160" y1="172" x2="160" y2="240" stroke="#a6e3a1" stroke-width="1.5"/>
+  <line x1="160" y1="186" x2="160" y2="240" stroke="#f38ba8" stroke-width="1.5"/>
+
+  <!-- Slave 2 bus connections at x=430 -->
+  <line x1="430" y1="172" x2="430" y2="240" stroke="#a6e3a1" stroke-width="1.5"/>
+  <line x1="430" y1="186" x2="430" y2="240" stroke="#f38ba8" stroke-width="1.5"/>
+
+  <!-- Slave 3 bus connections at x=680 -->
+  <line x1="680" y1="158" x2="680" y2="240" stroke="#89b4fa" stroke-width="1.5"/>
+  <line x1="680" y1="172" x2="680" y2="240" stroke="#a6e3a1" stroke-width="1.5"/>
+  <line x1="680" y1="186" x2="680" y2="240" stroke="#f38ba8" stroke-width="1.5"/>
+
+  <!-- ══════════════════════════════════════════
+       CS LINES — from Master down to each slave
+       Dedicated per slave, routed below bus
+       CS1: x=280 from master y=92 down to slave1
+       CS2: x=430 (separate line)
+       CS3: x=580
+       ══════════════════════════════════════════ -->
+
+  <!-- CS1: Master x=340 → route down y=92→220 → left to x=110 → down to slave y=240 -->
+  <polyline points="340,92 340,220 110,220 110,240"
+    fill="none" stroke="#f9e2af" stroke-width="1.5" marker-end="url(#arr-cs)"/>
+  <text x="224" y="215" text-anchor="middle" font-size="11" fill="#f9e2af">CS1</text>
+
+  <!-- CS2: Master x=370 → route down to y=228 → to x=370 already, down to slave2 -->
+  <polyline points="370,92 370,228 370,240"
+    fill="none" stroke="#f9e2af" stroke-width="1.5" marker-end="url(#arr-cs)"/>
+  <text x="380" y="225" font-size="11" fill="#f9e2af">CS2</text>
+
+  <!-- CS3: Master x=400 → route down y=92→234 → right to x=630 → down -->
+  <polyline points="400,92 400,234 630,234 630,240"
+    fill="none" stroke="#f9e2af" stroke-width="1.5" marker-end="url(#arr-cs)"/>
+  <text x="515" y="230" text-anchor="middle" font-size="11" fill="#f9e2af">CS3</text>
+
+  <!-- CS label note -->
+  <text x="430" y="395" text-anchor="middle" font-size="12" fill="#585b70">CS = unique per slave — "tap on the shoulder"</text>
+
+  <!-- ══════════════════════════════════════════
+       ANIMATED PACKETS on shared bus
+       SCLK, MOSI, MISO dots travel the rails
+       ══════════════════════════════════════════ -->
+
+  <!-- SCLK clock pulse travelling left→right on y=158 -->
+  <circle cy="158" r="5" fill="#89b4fa" filter="url(#glow)">
+    <animate attributeName="cx" values="60;800;60" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <!-- second SCLK pulse offset -->
+  <circle cy="158" r="5" fill="#89b4fa" filter="url(#glow)">
+    <animate attributeName="cx" values="60;800;60" keyTimes="0;0.5;1" dur="2s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="2s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- MOSI data travelling Master→Slave (left to right) on y=172 -->
+  <circle cy="172" r="5" fill="#a6e3a1" filter="url(#glow)">
+    <animate attributeName="cx" values="360;800;360" keyTimes="0;0.5;1" dur="2.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="2.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- MISO data travelling Slave→Master (right to left) on y=186 -->
+  <circle cy="186" r="5" fill="#f38ba8" filter="url(#glow)">
+    <animate attributeName="cx" values="800;60;800" keyTimes="0;0.5;1" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- CS1 pulse travelling down the CS1 route (animates a dot along the polyline path) -->
+  <!-- Route: (340,92)→(340,220)→(110,220)→(110,240) — animate cx,cy separately -->
+  <circle r="4" fill="#f9e2af" filter="url(#glow-sm)">
+    <animate attributeName="cx" values="340;340;110;110" keyTimes="0;0.4;0.8;1" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="92;220;220;240" keyTimes="0;0.4;0.8;1" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.5;0.9;1" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- CS2 pulse: (370,92)→(370,240) -->
+  <circle r="4" fill="#f9e2af" filter="url(#glow-sm)">
+    <animate attributeName="cx" values="370;370" keyTimes="0;1" dur="3s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="92;240" keyTimes="0;1" dur="3s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.9;1" dur="3s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- CS3 pulse: (400,92)→(400,234)→(630,234)→(630,240) -->
+  <circle r="4" fill="#f9e2af" filter="url(#glow-sm)">
+    <animate attributeName="cx" values="400;400;630;630" keyTimes="0;0.4;0.8;1" dur="3s" begin="2s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="92;234;234;240" keyTimes="0;0.4;0.8;1" dur="3s" begin="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.5;0.9;1" dur="3s" begin="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══════════════════════════════════════════
+       SLAVE CS PIN BLINK (glows when CS active)
+       ══════════════════════════════════════════ -->
+
+  <!-- Slave 1 CS dot -->
+  <circle cx="110" cy="252" r="4" fill="#f9e2af" filter="url(#glow-sm)">
+    <animate attributeName="r"       values="4;7;4"   dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Slave 2 CS dot -->
+  <circle cx="370" cy="252" r="4" fill="#f9e2af" filter="url(#glow-sm)">
+    <animate attributeName="r"       values="4;7;4"   dur="3s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Slave 3 CS dot -->
+  <circle cx="630" cy="252" r="4" fill="#f9e2af" filter="url(#glow-sm)">
+    <animate attributeName="r"       values="4;7;4"   dur="3s" begin="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══════════════════════════════════════════
+       LEGEND
+       ══════════════════════════════════════════ -->
+  <line x1="60"  y1="430" x2="100" y2="430" stroke="#89b4fa" stroke-width="2"/>
+  <text x="108" y="434" font-size="12" fill="#89b4fa">SCLK — clock (Master drives)</text>
+
+  <line x1="60"  y1="450" x2="100" y2="450" stroke="#a6e3a1" stroke-width="2"/>
+  <text x="108" y="454" font-size="12" fill="#a6e3a1">MOSI — Master Out Slave In</text>
+
+  <line x1="360" y1="430" x2="400" y2="430" stroke="#f38ba8" stroke-width="2"/>
+  <text x="408" y="434" font-size="12" fill="#f38ba8">MISO — Master In Slave Out</text>
+
+  <line x1="360" y1="450" x2="400" y2="450" stroke="#f9e2af" stroke-width="2"/>
+  <text x="408" y="454" font-size="12" fill="#f9e2af">CS — Chip Select (1 per slave)</text>
+
+</svg>
