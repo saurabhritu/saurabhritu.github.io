@@ -1,0 +1,194 @@
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" style="background:#080E1A">
+
+  <defs>
+    <!-- Wi-Fi gradient -->
+    <linearGradient id="gradWifi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#1E40AF"/>
+    </linearGradient>
+
+    <!-- BT gradient -->
+    <linearGradient id="gradBT" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F97316"/>
+      <stop offset="100%" style="stop-color:#9A3412"/>
+    </linearGradient>
+
+    <!-- BLE gradient -->
+    <linearGradient id="gradBLE" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2DD4BF"/>
+      <stop offset="100%" style="stop-color:#0F766E"/>
+    </linearGradient>
+
+    <!-- Time bar gradients (horizontal) -->
+    <linearGradient id="tbWifi" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#1E40AF"/>
+    </linearGradient>
+    <linearGradient id="tbBT" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F97316"/>
+      <stop offset="100%" style="stop-color:#C2410C"/>
+    </linearGradient>
+    <linearGradient id="tbBLE" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2DD4BF"/>
+      <stop offset="100%" style="stop-color:#0D9488"/>
+    </linearGradient>
+
+    <!-- Center overlap -->
+    <radialGradient id="overlapGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </radialGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle glow for badge -->
+    <filter id="badgeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Dot grid pattern -->
+    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="0.7" fill="#1a2540"/>
+    </pattern>
+
+    <!-- Clip for rounded bar -->
+    <clipPath id="barClip">
+      <rect x="140" y="272" width="460" height="14" rx="7"/>
+    </clipPath>
+
+    <!-- Scan line texture -->
+    <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#ffffff" fill-opacity="0.025"/>
+    </pattern>
+  </defs>
+
+  <!-- Background layers -->
+  <rect width="760" height="340" fill="#080E1A"/>
+  <rect width="760" height="340" fill="url(#dots)"/>
+  <rect width="760" height="340" fill="url(#scanlines)"/>
+
+  <!-- Subtle outer vignette -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="60%" stop-color="#080E1A" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#080E1A" stop-opacity="0.7"/>
+  </radialGradient>
+  <rect width="760" height="340" fill="url(#vignette)"/>
+
+  <!-- ── VENN CIRCLES ── -->
+
+  <!-- Wi-Fi (left) -->
+  <circle cx="310" cy="138" r="82" fill="url(#gradWifi)" opacity="0.82" filter="url(#glow)"/>
+  <!-- BT (right) -->
+  <circle cx="450" cy="138" r="82" fill="url(#gradBT)" opacity="0.82" filter="url(#glow)"/>
+  <!-- BLE (bottom) -->
+  <circle cx="380" cy="210" r="82" fill="url(#gradBLE)" opacity="0.82" filter="url(#glow)"/>
+
+  <!-- Overlap shimmer -->
+  <circle cx="380" cy="162" r="40" fill="url(#overlapGlow)"/>
+
+  <!-- ── CENTER BADGE ── -->
+  <circle cx="380" cy="162" r="30" fill="#080E1A" opacity="0.9" filter="url(#badgeGlow)"/>
+  <circle cx="380" cy="162" r="30" fill="none" stroke="#334155" stroke-width="1.2"/>
+  <circle cx="380" cy="162" r="26" fill="none" stroke="#1E293B" stroke-width="0.6"/>
+
+  <!-- TDM text -->
+  <text x="380" y="158" text-anchor="middle" dominant-baseline="middle"
+        font-size="13" font-family="'Courier New', monospace" fill="#F1F5F9" font-weight="bold" letter-spacing="2">TDM</text>
+  <text x="380" y="172" text-anchor="middle"
+        font-size="5.5" font-family="'Courier New', monospace" fill="#64748B" letter-spacing="3">ARBITER</text>
+
+  <!-- ── LABELS ── -->
+
+  <!-- Wi-Fi label with icon hint -->
+  <text x="272" y="108" text-anchor="middle"
+        font-size="20" font-family="'Courier New', monospace" fill="#BFDBFE" font-weight="bold" letter-spacing="1">Wi-Fi</text>
+  <text x="272" y="123" text-anchor="middle"
+        font-size="7.5" font-family="'Courier New', monospace" fill="#3B82F6" letter-spacing="2.5" opacity="0.85">2.4 GHz</text>
+
+  <!-- BT label -->
+  <text x="488" y="108" text-anchor="middle"
+        font-size="20" font-family="'Courier New', monospace" fill="#FFEDD5" font-weight="bold" letter-spacing="1">BT</text>
+  <text x="488" y="123" text-anchor="middle"
+        font-size="7.5" font-family="'Courier New', monospace" fill="#F97316" letter-spacing="2.5" opacity="0.85">CLASSIC</text>
+
+  <!-- BLE label -->
+  <text x="380" y="243" text-anchor="middle"
+        font-size="20" font-family="'Courier New', monospace" fill="#CCFBF1" font-weight="bold" letter-spacing="1">BLE</text>
+  <text x="380" y="257" text-anchor="middle"
+        font-size="7.5" font-family="'Courier New', monospace" fill="#2DD4BF" letter-spacing="2.5" opacity="0.85">5.0 ADV</text>
+
+  <!-- ── CONNECTOR DASHES ── -->
+  <line x1="345" y1="60" x2="415" y2="60"
+        stroke="#334155" stroke-width="1.2" stroke-dasharray="3,5" opacity="0.55"/>
+  <line x1="245" y1="196" x2="305" y2="248"
+        stroke="#334155" stroke-width="1.2" stroke-dasharray="3,5" opacity="0.55"/>
+  <line x1="515" y1="196" x2="455" y2="248"
+        stroke="#334155" stroke-width="1.2" stroke-dasharray="3,5" opacity="0.55"/>
+
+  <!-- ── TIME-DIVISION BAR ── -->
+
+  <!-- Bar background -->
+  <rect x="140" y="272" width="460" height="14" rx="7" fill="#0F172A"/>
+  <rect x="140" y="272" width="460" height="14" rx="7" fill="none" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Animated Wi-Fi slice -->
+  <rect x="140" y="272" width="170" height="14" clip-path="url(#barClip)" fill="url(#tbWifi)" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="2.4s" repeatCount="indefinite" begin="0s"/>
+  </rect>
+
+  <!-- Animated BT slice -->
+  <rect x="313" y="272" width="128" height="14" clip-path="url(#barClip)" fill="url(#tbBT)" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+  </rect>
+
+  <!-- Animated BLE slice -->
+  <rect x="444" y="272" width="108" height="14" clip-path="url(#barClip)" fill="url(#tbBLE)" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="2.4s" repeatCount="indefinite" begin="1.6s"/>
+  </rect>
+
+  <!-- Fade-out next Wi-Fi cycle -->
+  <rect x="555" y="272" width="45" height="14" clip-path="url(#barClip)" fill="url(#tbWifi)" opacity="0.28"/>
+
+  <!-- Gap dividers -->
+  <rect x="311" y="272" width="2" height="14" fill="#080E1A" opacity="0.9"/>
+  <rect x="442" y="272" width="2" height="14" fill="#080E1A" opacity="0.9"/>
+  <rect x="553" y="272" width="2" height="14" fill="#080E1A" opacity="0.9"/>
+
+  <!-- Travelling scan dot on bar -->
+  <circle cy="279" r="3" fill="#ffffff" opacity="0.7">
+    <animate attributeName="cx" values="140;600;140" dur="4.8s" repeatCount="indefinite" calcMode="linear"/>
+    <animate attributeName="opacity" values="0;0.7;0.7;0.7;0" keyTimes="0;0.05;0.5;0.95;1" dur="4.8s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Slice labels above bar -->
+  <text x="225" y="268" text-anchor="middle" font-size="7.5" font-family="'Courier New', monospace"
+        fill="#3B82F6" letter-spacing="1.5" opacity="0.9">Wi-Fi</text>
+  <text x="377" y="268" text-anchor="middle" font-size="7.5" font-family="'Courier New', monospace"
+        fill="#F97316" letter-spacing="1.5" opacity="0.9">BT</text>
+  <text x="498" y="268" text-anchor="middle" font-size="7.5" font-family="'Courier New', monospace"
+        fill="#2DD4BF" letter-spacing="1.5" opacity="0.9">BLE</text>
+
+  <!-- Time arrow -->
+  <text x="614" y="281" font-size="11" fill="#475569" font-family="'Courier New', monospace">→ t</text>
+
+  <!-- ── TITLE / CAPTION ── -->
+  <text x="380" y="24" text-anchor="middle" font-size="11" font-family="'Courier New', monospace"
+        fill="#334155" letter-spacing="3">ESP32 · COEXISTENCE ARCHITECTURE</text>
+
+  <text x="380" y="323" text-anchor="middle" font-size="8" fill="#334155"
+        font-family="'Courier New', monospace" letter-spacing="2.5">
+    ONE RADIO · THREE PROTOCOLS · TIME-DIVISION MULTIPLEXED
+  </text>
+
+</svg>

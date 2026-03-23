@@ -1384,6 +1384,8 @@ button {
   padding-block: 0 var(--space-lg);
   font-size: 1rem;
   line-height: 1.7;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .prose h1,
@@ -1466,11 +1468,17 @@ button {
   font-style: italic;
 }
 
-.prose ul,
-.prose ol {
+.prose ul {
   padding-left: 1.5rem;
   color: var(--clr-text-muted);
   list-style: disc;
+  margin-block: 0.8em;
+}
+
+.prose ol {
+  padding-left: 1.5rem;
+  color: var(--clr-text-muted);
+  list-style: decimal;
   margin-block: 0.8em;
 }
 
@@ -1627,6 +1635,46 @@ button {
   --alert-bg: rgba(248, 81, 73, 0.08);
 }
 
+/* ── FOOTNOTES ──────────────────────────────────────────── */
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--clr-border);
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+.footnotes hr {
+  display: none; /* Hide the default HR as we use border-top on container */
+}
+
+.footnotes ol {
+  padding-left: 1.25rem;
+}
+
+.footnotes li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.footnotes li p {
+  display: inline; /* Keep backlink on the same line */
+  margin: 0;
+}
+
+.footnote-backref {
+  margin-left: 0.5rem;
+  color: var(--clr-accent) !important;
+  text-decoration: none !important;
+  font-family: var(--font-mono);
+  transition: opacity var(--dur-fast);
+}
+
+.footnote-backref:hover {
+  opacity: 0.7;
+}
 
 /* ═════════════════════════════════════════════════════════
    RESPONSIVE
