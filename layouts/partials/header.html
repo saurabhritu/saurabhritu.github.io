@@ -60,7 +60,7 @@
       </ul>
 
       {{/* ── Mobile TOC (Visible only on mobile inside nav) ── */}}
-      {{ if .TableOfContents }}
+      {{ if and .TableOfContents (findRE "<li>" .TableOfContents) }}
       <div class="mobile-toc-wrapper">
         <p class="mobile-toc-title">On This Page</p>
         <nav class="mobile-toc">
