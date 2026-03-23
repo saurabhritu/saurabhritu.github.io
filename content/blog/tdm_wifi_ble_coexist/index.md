@@ -1,6 +1,6 @@
 ---
 title: "Time Division Multiplexing: How Your ESP32 Runs BLE and Wi-Fi on a Single Radio"
-date: 2025-03-23
+date: 2026-03-23
 draft: false
 description: "Ever wondered how your ESP32 manages to run Wi-Fi and Bluetooth at the same time? It's all about time division multiplexing (TDM)."
 image: "images/tdm_wifi_ble_coexist.svg"
