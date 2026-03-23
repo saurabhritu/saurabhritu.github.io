@@ -16,9 +16,7 @@
     <h1 class="section-title article-title">{{ .Title }}</h1>
     {{ with .Params.subtitle }}<p class="article-subtitle">{{ . }}</p>{{ end }}
     <div class="article-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
       {{ with .Params.readingTime }}
-      <span class="meta-sep" aria-hidden="true">·</span>
       <span>{{ . }} min read</span>
       {{ end }}
       {{ range .Params.tags }}

@@ -2,7 +2,7 @@
   <div class="container footer-inner">
 
     <div class="footer-brand">
-      <a href="{{ " /" | relURL }}" class="site-logo" aria-label="{{ .Site.Title }} home">
+      <a href="{{ "/" | relURL }}" class="site-logo" aria-label="{{ .Site.Title }} home">
         {{- if .Site.Params.logo }}
         <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" width="120" height="34" />
         {{- else }}
@@ -34,7 +34,7 @@
 
   <div class="footer-bottom">
     <div class="container">
-      <p class="footer-copy">© {{ now.Year }} {{ .Site.Title }}</p>
+      <p class="footer-copy">© {{ now.Year }} <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></p>
       <div class="footer-line"></div>
     </div>
   </div>

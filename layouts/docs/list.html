@@ -106,7 +106,7 @@
         </div>
         {{ end }}
         <div class="docs-list">
-          {{ range sort (sort . "Date" "asc") "Params.index" "asc" }}
+          {{ range .ByWeight }}
           <article class="docs-item reveal">
             <a href="{{ .RelPermalink }}" class="docs-item-inner">
               {{ if .Params.image }}
@@ -116,7 +116,6 @@
               {{ end }}
               <div class="docs-item-content">
                 <div class="docs-item-meta">
-                  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
