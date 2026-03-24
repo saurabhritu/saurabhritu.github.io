@@ -6,10 +6,10 @@
         {{- if .Site.Params.logo }}
         <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" width="120" height="34" />
         {{- else }}
-        <span class="logo-text">{{ .Site.Title }}</span>
+        <span class="logo-text"><span class="accent-slash">//</span> {{ .Site.Title }}</span>
         {{- end }}
       </a>
-      <p class="footer-tagline">Be Curious!</p>
+      <p class="footer-tagline">Be Curious</p>
     </div>
 
     <nav class="footer-nav" aria-label="Footer navigation">
@@ -34,7 +34,7 @@
 
   <div class="footer-bottom">
     <div class="container">
-      <p class="footer-copy">© {{ now.Year }} <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></p>
+      <p class="footer-copy">© {{ now.Year }} &nbsp; <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></p>
       <div class="footer-line"></div>
     </div>
   </div>

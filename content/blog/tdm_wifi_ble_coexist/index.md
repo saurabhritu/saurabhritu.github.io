@@ -57,7 +57,7 @@ During each slice, that protocol's requests get **higher priority** in the arbit
 The actual duration and split of these slices changes based on what Wi-Fi is doing:
 
 | Wi-Fi Status | What Happens |
-|||
+|---|---|
 | **IDLE** | Bluetooth module handles its own coexistence freely |
 | **CONNECTED** | Period starts at TBTT (Target Beacon Transmission Time), lasts >100ms |
 | **SCANNING** | Wi-Fi gets a longer slice (it needs more airtime to hop channels) |
@@ -106,7 +106,7 @@ It's like two people sharing a walkie-talkie, but with a polite protocol for who
 Let's zoom out for a second. There are really **two fundamental approaches** to multiprotocol coexistence on 2.4 GHz:
 
 | Approach | How It Works | Used By | Best For |
-|||||
+|---|---|---|---|
 | **Software TDM** | Single radio, time-sliced in firmware | ESP32, Nordic nRF, many single-chip SoCs | Cost-sensitive, space-constrained devices |
 | **Hardware PTA** | Multiple radios, coordinated via GPIO signals | Silicon Labs EFR32 + Wi-Fi combos, multi-chip gateways | High-throughput gateways and hubs |
 

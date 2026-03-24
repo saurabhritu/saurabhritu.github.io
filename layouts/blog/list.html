@@ -42,7 +42,7 @@
           {{ $postTags = printf "%s %s" $postTags (. | urlize) }}
         {{ end }}
       {{ end }}
-      <article class="post-card reveal" data-tags="{{ $postTags | title }}">
+      <a href="{{ .RelPermalink }}" class="post-card reveal" data-tags="{{ $postTags | title }}">
         <div class="post-card-inner">
           {{ if .Params.image }}
           <div class="post-card-image">
@@ -59,19 +59,19 @@
             <div class="post-meta">
               <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
             </div>
-            <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <h2 class="post-title">{{ .Title }}</h2>
             {{ if not .Params.image }}
             {{ with .Params.description }}<p class="post-excerpt">{{ . | truncate 160 }}</p>{{ else }}{{ with .Summary }}<p class="post-excerpt">{{ . | truncate 160 }}</p>{{ end }}{{ end }}
             {{ end }}
-            <a href="{{ .RelPermalink }}" class="post-read-more" aria-label="Read {{ .Title }}">
+            <div class="post-read-more" aria-label="Read {{ .Title }}">
               READ MORE
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-            </a>
+            </div>
           </div>
         </div>
-      </article>
+      </a>
       {{ end }}
     </div>
 

@@ -284,7 +284,7 @@ button {
 }
 
 .logo-text {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.2rem;
   letter-spacing: -0.01em;
@@ -298,8 +298,17 @@ button {
 
 .accent-slash {
   color: var(--clr-accent);
-  margin-right: 0.1em;
-  font-weight: 900;
+  margin-right: 3px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  /* Sans-serif slashes are more consistent */
+  display: inline-flex;
+  align-items: center;
+  transform: scaleY(0.95);
+  /* Prevent them from sticking out too tall */
+  line-height: 1;
+  position: relative;
+  /* top: -1px;  Adjust if needed for serif baselines */
 }
 
 .logo-group {
@@ -309,22 +318,21 @@ button {
 }
 
 .logo-slogan {
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   color: var(--clr-accent);
-  text-transform: uppercase;
+  text-transform: none;
   margin-top: 5px;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .footer-tagline {
-  color: #f05a30 !important;
-  font-size: 0.82rem;
+  color: var(--clr-accent) !important;
+  font-size: 0.75rem;
   font-weight: 500;
-  margin-top: -4px !important;
-  /* Negative margin to bring it extremely close */
+  margin-top: -6px !important;
   line-height: 1;
   font-family: var(--font-display);
   letter-spacing: 0.02em;
@@ -515,6 +523,7 @@ button {
 }
 
 .smooth-blink {
+  font-family: var(--font-display);
   animation: smooth-fade 3s infinite;
   display: inline-block;
   font-size: 1.75rem;
@@ -573,6 +582,7 @@ button {
 }
 
 .about-container h6 {
+  font-family: var(--font-display);
   font-size: 2.8rem !important;
   font-weight: 800;
   color: var(--clr-accent) !important;
@@ -616,6 +626,7 @@ button {
 }
 
 .about-page .prose h6 {
+  font-family: var(--font-display);
   animation: smooth-fade 3s infinite;
   font-size: 1.75rem;
   font-weight: 700;
@@ -990,6 +1001,12 @@ button {
 
 .post-card {
   background: var(--clr-bg-card);
+  display: block;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
 }
 
 .post-card-inner {
@@ -1051,13 +1068,10 @@ button {
   font-size: 1.1rem;
   line-height: 1.3;
   color: var(--clr-white);
-}
-
-.post-title a {
   transition: color var(--dur-fast);
 }
 
-.post-title a:hover {
+.post-card:hover .post-title {
   color: var(--clr-accent);
 }
 
@@ -1084,7 +1098,7 @@ button {
   transition: gap var(--dur-fast);
 }
 
-.post-read-more:hover {
+.post-card:hover .post-read-more {
   gap: 0.7rem;
 }
 
@@ -1347,6 +1361,14 @@ button {
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   color: var(--clr-text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.footer-copy .accent-slash {
+  font-size: 0.8em;
+  /* Scale down in tiny copyright area */
+  margin-right: 2px;
 }
 
 .footer-copy a {
