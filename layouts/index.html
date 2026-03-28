@@ -12,8 +12,10 @@
       <span>BE CURIOUS</span>
     </div>
     <h1 class="hero-title reveal">
-      {{ with .Site.Params.heroTitle }}{{ . }}{{ else }}Explore Your<br />Curiosity.{{ end }}
+      <span id="typing-text">Explore Your Curiosity.</span><span class="typing-cursor" aria-hidden="true">|</span>
     </h1>
+    {{ $js := resources.Get "js/typing-animation.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $js.RelPermalink }}" defer></script>
     <p class="hero-sub reveal">
       {{ with .Site.Params.heroSubtitle }}{{ . }}{{ else }}From bare-metal basics to the intelligent edge — deep dives
       into embedded systems, AIoT, and open-source engineering.{{ end }}

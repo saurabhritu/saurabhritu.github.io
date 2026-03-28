@@ -2790,3 +2790,33 @@ body .chroma .p {
   padding-right: 1rem;
   user-select: none;
 }
+/* ── TYPING ANIMATION ────────────────────────────────────── */
+.typing-container {
+  display: inline-block;
+  min-height: 1.1em; /* Prevent jumpy layout */
+  vertical-align: bottom;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.8em;
+  background-color: var(--clr-accent);
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-title br {
+  display: none; /* Let the text flow naturally or control via JS */
+}
+
+@media (min-width: 768px) {
+  .hero-title br {
+    display: inline;
+  }
+}
