@@ -1,15 +1,15 @@
 ---
-title: "Architecture Patterns in Embedded Systems"
+title: "Design Patterns in Embedded Systems"
 # date: 2026-03-19
 weight: 30
 draft: false
-description: "Architecture Patterns explained in Embedded Systems"
-tags: ["embedded system", "architecture patterns", "rtos"]
+description: "Design Patterns explained in Embedded Systems"
+tags: ["embedded system", "design patterns", "rtos"]
 readingTime: 15
 toc: true
 ---
 
-## Bulletproof Embedded Architecture: Essential Design Patterns
+## Bulletproof Embedded Design: Essential Design Patterns
 
 Writing embedded C code that works on your desk is easy. Writing code that survives `sensor glitches`, `power fluctuations`, and `memory constraints` in the real world is incredibly hard.
 
@@ -25,7 +25,7 @@ The problem is `invisible illegal states`. Nothing in your code prevents `is_fly
 
 > **Real-world analogy:** Think of a traffic light. It doesn't use three boolean flags — `is_red`, `is_yellow`, `is_green`. That would allow `is_red` and `is_green` to both be `true`, which is a disaster at an intersection. Instead, a traffic light is a `state machine` with exactly `one active state` at a time: `RED`, `GREEN`, or `YELLOW`. The transitions between them are fixed and explicit.
 
-### What is a Formal State Machine?
+### What is a Finite State Machine?
 
 A `Finite State Machine (FSM)` has three things:
 

@@ -12,11 +12,11 @@
       <span>BE CURIOUS</span>
     </div>
     <h1 class="hero-title reveal">
-      {{ with .Site.Params.heroTitle }}{{ . }}{{ else }}Learn Emerging<br />Technology.{{ end }}
+      {{ with .Site.Params.heroTitle }}{{ . }}{{ else }}Explore Your<br />Curiosity.{{ end }}
     </h1>
     <p class="hero-sub reveal">
-      {{ with .Site.Params.heroSubtitle }}{{ . }}{{ else }}Explore with confidence — deep dives into embedded systems,
-      AIoT, and open-source engineering.{{ end }}
+      {{ with .Site.Params.heroSubtitle }}{{ . }}{{ else }}From bare-metal basics to the intelligent edge — deep dives
+      into embedded systems, AIoT, and open-source engineering.{{ end }}
     </p>
     <div class="hero-cta reveal">
       <a href="/blog" class="btn btn-primary">
@@ -26,7 +26,7 @@
             stroke-linejoin="round" />
         </svg>
       </a>
-      <a href="/docs" class="btn btn-ghost">Explore Knowledge Base</a>
+      <a href="/docs" class="btn btn-ghost">Knowledge Base</a>
     </div>
   </div>
 
@@ -48,7 +48,13 @@
       {{ range .Site.Params.categories }}
       <li class="category-card reveal">
         <a href="{{ .url }}">
-          <div class="card-icon" aria-hidden="true">{{ .icon | safeHTML }}</div>
+          <div class="card-icon" aria-hidden="true">
+            {{ with resources.Get .icon }}
+              {{ .Content | safeHTML }}
+            {{ else }}
+              {{ .icon | safeHTML }}
+            {{ end }}
+          </div>
           <div class="card-body">
             <h3 class="card-title">{{ .name }}</h3>
             <p class="card-desc">{{ .description }}</p>
@@ -145,14 +151,15 @@
           {{ if .Params.image }}
           {{ $image := .Params.image }}
           {{ if not (hasPrefix $image "/") }}
-            {{ with .Resources.GetMatch $image }}
-              {{ $image = .RelPermalink }}
-            {{ end }}
+          {{ with .Resources.GetMatch $image }}
+          {{ $image = .RelPermalink }}
+          {{ end }}
           {{ end }}
           <img src="{{ $image }}" alt="{{ .Title }}" class="showcase-image" loading="lazy">
           {{ else }}
           <div class="showcase-text-fallback">
-            {{ with .Params.description }}<p>{{ . | truncate 120 }}</p>{{ else }}{{ with .Summary }}<p>{{ . | truncate 120 }}</p>{{ end }}{{ end }}
+            {{ with .Params.description }}<p>{{ . | truncate 120 }}</p>{{ else }}{{ with .Summary }}<p>{{ . | truncate
+              120 }}</p>{{ end }}{{ end }}
           </div>
           {{ end }}
         </div>
@@ -169,7 +176,7 @@
   <div class="container contact-strip-inner">
     <div class="contact-text">
       <p class="section-label">CONTACT</p>
-      <h2 class="section-title">Get in Touch</h2>
+      <h2 class="section-title">Say Hello!</h2>
     </div>
     <div class="contact-links">
       {{ with .Site.Params.email }}

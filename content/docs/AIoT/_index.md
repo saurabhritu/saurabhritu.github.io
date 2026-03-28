@@ -1,6 +1,5 @@
 ---
 title: "AIoT"
 description: "Artificial Intelligence meets the Internet of Things. Edge inference, sensor fusion, and connected embedded devices."
-icon: |
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="26" width="28" height="8" rx="1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 26v-6a6 6 0 0 1 12 0v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="13" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 30h4M26 30h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+icon: "icons/aiot.svg"
 ---

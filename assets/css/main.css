@@ -273,8 +273,20 @@ button {
 .header-inner {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
   justify-content: space-between;
+  width: 100%;
+}
+
+.header-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 769px) {
+  .header-nav-group {
+    gap: 1.25rem;
+  }
 }
 
 /* Logo */
@@ -462,12 +474,6 @@ button {
 }
 
 /* Theme Toggle */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
 .theme-toggle {
   display: flex;
   align-items: center;
