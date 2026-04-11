@@ -1,0 +1,379 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" style="background:#080b0f; font-family:'Courier New',monospace;">
+  <defs>
+    <!-- Background grid -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0d1520" stroke-width="0.8"/>
+    </pattern>
+
+    <!-- Glow filters -->
+    <filter id="glow-cyan" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-green" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-red" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="text-glow" x="-10%" y="-40%" width="120%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Clip path for content area -->
+    <clipPath id="main-clip">
+      <rect width="1200" height="630"/>
+    </clipPath>
+
+    <!-- Noise texture -->
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </defs>
+
+  <g clip-path="url(#main-clip)">
+
+  <!-- ═══ BACKGROUND ═══ -->
+  <rect width="1200" height="630" fill="#080b0f"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Ambient glow blobs -->
+  <ellipse cx="200" cy="315" rx="280" ry="200" fill="#00e5ff" opacity="0.028" filter="url(#glow-soft)"/>
+  <ellipse cx="950" cy="200" rx="220" ry="160" fill="#b8ff57" opacity="0.022" filter="url(#glow-soft)"/>
+  <ellipse cx="700" cy="480" rx="180" ry="130" fill="#ff4d6d" opacity="0.02" filter="url(#glow-soft)"/>
+
+  <!-- ═══ LEFT PANEL — PRNG COLUMN (PREDICTABLE / BAD) ═══ -->
+  <!-- Label -->
+  <text x="68" y="58" font-size="9" fill="#ff4d6d" letter-spacing="3" font-family="'Courier New',monospace" opacity="0.9">PRNG · PREDICTABLE</text>
+  <line x1="68" y1="64" x2="240" y2="64" stroke="#ff4d6d" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Bit stream — deterministic repeating pattern -->
+  <!-- Row 1 — fixed LCG sequence, always same -->
+  <text x="68" y="92" font-size="11" fill="#ff4d6d" opacity="0.5" font-family="'Courier New',monospace">1 0 1 1 0 1 0 0</text>
+  <text x="68" y="108" font-size="11" fill="#ff4d6d" opacity="0.5" font-family="'Courier New',monospace">0 0 1 1 0 1 0 0</text>
+  <text x="68" y="124" font-size="11" fill="#ff4d6d" opacity="0.5" font-family="'Courier New',monospace">1 1 0 0 1 0 1 1</text>
+  <text x="68" y="140" font-size="11" fill="#ff4d6d" opacity="0.5" font-family="'Courier New',monospace">1 0 1 1 0 1 0 0</text>
+  <text x="68" y="156" font-size="11" fill="#ff4d6d" opacity="0.5" font-family="'Courier New',monospace">0 0 1 1 0 1 0 0</text>
+
+  <!-- Pulse overlay showing repeating — blink the repeated rows -->
+  <rect x="66" y="79" width="178" height="15" fill="#ff4d6d" opacity="0" rx="1">
+    <animate attributeName="opacity" values="0;0.08;0;0.08;0" keyTimes="0;0.1;0.5;0.6;1" dur="3s" repeatCount="indefinite" begin="0s"/>
+  </rect>
+  <rect x="66" y="127" width="178" height="15" fill="#ff4d6d" opacity="0" rx="1">
+    <animate attributeName="opacity" values="0;0.08;0;0.08;0" keyTimes="0;0.1;0.5;0.6;1" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+  </rect>
+
+  <!-- "SEED" label with blinking arrow -->
+  <text x="68" y="188" font-size="9" fill="#ff4d6d" opacity="0.6" letter-spacing="1">SEED: 0x04D2</text>
+  <text x="68" y="202" font-size="9" fill="#ff4d6d" opacity="0.4" letter-spacing="1">= millis() at boot</text>
+
+  <!-- Brace / repeat indicator -->
+  <line x1="56" y1="82" x2="56" y2="158" stroke="#ff4d6d" stroke-width="1" opacity="0.4"/>
+  <line x1="56" y1="82" x2="62" y2="82" stroke="#ff4d6d" stroke-width="1" opacity="0.4"/>
+  <line x1="56" y1="120" x2="62" y2="120" stroke="#ff4d6d" stroke-width="1" opacity="0.4"/>
+  <line x1="56" y1="158" x2="62" y2="158" stroke="#ff4d6d" stroke-width="1" opacity="0.4"/>
+  <text x="30" y="124" font-size="9" fill="#ff4d6d" opacity="0.5" transform="rotate(-90,30,124)" letter-spacing="2">REPEAT</text>
+
+  <!-- ═══ CENTER CHIP — ESP32 DIE ═══ -->
+  <!-- Outer package -->
+  <rect x="430" y="195" width="340" height="240" rx="8" fill="#0d1520" stroke="#1a2535" stroke-width="1.5"/>
+
+  <!-- Die surface -->
+  <rect x="450" y="212" width="300" height="206" rx="4" fill="#0f1a28" stroke="#1f2f44" stroke-width="1"/>
+
+  <!-- Die grid lines — silicon texture -->
+  <line x1="450" y1="248" x2="750" y2="248" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="450" y1="284" x2="750" y2="284" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="450" y1="320" x2="750" y2="320" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="450" y1="356" x2="750" y2="356" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="510" y1="212" x2="510" y2="418" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="570" y1="212" x2="570" y2="418" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="630" y1="212" x2="630" y2="418" stroke="#1a2838" stroke-width="0.5"/>
+  <line x1="690" y1="212" x2="690" y2="418" stroke="#1a2838" stroke-width="0.5"/>
+
+  <!-- CPU core block -->
+  <rect x="520" y="238" width="80" height="60" rx="3" fill="#0a1520" stroke="#243550" stroke-width="1"/>
+  <text x="560" y="263" font-size="8" fill="#3a5070" text-anchor="middle" letter-spacing="1">CPU</text>
+  <text x="560" y="275" font-size="7" fill="#2a4060" text-anchor="middle">CORE 0/1</text>
+  <!-- CPU activity pulse -->
+  <rect x="524" y="242" width="72" height="52" rx="2" fill="#00e5ff" opacity="0">
+    <animate attributeName="opacity" values="0;0.04;0;0.06;0" keyTimes="0;0.15;0.4;0.55;1" dur="1.8s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- TRNG block — highlighted -->
+  <rect x="618" y="238" width="80" height="60" rx="3" fill="#071520" stroke="#00e5ff" stroke-width="1.2">
+    <animate attributeName="stroke-opacity" values="0.6;1;0.6" keyTimes="0;0.5;1" dur="2.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="658" y="261" font-size="8" fill="#00bcd4" text-anchor="middle" letter-spacing="1">TRNG</text>
+  <text x="658" y="273" font-size="7" fill="#007890" text-anchor="middle">HW ENTROPY</text>
+  <!-- TRNG pulse glow -->
+  <rect x="618" y="238" width="80" height="60" rx="3" fill="#00e5ff" opacity="0">
+    <animate attributeName="opacity" values="0;0.08;0" keyTimes="0;0.5;1" dur="2.4s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- RF block -->
+  <rect x="520" y="318" width="80" height="50" rx="3" fill="#0a1520" stroke="#1a3030" stroke-width="1"/>
+  <text x="560" y="340" font-size="8" fill="#2a5050" text-anchor="middle" letter-spacing="1">RF 2.4GHz</text>
+  <text x="560" y="352" font-size="7" fill="#1a4040" text-anchor="middle">NOISE SRC</text>
+
+  <!-- Flash block -->
+  <rect x="618" y="318" width="80" height="50" rx="3" fill="#0a1520" stroke="#1a3020" stroke-width="1"/>
+  <text x="658" y="340" font-size="8" fill="#2a5030" text-anchor="middle" letter-spacing="1">FLASH</text>
+  <text x="658" y="352" font-size="7" fill="#1a4020" text-anchor="middle">OTA PARTS</text>
+
+  <!-- mbedTLS block -->
+  <rect x="466" y="318" width="48" height="50" rx="3" fill="#0a1520" stroke="#1a2535" stroke-width="0.8"/>
+  <text x="490" y="340" font-size="7" fill="#2a4060" text-anchor="middle">mbedTLS</text>
+  <text x="490" y="352" font-size="6" fill="#1a3050" text-anchor="middle">CTR-DRBG</text>
+
+  <!-- NVS block -->
+  <rect x="706" y="318" width="40" height="50" rx="3" fill="#0a1520" stroke="#1a2535" stroke-width="0.8"/>
+  <text x="726" y="340" font-size="7" fill="#2a4060" text-anchor="middle">NVS</text>
+  <text x="726" y="352" font-size="6" fill="#1a3050" text-anchor="middle">CERTS</text>
+
+  <!-- Bottom label area -->
+  <rect x="450" y="378" width="300" height="36" rx="2" fill="#08121e"/>
+  <text x="600" y="392" font-size="7" fill="#1a3050" text-anchor="middle" letter-spacing="2">ESP32 · XTENSA LX6 · DUAL CORE</text>
+  <text x="600" y="408" font-size="7" fill="#00e5ff" text-anchor="middle" letter-spacing="1" opacity="0.5">esp_fill_random() → HARDWARE TRNG</text>
+
+  <!-- Chip label -->
+  <text x="600" y="184" font-size="10" fill="#1e3a5a" text-anchor="middle" letter-spacing="4">SoC INTERNALS</text>
+
+  <!-- Pin pads — left side -->
+  <rect x="420" y="220" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="234" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="248" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="262" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="276" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="290" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="304" width="10" height="5" rx="1" fill="#00e5ff" opacity="0.6"/>
+  <rect x="420" y="318" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="332" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="346" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="360" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="420" y="374" width="10" height="5" rx="1" fill="#1a2838"/>
+  <!-- Pin pads — right side -->
+  <rect x="770" y="220" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="234" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="248" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="262" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="276" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="290" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="304" width="10" height="5" rx="1" fill="#b8ff57" opacity="0.5"/>
+  <rect x="770" y="318" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="332" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="346" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="360" width="10" height="5" rx="1" fill="#1a2838"/>
+  <rect x="770" y="374" width="10" height="5" rx="1" fill="#1a2838"/>
+
+  <!-- ═══ ENTROPY SOURCES — LEFT TRACES TO TRNG ═══ -->
+  <!-- Ring oscillator jitter trace -->
+  <polyline points="310,270 380,270 380,268 430,268" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.3"/>
+  <!-- Travelling dot on trace -->
+  <circle r="2.5" fill="#00e5ff" opacity="0" filter="url(#glow-cyan)">
+    <animate attributeName="cx" values="310;430" dur="2s" repeatCount="indefinite" begin="0s"/>
+    <animate attributeName="cy" values="270;268" dur="2s" repeatCount="indefinite" begin="0s"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="0s"/>
+  </circle>
+
+  <!-- RF noise trace -->
+  <polyline points="310,320 380,320 380,307 430,307" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.3"/>
+  <circle r="2.5" fill="#00e5ff" opacity="0" filter="url(#glow-cyan)">
+    <animate attributeName="cx" values="310;430" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+    <animate attributeName="cy" values="320;307" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+  </circle>
+
+  <!-- Thermal noise trace -->
+  <polyline points="310,380 380,380 380,345 430,345" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.2"/>
+  <circle r="2" fill="#00e5ff" opacity="0" filter="url(#glow-cyan)">
+    <animate attributeName="cx" values="310;430" dur="2s" repeatCount="indefinite" begin="1.3s"/>
+    <animate attributeName="cy" values="380;345" dur="2s" repeatCount="indefinite" begin="1.3s"/>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="1.3s"/>
+  </circle>
+
+  <!-- ═══ ENTROPY SOURCE LABELS — LEFT ═══ -->
+  <text x="295" y="232" font-size="9" fill="#00e5ff" opacity="0.7" text-anchor="end" letter-spacing="1">RING OSC</text>
+  <text x="295" y="244" font-size="8" fill="#00687a" opacity="0.7" text-anchor="end">JITTER</text>
+  <!-- Oscillator wiggly line -->
+  <polyline points="220,238 230,230 240,246 250,230 260,246 270,238 280,238" fill="none" stroke="#00e5ff" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="220" cy="238" r="2" fill="#00e5ff" opacity="0.4"/>
+  <circle cx="280" cy="238" r="2" fill="#00e5ff" opacity="0.4"/>
+
+  <text x="295" y="274" font-size="9" fill="#00e5ff" opacity="0.7" text-anchor="end" letter-spacing="1">THERMAL</text>
+  <text x="295" y="286" font-size="8" fill="#00687a" opacity="0.7" text-anchor="end">NOISE</text>
+  <!-- Thermal noise squiggle -->
+  <polyline points="220,278 224,272 228,284 232,270 236,282 240,274 244,280 248,272 252,282 256,274 260,280 264,278 270,278 280,278" fill="none" stroke="#00e5ff" stroke-width="1.2" opacity="0.4" stroke-linejoin="round"/>
+
+  <text x="295" y="322" font-size="9" fill="#00e5ff" opacity="0.7" text-anchor="end" letter-spacing="1">RF NOISE</text>
+  <text x="295" y="334" font-size="8" fill="#00687a" opacity="0.7" text-anchor="end">2.4 GHz</text>
+  <!-- RF waves -->
+  <path d="M230,328 Q240,318 250,328 Q260,338 270,328" fill="none" stroke="#00e5ff" stroke-width="1.2" opacity="0.5"/>
+  <path d="M222,328 Q236,312 250,328 Q264,344 278,328" fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.3"/>
+
+  <text x="295" y="382" font-size="9" fill="#00e5ff" opacity="0.5" text-anchor="end" letter-spacing="1">ADC LSB</text>
+  <text x="295" y="394" font-size="8" fill="#00687a" opacity="0.5" text-anchor="end">SHOT NOISE</text>
+
+  <!-- Entropy label -->
+  <text x="155" y="168" font-size="9" fill="#00e5ff" text-anchor="middle" opacity="0.6" letter-spacing="3">ENTROPY SOURCES</text>
+  <line x1="68" y1="174" x2="242" y2="174" stroke="#00e5ff" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- ═══ RIGHT — CRYPTO PIPELINE OUTPUT ═══ -->
+  <!-- Trace from TRNG out through right pin -->
+  <line x1="780" y1="307" x2="850" y2="307" stroke="#b8ff57" stroke-width="1" opacity="0.3"/>
+  <!-- Dot travelling right from TRNG output -->
+  <circle r="2.5" fill="#b8ff57" opacity="0" filter="url(#glow-green)">
+    <animate attributeName="cx" values="780;1130" dur="3.5s" repeatCount="indefinite" begin="0.2s"/>
+    <animate attributeName="cy" values="307;307" dur="3.5s" repeatCount="indefinite" begin="0.2s"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.9;1" dur="3.5s" repeatCount="indefinite" begin="0.2s"/>
+  </circle>
+
+  <!-- Pipeline nodes -->
+  <!-- Node 1: CTR-DRBG -->
+  <rect x="850" y="240" width="90" height="46" rx="3" fill="#0a1a10" stroke="#2a5030" stroke-width="1"/>
+  <text x="895" y="259" font-size="8" fill="#4a8050" text-anchor="middle" letter-spacing="1">CTR-DRBG</text>
+  <text x="895" y="271" font-size="7" fill="#2a5030" text-anchor="middle">mbedTLS</text>
+  <rect x="850" y="240" width="90" height="46" rx="3" fill="#b8ff57" opacity="0">
+    <animate attributeName="opacity" values="0;0.04;0" dur="2.8s" repeatCount="indefinite" begin="0.5s"/>
+  </rect>
+  <!-- Vertical connector -->
+  <line x1="895" y1="286" x2="895" y2="310" stroke="#b8ff57" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Node 2: TLS Handshake -->
+  <rect x="850" y="310" width="90" height="46" rx="3" fill="#0a1a10" stroke="#2a5030" stroke-width="1"/>
+  <text x="895" y="330" font-size="8" fill="#4a8050" text-anchor="middle" letter-spacing="1">TLS 1.3</text>
+  <text x="895" y="342" font-size="7" fill="#2a5030" text-anchor="middle">HANDSHAKE</text>
+  <!-- Connector -->
+  <line x1="895" y1="356" x2="895" y2="380" stroke="#b8ff57" stroke-width="0.8" opacity="0.3"/>
+  <!-- Dot vertical -->
+  <circle r="2" fill="#b8ff57" opacity="0" filter="url(#glow-green)">
+    <animate attributeName="cx" values="895;895" dur="1.2s" repeatCount="indefinite" begin="1.4s"/>
+    <animate attributeName="cy" values="286;356" dur="1.2s" repeatCount="indefinite" begin="1.4s"/>
+    <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite" begin="1.4s"/>
+  </circle>
+
+  <!-- Node 3: SHA-256 + Sig -->
+  <rect x="850" y="380" width="90" height="46" rx="3" fill="#0a1a10" stroke="#2a5030" stroke-width="1"/>
+  <text x="895" y="399" font-size="8" fill="#4a8050" text-anchor="middle" letter-spacing="1">SHA-256</text>
+  <text x="895" y="411" font-size="7" fill="#2a5030" text-anchor="middle">+ RSA SIG</text>
+  <circle r="2" fill="#b8ff57" opacity="0" filter="url(#glow-green)">
+    <animate attributeName="cx" values="895;895" dur="1.2s" repeatCount="indefinite" begin="2.8s"/>
+    <animate attributeName="cy" values="356;426" dur="1.2s" repeatCount="indefinite" begin="2.8s"/>
+    <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite" begin="2.8s"/>
+  </circle>
+
+  <!-- Right label -->
+  <text x="895" y="224" font-size="9" fill="#b8ff57" text-anchor="middle" opacity="0.7" letter-spacing="3">CRYPTO PIPELINE</text>
+  <line x1="850" y1="230" x2="940" y2="230" stroke="#b8ff57" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- ═══ TRNG→PIPELINE CONNECTING LABEL ═══ -->
+  <text x="815" y="295" font-size="8" fill="#b8ff57" text-anchor="middle" opacity="0.5">ENTROPY</text>
+  <text x="815" y="306" font-size="8" fill="#b8ff57" text-anchor="middle" opacity="0.5">OUT →</text>
+
+  <!-- ═══ TITLE BLOCK ═══ -->
+  <rect x="340" y="490" width="520" height="112" rx="4" fill="#080c12" opacity="0.9"/>
+  <line x1="340" y1="490" x2="860" y2="490" stroke="#00e5ff" stroke-width="1" opacity="0.3"/>
+  <line x1="340" y1="602" x2="860" y2="602" stroke="#00e5ff" stroke-width="1" opacity="0.15"/>
+
+  <!-- ═══ BINARY RAIN — BACKGROUND AMBIENCE ═══ -->
+  <!-- Column 1 -->
+  <text x="18" y="300" font-size="9" fill="#0a2030" font-family="'Courier New',monospace" opacity="0.8">1</text>
+  <text x="18" y="312" font-size="9" fill="#0a2030" font-family="'Courier New',monospace" opacity="0.6">0</text>
+  <text x="18" y="324" font-size="9" fill="#0a2030" font-family="'Courier New',monospace" opacity="0.5">1</text>
+  <text x="18" y="336" font-size="9" fill="#0a2030" font-family="'Courier New',monospace" opacity="0.4">1</text>
+  <text x="18" y="348" font-size="9" fill="#0a2030" font-family="'Courier New',monospace" opacity="0.3">0</text>
+
+  <!-- Column 2 — blink stagger -->
+  <text x="34" y="280" font-size="9" fill="#0a1a28" font-family="'Courier New',monospace">0</text>
+  <text x="34" y="292" font-size="9" fill="#0a1a28" font-family="'Courier New',monospace">1</text>
+  <text x="34" y="304" font-size="9" fill="#0a1a28" font-family="'Courier New',monospace">0</text>
+  <text x="34" y="316" font-size="9" fill="#0a1a28" font-family="'Courier New',monospace">0</text>
+
+  <!-- Far right binary columns -->
+  <text x="1030" y="460" font-size="9" fill="#0a2010" font-family="'Courier New',monospace">0</text>
+  <text x="1030" y="472" font-size="9" fill="#0a2010" font-family="'Courier New',monospace">1</text>
+  <text x="1030" y="484" font-size="9" fill="#0a2010" font-family="'Courier New',monospace">1</text>
+  <text x="1046" y="454" font-size="9" fill="#081808" font-family="'Courier New',monospace">1</text>
+  <text x="1046" y="466" font-size="9" fill="#081808" font-family="'Courier New',monospace">0</text>
+  <text x="1046" y="478" font-size="9" fill="#081808" font-family="'Courier New',monospace">0</text>
+  <text x="1062" y="460" font-size="9" fill="#0a2010" font-family="'Courier New',monospace">1</text>
+  <text x="1062" y="472" font-size="9" fill="#0a2010" font-family="'Courier New',monospace">0</text>
+
+  <!-- ═══ TRNG BIT STREAM — RIGHT COLUMN (TRUE RANDOM) ═══ -->
+  <text x="960" y="58" font-size="9" fill="#b8ff57" letter-spacing="3" font-family="'Courier New',monospace" opacity="0.9">TRNG · UNPREDICTABLE</text>
+  <line x1="960" y1="64" x2="1140" y2="64" stroke="#b8ff57" stroke-width="0.5" opacity="0.35"/>
+
+  <!-- Truly random bit rows — all different, each "revealed" by pulse -->
+  <text x="960" y="92" font-size="11" fill="#b8ff57" opacity="0.5" font-family="'Courier New',monospace">A4 F9 2C 01</text>
+  <text x="960" y="108" font-size="11" fill="#b8ff57" opacity="0.5" font-family="'Courier New',monospace">7E 3B D1 88</text>
+  <text x="960" y="124" font-size="11" fill="#b8ff57" opacity="0.5" font-family="'Courier New',monospace">C0 55 F2 4A</text>
+  <text x="960" y="140" font-size="11" fill="#b8ff57" opacity="0.5" font-family="'Courier New',monospace">19 AB 0D 67</text>
+  <text x="960" y="156" font-size="11" fill="#b8ff57" opacity="0.5" font-family="'Courier New',monospace">83 7C E4 B2</text>
+
+  <!-- Random scan reveal overlay -->
+  <rect x="958" y="82" width="195" height="82" fill="none" stroke="#b8ff57" stroke-width="0.5" rx="2" opacity="0.2"/>
+
+  <!-- Scan line moving through TRNG output -->
+  <rect x="958" y="82" width="195" height="3" fill="#b8ff57" opacity="0">
+    <animate attributeName="y" values="82;162;82" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.15;0.25;0.15" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- TRNG legitimacy badge -->
+  <text x="960" y="188" font-size="9" fill="#b8ff57" opacity="0.6" letter-spacing="1">SOURCE: esp_fill_random()</text>
+  <text x="960" y="202" font-size="9" fill="#5a9040" opacity="0.5" letter-spacing="1">HW REGISTER 0x3FF75144</text>
+
+  <!-- ═══ COMPARISON DIVIDER ═══ -->
+  <!-- Central vertical spine faint line -->
+  <line x1="600" y1="70" x2="600" y2="170" stroke="#1a2838" stroke-width="0.8" stroke-dasharray="4,4" opacity="0.4"/>
+  <text x="600" y="140" font-size="24" fill="#1a2838" text-anchor="middle" opacity="0.5">⟺</text>
+
+  <!-- Bad/Good labels -->
+  <text x="335" y="140" font-size="9" fill="#ff4d6d" text-anchor="middle" letter-spacing="2" opacity="0.6">PREDICTABLE</text>
+  <text x="870" y="140" font-size="9" fill="#b8ff57" text-anchor="middle" letter-spacing="2" opacity="0.6">UNPREDICTABLE</text>
+
+  <!-- ═══ CORNER DECORATIONS ═══ -->
+  <!-- Top-left bracket -->
+  <path d="M20,16 L20,20 L8,20" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <path d="M8,16 L20,16" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <!-- Top-right bracket -->
+  <path d="M1180,16 L1180,20 L1192,20" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <path d="M1192,16 L1180,16" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <!-- Bottom-left bracket -->
+  <path d="M20,614 L20,610 L8,610" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <path d="M8,614 L20,614" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <!-- Bottom-right bracket -->
+  <path d="M1180,614 L1180,610 L1192,610" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+  <path d="M1192,614 L1180,614" fill="none" stroke="#1a3050" stroke-width="1.2"/>
+
+  <!-- Site label -->
+  <text x="600" y="622" font-size="8" fill="#1a2838" text-anchor="middle" letter-spacing="4">STACKSR.COM · RNG TRNG IN EMBEDDED SYSTEMS</text>
+
+  <!-- ═══ TRNG BLOCK BLINKING PIN INDICATOR ═══ -->
+  <!-- blinking dot on TRNG block -->
+  <circle cx="698" cy="253" r="3" fill="#00e5ff" filter="url(#glow-cyan)">
+    <animate attributeName="r" values="2;4;2" keyTimes="0;0.5;1" dur="1.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;1;0.6" keyTimes="0;0.5;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ═══ OSCILLATOR WAVEFORM ANIMATION — ABOVE CHIP ═══ -->
+  <!-- Two overlapping oscillators showing jitter -->
+  <text x="510" y="178" font-size="8" fill="#00687a" letter-spacing="2" opacity="0.7">OSC_A</text>
+  <polyline points="530,172 538,162 546,182 554,162 562,182 570,172" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+
+  <text x="610" y="178" font-size="8" fill="#006070" letter-spacing="2" opacity="0.5">OSC_B</text>
+  <polyline points="630,172 638,164 646,180 654,164 662,180 670,172" fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.25"/>
+
+  <text x="680" y="178" font-size="8" fill="#003a48" letter-spacing="2" opacity="0.4">⊕ JITTER</text>
+
+  </g>
+</svg>

@@ -10,7 +10,7 @@ readingTime: 15
 ---
 
 
-Ever wondered how your ESP32 manages to run Wi-Fi *and* Bluetooth *at the same time* — with just one radio? There's no magic. No second antenna hiding under the hood. It's all about **time division multiplexing (TDM)** — a surprisingly elegant trick where the chip takes turns, really fast, between protocols.
+Ever wondered how your ESP32 manages to run Wi-Fi *and* Bluetooth *at the same time*, with just one radio? There's no magic. No second antenna hiding under the hood. It's all about **time division multiplexing (TDM)**, a surprisingly elegant trick where the chip takes turns, really fast, between protocols.
 
 Let's break this down.
 
@@ -18,9 +18,9 @@ Let's break this down.
 
 ## The Problem: One Radio, Many Mouths to Feed
 
-Here's the thing — the ESP32 (and many other IoT SoCs) has a **single 2.4 GHz RF module**. That's it. One radio for Wi-Fi, one for classic Bluetooth, one for BLE. Except... it's all the same one.
+Here's the thing: the ESP32 (and many other IoT SoCs) has a **single 2.4 GHz RF module**. That's it. One radio for Wi-Fi, one for classic Bluetooth, one for BLE. Except... it's all the same one.
 
-Wi-Fi, BLE, Zigbee, Thread — they all live in the **2.4 GHz ISM band**. When you tell your ESP32 to scan for Wi-Fi networks *and* advertise over BLE at the same time, you're essentially asking one mouth to eat two meals simultaneously.
+Wi-Fi, BLE, Zigbee, Thread, they all live in the **2.4 GHz ISM band**. When you tell your ESP32 to scan for Wi-Fi networks *and* advertise over BLE at the same time, you're essentially asking one mouth to eat two meals simultaneously.
 
 It can't. So it **takes turns**.
 
@@ -36,7 +36,7 @@ Espressif's documentation[^1] spells it out clearly:
 
 ### The Coexistence Arbiter
 
-At the core of this is a **coexistence arbitration module**. Think of it like a traffic cop at a busy intersection. Both Wi-Fi and Bluetooth constantly raise their hands saying *"I need the radio!"* — and the arbiter decides who gets it based on **priority**.
+At the core of this is a **coexistence arbitration module**. Think of it like a traffic cop at a busy intersection. Both Wi-Fi and Bluetooth constantly raise their hands saying *"I need the radio!"*, and the arbiter decides who gets it based on **priority**.
 
 ![RF Coexistence Arbitration](images/coex-arbiter.png)
 
@@ -46,9 +46,9 @@ The arbiter doesn't just flip a coin. It uses a **priority-based scheduling syst
 
 A **coexistence period** gets divided into three time slices, always in this order:
 
-1. **Wi-Fi slice** — Wi-Fi gets highest priority here
-2. **BT slice** — Classic Bluetooth takes over
-3. **BLE slice** — BLE gets its turn
+1. **Wi-Fi slice**: Wi-Fi gets highest priority here
+2. **BT slice**: Classic Bluetooth takes over
+3. **BLE slice**: BLE gets its turn
 
 ![TDM Time Slices](images/tdm-time-slices.png)
 
@@ -63,23 +63,23 @@ The actual duration and split of these slices changes based on what Wi-Fi is doi
 | **SCANNING** | Wi-Fi gets a longer slice (it needs more airtime to hop channels) |
 | **CONNECTING** | Wi-Fi slice expands to ensure the handshake completes |
 
-When both Wi-Fi and BLE are in **CONNECTED** state, the period gets split **50/50** between them — fair and square:
+When both Wi-Fi and BLE are in **CONNECTED** state, the period gets split **50/50** between them, fair and square:
 
 ![Wi-Fi + BLE 50/50 Split](images/wifi-ble-5050.png)
 
-### Dynamic Priority — The Plot Twist
+### Dynamic Priority: The Plot Twist
 
 Here's where it gets interesting. Priorities aren't fixed. They're **dynamic**.
 
 Take BLE advertising as an example. Out of every N advertising events, one is flagged as **high priority**. If that high-priority event happens to land inside the Wi-Fi time slice? BLE can **preempt** Wi-Fi and grab the radio.
 
-This is crucial for BLE reliability. You can't just starve Bluetooth of airtime because Wi-Fi is busy downloading a firmware update. The system needs to be smarter than that — and it is.
+This is crucial for BLE reliability. You can't just starve Bluetooth of airtime because Wi-Fi is busy downloading a firmware update. The system needs to be smarter than that, and it is.
 
 
 
 ## Beyond ESP32: How Silicon Labs Handles It
 
-Now, Espressif's approach is a **software-based** TDM solution — one chip, one radio, time-slicing in firmware. But what happens when you have **multiple physical radios** in the same device? Like an IoT gateway with separate Wi-Fi, Zigbee, and BLE chips all crammed into a small PCB?
+Now, Espressif's approach is a **software-based** TDM solution: one chip, one radio, time-slicing in firmware. But what happens when you have **multiple physical radios** in the same device? Like an IoT gateway with separate Wi-Fi, Zigbee, and BLE chips all crammed into a small PCB?
 
 This is where Silicon Labs' approach[^2] comes in, and it's a different beast.
 
@@ -93,9 +93,9 @@ The idea: the EFR32 (Silicon Labs' Zigbee/Thread/BLE SoC) physically signals the
 
 This works over **1, 2, or 3 wire connections** between the chips:
 
-- **REQUEST** — *"Hey Wi-Fi, I need to send something"*
-- **GRANT** — *"Go ahead, I'll wait"*
-- **PRIORITY** — *"This is urgent, give me the channel NOW"*
+- **REQUEST**: *"Hey Wi-Fi, I need to send something"*
+- **GRANT**: *"Go ahead, I'll wait"*
+- **PRIORITY**: *"This is urgent, give me the channel NOW"*
 
 It's like two people sharing a walkie-talkie, but with a polite protocol for who talks when. Implemented at the **MAC layer**, it's been tested with major Wi-Fi chip vendors and works across Zigbee, Thread, and Bluetooth.
 
@@ -130,7 +130,7 @@ It's not on by default. In `menuconfig`:
 Component config → Wi-Fi → Software controls WiFi/Bluetooth coexistence
 ```
 
-Set `CONFIG_ESP_COEX_SW_COEXIST_ENABLE` to **enabled**. Without this, you're flying blind — the radio will be a free-for-all.
+Set `CONFIG_ESP_COEX_SW_COEXIST_ENABLE` to **enabled**. Without this, you're flying blind, as the radio will be a free-for-all.
 
 ### 2. Pin Tasks to Different Cores
 
@@ -160,7 +160,7 @@ This lets BLE re-acquire RF resources within the same scan window after Wi-Fi st
 
 Espressif's docs have a subtle but important warning: if you customize Wi-Fi connectionless power-save parameters (Window and Interval), it can cause Wi-Fi to request RF access **outside its normal time slice**. This wrecks Bluetooth performance.
 
-Unless you've done extensive coexistence testing with custom parameters — **stick to the defaults**.
+Unless you've done extensive coexistence testing with custom parameters, **stick to the defaults**.
 
 
 
@@ -168,13 +168,13 @@ Unless you've done extensive coexistence testing with custom parameters — **st
 
 Let's be real. Coexistence isn't perfect. Here's what you might hit:
 
-- **BLE connection drops during heavy Wi-Fi traffic** — the BLE connection supervision timeout fires because BLE couldn't get enough airtime. Increase the supervision timeout or reduce Wi-Fi throughput during critical BLE operations.
+- **BLE connection drops during heavy Wi-Fi traffic**: the BLE connection supervision timeout fires because BLE couldn't get enough airtime. Increase the supervision timeout or reduce Wi-Fi throughput during critical BLE operations.
 
-- **Wi-Fi throughput tanks when BLE is active** — you're splitting a 100ms window. If BLE has a lot to say (mesh networking, for example), Wi-Fi gets less time. That's physics, not a bug.
+- **Wi-Fi throughput tanks when BLE is active**: you're splitting a 100ms window. If BLE has a lot to say (mesh networking, for example), Wi-Fi gets less time. That's physics, not a bug.
 
-- **SoftAP mode + BLE has unstable performance** — Espressif marks this as "C1" (supported but unstable) in their compatibility matrix. If you need rock-solid SoftAP + BLE, test thoroughly.
+- **SoftAP mode + BLE has unstable performance**: Espressif marks this as "C1" (supported but unstable) in their compatibility matrix. If you need rock-solid SoftAP + BLE, test thoroughly.
 
-- **Sniffer mode and BLE don't mix well** — also C1. The sniffer needs uninterrupted RF access to capture packets, which conflicts with BLE's time slices.
+- **Sniffer mode and BLE don't mix well**: also C1. The sniffer needs uninterrupted RF access to capture packets, which conflicts with BLE's time slices.
 
 
 
@@ -186,11 +186,11 @@ The devices that win aren't the ones with the most radios. They're the ones with
 
 Because at the end of the day, nobody cares about your time-division multiplexing implementation. They just want their lightbulb to respond when they tap the app.
 
-And that's the mark of good engineering — **when the hard stuff is invisible**.
+And that's the mark of good engineering: **when the hard stuff is invisible**.
 
 ## References
 
-[^1]: Espressif Systems, "RF Coexistence — ESP-IDF Programming Guide v5.1.1," [https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-guides/coexist.html](https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-guides/coexist.html)
+[^1]: Espressif Systems, "RF Coexistence: ESP-IDF Programming Guide v5.1.1," [https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-guides/coexist.html](https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-guides/coexist.html)
 
 [^2]: Silicon Labs, "Wi-Fi Coexistence Learning Center," [https://www.silabs.com/wireless/wi-fi/wi-fi-coexistence](https://www.silabs.com/wireless/wi-fi/wi-fi-coexistence)
 
