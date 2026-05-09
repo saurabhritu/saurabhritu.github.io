@@ -42,8 +42,8 @@
         50% { transform: translateY(-10px); opacity: 0.8; }
       }
       @keyframes pulse {
-        0%, 100% { r: 6; opacity: 0.3; }
-        50% { r: 16; opacity: 0.7; }
+        0%, 100% { r: 4; opacity: 0.3; }
+        50% { r: 12; opacity: 0.7; }
       }
       @keyframes slot {
         0% { transform: translateX(0); }
@@ -63,16 +63,16 @@
   <g class="wave">
     <path class="ink fine soft" d="M200 250 q 200 -100 400 0 t 400 0 t 400 0" />
     <path class="ink hair soft" d="M200 280 q 200 -80 400 0 t 400 0 t 400 0" />
-    <text x="300" y="180" font-family="PT Mono" font-size="42" class="dot">Wi-Fi (2.4 GHz)</text>
+    <text x="300" y="200" font-family="PT Mono" font-size="24" class="dot">Wi-Fi (2.4 GHz)</text>
   </g>
 
   <!-- Bluetooth Pulses -->
   <g>
-    <circle class="ink fine pulse" cx="400" cy="650" r="10" />
-    <circle class="ink fine pulse" cx="650" cy="650" r="10" style="animation-delay: 1.5s" />
-    <circle class="ink fine pulse" cx="900" cy="650" r="10" style="animation-delay: 3s" />
-    <circle class="ink fine pulse" cx="1150" cy="650" r="10" style="animation-delay: 4.5s" />
-    <text x="300" y="760" font-family="PT Mono" font-size="42" class="dot">Bluetooth (AFH)</text>
+    <circle class="ink fine pulse" cx="400" cy="650" r="8" />
+    <circle class="ink fine pulse" cx="600" cy="650" r="8" style="animation-delay: 1.5s" />
+    <circle class="ink fine pulse" cx="800" cy="650" r="8" style="animation-delay: 3s" />
+    <circle class="ink fine pulse" cx="1000" cy="650" r="8" style="animation-delay: 4.5s" />
+    <text x="300" y="750" font-family="PT Mono" font-size="24" class="dot">Bluetooth (AFH)</text>
   </g>
 
   <!-- TDM Scheduler Timeline -->
@@ -80,22 +80,22 @@
     <path class="ink hair soft" d="M0 50 h800" />
     <g class="slot">
       <!-- Slot Blocks -->
-      <rect class="ink fine" x="0" y="10" width="150" height="80" rx="4" />
-      <text x="75" y="60" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">WIFI</text>
+      <rect class="ink fine" x="0" y="20" width="120" height="60" rx="4" />
+      <text x="60" y="55" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot">WIFI</text>
       
-      <rect class="ink fine" x="180" y="10" width="100" height="80" rx="4" />
-      <text x="230" y="60" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">BLE</text>
+      <rect class="ink fine" x="150" y="20" width="80" height="60" rx="4" />
+      <text x="190" y="55" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot">BLE</text>
 
-      <rect class="ink fine" x="310" y="10" width="150" height="80" rx="4" />
-      <text x="385" y="60" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">WIFI</text>
+      <rect class="ink fine" x="260" y="20" width="120" height="60" rx="4" />
+      <text x="320" y="55" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot">WIFI</text>
 
-      <rect class="ink fine" x="490" y="10" width="100" height="80" rx="4" />
-      <text x="540" y="60" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">BLE</text>
+      <rect class="ink fine" x="410" y="20" width="80" height="60" rx="4" />
+      <text x="450" y="55" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot">BLE</text>
       
       <!-- Duplicate for looping effect -->
-      <rect class="ink fine" x="620" y="10" width="150" height="80" rx="4" />
-      <rect class="ink fine" x="800" y="10" width="100" height="80" rx="4" />
+      <rect class="ink fine" x="550" y="20" width="120" height="60" rx="4" />
+      <rect class="ink fine" x="700" y="20" width="80" height="60" rx="4" />
     </g>
-    <text x="400" y="-30" font-family="PT Mono" font-size="48" text-anchor="middle" class="dot">TDM Coexistence</text>
+    <text x="400" y="-20" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">TDM Coexistence</text>
   </g>
 </svg>

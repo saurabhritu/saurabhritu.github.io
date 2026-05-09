@@ -60,63 +60,63 @@
   <rect class="bg" width="1600" height="900"/>
   <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
 
+  <!-- Title — reduced font size to avoid crowding -->
+  <text x="800" y="70" font-family="PT Mono" font-size="30" text-anchor="middle" class="dot">The IoT Threat Landscape</text>
+
   <!-- Protected Ecosystem (Centered) -->
-  <g transform="translate(800 450)" class="float">
+  <g transform="translate(800 470)" class="float">
     <!-- Shield Perimeter -->
-    <circle class="ink fine soft pulse" cx="0" cy="0" r="300" stroke-dasharray="10 10" />
-    
-    <!-- Central Device -->
-    <g transform="translate(-120 -80)">
-       <rect class="ink fine" width="240" height="160" rx="12" />
-       <text x="120" y="80" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Edge Device</text>
-       <text x="120" y="115" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot soft">TRNG-Seeded</text>
+    <circle class="ink fine soft pulse" cx="0" cy="0" r="280" stroke-dasharray="10 10" />
+
+    <!-- Central Device — bigger box, bigger text -->
+    <g transform="translate(-140 -90)">
+      <rect class="ink fine" width="280" height="180" rx="12" />
+      <text x="140" y="82" font-family="PT Mono" font-size="30" text-anchor="middle" class="dot">Edge Device</text>
+      <text x="140" y="118" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot soft">TRNG-Seeded</text>
     </g>
 
-    <!-- Cloud Icon Above -->
-    <g transform="translate(-60 -240)">
-       <path class="ink hair soft" d="M0 40 q 0 -30 30 -30 q 15 -15 40 0 q 30 -15 50 15 q 30 0 30 30 z" />
-       <text x="60" y="90" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">Cloud</text>
+    <!-- Cloud Icon Above — bigger box + text -->
+    <g transform="translate(-75 -260)">
+      <path class="ink hair soft" d="M0 40 q 0 -36 36 -36 q 18 -18 50 0 q 36 -18 62 18 q 36 0 36 36 z" />
+      <text x="75" y="85" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Cloud</text>
     </g>
 
-    <!-- Mobile App Below -->
-    <g transform="translate(-40 140)">
-       <rect class="ink hair soft" width="80" height="130" rx="8" />
-       <text x="40" y="180" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">Mobile</text>
+    <!-- Mobile App Below — bigger box + text -->
+    <g transform="translate(-55 145)">
+      <rect class="ink hair soft" width="110" height="150" rx="10" />
+      <text x="55" y="185" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Mobile</text>
     </g>
   </g>
 
-  <!-- Attacks (Coming from corners/sides) -->
-  <g transform="translate(800 450)">
-    <!-- Top Left -->
-    <g transform="rotate(-45) translate(-500 0)">
-       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
-       <text x="0" y="-30" font-family="PT Mono" font-size="28" class="dot" fill="#f05a30">MITM Attack</text>
-    </g>
+  <!-- ── Attacks — all positioned in absolute coords to avoid rotation-induced text chaos ── -->
 
-    <!-- Mid Left -->
-    <g transform="translate(-550 0)">
-       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
-       <text x="0" y="-30" font-family="PT Mono" font-size="28" class="dot" fill="#f05a30">Replay Attack</text>
-    </g>
-
-    <!-- Bottom Left -->
-    <g transform="rotate(45) translate(-500 0)">
-       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
-       <text x="0" y="-30" font-family="PT Mono" font-size="28" class="dot" fill="#f05a30">Physical Probe</text>
-    </g>
-
-    <!-- Top Right -->
-    <g transform="rotate(225) translate(-500 0)">
-       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
-       <text x="150" y="50" font-family="PT Mono" font-size="28" text-anchor="end" class="dot" fill="#f05a30" transform="rotate(180 150 20)">Eavesdropping</text>
-    </g>
-    
-    <!-- Bottom Right -->
-    <g transform="rotate(135) translate(-500 0)">
-       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
-       <text x="150" y="50" font-family="PT Mono" font-size="28" text-anchor="end" class="dot" fill="#f05a30" transform="rotate(180 150 20)">OTA Injection</text>
-    </g>
+  <!-- Mid Left: Replay Attack (purely horizontal, leftward arrow) -->
+  <g>
+    <line class="ink fine attack" x1="170" y1="470" x2="500" y2="470" stroke="#f05a30" stroke-dasharray="8 8" />
+    <text x="100" y="458" font-family="PT Mono" font-size="22" text-anchor="start" class="dot" fill="#f05a30">Replay Attack</text>
   </g>
 
-  <text x="800" y="100" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">The IoT Threat Landscape</text>
+  <!-- Top Left: MITM Attack (~-30° angle) -->
+  <g>
+    <line class="ink fine attack" x1="230" y1="220" x2="540" y2="360" stroke="#f05a30" stroke-dasharray="8 8" />
+    <text x="110" y="215" font-family="PT Mono" font-size="22" text-anchor="start" class="dot" fill="#f05a30">MITM Attack</text>
+  </g>
+
+  <!-- Top: Physical Probe (near-vertical, slight angle to avoid heading overlap) -->
+  <g>
+    <line class="ink fine attack" x1="750" y1="135" x2="770" y2="200" stroke="#f05a30" stroke-dasharray="8 8" />
+    <text x="540" y="130" font-family="PT Mono" font-size="22" text-anchor="start" class="dot" fill="#f05a30">Physical Probe</text>
+  </g>
+
+  <!-- Top Right: OTA Injection (~30° angle) -->
+  <g>
+    <line class="ink fine attack" x1="1060" y1="220" x2="1000" y2="360" stroke="#f05a30" stroke-dasharray="8 8" />
+    <text x="1000" y="210" font-family="PT Mono" font-size="22" text-anchor="start" class="dot" fill="#f05a30">OTA Injection</text>
+  </g>
+
+  <!-- Mid Right: Eavesdropping (purely horizontal, rightward arrow) -->
+  <g>
+    <line class="ink fine attack" x1="1430" y1="470" x2="1100" y2="470" stroke="#f05a30" stroke-dasharray="8 8" />
+    <text x="1150" y="458" font-family="PT Mono" font-size="22" text-anchor="start" class="dot" fill="#f05a30">Eavesdropping</text>
+  </g>
 </svg>
