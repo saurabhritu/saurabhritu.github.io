@@ -35,6 +35,7 @@
 
       .march { animation: march 1s linear infinite; }
       .blink { animation: blink 2s ease-in-out infinite; }
+      .float { animation: float 10s ease-in-out infinite; }
 
       @keyframes march {
         0% { stroke-dashoffset: 20; }
@@ -44,9 +45,13 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
       }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
 
       @media (prefers-reduced-motion: reduce) {
-        .march, .blink { animation: none !important; }
+        .march, .blink, .float { animation: none !important; }
       }
     </style>
   </defs>
@@ -54,48 +59,64 @@
   <rect class="bg" width="1600" height="900"/>
   <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
 
-  <!-- Pipeline Stages -->
-  <g transform="translate(100 400)">
+  <!-- Pipeline Stages - Centered -->
+  <g transform="translate(150 400)">
+    
+    <!-- Cloud / Server -->
+    <g transform="translate(0, -20)" class="float">
+       <path class="ink fine soft" d="M20 60 q 0 -40 40 -40 q 20 -20 50 0 q 40 -20 60 20 q 40 0 40 40 z" />
+       <text x="105" y="110" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Cloud Server</text>
+    </g>
+
+    <!-- Initial Arrow -->
+    <path class="ink hair march" d="M210 50 h100" stroke-dasharray="5 5" />
+
     <!-- Stage 1: Download -->
-    <g>
+    <g transform="translate(310 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
       <path class="ink hair march" d="M75 120 v50" stroke-dasharray="5 5" />
       <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">HTTPS DL</text>
     </g>
 
-    <!-- Arrow -->
-    <path class="ink hair march" d="M150 50 h100" stroke-dasharray="5 5" />
+    <!-- Arrow 1 -->
+    <path class="ink hair march" d="M460 50 h90" stroke-dasharray="5 5" />
 
     <!-- Stage 2: Hashing -->
-    <g transform="translate(250 0)">
+    <g transform="translate(550 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
       <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">SHA-256</text>
     </g>
 
-    <!-- Arrow -->
-    <path class="ink hair march" d="M400 50 h100" stroke-dasharray="5 5" />
+    <!-- Arrow 2 -->
+    <path class="ink hair march" d="M700 50 h90" stroke-dasharray="5 5" />
 
     <!-- Stage 3: Verification -->
-    <g transform="translate(500 0)">
+    <g transform="translate(790 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
       <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">Signature</text>
-      <circle class="ink hair blink" cx="75" cy="130" r="15" />
+      <!-- Shield icon -->
+      <path class="ink hair soft blink" d="M60 120 q 15 10 30 0 v30 q -15 15 -30 0 z" />
     </g>
 
-    <!-- Arrow -->
-    <path class="ink hair march" d="M650 50 h100" stroke-dasharray="5 5" />
+    <!-- Arrow 3 -->
+    <path class="ink hair march" d="M940 50 h90" stroke-dasharray="5 5" />
 
     <!-- Stage 4: Flash -->
-    <g transform="translate(750 0)">
+    <g transform="translate(1030 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
       <path class="ink hair" d="M20 20 h110 v60 h-110 z" />
       <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">Flash</text>
     </g>
+
+    <!-- Final Success Icon -->
+    <g transform="translate(1180, 50)" class="blink">
+      <path class="ink fine" d="M20 0 l20 20 l40 -40" />
+    </g>
     
-    <!-- Foundation -->
-    <path class="ink hair soft" d="M0 250 h900" />
-    <text x="450" y="290" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">All seeded by Hardware TRNG</text>
+    <!-- Foundation Line -->
+    <path class="ink hair soft" d="M0 280 h1300" />
+    <text x="650" y="320" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot">All secure operations seeded by Hardware TRNG</text>
   </g>
 
-  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Secure OTA Update Pipeline</text>
+  <text x="800" y="150" font-family="PT Mono" font-size="42" text-anchor="middle" class="dot">Secure OTA Update Pipeline</text>
 </svg>
