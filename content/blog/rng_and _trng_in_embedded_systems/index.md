@@ -7,7 +7,7 @@ tags:
   - esp-idf
   - cryptography
   - embedded
-image: "images/rng_trng_cryptography_embedded.svg"
+image: "images/stacksr_entropy_vs_grid_animated_theme_aware.svg"
 description: "From dice rolls to silicon physics, what RNG actually is, why software timer–based randomness is cryptographically broken, what hardware entropy sources look like, and why none of this works without cryptography underneath."
 ---
 
