@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+
+    <style>
+      :root {
+        --bg: #F7F4EE;
+        --ink: #161616;
+        --noise-opacity: 0.85;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #131313;
+          --ink: #F3EFE7;
+          --noise-opacity: 0.18;
+        }
+      }
+
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2.2; }
+      .hair { stroke-width: 1.6; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.78; }
+      .soft { opacity: 0.55; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+
+      .float { animation: float 12s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      .floatAlt { animation: floatAlt 15s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      .pulse { animation: pulse 10s ease-in-out infinite; }
+
+      @keyframes float {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(4px, -6px); }
+      }
+      @keyframes floatAlt {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-5px, 4px); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.7; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .float, .floatAlt, .pulse { animation: none !important; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+  <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
+
+  <!-- Left Side: C (Simple, Structural) -->
+  <g class="float">
+    <path class="ink fine" d="M250 300 h150 v150 h-150 z" />
+    <path class="ink hair soft" d="M265 315 h120 v120 h-120 z" />
+    <path class="ink hair" d="M250 350 h150" />
+    <path class="ink hair" d="M250 400 h150" />
+    <text x="325" y="480" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">struct data</text>
+  </g>
+
+  <!-- Bridge: extern "C" -->
+  <g class="pulse">
+    <path class="ink fine soft" d="M550 450 q 250 -50 500 0" />
+    <path class="ink hair" d="M550 465 q 250 -50 500 0" />
+    <text x="800" y="410" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">extern "C"</text>
+  </g>
+
+  <!-- Right Side: C++ (Complex, Layered) -->
+  <g class="floatAlt">
+    <circle class="ink fine" cx="1200" cy="375" r="90" />
+    <circle class="ink hair soft" cx="1200" cy="375" r="70" />
+    <circle class="ink hair" cx="1200" cy="375" r="40" />
+    <path class="ink hair" d="M1110 375 h180" />
+    <path class="ink hair" d="M1200 285 v180" />
+    <text x="1200" y="500" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">class Object</text>
+  </g>
+
+  <!-- Decorative elements -->
+  <path class="ink hair soft" d="M100 100 q 50 20 100 0" />
+  <path class="ink hair soft" d="M1400 800 q 50 -20 100 0" />
+  <circle class="dot soft" cx="800" cy="150" r="4" />
+  <circle class="dot soft" cx="800" cy="750" r="4" />
+</svg>

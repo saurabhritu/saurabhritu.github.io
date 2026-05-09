@@ -3,7 +3,7 @@ title: "Integrating C++ Drivers into C-Based Firmware (and ESP-IDF)"
 date: 2025-09-03
 draft: false
 description: "Mixing C and C++ in embedded projects is a minefield of linkage surprises. Here's how to bridge the gap cleanly without losing your mind."
-image: "images/c-cpp-coexist.svg"
+image: "images/stacksr_c_cpp_bridge_animated.svg"
 categories: ["Embedded Systems"]
 tags: ["cpp", "firmware", "compilation", "esp-idf"]
 readingTime: 10
