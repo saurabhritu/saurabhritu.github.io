@@ -33,21 +33,26 @@
       .soft { opacity: 0.55; }
       .noiseLayer { opacity: var(--noise-opacity); }
 
-      .attack { animation: attack 3s infinite; }
-      .shield { animation: shield 6s ease-in-out infinite; }
+      .attack { animation: attackFlow 4s linear infinite; }
+      .pulse { animation: shieldPulse 5s ease-in-out infinite; }
+      .float { animation: float 8s ease-in-out infinite; }
 
-      @keyframes attack {
-        0% { transform: translateX(0); opacity: 0; }
+      @keyframes attackFlow {
+        0% { stroke-dashoffset: 40; opacity: 0.4; }
         50% { opacity: 1; }
-        100% { transform: translateX(300px); opacity: 0; }
+        100% { stroke-dashoffset: 0; opacity: 0.4; }
       }
-      @keyframes shield {
+      @keyframes shieldPulse {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(1.02); }
+      }
+      @keyframes float {
         0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
+        50% { transform: translateY(-10px); }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .attack, .shield { animation: none !important; }
+        .attack, .pulse, .float { animation: none !important; }
       }
     </style>
   </defs>
@@ -55,28 +60,63 @@
   <rect class="bg" width="1600" height="900"/>
   <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
 
-  <!-- Shielded Device -->
-  <g transform="translate(1000 450)" class="shield">
-    <path class="ink fine" d="M-100 -150 q 100 -50 200 0 v200 q -100 100 -200 0 z" />
-    <rect class="ink hair" x="-40" y="-40" width="80" height="80" rx="4" />
-    <text x="0" y="150" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Protected Device</text>
+  <!-- Protected Ecosystem (Centered) -->
+  <g transform="translate(800 450)" class="float">
+    <!-- Shield Perimeter -->
+    <circle class="ink fine soft pulse" cx="0" cy="0" r="300" stroke-dasharray="10 10" />
+    
+    <!-- Central Device -->
+    <g transform="translate(-120 -80)">
+       <rect class="ink fine" width="240" height="160" rx="12" />
+       <text x="120" y="80" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Edge Device</text>
+       <text x="120" y="115" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot soft">TRNG-Seeded</text>
+    </g>
+
+    <!-- Cloud Icon Above -->
+    <g transform="translate(-60 -240)">
+       <path class="ink hair soft" d="M0 40 q 0 -30 30 -30 q 15 -15 40 0 q 30 -15 50 15 q 30 0 30 30 z" />
+       <text x="60" y="90" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">Cloud</text>
+    </g>
+
+    <!-- Mobile App Below -->
+    <g transform="translate(-40 140)">
+       <rect class="ink hair soft" width="80" height="130" rx="8" />
+       <text x="40" y="180" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">Mobile</text>
+    </g>
   </g>
 
-  <!-- Attacks -->
-  <g transform="translate(400 450)">
-    <g class="attack">
-      <path class="ink fine" d="M0 -100 l50 0" stroke="#f05a30" />
-      <text x="0" y="-120" font-family="PT Mono" font-size="16" class="dot" fill="#f05a30">Replay Attack</text>
+  <!-- Attacks (Coming from corners/sides) -->
+  <g transform="translate(800 450)">
+    <!-- Top Left -->
+    <g transform="rotate(-45) translate(-500 0)">
+       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
+       <text x="0" y="-30" font-family="PT Mono" font-size="28" class="dot" fill="#f05a30">MITM Attack</text>
     </g>
-    <g class="attack" style="animation-delay: 1s">
-      <path class="ink fine" d="M0 0 l50 0" stroke="#f05a30" />
-      <text x="0" y="-20" font-family="PT Mono" font-size="16" class="dot" fill="#f05a30">MITM</text>
+
+    <!-- Mid Left -->
+    <g transform="translate(-550 0)">
+       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
+       <text x="0" y="-30" font-family="PT Mono" font-size="28" class="dot" fill="#f05a30">Replay Attack</text>
     </g>
-    <g class="attack" style="animation-delay: 2s">
-      <path class="ink fine" d="M0 100 l50 0" stroke="#f05a30" />
-      <text x="0" y="80" font-family="PT Mono" font-size="16" class="dot" fill="#f05a30">Tampering</text>
+
+    <!-- Bottom Left -->
+    <g transform="rotate(45) translate(-500 0)">
+       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
+       <text x="0" y="-30" font-family="PT Mono" font-size="28" class="dot" fill="#f05a30">Physical Probe</text>
+    </g>
+
+    <!-- Top Right -->
+    <g transform="rotate(225) translate(-500 0)">
+       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
+       <text x="150" y="50" font-family="PT Mono" font-size="28" text-anchor="end" class="dot" fill="#f05a30" transform="rotate(180 150 20)">Eavesdropping</text>
+    </g>
+    
+    <!-- Bottom Right -->
+    <g transform="rotate(135) translate(-500 0)">
+       <path class="ink fine attack" d="M0 0 h150" stroke="#f05a30" stroke-dasharray="8 8" />
+       <text x="150" y="50" font-family="PT Mono" font-size="28" text-anchor="end" class="dot" fill="#f05a30" transform="rotate(180 150 20)">OTA Injection</text>
     </g>
   </g>
 
-  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">The IoT Threat Landscape</text>
+  <text x="800" y="100" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">The IoT Threat Landscape</text>
 </svg>

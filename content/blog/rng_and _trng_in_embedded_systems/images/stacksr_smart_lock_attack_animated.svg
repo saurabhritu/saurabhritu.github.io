@@ -58,7 +58,7 @@
   <g transform="translate(300 450)">
     <rect class="ink fine" x="-60" y="-100" width="120" height="200" rx="10" />
     <path class="ink hair" d="M-40 -60 h80 M-40 -30 h80 M-40 0 h80" />
-    <text x="0" y="140" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">User Phone</text>
+    <text x="0" y="160" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">User Phone</text>
     <circle class="ink hair soft signal" cx="0" cy="0" r="100" />
   </g>
 
@@ -67,19 +67,19 @@
     <rect class="ink fine" x="-80" y="-120" width="160" height="240" rx="4" />
     <circle class="ink fine" cx="0" cy="-40" r="30" />
     <path class="ink fine" d="M0 -10 v60" />
-    <text x="0" y="160" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Smart Lock</text>
+    <text x="0" y="180" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Smart Lock</text>
   </g>
 
   <!-- Attacker -->
   <g transform="translate(800 650)" class="thief">
     <path class="ink fine" d="M-50 0 l50 -80 l50 80 z" />
-    <text x="0" y="40" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot" fill="#f05a30">Attacker (Replay)</text>
+    <text x="0" y="60" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot" fill="#f05a30">Attacker (Replay)</text>
     <path class="ink hair soft" d="M-100 -150 q 100 -50 200 0" stroke-dasharray="8 8" />
   </g>
 
   <!-- Interaction -->
-  <text x="800" y="350" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot fade">Intercepted Token</text>
+  <text x="800" y="350" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot fade">Intercepted Token</text>
   <path class="ink hair soft" d="M450 450 h700" stroke-dasharray="10 10" />
 
-  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Replay Attack Anatomy</text>
+  <text x="800" y="150" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">Replay Attack Anatomy</text>
 </svg>

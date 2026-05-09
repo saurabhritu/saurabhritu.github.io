@@ -65,7 +65,7 @@
     <!-- Cloud / Server -->
     <g transform="translate(0, -20)" class="float">
        <path class="ink fine soft" d="M20 60 q 0 -40 40 -40 q 20 -20 50 0 q 40 -20 60 20 q 40 0 40 40 z" />
-       <text x="105" y="110" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Cloud Server</text>
+       <text x="105" y="120" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">Cloud Server</text>
     </g>
 
     <!-- Initial Arrow -->
@@ -75,7 +75,7 @@
     <g transform="translate(310 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
       <path class="ink hair march" d="M75 120 v50" stroke-dasharray="5 5" />
-      <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">HTTPS DL</text>
+      <text x="75" y="60" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">HTTPS DL</text>
     </g>
 
     <!-- Arrow 1 -->
@@ -84,7 +84,7 @@
     <!-- Stage 2: Hashing -->
     <g transform="translate(550 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
-      <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">SHA-256</text>
+      <text x="75" y="60" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">SHA-256</text>
     </g>
 
     <!-- Arrow 2 -->
@@ -93,9 +93,9 @@
     <!-- Stage 3: Verification -->
     <g transform="translate(790 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
-      <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">Signature</text>
+      <text x="75" y="60" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">Signature</text>
       <!-- Shield icon -->
-      <path class="ink hair soft blink" d="M60 120 q 15 10 30 0 v30 q -15 15 -30 0 z" />
+      <path class="ink hair soft blink" d="M60 130 q 15 10 30 0 v30 q -15 15 -30 0 z" />
     </g>
 
     <!-- Arrow 3 -->
@@ -105,7 +105,7 @@
     <g transform="translate(1030 0)">
       <path class="ink fine" d="M0 0 h150 v100 h-150 z" />
       <path class="ink hair" d="M20 20 h110 v60 h-110 z" />
-      <text x="75" y="55" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">Flash</text>
+      <text x="75" y="60" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">Flash</text>
     </g>
 
     <!-- Final Success Icon -->
@@ -115,8 +115,8 @@
     
     <!-- Foundation Line -->
     <path class="ink hair soft" d="M0 280 h1300" />
-    <text x="650" y="320" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot">All secure operations seeded by Hardware TRNG</text>
+    <text x="650" y="330" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Secure operations seeded by TRNG</text>
   </g>
 
-  <text x="800" y="150" font-family="PT Mono" font-size="42" text-anchor="middle" class="dot">Secure OTA Update Pipeline</text>
+  <text x="800" y="150" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">Secure OTA Update Pipeline</text>
 </svg>

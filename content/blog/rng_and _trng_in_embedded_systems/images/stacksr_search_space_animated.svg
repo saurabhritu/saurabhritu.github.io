@@ -58,12 +58,12 @@
   <g transform="translate(300 450)" class="collapse">
     <circle class="ink fine soft" cx="0" cy="0" r="150" stroke-dasharray="8 8" />
     <circle class="dot" cx="0" cy="0" r="20" />
-    <text x="0" y="200" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Timer-Based Seed</text>
-    <text x="0" y="230" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">~5,000 possibilities</text>
+    <text x="0" y="220" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Timer-Based Seed</text>
+    <text x="0" y="260" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot soft">~5,000 possibilities</text>
   </g>
 
   <!-- VS -->
-  <text x="800" y="465" font-family="PT Mono" font-size="48" text-anchor="middle" class="dot">VS</text>
+  <text x="800" y="470" font-family="PT Mono" font-size="64" text-anchor="middle" class="dot">VS</text>
 
   <!-- Hardware TRNG (Expanded Space) -->
   <g transform="translate(1300 450)" class="expand">
@@ -78,9 +78,9 @@
       <circle class="dot soft" cx="-180" cy="-150" r="6" />
       <circle class="dot soft" cx="50" cy="-220" r="4" />
     </g>
-    <text x="0" y="350" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Hardware TRNG</text>
-    <text x="0" y="380" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">2^256 possibilities</text>
+    <text x="0" y="380" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Hardware TRNG</text>
+    <text x="0" y="420" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot soft">2^256 possibilities</text>
   </g>
 
-  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Entropy Search Space</text>
+  <text x="800" y="150" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">Entropy Search Space</text>
 </svg>

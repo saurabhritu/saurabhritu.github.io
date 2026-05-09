@@ -54,21 +54,21 @@
     <!-- Pillar 1: Confidentiality -->
     <g class="sway">
       <path class="ink fine" d="M-100 0 v-300 h200 v300" />
-      <text x="0" y="-330" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Confidentiality</text>
+      <text x="0" y="-340" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Confidentiality</text>
       <path class="ink hair soft" d="M-80 -280 h160 M-80 -240 h160 M-80 -200 h160" />
     </g>
 
     <!-- Pillar 2: Integrity -->
     <g transform="translate(400 0)" class="sway" style="animation-delay: -3s">
       <path class="ink fine" d="M-100 0 v-400 h200 v400" />
-      <text x="0" y="-430" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Integrity</text>
+      <text x="0" y="-440" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Integrity</text>
       <circle class="ink hair soft" cx="0" cy="-200" r="50" />
     </g>
 
     <!-- Pillar 3: Authentication -->
     <g transform="translate(800 0)" class="sway" style="animation-delay: -6s">
       <path class="ink fine" d="M-100 0 v-350 h200 v350" />
-      <text x="0" y="-380" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Authentication</text>
+      <text x="0" y="-390" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Authentication</text>
       <path class="ink hair soft" d="M-50 -250 l50 -50 l50 50 l-50 50 z" />
     </g>
 
@@ -76,5 +76,5 @@
     <path class="ink fine" d="M-200 0 h1200" />
   </g>
 
-  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">The Three Pillars of Cryptography</text>
+  <text x="800" y="150" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">The Three Pillars of Cryptography</text>
 </svg>

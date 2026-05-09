@@ -58,15 +58,15 @@
   <g transform="translate(300 450)">
     <rect class="ink fine" x="-60" y="-100" width="120" height="200" rx="10" />
     <circle class="ink hair soft ping" cx="0" cy="0" r="80" />
-    <text x="0" y="140" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">User App</text>
+    <text x="0" y="160" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">User App</text>
   </g>
 
   <!-- Flow Arrows -->
   <g transform="translate(450 400)">
     <path class="ink hair" d="M0 0 h700" stroke-dasharray="10 10" />
     <path class="ink hair" d="M700 100 h-700" stroke-dasharray="10 10" />
-    <text x="350" y="-20" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">1. Request / 3. Signed Response</text>
-    <text x="350" y="140" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">2. Challenge (TRNG)</text>
+    <text x="350" y="-30" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">1. Request / 3. Response</text>
+    <text x="350" y="160" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">2. Challenge (TRNG)</text>
   </g>
 
   <!-- Right: Lock -->
@@ -77,8 +77,8 @@
       <circle class="ink fine" cx="0" cy="0" r="40" stroke-dasharray="10 5" />
       <circle class="dot" cx="0" cy="0" r="10" />
     </g>
-    <text x="0" y="160" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Motor Control</text>
+    <text x="0" y="180" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Motor Control</text>
   </g>
 
-  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Secure Challenge-Response Flow</text>
+  <text x="800" y="150" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">Secure Challenge-Response Flow</text>
 </svg>

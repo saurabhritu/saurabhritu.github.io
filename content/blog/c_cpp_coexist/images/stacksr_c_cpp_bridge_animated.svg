@@ -60,34 +60,32 @@
   <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
 
   <!-- Left Side: C (Simple, Structural) -->
-  <g class="float">
-    <path class="ink fine" d="M250 300 h150 v150 h-150 z" />
-    <path class="ink hair soft" d="M265 315 h120 v120 h-120 z" />
-    <path class="ink hair" d="M250 350 h150" />
-    <path class="ink hair" d="M250 400 h150" />
-    <text x="325" y="480" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">struct data</text>
+  <g class="float" transform="translate(150 50)">
+    <path class="ink fine" d="M100 250 h250 v250 h-250 z" />
+    <path class="ink hair soft" d="M115 265 h220 v220 h-220 z" />
+    <path class="ink hair" d="M100 330 h250" />
+    <path class="ink hair" d="M100 410 h250" />
+    <text x="225" y="560" font-family="PT Mono" font-size="42" text-anchor="middle" class="dot">struct data</text>
   </g>
 
   <!-- Bridge: extern "C" -->
   <g class="pulse">
     <path class="ink fine soft" d="M550 450 q 250 -50 500 0" />
     <path class="ink hair" d="M550 465 q 250 -50 500 0" />
-    <text x="800" y="410" font-family="PT Mono" font-size="32" text-anchor="middle" class="dot">extern "C"</text>
+    <text x="800" y="400" font-family="PT Mono" font-size="52" text-anchor="middle" class="dot">extern "C"</text>
   </g>
 
   <!-- Right Side: C++ (Complex, Layered) -->
-  <g class="floatAlt">
-    <circle class="ink fine" cx="1200" cy="375" r="90" />
-    <circle class="ink hair soft" cx="1200" cy="375" r="70" />
-    <circle class="ink hair" cx="1200" cy="375" r="40" />
-    <path class="ink hair" d="M1110 375 h180" />
-    <path class="ink hair" d="M1200 285 v180" />
-    <text x="1200" y="500" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">class Object</text>
+  <g class="floatAlt" transform="translate(-100 50)">
+    <circle class="ink fine" cx="1300" cy="375" r="120" />
+    <circle class="ink hair soft" cx="1300" cy="375" r="90" />
+    <circle class="ink hair" cx="1300" cy="375" r="50" />
+    <path class="ink hair" d="M1180 375 h240" />
+    <path class="ink hair" d="M1300 255 v240" />
+    <text x="1300" y="560" font-family="PT Mono" font-size="42" text-anchor="middle" class="dot">class Object</text>
   </g>
 
   <!-- Decorative elements -->
-  <path class="ink hair soft" d="M100 100 q 50 20 100 0" />
-  <path class="ink hair soft" d="M1400 800 q 50 -20 100 0" />
   <circle class="dot soft" cx="800" cy="150" r="4" />
   <circle class="dot soft" cx="800" cy="750" r="4" />
 </svg>

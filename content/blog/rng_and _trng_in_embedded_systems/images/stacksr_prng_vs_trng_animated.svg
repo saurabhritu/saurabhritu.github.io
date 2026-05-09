@@ -62,27 +62,27 @@
   <!-- Left: PRNG (Formulaic) -->
   <g transform="translate(200 200)" class="float">
     <path class="ink fine" d="M0 0 h400 v500 h-400 z" />
-    <text x="200" y="-30" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">PRNG (Deterministic)</text>
+    <text x="200" y="-40" font-family="PT Mono" font-size="42" text-anchor="middle" class="dot">PRNG (Deterministic)</text>
     
     <g transform="translate(50 100)">
-      <text x="0" y="0" font-family="PT Mono" font-size="20" class="dot">Seed -> [f(x)] -> Output</text>
+      <text x="0" y="0" font-family="PT Mono" font-size="32" class="dot">Seed -> [f(x)] -> Output</text>
       <path class="ink hair soft" d="M0 30 h300" />
       
       <g transform="translate(0 100)" class="sequence">
-        <text x="0" y="0" font-family="PT Mono" font-size="18" class="dot">42, 107, 8, 215, 42, 107, 8, 215...</text>
+        <text x="0" y="0" font-family="PT Mono" font-size="28" class="dot">42, 107, 8, 215, 42...</text>
       </g>
     </g>
     <path class="ink hair soft" d="M50 350 q 150 20 300 0" />
-    <text x="200" y="420" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">Repeatable & Predictable</text>
+    <text x="200" y="440" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot soft">Repeatable & Predictable</text>
   </g>
 
   <!-- Right: TRNG (Physical) -->
   <g transform="translate(1000 200)" class="float" style="animation-delay: -2s">
     <path class="ink fine" d="M0 0 h400 v500 h-400 z" />
-    <text x="200" y="-30" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">TRNG (Entropy)</text>
+    <text x="200" y="-40" font-family="PT Mono" font-size="42" text-anchor="middle" class="dot">TRNG (Entropy)</text>
     
     <g transform="translate(50 100)">
-      <text x="0" y="0" font-family="PT Mono" font-size="20" class="dot">Physical Noise Source</text>
+      <text x="0" y="0" font-family="PT Mono" font-size="32" class="dot">Physical Noise Source</text>
       
       <!-- Random dots that pulse/noise -->
       <g class="noise">
@@ -97,7 +97,7 @@
       </g>
     </g>
     <path class="ink hair soft" d="M50 350 q 150 -20 300 0" />
-    <text x="200" y="420" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">Unpredictable Physics</text>
+    <text x="200" y="440" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot soft">Unpredictable Physics</text>
   </g>
 
   <!-- Arrows -->
