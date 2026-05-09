@@ -45,15 +45,25 @@
   {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
+  <!-- Search Assets -->
+  {{ $searchCSS := resources.Get "css/search.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $searchCSS.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ "/pagefind/pagefind-ui.css" | relURL }}" />
+  <script src="{{ "/pagefind/pagefind-ui.js" | relURL }}" defer></script>
+  {{ $searchJS := resources.Get "js/search.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $searchJS.RelPermalink }}" defer></script>
+
   {{ block "head" . }}{{ end }}
 </head>
 <body class="{{ if .IsHome }}is-home{{ end }} {{ .Params.body_class }}">
 
   {{ partial "header.html" . }}
 
-  <main id="main-content">
+  <main id="main-content" data-pagefind-body>
     {{ block "main" . }}{{ end }}
   </main>
+
+  {{ partial "search-modal.html" . }}
 
   {{ partial "footer.html" . }}
 
