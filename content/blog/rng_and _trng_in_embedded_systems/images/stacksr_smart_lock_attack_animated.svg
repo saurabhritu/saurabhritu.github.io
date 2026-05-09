@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="66" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+
+    <style>
+      :root {
+        --bg: #F7F4EE;
+        --ink: #161616;
+        --noise-opacity: 0.85;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #131313;
+          --ink: #F3EFE7;
+          --noise-opacity: 0.18;
+        }
+      }
+
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2.2; }
+      .hair { stroke-width: 1.6; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.78; }
+      .soft { opacity: 0.55; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+
+      .signal { animation: signal 2s ease-out infinite; }
+      .thief { animation: thief 4s ease-in-out infinite; }
+
+      @keyframes signal {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(1.5); opacity: 0; }
+      }
+      @keyframes thief {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .signal, .thief { animation: none !important; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+  <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
+
+  <!-- Phone -->
+  <g transform="translate(300 450)">
+    <rect class="ink fine" x="-60" y="-100" width="120" height="200" rx="10" />
+    <path class="ink hair" d="M-40 -60 h80 M-40 -30 h80 M-40 0 h80" />
+    <text x="0" y="140" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">User Phone</text>
+    <circle class="ink hair soft signal" cx="0" cy="0" r="100" />
+  </g>
+
+  <!-- Lock -->
+  <g transform="translate(1300 450)">
+    <rect class="ink fine" x="-80" y="-120" width="160" height="240" rx="4" />
+    <circle class="ink fine" cx="0" cy="-40" r="30" />
+    <path class="ink fine" d="M0 -10 v60" />
+    <text x="0" y="160" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Smart Lock</text>
+  </g>
+
+  <!-- Attacker -->
+  <g transform="translate(800 650)" class="thief">
+    <path class="ink fine" d="M-50 0 l50 -80 l50 80 z" />
+    <text x="0" y="40" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot" fill="#f05a30">Attacker (Replay)</text>
+    <path class="ink hair soft" d="M-100 -150 q 100 -50 200 0" stroke-dasharray="8 8" />
+  </g>
+
+  <!-- Interaction -->
+  <text x="800" y="350" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot fade">Intercepted Token</text>
+  <path class="ink hair soft" d="M450 450 h700" stroke-dasharray="10 10" />
+
+  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Replay Attack Anatomy</text>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="44" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+
+    <style>
+      :root {
+        --bg: #F7F4EE;
+        --ink: #161616;
+        --noise-opacity: 0.85;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #131313;
+          --ink: #F3EFE7;
+          --noise-opacity: 0.18;
+        }
+      }
+
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2.2; }
+      .hair { stroke-width: 1.6; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.78; }
+      .soft { opacity: 0.55; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+
+      .expand { animation: expand 8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      .collapse { animation: collapse 8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+      @keyframes expand {
+        0%, 100% { transform: scale(0.95); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+      }
+      @keyframes collapse {
+        0%, 100% { transform: scale(1.1); opacity: 1; }
+        50% { transform: scale(0.4); opacity: 0.6; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .expand, .collapse { animation: none !important; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+  <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
+
+  <!-- Timer Seed (Collapsed Space) -->
+  <g transform="translate(300 450)" class="collapse">
+    <circle class="ink fine soft" cx="0" cy="0" r="150" stroke-dasharray="8 8" />
+    <circle class="dot" cx="0" cy="0" r="20" />
+    <text x="0" y="200" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Timer-Based Seed</text>
+    <text x="0" y="230" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">~5,000 possibilities</text>
+  </g>
+
+  <!-- VS -->
+  <text x="800" y="465" font-family="PT Mono" font-size="48" text-anchor="middle" class="dot">VS</text>
+
+  <!-- Hardware TRNG (Expanded Space) -->
+  <g transform="translate(1300 450)" class="expand">
+    <circle class="ink fine" cx="0" cy="0" r="300" />
+    <g>
+      <circle class="dot soft" cx="-100" cy="-50" r="4" />
+      <circle class="dot soft" cx="80" cy="120" r="3" />
+      <circle class="dot soft" cx="-40" cy="200" r="5" />
+      <circle class="dot soft" cx="150" cy="-100" r="2" />
+      <circle class="dot soft" cx="0" cy="0" r="4" />
+      <circle class="dot soft" cx="220" cy="40" r="3" />
+      <circle class="dot soft" cx="-180" cy="-150" r="6" />
+      <circle class="dot soft" cx="50" cy="-220" r="4" />
+    </g>
+    <text x="0" y="350" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Hardware TRNG</text>
+    <text x="0" y="380" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">2^256 possibilities</text>
+  </g>
+
+  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Entropy Search Space</text>
+</svg>

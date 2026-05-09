@@ -34,7 +34,7 @@ There are two fundamentally different ways to get a number that behaves randomly
 
 >[!TIP] **Analogy:** Imagine a vending machine that always gives you chips when you press B3. That's deterministic: a PRNG. A truly random vending machine would give you chips, then a drink, then chips again, with no pattern you or anyone else could predict in advance. That's TRNG.
 
-![PRNG vs TRNG: The Two Paths to Randomness](images/prng_vs_trng.png)
+![PRNG vs TRNG: The Two Paths to Randomness](images/stacksr_prng_vs_trng_animated.svg)
 
 The distinction matters enormously in practice:
 
@@ -134,7 +134,7 @@ Because the lock's random number generator was entirely predictable, the attacke
 
 {{< /details >}}
 
-![Smart Door Lock: Why Weak RNG Breaks Everything](images/smart_lock_attack.png)
+![Smart Door Lock: Why Weak RNG Breaks Everything](images/stacksr_smart_lock_attack_animated.svg)
 
 This is not a hypothetical scenario. In 2010, Sony's PlayStation 3 was completely broken because their ECDSA signature implementation used a **constant value** where a random nonce was required. From just two signed messages, researchers solved for the private key using simple algebra[^1]. The entire platform security collapsed, not because of weak cryptography, but because of a single bad random number.
 
@@ -151,7 +151,7 @@ This is not a hypothetical scenario. In 2010, Sony's PlayStation 3 was completel
 
 Because TRNG requires a source of physical unpredictability, it requires dedicated hardware to harvest it. You can't fake physics in software. Here is what that looks like in practice.
 
-![TRNG Hardware Architecture: Three-Stage Pipeline](images/trng_hardware_architecture.png)
+![TRNG Hardware Architecture: Three-Stage Pipeline](images/stacksr_trng_hardware_architecture_animated.svg)
 
 ### Stage 1: Physical Noise Sources
 
@@ -247,7 +247,7 @@ This looks reasonable at a glance. The timer value changes constantly, right? Th
 
 **LCG is not cryptographically secure.** Even with a strong seed, standard C `rand()` uses a Linear Congruential Generator. Given any consecutive output, the internal state and all future outputs can be calculated analytically. It was designed for statistical uniformity, not unpredictability[^5].
 
-![Search Space Collapse: Timer Seed vs Hardware TRNG](images/search_space.png)
+![Search Space Collapse: Timer Seed vs Hardware TRNG](images/stacksr_search_space_animated.svg)
 
 ### The Boot-Time Entropy Hole
 
@@ -282,7 +282,7 @@ It has existed for thousands of years, starting with Julius Caesar who shifted e
 
 Cryptography has three core security properties, and you need to understand all three to make sense of how it is used in embedded systems.
 
-![Cryptography: The Three Pillars of Security](images/crypto_pillars.png)
+![Cryptography: The Three Pillars of Security](images/stacksr_crypto_pillars_animated.svg)
 
 **Confidentiality** means that only the intended recipient can read the data. AES-256 in GCM mode encrypts a plaintext message into ciphertext that is indistinguishable from random noise without the key. Intercepting the packet gives you nothing useful.
 
@@ -310,7 +310,7 @@ This threat model is fundamentally different from desktop computing.
 
 ### The IoT Threat Landscape
 
-![IoT Threat Landscape: Attacks vs Cryptographic Defenses](images/threat_landscape.png)
+![IoT Threat Landscape: Attacks vs Cryptographic Defenses](images/stacksr_threat_landscape_animated.svg)
 
 Without TLS, every MQTT message your device publishes (sensor readings, commands, tokens) is visible to anyone on the same network or with a passive radio receiver.
 
@@ -326,7 +326,7 @@ Without TLS, every MQTT message your device publishes (sensor readings, commands
 
 Let's trace the complete authentication flow of our smart door lock to see how all these cryptographic concepts work together in practice.
 
-![Smart Door Lock: Challenge-Response Authentication](images/smart_lock_auth_flow.png)
+![Smart Door Lock: Challenge-Response Authentication](images/stacksr_smart_lock_auth_flow_animated.svg)
 
 **Step 1:** Your phone sends an "unlock" request over BLE.
 
@@ -350,7 +350,7 @@ Every single step in this chain depends on the quality of the random numbers at 
 
 A complete HTTPS OTA update chains several cryptographic operations together, each depending on the previous:
 
-![ESP32 Secure OTA: Cryptographic Pipeline](images/ota_pipeline.png)
+![ESP32 Secure OTA: Cryptographic Pipeline](images/stacksr_ota_pipeline_animated.svg)
 
 1. **`esp_fill_random()`** seeds the TLS entropy pool via mbedTLS's CTR-DRBG
 2. **TLS Handshake** uses ECDHE for key exchange (ephemeral keys protect forward secrecy)

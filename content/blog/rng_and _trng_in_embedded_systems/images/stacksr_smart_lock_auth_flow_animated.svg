@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="88" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+
+    <style>
+      :root {
+        --bg: #F7F4EE;
+        --ink: #161616;
+        --noise-opacity: 0.85;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #131313;
+          --ink: #F3EFE7;
+          --noise-opacity: 0.18;
+        }
+      }
+
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2.2; }
+      .hair { stroke-width: 1.6; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.78; }
+      .soft { opacity: 0.55; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+
+      .ping { animation: ping 3s infinite; }
+      .motor { animation: rotate 4s linear infinite; }
+
+      @keyframes ping {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(1.4); opacity: 0; }
+      }
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ping, .motor { animation: none !important; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+  <rect class="noiseLayer" width="1600" height="900" filter="url(#paperNoise)"/>
+
+  <!-- Left: Phone -->
+  <g transform="translate(300 450)">
+    <rect class="ink fine" x="-60" y="-100" width="120" height="200" rx="10" />
+    <circle class="ink hair soft ping" cx="0" cy="0" r="80" />
+    <text x="0" y="140" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">User App</text>
+  </g>
+
+  <!-- Flow Arrows -->
+  <g transform="translate(450 400)">
+    <path class="ink hair" d="M0 0 h700" stroke-dasharray="10 10" />
+    <path class="ink hair" d="M700 100 h-700" stroke-dasharray="10 10" />
+    <text x="350" y="-20" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">1. Request / 3. Signed Response</text>
+    <text x="350" y="140" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot">2. Challenge (TRNG)</text>
+  </g>
+
+  <!-- Right: Lock -->
+  <g transform="translate(1300 450)">
+    <rect class="ink fine" x="-100" y="-120" width="200" height="240" rx="4" />
+    <!-- Gear icon -->
+    <g transform="translate(0 -20)" class="motor">
+      <circle class="ink fine" cx="0" cy="0" r="40" stroke-dasharray="10 5" />
+      <circle class="dot" cx="0" cy="0" r="10" />
+    </g>
+    <text x="0" y="160" font-family="PT Mono" font-size="24" text-anchor="middle" class="dot">Motor Control</text>
+  </g>
+
+  <text x="800" y="150" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">Secure Challenge-Response Flow</text>
+</svg>
