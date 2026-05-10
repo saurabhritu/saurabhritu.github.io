@@ -128,6 +128,75 @@
         });
       }, { threshold: 0 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // ── IMAGE LIGHTBOX ──────────────────────────────────
+      // 1. Create the lightbox overlay (once)
+      const lightbox = document.createElement('div');
+      lightbox.className = 'img-lightbox';
+      lightbox.innerHTML = `
+        <button class="img-lightbox-close" aria-label="Close">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/>
+          </svg>
+        </button>
+        <img src="" alt="">
+        <span class="img-lightbox-hint">esc or click to close</span>
+      `;
+      document.body.appendChild(lightbox);
+      const lbImg = lightbox.querySelector('img');
+      const lbClose = lightbox.querySelector('.img-lightbox-close');
+
+      const openLightbox = (src, alt) => {
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lightbox.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('is-active');
+        document.body.style.overflow = '';
+      };
+
+      // Close handlers
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target === lbClose || lbClose.contains(e.target)) {
+          closeLightbox();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-active')) {
+          closeLightbox();
+        }
+      });
+
+      // 2. Handle clicks on Hugo render-hook buttons
+      document.querySelectorAll('.img-expand-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const img = btn.closest('.img-viewer')?.querySelector('img');
+          if (img) openLightbox(img.src, img.alt);
+        });
+      });
+
+      // 3. Fallback: wrap orphan <img> inside .article-content that have no .img-viewer parent
+      document.querySelectorAll('.article-content img').forEach(img => {
+        if (img.closest('.img-viewer') || img.closest('.img-lightbox')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'img-viewer';
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+        const btn = document.createElement('button');
+        btn.className = 'img-expand-btn';
+        btn.setAttribute('aria-label', 'View fullscreen');
+        btn.setAttribute('title', 'View fullscreen');
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 1 1 1 1 6"/><polyline points="10 15 15 15 15 10"/><line x1="1" y1="1" x2="6.5" y2="6.5"/><line x1="15" y1="15" x2="9.5" y2="9.5"/></svg>';
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openLightbox(img.src, img.alt);
+        });
+        wrapper.appendChild(btn);
+      });
     });
   </script>
 </body>

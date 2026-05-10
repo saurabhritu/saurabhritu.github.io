@@ -33,9 +33,9 @@
       .soft { opacity: 0.55; }
       .noiseLayer { opacity: var(--noise-opacity); }
 
-      .wave { animation: wave 8s ease-in-out infinite; }
-      .pulse { animation: pulse 6s ease-in-out infinite; }
-      .slot { animation: slot 12s linear infinite; }
+      .wave { animation: none !important; }
+      .pulse { animation: none !important; }
+      .slot { animation: none !important; }
 
       @keyframes wave {
         0%, 100% { transform: translateY(0); opacity: 0.4; }
@@ -72,7 +72,7 @@
     <circle class="ink fine pulse" cx="600" cy="650" r="8" style="animation-delay: 1.5s" />
     <circle class="ink fine pulse" cx="800" cy="650" r="8" style="animation-delay: 3s" />
     <circle class="ink fine pulse" cx="1000" cy="650" r="8" style="animation-delay: 4.5s" />
-    <text x="300" y="750" font-family="PT Mono" font-size="24" class="dot">Bluetooth (AFH)</text>
+    <text x="1100" y="200" font-family="PT Mono" font-size="24" class="dot">Bluetooth (AFH)</text>
   </g>
 
   <!-- TDM Scheduler Timeline -->

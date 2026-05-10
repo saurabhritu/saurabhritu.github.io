@@ -34,13 +34,13 @@
       .noiseLayer { opacity: var(--noise-opacity); }
 
       /* Soft, low-attention motion */
-      .entropyA { animation: driftA 14s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-      .entropyB { animation: driftB 18s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-      .entropyC { animation: driftC 16s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-      .dividerFlow { animation: dividerBreath 12s ease-in-out infinite; }
-      .gridBreath { animation: gridBreath 10s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-      .gridGlow { animation: gridGlow 11s ease-in-out infinite; }
-      .accentFloat { animation: accentFloat 13s ease-in-out infinite; }
+      .entropyA { animation: none !important; transform-box: fill-box; transform-origin: center; }
+      .entropyB { animation: none !important; transform-box: fill-box; transform-origin: center; }
+      .entropyC { animation: none !important; transform-box: fill-box; transform-origin: center; }
+      .dividerFlow { animation: none !important; }
+      .gridBreath { animation: none !important; transform-box: fill-box; transform-origin: center; }
+      .gridGlow { animation: none !important; }
+      .accentFloat { animation: none !important; }
 
       @keyframes driftA {
         0%, 100% { transform: translate(0px, 0px); opacity: 1; }

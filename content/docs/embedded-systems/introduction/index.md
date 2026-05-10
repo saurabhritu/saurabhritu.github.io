@@ -13,7 +13,7 @@ toc: true
 
 Embedded systems are everywhere — inside your microwave, your car's ABS controller, your Wi-Fi router, and the radar module on the shelf next to your desk oh sorry I mean my desk. They are not "small computers." They are dedicated machines built to do one thing, reliably, often forever, with the exact amount of hardware they need and nothing more.
 
-This doc establishes the `uncomfortable foundation`. If you're coming from web, CS, from university or who knows from where you are comming having thought of `System par denge`, a lot of your mental models will need revision. If you're already writing firmware, this is a structured reference for the concepts you probably learned piecemeal.
+This doc establishes the `uncomfortable foundation`. If you're coming from web, CS, from university, a lot of your mental models will need revision. If you're already writing firmware, this is a structured reference for the concepts you probably learned piecemeal.
 
 
 ## What are Embedded Systems?

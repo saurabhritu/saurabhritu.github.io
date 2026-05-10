@@ -1,328 +1,210 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" width="100%" height="100%"
-     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
-
+<svg width="100%" viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise"><feFuncA type="table" tableValues="0 0.03"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
     </filter>
-    <filter id="glow-lg" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <style>
+      :root{--bg:#F7F4EE;--ink:#161616;--noise-opacity:0.85;--green:#E2EFED;--purple:#EBE6F5;--gray:#F0EFEC;--amber:#F5E9D0;--red:#F5E0E0;--blue:#E0EAF5}
+      @media(prefers-color-scheme:dark){:root{--bg:#131313;--ink:#F3EFE7;--noise-opacity:0.18;--green:#1A2E28;--purple:#221E33;--gray:#1A1A19;--amber:#2E2619;--red:#2E1919;--blue:#192633}}
+      .ink{stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}.fine{stroke-width:2}.hair{stroke-width:1.4}.dot{fill:var(--ink)}.bg{fill:var(--bg)}.soft{opacity:.5}.noiseLayer{opacity:var(--noise-opacity)}
+      .fill-green{fill:var(--green)}.fill-purple{fill:var(--purple)}.fill-gray{fill:var(--gray)}.fill-amber{fill:var(--amber)}.fill-red{fill:var(--red)}.fill-blue{fill:var(--blue)}
+    </style>
   </defs>
+  <rect class="bg" width="700" height="420"/>
+  <rect class="noiseLayer" width="700" height="420" filter="url(#paperNoise)"/>
 
-  <!-- ══════════════════════════════════════
-       TITLE
-       ══════════════════════════════════════ -->
-  <text x="430" y="28" text-anchor="middle" font-size="14" fill="#a6adc8">
-    Node A (ID=0x100) and Node B (ID=0x050) transmit simultaneously
-  </text>
+  <!-- Title -->
+  <text x="350" y="22" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">Node A (0x100) and Node B (0x050) transmit simultaneously</text>
 
-  <!-- ══════════════════════════════════════
-       BIT POSITION HEADERS  y=52
-       11 bit positions, x start=160, each cell w=60
-       positions: 10 9 8 7 6 5 4 3 2 1 0
-       x centres: 190 250 310 370 430 490 550 610 670 730 790
-       ══════════════════════════════════════ -->
+  <!-- Bit position headers -->
+  <text x="86" y="46" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Bit</text>
+  <text x="156" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">10</text>
+  <text x="206" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">9</text>
+  <text x="256" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">8</text>
+  <text x="306" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">7</text>
+  <text x="356" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">6</text>
+  <text x="406" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">5</text>
+  <text x="456" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">4</text>
+  <text x="506" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">3</text>
+  <text x="556" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">2</text>
+  <text x="606" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">1</text>
+  <text x="656" y="46" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">0</text>
 
-  <text x="100" y="55" font-size="12" fill="#585b70" text-anchor="middle">Bit pos</text>
+  <!-- Grid lines -->
+  <line x1="130" y1="52" x2="130" y2="230" class="ink hair" opacity="0.15"/>
+  <line x1="680" y1="52" x2="680" y2="230" class="ink hair" opacity="0.15"/>
 
-  <!-- bit position labels -->
-  <text x="190" y="55" text-anchor="middle" font-size="13" fill="#45475a">10</text>
-  <text x="250" y="55" text-anchor="middle" font-size="13" fill="#45475a">9</text>
-  <text x="310" y="55" text-anchor="middle" font-size="13" fill="#45475a">8</text>
-  <text x="370" y="55" text-anchor="middle" font-size="13" fill="#45475a">7</text>
-  <text x="430" y="55" text-anchor="middle" font-size="13" fill="#45475a">6</text>
-  <text x="490" y="55" text-anchor="middle" font-size="13" fill="#45475a">5</text>
-  <text x="550" y="55" text-anchor="middle" font-size="13" fill="#45475a">4</text>
-  <text x="610" y="55" text-anchor="middle" font-size="13" fill="#45475a">3</text>
-  <text x="670" y="55" text-anchor="middle" font-size="13" fill="#45475a">2</text>
-  <text x="730" y="55" text-anchor="middle" font-size="13" fill="#45475a">1</text>
-  <text x="790" y="55" text-anchor="middle" font-size="13" fill="#45475a">0</text>
+  <!-- ══ ROW LABELS ══ -->
+  <text x="86" y="82" text-anchor="middle" font-family="PT Mono" font-size="12" font-weight="600" class="dot">Node A</text>
+  <text x="86" y="96" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">0x100</text>
 
-  <!-- vertical grid lines -->
-  <line x1="160" y1="60" x2="160" y2="260" stroke="#1e1e2e" stroke-width="1"/>
-  <line x1="820" y1="60" x2="820" y2="260" stroke="#1e1e2e" stroke-width="1"/>
-  <line x1="220" y1="60" x2="220" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="280" y1="60" x2="280" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="340" y1="60" x2="340" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="400" y1="60" x2="400" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="460" y1="60" x2="460" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="520" y1="60" x2="520" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="580" y1="60" x2="580" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="640" y1="60" x2="640" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="700" y1="60" x2="700" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
-  <line x1="760" y1="60" x2="760" y2="260" stroke="#1e1e2e" stroke-width="0.5"/>
+  <text x="86" y="136" text-anchor="middle" font-family="PT Mono" font-size="12" font-weight="600" class="dot">Node B</text>
+  <text x="86" y="150" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">0x050</text>
 
-  <!-- ══════════════════════════════════════
-       ROW LABELS
-       ══════════════════════════════════════ -->
-  <text x="100" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#89b4fa">Node A</text>
-  <text x="100" y="116" text-anchor="middle" font-size="11" fill="#3a5a8a">0x100</text>
+  <text x="86" y="192" text-anchor="middle" font-family="PT Mono" font-size="12" font-weight="600" class="dot">Bus</text>
+  <text x="86" y="206" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">dominant</text>
+  <text x="86" y="218" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">wins</text>
 
-  <text x="100" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#a6e3a1">Node B</text>
-  <text x="100" y="176" text-anchor="middle" font-size="11" fill="#3a7a5a">0x050</text>
-
-  <text x="100" y="220" text-anchor="middle" font-size="13" font-weight="bold" fill="#fab387">Bus</text>
-  <text x="100" y="236" text-anchor="middle" font-size="11" fill="#7a4a2a">dominant</text>
-  <text x="100" y="250" text-anchor="middle" font-size="11" fill="#7a4a2a">wins</text>
-
-  <!-- ══════════════════════════════════════
-       NODE A BIT VALUES  (1 0 0 0 0 0 0 0 0 0 0)
-       Row y=96, cells h=32
-       bit 10 = 1 (different), bits 9-0 = 0
-       ══════════════════════════════════════ -->
-
-  <!-- Node A bit 10 = 1 (RECESSIVE — this is the conflict bit) -->
-  <rect x="161" y="72" width="58" height="32" rx="3" fill="#1a2a40" stroke="#89b4fa" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <!-- ══ NODE A: bit 10=1 (recessive, CONFLICT) ══ -->
+  <rect x="131" y="62" width="48" height="28" rx="3" class="fill-blue ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.00;0.04;0.08;0.10;1" values="0.3;1;1;1;0.3;0.3"/>
   </rect>
-  <text x="190" y="93" text-anchor="middle" font-size="15" font-weight="bold" fill="#89b4fa">1</text>
+  <text x="155" y="80" text-anchor="middle" font-family="PT Mono" font-size="13" font-weight="600" class="dot">1</text>
 
-  <!-- Node A bits 9-0 = 0 (all same, animate sequentially) -->
-  <rect x="221" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#89b4fa" stroke-width="1" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.09;0.13;0.17;0.21;1" values="0.3;0.3;0.8;0.8;0.3;0.3"/>
-    <animate attributeName="stroke" values="#89b4fa;#89b4fa;#313244;#313244;#89b4fa;#89b4fa"
-      keyTimes="0;0.09;0.13;0.17;0.21;1" dur="5.5s" repeatCount="indefinite"/>
-  </rect>
-  <text x="250" y="93" text-anchor="middle" font-size="15" fill="#3a5a8a">0</text>
+  <!-- Node A bit 9=0, then dims (loses) -->
+  <rect x="181" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.2"/>
+  <text x="205" y="80" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot soft">0</text>
+  <!-- remaining dim cells -->
+  <rect x="231" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <text x="255" y="80" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot" opacity="0.2">0</text>
+  <rect x="281" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <text x="305" y="80" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot" opacity="0.2">0</text>
+  <rect x="331" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <rect x="381" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <rect x="431" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <rect x="481" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <rect x="531" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <rect x="581" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
+  <rect x="631" y="62" width="48" height="28" rx="3" class="fill-gray ink hair" opacity="0.12"/>
 
-  <!-- Remaining Node A bits 8-0: dim after arbitration lost -->
-  <rect x="281" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="310" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="341" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="370" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="401" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="430" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="461" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="490" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="521" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="550" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="581" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="610" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="641" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="670" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="701" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="730" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-  <rect x="761" y="72" width="58" height="32" rx="3" fill="#0e1e0e" stroke="#313244" stroke-width="1" opacity="0.15"/>
-  <text x="790" y="93" text-anchor="middle" font-size="15" fill="#2a3a4a">0</text>
-
-  <!-- "STOPS" label after bit 10 conflict -->
-  <text x="490" y="88" text-anchor="middle" font-size="13" font-weight="bold" fill="#f38ba8" opacity="0">
+  <!-- "STOPS" label -->
+  <text x="406" y="78" text-anchor="middle" font-family="PT Mono" font-size="10" font-weight="500" class="dot" opacity="0">
     — stops —
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.10;0.12;0.85;0.88;1" values="0;0;0.9;0.9;0;0"/>
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.10;0.12;0.85;0.88;1" values="0;0;0.7;0.7;0;0"/>
   </text>
 
-  <!-- ══════════════════════════════════════
-       NODE B BIT VALUES  (0 1 0 1 0 0 0 0 0 0 0) for 0x050
-       0x050 = 0000001010000 → bits: 10=0,9=1,8=0,7=1,6-0=0
-       ══════════════════════════════════════ -->
-
-  <!-- Node B bit 10 = 0 (DOMINANT — wins) -->
-  <rect x="161" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <!-- ══ NODE B: bit 10=0 (dominant, WINS) ══ -->
+  <rect x="131" y="118" width="48" height="28" rx="3" class="fill-green ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.00;0.04;0.08;0.10;1" values="0.3;1;1;1;0.3;0.3"/>
   </rect>
-  <text x="190" y="153" text-anchor="middle" font-size="15" font-weight="bold" fill="#a6e3a1">0</text>
+  <text x="155" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" font-weight="600" class="dot">0</text>
 
-  <!-- Node B remaining bits (continues transmitting) -->
-  <rect x="221" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <!-- Node B continues (all bits animate) -->
+  <rect x="181" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.09;0.13;0.22;0.26;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="250" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">1</text>
+  <text x="205" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">1</text>
 
-  <rect x="281" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="231" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.22;0.26;0.31;0.35;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="310" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="255" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="341" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="281" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.31;0.35;0.40;0.44;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="370" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">1</text>
+  <text x="305" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">1</text>
 
-  <rect x="401" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="331" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.40;0.44;0.49;0.53;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="430" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="355" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="461" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="381" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.49;0.53;0.58;0.62;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="490" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="405" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="521" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="431" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.58;0.62;0.67;0.71;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="550" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="455" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="581" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="481" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.67;0.71;0.76;0.80;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="610" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="505" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="641" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="531" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.76;0.80;0.85;0.89;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="670" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="555" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="701" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="581" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.85;0.89;0.94;0.98;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="730" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="605" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <rect x="761" y="132" width="58" height="32" rx="3" fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <rect x="631" y="118" width="48" height="28" rx="3" class="fill-green ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.94;0.98;1" values="0.3;0.3;1"/>
   </rect>
-  <text x="790" y="153" text-anchor="middle" font-size="15" fill="#a6e3a1">0</text>
+  <text x="655" y="136" text-anchor="middle" font-family="PT Mono" font-size="13" class="dot">0</text>
 
-  <!-- ══════════════════════════════════════
-       BUS ROW — dominant wins (0 beats 1)
-       Bus shows 0 on bit 10 (Node B wins),
-       then Node B's full ID bits
-       ══════════════════════════════════════ -->
-
-  <!-- Bus bit 10 = 0 (dominant, Node B's value) -->
-  <rect x="161" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="2">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
+  <!-- ══ BUS ROW — shows dominant (Node B wins) ══ -->
+  <rect x="131" y="176" width="48" height="34" rx="3" class="fill-amber ink fine">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.00;0.04;0.08;0.12;1" values="0.3;1;1;1;0.3;0.3"/>
-    <animate attributeName="stroke" values="#fab387;#fab387;#f38ba8;#fab387;#fab387;#fab387"
-      keyTimes="0;0.05;0.09;0.12;0.14;1" dur="5.5s" repeatCount="indefinite"/>
   </rect>
-  <text x="190" y="225" text-anchor="middle" font-size="16" font-weight="bold" fill="#fab387">0</text>
+  <text x="155" y="198" text-anchor="middle" font-family="PT Mono" font-size="14" font-weight="600" class="dot">0</text>
 
-  <!-- bus bits 9-0 from Node B, animating in sequence -->
-  <rect x="221" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.09;0.13;0.22;0.26;1" values="0.3;0.3;1;1;0.3;0.3"/>
+  <!-- Bus mirrors Node B bits -->
+  <rect x="181" y="176" width="48" height="34" rx="3" class="fill-amber ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.09;0.13;0.22;0.26;1" values="0.3;0.3;0.8;0.8;0.3;0.3"/>
   </rect>
-  <text x="250" y="225" text-anchor="middle" font-size="16" fill="#fab387">1</text>
+  <text x="205" y="198" text-anchor="middle" font-family="PT Mono" font-size="14" class="dot">1</text>
 
-  <rect x="281" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.22;0.26;0.31;0.35;1" values="0.3;0.3;1;1;0.3;0.3"/>
+  <rect x="231" y="176" width="48" height="34" rx="3" class="fill-amber ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.22;0.26;0.31;0.35;1" values="0.3;0.3;0.8;0.8;0.3;0.3"/>
   </rect>
-  <text x="310" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
+  <text x="255" y="198" text-anchor="middle" font-family="PT Mono" font-size="14" class="dot">0</text>
 
-  <rect x="341" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.31;0.35;0.40;0.44;1" values="0.3;0.3;1;1;0.3;0.3"/>
+  <rect x="281" y="176" width="48" height="34" rx="3" class="fill-amber ink hair" opacity="0.3">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.31;0.35;0.40;0.44;1" values="0.3;0.3;0.8;0.8;0.3;0.3"/>
   </rect>
-  <text x="370" y="225" text-anchor="middle" font-size="16" fill="#fab387">1</text>
+  <text x="305" y="198" text-anchor="middle" font-family="PT Mono" font-size="14" class="dot">1</text>
 
-  <rect x="401" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.40;0.44;0.49;0.53;1" values="0.3;0.3;1;1;0.3;0.3"/>
-  </rect>
-  <text x="430" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <rect x="461" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.49;0.53;0.58;0.62;1" values="0.3;0.3;1;1;0.3;0.3"/>
-  </rect>
-  <text x="490" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <rect x="521" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.58;0.62;0.67;0.71;1" values="0.3;0.3;1;1;0.3;0.3"/>
-  </rect>
-  <text x="550" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <rect x="581" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.67;0.71;0.76;0.80;1" values="0.3;0.3;1;1;0.3;0.3"/>
-  </rect>
-  <text x="610" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <rect x="641" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.76;0.80;0.85;0.89;1" values="0.3;0.3;1;1;0.3;0.3"/>
-  </rect>
-  <text x="670" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <rect x="701" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.85;0.89;0.94;0.98;1" values="0.3;0.3;1;1;0.3;0.3"/>
-  </rect>
-  <text x="730" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <rect x="761" y="200" width="58" height="40" rx="3" fill="#1a2a0e" stroke="#fab387" stroke-width="1.5" opacity="0.3">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.94;0.98;1" values="0.3;0.3;1"/>
-  </rect>
-  <text x="790" y="225" text-anchor="middle" font-size="16" fill="#fab387">0</text>
-
-  <!-- ══════════════════════════════════════
-       CONFLICT MARKER at bit 10 (x=190)
-       Arrow pointing up to the conflict
-       ══════════════════════════════════════ -->
-
-  <!-- conflict arrow -->
-  <line x1="190" y1="265" x2="190" y2="248" stroke="#f38ba8" stroke-width="2" opacity="0">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.06;0.08;0.88;0.90;1" values="0;0;1;1;0;0"/>
+  <!-- Conflict arrow -->
+  <line x1="155" y1="230" x2="155" y2="214" class="ink hair" opacity="0">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.06;0.08;0.88;0.90;1" values="0;0;0.7;0.7;0;0"/>
   </line>
-  <polygon points="183,248 197,248 190,240" fill="#f38ba8" opacity="0">
-    <animate attributeName="opacity" dur="5.5s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.06;0.08;0.88;0.90;1" values="0;0;1;1;0;0"/>
+  <polygon points="149,214 161,214 155,208" fill="var(--ink)" opacity="0">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.06;0.08;0.88;0.90;1" values="0;0;0.6;0.6;0;0"/>
   </polygon>
 
-  <!-- ══════════════════════════════════════
-       ANNOTATION PANEL
-       ══════════════════════════════════════ -->
-  <rect x="30" y="272" width="800" height="148" rx="8"
-        fill="#0d0d18" stroke="#313244" stroke-width="1"/>
+  <!-- ══ ANNOTATION PANEL ══ -->
+  <rect x="24" y="244" width="652" height="140" rx="6" class="fill-gray ink hair"/>
 
-  <!-- conflict line -->
-  <rect x="42" y="282" width="10" height="10" rx="2" fill="#f38ba8"/>
-  <text x="60" y="291" font-size="13" fill="#f38ba8" font-weight="bold">Bit 10 differs</text>
-  <text x="185" y="291" font-size="13" fill="#a6adc8">— first bit where Node A sends 1, Node B sends 0</text>
+  <rect x="36" y="256" width="8" height="8" rx="1" class="fill-red ink hair"/>
+  <text x="50" y="262" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Bit 10 differs</text>
+  <text x="152" y="262" font-family="PT Mono" font-size="11" class="dot soft">— A sends 1, B sends 0</text>
 
-  <!-- dominant wins -->
-  <rect x="42" y="302" width="10" height="10" rx="2" fill="#fab387"/>
-  <text x="60" y="311" font-size="13" fill="#fab387" font-weight="bold">Dominant wins</text>
-  <text x="200" y="311" font-size="13" fill="#a6adc8">— 0 (dominant) always overrides 1 (recessive) on the bus</text>
+  <rect x="36" y="276" width="8" height="8" rx="1" class="fill-amber ink hair"/>
+  <text x="50" y="282" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Dominant wins</text>
+  <text x="168" y="282" font-family="PT Mono" font-size="11" class="dot soft">— 0 always overrides 1 on bus</text>
 
-  <!-- node a stops -->
-  <rect x="42" y="322" width="10" height="10" rx="2" fill="#89b4fa"/>
-  <text x="60" y="331" font-size="13" fill="#89b4fa" font-weight="bold">Node A detects loss</text>
-  <text x="248" y="331" font-size="13" fill="#a6adc8">— reads 0 instead of its 1, immediately stops transmitting</text>
+  <rect x="36" y="296" width="8" height="8" rx="1" class="fill-blue ink hair"/>
+  <text x="50" y="302" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Node A detects loss</text>
+  <text x="210" y="302" font-family="PT Mono" font-size="11" class="dot soft">— reads 0 instead of its 1, stops</text>
 
-  <!-- node b wins -->
-  <rect x="42" y="342" width="10" height="10" rx="2" fill="#a6e3a1"/>
-  <text x="60" y="351" font-size="13" fill="#a6e3a1" font-weight="bold">Node B wins</text>
-  <text x="172" y="351" font-size="13" fill="#a6adc8">— lower ID (0x050) has higher priority, continues uninterrupted</text>
+  <rect x="36" y="316" width="8" height="8" rx="1" class="fill-green ink hair"/>
+  <text x="50" y="322" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Node B wins</text>
+  <text x="146" y="322" font-family="PT Mono" font-size="11" class="dot soft">— lower ID = higher priority</text>
 
-  <line x1="42" y1="360" x2="818" y2="360" stroke="#313244" stroke-width="1"/>
+  <line x1="36" y1="336" x2="664" y2="336" class="ink hair soft" stroke-dasharray="5 3"/>
+  <text x="350" y="352" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">no data corrupted · no retransmission needed · Node A waits</text>
+  <text x="350" y="370" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">CAN arbitration — collision-free, non-destructive, priority-based</text>
 
-  <text x="430" y="376" text-anchor="middle" font-size="13" fill="#a6adc8">
-    No data corrupted. No retransmission needed. Node A waits for bus to be free.
-  </text>
-  <text x="430" y="396" text-anchor="middle" font-size="12" fill="#585b70">
-    This is CAN arbitration — collision-free, non-destructive, priority-based.
-  </text>
-  <text x="430" y="412" text-anchor="middle" font-size="12" fill="#585b70">
-    Lower ID = more dominant = higher priority. Always.
-  </text>
-
+  <!-- Bottom note -->
+  <text x="350" y="404" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">lower ID = more dominant = higher priority · always</text>
 </svg>

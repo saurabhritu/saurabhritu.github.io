@@ -3,7 +3,7 @@ title: "Integrating C++ Drivers into C-Based Firmware (and ESP-IDF)"
 date: 2025-09-03
 draft: false
 description: "Mixing C and C++ in embedded projects is a minefield of linkage surprises. Here's how to bridge the gap cleanly without losing your mind."
-image: "images/stacksr_c_cpp_bridge_animated.svg"
+image: "images/c_cpp_coexist.svg"
 categories: ["Embedded Systems"]
 tags: ["cpp", "firmware", "compilation", "esp-idf"]
 readingTime: 10
@@ -88,7 +88,7 @@ extern "C" {
 
 If you only ever have one instance of this sensor (common in ESP-IDF projects), you can skip the opaque pointer and manage a static C++ instance directly behind the `extern "C"` wall.
 
-![C with C++](images/c-with-cpp.svg)
+![C with C++](images/c_with_cpp.svg)
 
 **1. The Wrapper Implementation (`sensor.cpp`)**
 
@@ -158,5 +158,3 @@ When bringing C++ into constrained environments, keep an eye out for these traps
 ## The Golden Rule
 
 Keep the C/C++ boundary as thin as possible. Write a clean C API in `extern "C"` wrappers, hide the C++ complexity behind that wall, and let your C firmware remain blissfully unaware of the class hierarchy on the other side. The thinner the boundary, the fewer surprises.
-
-> Stay tuned & Be Curious!

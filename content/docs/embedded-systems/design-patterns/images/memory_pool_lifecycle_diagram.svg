@@ -1,9 +1,46 @@
-<svg width="100%" viewBox="0 0 680 530" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" viewBox="0 0 680 530" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+
+    <style>
+      :root { 
+        --bg: #F7F4EE; --ink: #161616; --noise-opacity: 0.85;
+        --free: #E2EFED; --used: #F2E4DF; --just-freed: #F5E9D0; --empty: #F0EFEC;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { 
+          --bg: #131313; --ink: #F3EFE7; --noise-opacity: 0.18;
+          --free: #1A2E28; --used: #2E1E1A; --just-freed: #2E2619; --empty: #1A1A19;
+        }
+      }
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2; }
+      .hair { stroke-width: 1.4; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.75; }
+      .soft { opacity: 0.5; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+      .fill-free { fill: var(--free); }
+      .fill-used { fill: var(--used); }
+      .fill-just-freed { fill: var(--just-freed); }
+      .fill-empty { fill: var(--empty); }
+    </style>
+
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 1L8 5L2 9" class="ink hair soft" fill="none"/>
     </marker>
   </defs>
+
+  <rect class="bg" width="680" height="530"/>
+  <rect class="noiseLayer" width="680" height="530" filter="url(#paperNoise)"/>
 
   <!-- ══ BLOCK dimensions: 5 blocks, x0=40, each 112px wide, 4px gap ══ -->
   <!-- x positions: 40, 156, 272, 388, 504  width=112 -->
@@ -11,139 +48,128 @@
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <!-- SCENE 1 — Boot time                      -->
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <text x="40" y="26" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">Boot time — all blocks free</text>
+  <text x="40" y="26" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot fade">Boot time — all blocks free</text>
 
   <!-- 5 free blocks -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="40" y="38" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="156" y="38" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="272" y="38" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="388" y="38" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="504" y="38" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="96" y="58" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 0</text>
-    <text x="212" y="58" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 1</text>
-    <text x="328" y="58" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 2</text>
-    <text x="444" y="58" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 3</text>
-    <text x="560" y="58" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 4</text>
-    <text x="96" y="78" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="212" y="78" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="328" y="78" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="444" y="78" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="560" y="78" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-  </g>
+  <rect x="40" y="38" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="156" y="38" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="272" y="38" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="388" y="38" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="504" y="38" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <text x="96" y="58" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 0</text>
+  <text x="212" y="58" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 1</text>
+  <text x="328" y="58" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 2</text>
+  <text x="444" y="58" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 3</text>
+  <text x="560" y="58" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 4</text>
+  <text x="96" y="78" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="212" y="78" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="328" y="78" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="444" y="78" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="560" y="78" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
 
   <!-- free_list chain: free_list → [0] → [1] → [2] → [3] → [4] → NULL -->
-  <text x="40" y="116" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">free_list</text>
-  <!-- arrows between nodes -->
-  <line x1="96" y1="116" x2="118" y2="116" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="130" y="116" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[0]</text>
-  <line x1="152" y1="116" x2="174" y2="116" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="186" y="116" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[1]</text>
-  <line x1="208" y1="116" x2="230" y2="116" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="242" y="116" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[2]</text>
-  <line x1="264" y1="116" x2="286" y2="116" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="298" y="116" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[3]</text>
-  <line x1="320" y1="116" x2="342" y2="116" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="354" y="116" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[4]</text>
-  <line x1="376" y1="116" x2="398" y2="116" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="406" y="116" dominant-baseline="central" style="fill:#888780;fill:rgb(136, 135, 128);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">NULL</text>
+  <text x="40" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free_list</text>
+  <line x1="96" y1="116" x2="118" y2="116" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="130" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[0]</text>
+  <line x1="152" y1="116" x2="174" y2="116" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="186" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[1]</text>
+  <line x1="208" y1="116" x2="230" y2="116" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="242" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[2]</text>
+  <line x1="264" y1="116" x2="286" y2="116" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="298" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[3]</text>
+  <line x1="320" y1="116" x2="342" y2="116" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="354" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[4]</text>
+  <line x1="376" y1="116" x2="398" y2="116" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="406" y="116" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">NULL</text>
 
   <!-- ── divider ── -->
-  <line x1="40" y1="142" x2="640" y2="142" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 4" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="40" y1="142" x2="640" y2="142" class="ink hair soft" stroke-dasharray="4 4"/>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <!-- SCENE 2 — After allocating 2 blocks      -->
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <text x="40" y="162" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">After allocating 2 blocks — blocks 0 &amp; 1 popped from free_list</text>
+  <text x="40" y="162" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot fade">After allocating 2 blocks — blocks 0 &amp; 1 popped from free_list</text>
 
   <!-- Block 0 — IN USE -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="40" y="176" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(113, 43, 19);stroke:rgb(240, 153, 123);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="96" y="196" text-anchor="middle" dominant-baseline="central" style="fill:rgb(245, 196, 179);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 0</text>
-    <text x="96" y="216" text-anchor="middle" dominant-baseline="central" style="fill:rgb(240, 153, 123);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">in use</text>
-  </g>
+  <rect x="40" y="176" width="112" height="56" rx="6" class="fill-used ink fine"/>
+  <text x="96" y="196" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 0</text>
+  <text x="96" y="216" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">in use</text>
+
   <!-- Block 1 — IN USE -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="156" y="176" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(113, 43, 19);stroke:rgb(240, 153, 123);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="212" y="196" text-anchor="middle" dominant-baseline="central" style="fill:rgb(245, 196, 179);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 1</text>
-    <text x="212" y="216" text-anchor="middle" dominant-baseline="central" style="fill:rgb(240, 153, 123);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">in use</text>
-  </g>
+  <rect x="156" y="176" width="112" height="56" rx="6" class="fill-used ink fine"/>
+  <text x="212" y="196" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 1</text>
+  <text x="212" y="216" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">in use</text>
+
   <!-- Blocks 2-4 — free -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="272" y="176" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="388" y="176" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="504" y="176" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="328" y="196" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 2</text>
-    <text x="444" y="196" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 3</text>
-    <text x="560" y="196" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 4</text>
-    <text x="328" y="216" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="444" y="216" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="560" y="216" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-  </g>
+  <rect x="272" y="176" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="388" y="176" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="504" y="176" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <text x="328" y="196" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 2</text>
+  <text x="444" y="196" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 3</text>
+  <text x="560" y="196" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 4</text>
+  <text x="328" y="216" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="444" y="216" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="560" y="216" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
 
   <!-- free_list chain: free_list → [2] → [3] → [4] → NULL -->
-  <text x="40" y="254" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">free_list</text>
-  <line x1="96" y1="254" x2="118" y2="254" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="130" y="254" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[2]</text>
-  <line x1="152" y1="254" x2="174" y2="254" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="186" y="254" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[3]</text>
-  <line x1="208" y1="254" x2="230" y2="254" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="242" y="254" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[4]</text>
-  <line x1="264" y1="254" x2="286" y2="254" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="294" y="254" dominant-baseline="central" style="fill:#888780;fill:rgb(136, 135, 128);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">NULL</text>
+  <text x="40" y="254" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free_list</text>
+  <line x1="96" y1="254" x2="118" y2="254" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="130" y="254" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[2]</text>
+  <line x1="152" y1="254" x2="174" y2="254" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="186" y="254" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[3]</text>
+  <line x1="208" y1="254" x2="230" y2="254" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="242" y="254" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[4]</text>
+  <line x1="264" y1="254" x2="286" y2="254" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="294" y="254" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">NULL</text>
 
   <!-- ── divider ── -->
-  <line x1="40" y1="280" x2="640" y2="280" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 4" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="40" y1="280" x2="640" y2="280" class="ink hair soft" stroke-dasharray="4 4"/>
 
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
   <!-- SCENE 3 — After freeing Block 0          -->
   <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <text x="40" y="300" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">After freeing block 0 — pushed back to head of free_list</text>
+  <text x="40" y="300" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot fade">After freeing block 0 — pushed back to head of free_list</text>
 
   <!-- Block 0 — free again (amber = just returned) -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="40" y="314" width="112" height="56" rx="6" stroke-width="1" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="96" y="334" text-anchor="middle" dominant-baseline="central" style="fill:rgb(250, 199, 117);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 0</text>
-    <text x="96" y="354" text-anchor="middle" dominant-baseline="central" style="fill:rgb(239, 159, 39);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">just freed</text>
-  </g>
+  <rect x="40" y="314" width="112" height="56" rx="6" class="fill-just-freed ink hair" stroke-dasharray="4 3"/>
+  <text x="96" y="334" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 0</text>
+  <text x="96" y="354" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">just freed</text>
+
   <!-- Block 1 still IN USE -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="156" y="314" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(113, 43, 19);stroke:rgb(240, 153, 123);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="212" y="334" text-anchor="middle" dominant-baseline="central" style="fill:rgb(245, 196, 179);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 1</text>
-    <text x="212" y="354" text-anchor="middle" dominant-baseline="central" style="fill:rgb(240, 153, 123);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">in use</text>
-  </g>
-  <!-- Blocks 2-4 free -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="272" y="314" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="388" y="314" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <rect x="504" y="314" width="112" height="56" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="328" y="334" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 2</text>
-    <text x="444" y="334" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 3</text>
-    <text x="560" y="334" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Block 4</text>
-    <text x="328" y="354" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="444" y="354" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-    <text x="560" y="354" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">free</text>
-  </g>
+  <rect x="156" y="314" width="112" height="56" rx="6" class="fill-used ink fine"/>
+  <text x="212" y="334" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 1</text>
+  <text x="212" y="354" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">in use</text>
+
+  <!-- Blocks 2-4 — free -->
+  <rect x="272" y="314" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="388" y="314" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <rect x="504" y="314" width="112" height="56" rx="6" class="fill-free ink fine"/>
+  <text x="328" y="334" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 2</text>
+  <text x="444" y="334" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 3</text>
+  <text x="560" y="334" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="14" font-weight="500" class="dot">Block 4</text>
+  <text x="328" y="354" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="444" y="354" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
+  <text x="560" y="354" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free</text>
 
   <!-- free_list chain: free_list → [0] → [2] → [3] → [4] → NULL -->
-  <text x="40" y="392" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">free_list</text>
-  <line x1="96" y1="392" x2="118" y2="392" stroke="#BA7517" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="130" y="392" dominant-baseline="central" style="fill:#BA7517;fill:rgb(186, 117, 23);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[0]</text>
-  <line x1="152" y1="392" x2="174" y2="392" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="186" y="392" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[2]</text>
-  <line x1="208" y1="392" x2="230" y2="392" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="242" y="392" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[3]</text>
-  <line x1="264" y1="392" x2="286" y2="392" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="298" y="392" dominant-baseline="central" style="fill:#0F6E56;fill:rgb(15, 110, 86);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">[4]</text>
-  <line x1="320" y1="392" x2="342" y2="392" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="350" y="392" dominant-baseline="central" style="fill:#888780;fill:rgb(136, 135, 128);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">NULL</text>
+  <text x="40" y="392" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">free_list</text>
+  <line x1="96" y1="392" x2="118" y2="392" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="130" y="392" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[0]</text>
+  <line x1="152" y1="392" x2="174" y2="392" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="186" y="392" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[2]</text>
+  <line x1="208" y1="392" x2="230" y2="392" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="242" y="392" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[3]</text>
+  <line x1="264" y1="392" x2="286" y2="392" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="298" y="392" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">[4]</text>
+  <line x1="320" y1="392" x2="342" y2="392" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="350" y="392" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">NULL</text>
 
   <!-- ── Legend ── -->
-  <line x1="40" y1="418" x2="640" y2="418" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 4" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="40" y="428" width="12" height="12" rx="2" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="58" y="434" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">Free</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="120" y="428" width="12" height="12" rx="2" stroke-width="0.5" style="fill:rgb(113, 43, 19);stroke:rgb(240, 153, 123);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="138" y="434" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">In use</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="210" y="428" width="12" height="12" rx="2" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="228" y="434" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">Just freed (pushed to head)</text>
+  <line x1="40" y1="418" x2="640" y2="418" class="ink hair soft" stroke-dasharray="4 4"/>
+  <rect x="40" y="428" width="12" height="12" rx="2" class="fill-free ink fine"/>
+  <text x="58" y="434" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">Free</text>
+  <rect x="120" y="428" width="12" height="12" rx="2" class="fill-used ink fine"/>
+  <text x="138" y="434" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">In use</text>
+  <rect x="210" y="428" width="12" height="12" rx="2" class="fill-just-freed ink hair" stroke-dasharray="4 3"/>
+  <text x="228" y="434" dominant-baseline="central" font-family="PT Mono" font-size="12" class="dot soft">Just freed (pushed to head)</text>
 </svg>

@@ -1,87 +1,115 @@
-<svg width="100%" viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 560" fill="none">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+
+    <style>
+      :root { 
+        --bg: #F7F4EE; --ink: #161616; --noise-opacity: 0.85;
+        --idle: #F0EFEC; --armed: #E2EFED; --flying: #EBE6F5; --landing: #F5E9D0; --fault: #F2E4DF;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { 
+          --bg: #131313; --ink: #F3EFE7; --noise-opacity: 0.18;
+          --idle: #1A1A19; --armed: #1A2E28; --flying: #221E33; --landing: #2E2619; --fault: #2E1E1A;
+        }
+      }
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2; }
+      .hair { stroke-width: 1.4; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.75; }
+      .soft { opacity: 0.5; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+      .fill-idle { fill: var(--idle); }
+      .fill-armed { fill: var(--armed); }
+      .fill-flying { fill: var(--flying); }
+      .fill-landing { fill: var(--landing); }
+      .fill-fault { fill: var(--fault); }
+    </style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M2 1L8 5L2 9" class="ink hair soft" fill="none"/>
     </marker>
-  <mask id="imagine-text-gaps-xuz3zs" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="560" fill="white"/><rect x="100.28829193115234" y="71.31900024414062" width="39.42342185974121" height="21.36200523376465" fill="black" rx="2"/><rect x="369.6405029296875" y="71.31900024414062" width="60.7190055847168" height="21.36200523376465" fill="black" rx="2"/><rect x="230.76329040527344" y="231.31900024414062" width="58.4734001159668" height="21.36202049255371" fill="black" rx="2"/><rect x="222.9564208984375" y="381.3190002441406" width="74.08715057373047" height="21.36200523376465" fill="black" rx="2"/><rect x="524.9304809570312" y="301.3190002441406" width="50.139034271240234" height="21.36200523376465" fill="black" rx="2"/><rect x="223.1922607421875" y="60.42533493041992" width="71.61547470092773" height="18.468338012695312" fill="black" rx="2"/><rect x="331.1707763671875" y="160.42532348632812" width="97.65847778320312" height="18.468338012695312" fill="black" rx="2"/><rect x="162.74571228027344" y="306.4253234863281" width="94.50860595703125" height="18.468338012695312" fill="black" rx="2"/><rect x="383.1752624511719" y="302.42535400390625" width="93.64954376220703" height="18.468338012695312" fill="black" rx="2"/><rect x="394.6670227050781" y="316.4253234863281" width="70.66598892211914" height="18.468338012695312" fill="black" rx="2"/><rect x="54.6502685546875" y="296.4253234863281" width="58.699466705322266" height="18.468338012695312" fill="black" rx="2"/><rect x="255.65914916992188" y="14.425331115722656" width="158.6817169189453" height="18.468339920043945" fill="black" rx="2"/><rect x="76" y="502.4253234863281" width="34.79656791687012" height="18.468338012695312" fill="black" rx="2"/><rect x="140.00001525878906" y="502.4253234863281" width="52.881988525390625" height="18.468338012695312" fill="black" rx="2"/><rect x="220.00001525878906" y="502.4253234863281" width="50.99810791015625" height="18.468338012695312" fill="black" rx="2"/><rect x="300" y="502.4253234863281" width="64.38130569458008" height="18.468338012695312" fill="black" rx="2"/><rect x="390.0000305175781" y="502.4253234863281" width="103.09918212890625" height="18.468338012695312" fill="black" rx="2"/><rect x="516" y="502.4253234863281" width="139.57144165039062" height="18.468338012695312" fill="black" rx="2"/></mask></defs>
+  </defs>
+
+  <rect class="bg" width="680" height="560"/>
+  <rect class="noiseLayer" width="680" height="560" filter="url(#paperNoise)"/>
 
   <!-- ── IDLE ── (top-left) -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="60" y="60" width="120" height="44" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="120" y="82" text-anchor="middle" dominant-baseline="central" style="fill:rgb(211, 209, 199);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">IDLE</text>
-  </g>
+  <rect x="60" y="60" width="120" height="44" rx="8" class="fill-idle ink fine"/>
+  <text x="120" y="82" text-anchor="middle" dominant-baseline="central" class="dot" font-family="PT Mono" font-size="14" font-weight="500">IDLE</text>
 
   <!-- ── ARMED ── (top-right) -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="340" y="60" width="120" height="44" rx="8" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="400" y="82" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">ARMED</text>
-  </g>
+  <rect x="340" y="60" width="120" height="44" rx="8" class="fill-armed ink fine"/>
+  <text x="400" y="82" text-anchor="middle" dominant-baseline="central" class="dot" font-family="PT Mono" font-size="14" font-weight="500">ARMED</text>
 
   <!-- ── FLYING ── (middle) -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="200" y="220" width="120" height="44" rx="8" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="260" y="242" text-anchor="middle" dominant-baseline="central" style="fill:rgb(206, 203, 246);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">FLYING</text>
-  </g>
+  <rect x="200" y="220" width="120" height="44" rx="8" class="fill-flying ink fine"/>
+  <text x="260" y="242" text-anchor="middle" dominant-baseline="central" class="dot" font-family="PT Mono" font-size="14" font-weight="500">FLYING</text>
 
   <!-- ── LANDING ── (lower-middle) -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="200" y="370" width="120" height="44" rx="8" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="260" y="392" text-anchor="middle" dominant-baseline="central" style="fill:rgb(250, 199, 117);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">LANDING</text>
-  </g>
+  <rect x="200" y="370" width="120" height="44" rx="8" class="fill-landing ink fine" stroke-dasharray="4 3"/>
+  <text x="260" y="392" text-anchor="middle" dominant-baseline="central" class="dot" font-family="PT Mono" font-size="14" font-weight="500">LANDING</text>
 
   <!-- ── FAULT ── (right) -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="490" y="290" width="120" height="44" rx="8" stroke-width="0.5" style="fill:rgb(121, 31, 31);stroke:rgb(240, 149, 149);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="550" y="312" text-anchor="middle" dominant-baseline="central" style="fill:rgb(247, 193, 193);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">FAULT</text>
-  </g>
+  <rect x="490" y="290" width="120" height="44" rx="8" class="fill-fault ink fine"/>
+  <text x="550" y="312" text-anchor="middle" dominant-baseline="central" class="dot" font-family="PT Mono" font-size="14" font-weight="500">FAULT</text>
 
   <!-- ══ ARROWS ══ -->
 
   <!-- IDLE → ARMED (CMD_ARM) — top horizontal right -->
-  <line x1="180" y1="82" x2="338" y2="82" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="259" y="74" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">CMD_ARM</text>
+  <line x1="180" y1="82" x2="338" y2="82" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="259" y="74" text-anchor="middle" class="dot fade" font-family="PT Mono" font-size="12">CMD_ARM</text>
 
   <!-- ARMED → FLYING (CMD_TAKEOFF) — diagonal down-left -->
-  <path d="M 400 104 L 400 180 L 262 180 L 262 218" fill="none" marker-end="url(#arrow)" mask="url(#imagine-text-gaps-xuz3zs)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="380" y="174" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">CMD_TAKEOFF</text>
+  <path d="M 400 104 L 400 180 L 262 180 L 262 218" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="380" y="174" text-anchor="middle" class="dot fade" font-family="PT Mono" font-size="12">CMD_TAKEOFF</text>
 
   <!-- FLYING → LANDING (LOW_BATTERY) — straight down -->
-  <line x1="260" y1="264" x2="260" y2="368" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="210" y="320" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">LOW_BATTERY</text>
+  <line x1="260" y1="264" x2="260" y2="368" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="210" y="320" text-anchor="middle" class="dot fade" font-family="PT Mono" font-size="12">LOW_BATTERY</text>
 
   <!-- LANDING → FLYING (CMD_RESUME) — right curved loop -->
-  <path d="M 320 380 L 390 380 L 390 242 L 322 242" fill="none" marker-end="url(#arrow)" mask="url(#imagine-text-gaps-xuz3zs)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="430" y="316" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">CMD_RESUME</text>
-  <text x="430" y="330" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">(if cleared)</text>
+  <path d="M 320 380 L 390 380 L 390 242 L 322 242" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="430" y="316" text-anchor="middle" class="dot fade" font-family="PT Mono" font-size="12">CMD_RESUME</text>
+  <text x="430" y="330" text-anchor="middle" class="dot soft" font-family="PT Mono" font-size="12">(if cleared)</text>
 
   <!-- LANDING → IDLE (LANDED) — left then up -->
-  <path d="M 200 392 L 120 392 L 120 106" fill="none" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="84" y="310" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">LANDED</text>
+  <path d="M 200 392 L 120 392 L 120 106" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="84" y="310" text-anchor="middle" class="dot fade" font-family="PT Mono" font-size="12">LANDED</text>
 
   <!-- IDLE → FAULT (MOTOR_FAULT) — curved right arc -->
-  <path d="M 180 72 Q 340 20 488 298" fill="none" marker-end="url(#arrow)" mask="url(#imagine-text-gaps-xuz3zs)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="335" y="28" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">MOTOR_FAULT (any state)</text>
+  <path d="M 180 72 Q 340 20 488 298" class="ink hair soft" marker-end="url(#arrow)"/>
+  <text x="335" y="28" text-anchor="middle" class="dot fade" font-family="PT Mono" font-size="12">MOTOR_FAULT (any state)</text>
 
   <!-- FLYING → FAULT -->
-  <path d="M 320 242 L 488 302" fill="none" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <path d="M 320 242 L 488 302" class="ink hair soft" marker-end="url(#arrow)"/>
 
   <!-- LANDING → FAULT -->
-  <path d="M 320 392 L 488 320" fill="none" marker-end="url(#arrow)" mask="url(#imagine-text-gaps-xuz3zs)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <path d="M 320 392 L 488 320" class="ink hair soft" marker-end="url(#arrow)"/>
 
   <!-- ARMED → FAULT -->
-  <path d="M 460 82 Q 520 82 552 288" fill="none" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <path d="M 460 82 Q 520 82 552 288" class="ink hair soft" marker-end="url(#arrow)"/>
 
   <!-- ── Legend ── -->
-  <rect x="40" y="490" width="600" height="48" rx="6" fill="none" stroke="var(--b)" stroke-width="0.5" opacity="0.4" style="fill:none;stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="56" y="504" width="16" height="16" rx="3" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="80" y="516" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">IDLE</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="120" y="504" width="16" height="16" rx="3" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="144" y="516" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">ARMED</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="200" y="504" width="16" height="16" rx="3" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="224" y="516" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">FLYING</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="280" y="504" width="16" height="16" rx="3" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="304" y="516" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">LANDING</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="370" y="504" width="16" height="16" rx="3" stroke-width="0.5" style="fill:rgb(121, 31, 31);stroke:rgb(240, 149, 149);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="394" y="516" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">FAULT (terminal)</text>
-  <text x="520" y="516" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">Arrow = valid transition</text>
+  <rect x="40" y="490" width="600" height="60" rx="6" class="ink hair soft"/>
+  <rect x="56" y="504" width="16" height="16" rx="3" class="fill-idle ink fine"/>
+  <text x="80" y="516" class="dot soft" font-family="PT Mono" font-size="12">IDLE</text>
+  <rect x="120" y="504" width="16" height="16" rx="3" class="fill-armed ink fine"/>
+  <text x="144" y="516" class="dot soft" font-family="PT Mono" font-size="12">ARMED</text>
+  <rect x="200" y="504" width="16" height="16" rx="3" class="fill-flying ink fine"/>
+  <text x="224" y="516" class="dot soft" font-family="PT Mono" font-size="12">FLYING</text>
+  <rect x="280" y="504" width="16" height="16" rx="3" class="fill-landing ink fine" stroke-dasharray="4 3"/>
+  <text x="304" y="516" class="dot soft" font-family="PT Mono" font-size="12">LANDING</text>
+  <rect x="370" y="504" width="16" height="16" rx="3" class="fill-fault ink fine"/>
+  <text x="394" y="516" class="dot soft" font-family="PT Mono" font-size="12">FAULT (terminal)</text>
+  <text x="220" y="540" class="dot soft" font-family="PT Mono" font-size="12">Arrow = valid transition</text>
 </svg>

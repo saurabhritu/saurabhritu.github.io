@@ -1,119 +1,116 @@
-<svg width="100%" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" viewBox="0 0 620 500" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
+    <style>
+      :root { --bg: #F7F4EE; --ink: #161616; --noise-opacity: 0.85;
+        --green: #E2EFED; --purple: #EBE6F5; --gray: #F0EFEC; --amber: #F5E9D0; }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg: #131313; --ink: #F3EFE7; --noise-opacity: 0.18;
+          --green: #1A2E28; --purple: #221E33; --gray: #1A1A19; --amber: #2E2619; }
+      }
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2; }
+      .hair { stroke-width: 1.4; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .soft { opacity: 0.5; }
+      .noiseLayer { opacity: var(--noise-opacity); }
+      .fill-green { fill: var(--green); }
+      .fill-purple { fill: var(--purple); }
+      .fill-gray { fill: var(--gray); }
+      .fill-amber { fill: var(--amber); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M2 1L8 5L2 9" class="ink hair soft" fill="none"/>
     </marker>
-  <mask id="imagine-text-gaps-0x77nz" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="580" fill="white"/><rect x="103.27366638183594" y="33.31898880004883" width="133.45265197753906" height="21.36202049255371" fill="black" rx="2"/><rect x="128.12606811523438" y="54.76582336425781" width="83.74784088134766" height="18.468350410461426" fill="black" rx="2"/><rect x="435.7531433105469" y="33.31898880004883" width="148.49371337890625" height="21.36202049255371" fill="black" rx="2"/><rect x="464.3808898925781" y="54.76582336425781" width="91.23822784423828" height="18.468350410461426" fill="black" rx="2"/><rect x="91.37496185302734" y="106.76582336425781" width="157.2500762939453" height="18.468350410461426" fill="black" rx="2"/><rect x="114.20782470703125" y="122.76582336425781" width="111.58434295654297" height="18.468350410461426" fill="black" rx="2"/><rect x="106.80033111572266" y="170.7658233642578" width="126.39933776855469" height="18.468350410461426" fill="black" rx="2"/><rect x="446.8003234863281" y="208.7658233642578" width="126.39933776855469" height="18.468350410461426" fill="black" rx="2"/><rect x="72" y="240.76583862304688" width="83.79305267333984" height="18.468350410461426" fill="black" rx="2"/><rect x="106.23516082763672" y="258.76580810546875" width="127.52967071533203" height="18.532462120056152" fill="black" rx="2"/><rect x="120.52265930175781" y="273.76580810546875" width="98.95468139648438" height="18.468350410461426" fill="black" rx="2"/><rect x="299.95721435546875" y="256.76580810546875" width="80.08554077148438" height="18.468350410461426" fill="black" rx="2"/><rect x="447.63677978515625" y="258.76580810546875" width="124.72643280029297" height="18.532462120056152" fill="black" rx="2"/><rect x="456.9960021972656" y="273.76580810546875" width="106.00800323486328" height="18.532462120056152" fill="black" rx="2"/><rect x="106.53658294677734" y="338.7658386230469" width="126.92682647705078" height="18.468350410461426" fill="black" rx="2"/><rect x="446.5365905761719" y="338.7658386230469" width="126.92682647705078" height="18.468350410461426" fill="black" rx="2"/><rect x="103.07020568847656" y="402.76580810546875" width="133.85958099365234" height="18.468350410461426" fill="black" rx="2"/><rect x="443.0400695800781" y="402.76580810546875" width="133.91986083984375" height="18.468350410461426" fill="black" rx="2"/><rect x="429.7095947265625" y="454.76580810546875" width="160.580810546875" height="18.468350410461426" fill="black" rx="2"/><rect x="430.968017578125" y="469.76580810546875" width="158.0639190673828" height="18.468350410461426" fill="black" rx="2"/><rect x="74" y="522.7658081054688" width="209.8184051513672" height="18.468350410461426" fill="black" rx="2"/><rect x="324" y="522.7658081054688" width="104.78723907470703" height="18.532462120056152" fill="black" rx="2"/></mask></defs>
+  </defs>
+  <rect class="bg" width="620" height="500"/>
+  <rect class="noiseLayer" width="620" height="500" filter="url(#paperNoise)"/>
 
   <!-- ══ COLUMN HEADERS ══ -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="60" y="24" width="220" height="52" rx="8" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="170" y="44" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">`task_gps_reader`</text>
-    <text x="170" y="64" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">writer — 5 Hz</text>
-  </g>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="400" y="24" width="220" height="52" rx="8" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="510" y="44" text-anchor="middle" dominant-baseline="central" style="fill:rgb(206, 203, 246);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">`task_flight_control`</text>
-    <text x="510" y="64" text-anchor="middle" dominant-baseline="central" style="fill:rgb(175, 169, 236);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">reader — 1 kHz</text>
-  </g>
+  <rect x="50" y="20" width="200" height="46" rx="8" class="fill-green ink fine"/>
+  <text x="150" y="36" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="13" font-weight="500" class="dot">GPS Writer</text>
+  <text x="150" y="54" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">5 Hz</text>
 
-  <!-- ── column spine lines ── -->
-  <line x1="170" y1="76" x2="170" y2="540" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 3" mask="url(#imagine-text-gaps-0x77nz)" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="510" y1="76" x2="510" y2="540" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 3" mask="url(#imagine-text-gaps-0x77nz)" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <rect x="370" y="20" width="200" height="46" rx="8" class="fill-purple ink fine"/>
+  <text x="470" y="36" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="13" font-weight="500" class="dot">Flight Control</text>
+  <text x="470" y="54" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">1 kHz</text>
 
-  <!-- ══ LEFT COLUMN ══ -->
+  <!-- column spines -->
+  <line x1="150" y1="66" x2="150" y2="460" class="ink hair soft" stroke-dasharray="5 3"/>
+  <line x1="470" y1="66" x2="470" y2="460" class="ink hair soft" stroke-dasharray="5 3"/>
 
-  <!-- parse_nmea_sentence() local box -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="80" y="100" width="180" height="44" rx="6" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="170" y="116" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`parse_nmea_sentence()`</text>
-    <text x="170" y="132" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">fresh — local copy</text>
-  </g>
-  <line x1="170" y1="144" x2="170" y2="162" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- ══ LEFT: parse NMEA ══ -->
+  <rect x="60" y="86" width="180" height="32" rx="6" class="fill-gray ink fine"/>
+  <text x="150" y="102" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">parse NMEA → local</text>
 
-  <!-- xSemaphoreTake left -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="80" y="162" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="170" y="180" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`xSemaphoreTake()`</text>
-  </g>
-  <line x1="170" y1="198" x2="170" y2="236" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="150" y1="118" x2="150" y2="140" class="ink hair soft" marker-end="url(#arrow)"/>
 
-  <!-- ══ RIGHT COLUMN ══ -->
+  <!-- LEFT: take mutex -->
+  <rect x="60" y="140" width="180" height="30" rx="6" class="fill-green ink fine"/>
+  <text x="150" y="155" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot">TAKE mutex</text>
 
-  <!-- xSemaphoreTake right — staggered slightly lower to show contention -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="420" y="200" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="510" y="218" text-anchor="middle" dominant-baseline="central" style="fill:rgb(175, 169, 236);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`xSemaphoreTake()`</text>
-  </g>
+  <line x1="150" y1="170" x2="150" y2="200" class="ink hair soft" marker-end="url(#arrow)"/>
 
-  <!-- blocked arrow on right — hits the mutex region, waits -->
-  <line x1="510" y1="76" x2="510" y2="198" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 3" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="510" y1="236" x2="510" y2="304" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 3" mask="url(#imagine-text-gaps-0x77nz)" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- RIGHT: take mutex (contention) -->
+  <rect x="380" y="168" width="180" height="30" rx="6" class="fill-purple ink fine"/>
+  <text x="470" y="183" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot">TAKE mutex</text>
 
   <!-- ══ MUTEX LOCKED REGION ══ -->
-  <!-- spans both columns, y=236 to y=304 -->
-  <rect x="60" y="236" width="560" height="68" rx="8" fill="none" stroke="#BA7517" stroke-width="1" stroke-dasharray="5 3" style="fill:none;stroke:rgb(186, 117, 23);color:rgb(255, 255, 255);stroke-width:1px;stroke-dasharray:5px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="76" y="250" dominant-baseline="central" style="fill:#BA7517;fill:rgb(186, 117, 23);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">mutex locked</text>
+  <rect x="40" y="200" width="540" height="66" rx="8" fill="none" class="ink hair" stroke-dasharray="5 3"/>
+  <text x="56" y="214" dominant-baseline="central" font-family="PT Mono" font-size="10" class="dot soft">LOCKED</text>
 
-  <!-- left: g_gps_data = fresh -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="80" y="256" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="170" y="268" text-anchor="middle" dominant-baseline="central" style="fill:rgb(239, 159, 39);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`g_gps_data = fresh`</text>
-    <text x="170" y="283" text-anchor="middle" dominant-baseline="central" style="fill:rgb(239, 159, 39);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">safe struct copy</text>
-  </g>
+  <!-- left: write -->
+  <rect x="60" y="220" width="180" height="30" rx="6" class="fill-amber ink fine"/>
+  <text x="150" y="235" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">g_gps = fresh</text>
 
-  <!-- "only one at a time" bridge label -->
-  <line x1="268" y1="274" x2="418" y2="274" stroke="#BA7517" stroke-width="0.5" stroke-dasharray="3 3" mask="url(#imagine-text-gaps-0x77nz)" style="fill:rgb(0, 0, 0);stroke:rgb(186, 117, 23);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:3px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="340" y="266" text-anchor="middle" dominant-baseline="central" style="fill:#BA7517;fill:rgb(186, 117, 23);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">one at a time</text>
+  <!-- bridge label -->
+  <line x1="248" y1="235" x2="372" y2="235" class="ink hair soft" stroke-dasharray="5 3"/>
+  <text x="310" y="226" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="10" class="dot soft">exclusive</text>
 
-  <!-- right: snap = g_gps_data — dimmed, blocked out -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="420" y="256" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="510" y="268" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`snap = g_gps_data`</text>
-    <text x="510" y="283" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">waiting for lock…</text>
-  </g>
+  <!-- right: blocked -->
+  <rect x="380" y="220" width="180" height="30" rx="6" class="fill-gray ink fine"/>
+  <text x="470" y="235" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">waiting…</text>
 
   <!-- ══ AFTER MUTEX ══ -->
-  <line x1="170" y1="304" x2="170" y2="330" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="510" y1="304" x2="510" y2="330" stroke="#534AB7" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="150" y1="266" x2="150" y2="290" class="ink hair soft" marker-end="url(#arrow)"/>
+  <line x1="470" y1="266" x2="470" y2="290" class="ink hair soft" marker-end="url(#arrow)"/>
 
-  <!-- xSemaphoreGive left -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="80" y="330" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="170" y="348" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`xSemaphoreGive()`</text>
-  </g>
+  <!-- give mutex left -->
+  <rect x="60" y="290" width="180" height="30" rx="6" class="fill-green ink fine"/>
+  <text x="150" y="305" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot">GIVE mutex</text>
 
-  <!-- xSemaphoreGive right -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="420" y="330" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="510" y="348" text-anchor="middle" dominant-baseline="central" style="fill:rgb(175, 169, 236);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`xSemaphoreGive()`</text>
-  </g>
+  <!-- give mutex right -->
+  <rect x="380" y="290" width="180" height="30" rx="6" class="fill-purple ink fine"/>
+  <text x="470" y="305" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot">GIVE mutex</text>
 
-  <line x1="170" y1="366" x2="170" y2="394" stroke="#0F6E56" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="510" y1="366" x2="510" y2="394" stroke="#534AB7" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="150" y1="320" x2="150" y2="346" class="ink hair soft" marker-end="url(#arrow)"/>
+  <line x1="470" y1="320" x2="470" y2="346" class="ink hair soft" marker-end="url(#arrow)"/>
 
-  <!-- vTaskDelay left -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="80" y="394" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="170" y="412" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`vTaskDelay(200 ms)`</text>
-  </g>
+  <!-- delay left -->
+  <rect x="60" y="346" width="180" height="30" rx="6" class="fill-gray ink fine"/>
+  <text x="150" y="361" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">delay 200 ms</text>
 
-  <!-- run_pid_controller right — highlighted as the key point -->
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="420" y="394" width="180" height="36" rx="6" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="510" y="412" text-anchor="middle" dominant-baseline="central" style="fill:rgb(175, 169, 236);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">`run_pid_controller()`</text>
-  </g>
+  <!-- PID right -->
+  <rect x="380" y="346" width="180" height="30" rx="6" class="fill-purple ink fine"/>
+  <text x="470" y="361" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot">run PID</text>
 
-  <!-- "compute outside the lock" callout -->
-  <line x1="510" y1="430" x2="510" y2="450" stroke="#534AB7" marker-end="url(#arrow)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <rect x="386" y="452" width="248" height="36" rx="6" fill="none" stroke="#534AB7" stroke-width="0.8" stroke-dasharray="4 3" style="fill:none;stroke:rgb(83, 74, 183);color:rgb(255, 255, 255);stroke-width:0.8px;stroke-dasharray:4px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="510" y="464" text-anchor="middle" dominant-baseline="central" style="fill:#534AB7;fill:rgb(83, 74, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">compute OUTSIDE the lock</text>
-  <text x="510" y="479" text-anchor="middle" dominant-baseline="central" style="fill:#534AB7;fill:rgb(83, 74, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">never starve other threads</text>
+  <!-- key callout -->
+  <line x1="470" y1="376" x2="470" y2="400" class="ink hair soft" marker-end="url(#arrow)"/>
+  <rect x="366" y="400" width="208" height="30" rx="6" fill="none" class="ink hair" stroke-dasharray="5 3"/>
+  <text x="470" y="415" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="11" class="dot soft">compute outside lock</text>
 
   <!-- ══ LEGEND ══ -->
-  <line x1="60" y1="516" x2="620" y2="516" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="4 4" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-dasharray:4px, 4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="60" y="526" width="12" height="12" rx="2" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="78" y="532" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">Inside mutex — one thread at a time</text>
-  <g style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"><rect x="310" y="526" width="12" height="12" rx="2" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/></g>
-  <text x="328" y="532" dominant-baseline="central" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:central">Waiting / blocked</text>
+  <line x1="40" y1="444" x2="580" y2="444" class="ink hair soft" stroke-dasharray="5 3"/>
+  <rect x="50" y="456" width="12" height="12" rx="2" class="fill-amber ink fine"/>
+  <text x="68" y="462" dominant-baseline="central" font-family="PT Mono" font-size="10" class="dot soft">mutex-protected</text>
+  <rect x="220" y="456" width="12" height="12" rx="2" class="fill-gray ink fine"/>
+  <text x="238" y="462" dominant-baseline="central" font-family="PT Mono" font-size="10" class="dot soft">waiting / blocked</text>
 </svg>

@@ -1,226 +1,171 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="100%" height="100%"
-     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
-
+<svg width="100%" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise"><feFuncA type="table" tableValues="0 0.03"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
     </filter>
-    <filter id="glow-sm" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <style>
+      :root{--bg:#F7F4EE;--ink:#161616;--noise-opacity:0.85;--green:#E2EFED;--purple:#EBE6F5;--gray:#F0EFEC;--amber:#F5E9D0;--red:#F5E0E0;--blue:#E0EAF5}
+      @media(prefers-color-scheme:dark){:root{--bg:#131313;--ink:#F3EFE7;--noise-opacity:0.18;--green:#1A2E28;--purple:#221E33;--gray:#1A1A19;--amber:#2E2619;--red:#2E1919;--blue:#192633}}
+      .ink{stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}.fine{stroke-width:2}.hair{stroke-width:1.4}.dot{fill:var(--ink)}.bg{fill:var(--bg)}.soft{opacity:.5}.noiseLayer{opacity:var(--noise-opacity)}
+      .fill-green{fill:var(--green)}.fill-purple{fill:var(--purple)}.fill-gray{fill:var(--gray)}.fill-amber{fill:var(--amber)}.fill-red{fill:var(--red)}.fill-blue{fill:var(--blue)}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" class="ink hair soft" fill="none"/></marker>
   </defs>
+  <rect class="bg" width="700" height="380"/>
+  <rect class="noiseLayer" width="700" height="380" filter="url(#paperNoise)"/>
 
-  <!-- ══════════════════════════════════════
-       TITLE
-       ══════════════════════════════════════ -->
-  <text x="440" y="30" text-anchor="middle" font-size="14" fill="#a6adc8">
-    Master wants to talk to Slave at address 0x48
-  </text>
+  <!-- Title -->
+  <text x="350" y="22" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">Master writes to Slave 0x48</text>
 
-  <!-- ══════════════════════════════════════
-       SDA LABEL
-       ══════════════════════════════════════ -->
-  <text x="28" y="95" font-size="14" font-weight="bold" fill="#a6e3a1" text-anchor="middle">SDA</text>
+  <!-- SDA label -->
+  <text x="22" y="68" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="600" class="dot">SDA</text>
 
-  <!-- idle line before START -->
-  <line x1="48" y1="90" x2="80" y2="90" stroke="#a6e3a1" stroke-width="2"/>
+  <!-- idle before START -->
+  <line x1="40" y1="64" x2="64" y2="64" class="ink hair soft"/>
 
-  <!-- ══════════════════════════════════════
-       FRAME CELLS
-       Layout: x=80, each cell w=100, gap=4
-       START  x=80   w=80
-       0x48   x=164  w=100
-       W      x=268  w=70
-       ACK1   x=342  w=80
-       data   x=426  w=110
-       ACK2   x=540  w=80
-       STOP   x=624  w=80
-       idle   x=708  line to 760
-       ══════════════════════════════════════ -->
-
-  <!-- ── START ── -->
-  <rect x="80" y="68" width="80" height="44" rx="5"
-        fill="#1a0e0e" stroke="#f38ba8" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.00;0.04;0.14;0.18;1"
-      values="0.2;1;1;1;0.2;0.2"/>
+  <!-- ══ FRAME CELLS ══ -->
+  <!-- START -->
+  <rect x="64" y="44" width="68" height="40" rx="5" class="fill-red ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.00;0.04;0.12;0.16;1" values="0.3;1;1;1;0.3;0.3"/>
   </rect>
-  <text x="120" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#f38ba8">START</text>
-  <text x="120" y="103" text-anchor="middle" font-size="10" fill="#7c4a4a">SDA↓ SCL HIGH</text>
+  <text x="98" y="60" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">START</text>
+  <text x="98" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">SDA↓ SCL HIGH</text>
 
-  <!-- ── 0x48 ADDRESS ── -->
-  <rect x="164" y="68" width="100" height="44" rx="5"
-        fill="#0e1e2a" stroke="#89b4fa" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.14;0.18;0.28;0.32;1"
-      values="0.2;0.2;1;1;0.2;0.2"/>
+  <!-- 0x48 ADDRESS -->
+  <rect x="134" y="44" width="84" height="40" rx="5" class="fill-blue ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.12;0.16;0.28;0.32;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="214" y="87" text-anchor="middle" font-size="14" font-weight="bold" fill="#89b4fa">0x48</text>
-  <text x="214" y="103" text-anchor="middle" font-size="10" fill="#4a6a8a">7-bit address</text>
+  <text x="176" y="60" text-anchor="middle" font-family="PT Mono" font-size="12" font-weight="600" class="dot">0x48</text>
+  <text x="176" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">7-bit address</text>
 
-  <!-- ── W/R FLAG ── -->
-  <rect x="268" y="68" width="70" height="44" rx="5"
-        fill="#1a1a0e" stroke="#f9e2af" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.28;0.32;0.42;0.46;1"
-      values="0.2;0.2;1;1;0.2;0.2"/>
+  <!-- W flag -->
+  <rect x="220" y="44" width="56" height="40" rx="5" class="fill-amber ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.28;0.32;0.42;0.46;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="303" y="87" text-anchor="middle" font-size="14" font-weight="bold" fill="#f9e2af">W</text>
-  <text x="303" y="103" text-anchor="middle" font-size="10" fill="#7a6a3a">0=Write 1=Read</text>
+  <text x="248" y="60" text-anchor="middle" font-family="PT Mono" font-size="12" font-weight="600" class="dot">W</text>
+  <text x="248" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">0=W 1=R</text>
 
-  <!-- ── ACK 1 ── -->
-  <rect x="342" y="68" width="80" height="44" rx="5"
-        fill="#0e1e0e" stroke="#a6e3a1" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.42;0.46;0.56;0.60;1"
-      values="0.2;0.2;1;1;0.2;0.2"/>
+  <!-- ACK 1 -->
+  <rect x="278" y="44" width="68" height="40" rx="5" class="fill-green ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.42;0.46;0.56;0.60;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="382" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#a6e3a1">ACK</text>
-  <text x="382" y="103" text-anchor="middle" font-size="10" fill="#4a7a4a">slave replies</text>
-
-  <!-- ── DATA ── -->
-  <rect x="426" y="68" width="110" height="44" rx="5"
-        fill="#0e1e2a" stroke="#cba6f7" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.56;0.60;0.70;0.74;1"
-      values="0.2;0.2;1;1;0.2;0.2"/>
+  <text x="312" y="60" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">ACK</text>
+  <text x="312" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">slave replies</text>
+  <!-- ACK glow ring -->
+  <rect x="278" y="44" width="68" height="40" rx="5" fill="none" class="ink" stroke-width="3" opacity="0">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.48;0.52;0.58;0.62;1" values="0;0;0.7;0.7;0;0"/>
   </rect>
-  <text x="481" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#cba6f7">data...</text>
-  <text x="481" y="103" text-anchor="middle" font-size="10" fill="#6a4a8a">8-bit payload</text>
 
-  <!-- ── ACK 2 ── -->
-  <rect x="540" y="68" width="80" height="44" rx="5"
-        fill="#0e1e0e" stroke="#a6e3a1" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.70;0.74;0.84;0.88;1"
-      values="0.2;0.2;1;1;0.2;0.2"/>
+  <!-- DATA -->
+  <rect x="348" y="44" width="90" height="40" rx="5" class="fill-purple ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.56;0.60;0.72;0.76;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="580" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#a6e3a1">ACK</text>
-  <text x="580" y="103" text-anchor="middle" font-size="10" fill="#4a7a4a">confirmed</text>
+  <text x="393" y="60" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">data…</text>
+  <text x="393" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">8-bit payload</text>
 
-  <!-- ── STOP ── -->
-  <rect x="624" y="68" width="80" height="44" rx="5"
-        fill="#1a0e0e" stroke="#f38ba8" stroke-width="1.5">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.84;0.88;0.98;1"
-      values="0.2;0.2;1;1;0.2"/>
+  <!-- ACK 2 -->
+  <rect x="440" y="44" width="68" height="40" rx="5" class="fill-green ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.72;0.76;0.86;0.90;1" values="0.3;0.3;1;1;0.3;0.3"/>
   </rect>
-  <text x="664" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#f38ba8">STOP</text>
-  <text x="664" y="103" text-anchor="middle" font-size="10" fill="#7c4a4a">SDA↑ SCL HIGH</text>
+  <text x="474" y="60" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">ACK</text>
+  <text x="474" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">confirmed</text>
 
-  <!-- idle line after STOP -->
-  <line x1="704" y1="90" x2="760" y2="90" stroke="#a6e3a1" stroke-width="2"/>
+  <!-- STOP -->
+  <rect x="510" y="44" width="68" height="40" rx="5" class="fill-red ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.86;0.90;0.98;1" values="0.3;0.3;1;1;0.3"/>
+  </rect>
+  <text x="544" y="60" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">STOP</text>
+  <text x="544" y="76" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">SDA↑ SCL HIGH</text>
 
-  <!-- ══════════════════════════════════════
-       TRAVELLING PACKET along SDA frame
-       ══════════════════════════════════════ -->
-  <circle cy="90" r="6" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="cx" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.07;0.21;0.35;0.49;0.63;0.77;0.91;1"
-      values="48;120;214;303;382;481;580;664;760"/>
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.02;0.95;1"
-      values="0;1;1;0"/>
+  <!-- idle after STOP -->
+  <line x1="578" y1="64" x2="620" y2="64" class="ink hair soft"/>
+
+  <!-- ══ TRAVELLING PACKET ══ -->
+  <circle cy="64" r="4" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.06;0.19;0.35;0.49;0.63;0.79;0.92;1"
+      values="40;98;176;248;312;393;474;544;620"/>
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.04;0.94;1" values="0;0.7;0.7;0"/>
   </circle>
 
-  <!-- ══════════════════════════════════════
-       ANNOTATION LINES & CALLOUTS
-       Vertical drops from cell bottoms at y=112
-       0x48 drop: x=214
-       W drop:    x=303
-       ACK drop:  x=382
-       ══════════════════════════════════════ -->
-
-  <!-- 0x48 vertical drop -->
-  <line x1="214" y1="112" x2="214" y2="175" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3 2"/>
-  <!-- W vertical drop -->
-  <line x1="303" y1="112" x2="303" y2="195" stroke="#f9e2af" stroke-width="1" stroke-dasharray="3 2"/>
-  <!-- ACK1 vertical drop -->
-  <line x1="382" y1="112" x2="382" y2="215" stroke="#a6e3a1" stroke-width="1" stroke-dasharray="3 2"/>
-
-  <!-- horizontal annotation lines -->
-  <!-- 0x48 annotation: x=214→750, y=175 -->
-  <line x1="214" y1="175" x2="560" y2="175" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="565" y="179" font-size="12" fill="#89b4fa">7-bit address broadcast to ALL devices</text>
-  <text x="565" y="195" font-size="12" fill="#585b70">Only 0x48 responds — rest stay silent</text>
-
-  <!-- W annotation: y=195 -->
-  <line x1="303" y1="195" x2="560" y2="215" stroke="#f9e2af" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="565" y="219" font-size="12" fill="#f9e2af">Write (0) or Read (1) flag</text>
-
-  <!-- ACK annotation: y=215 -->
-  <line x1="382" y1="215" x2="560" y2="238" stroke="#a6e3a1" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="565" y="242" font-size="12" fill="#a6e3a1">Slave 0x48 pulls SDA low:</text>
-  <text x="565" y="258" font-size="12" fill="#a6e3a1">"I'm here! Go ahead."</text>
-
-  <!-- ══════════════════════════════════════
-       ACK SLAVE GLOW — address cell glows
-       when ACK arrives at x=382
-       ══════════════════════════════════════ -->
-  <rect x="342" y="68" width="80" height="44" rx="5"
-        fill="none" stroke="#a6e3a1" stroke-width="4" opacity="0" filter="url(#glow)">
-    <animate attributeName="opacity" dur="5.6s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.50;0.56;0.62;0.68;1"
-      values="0;0;0.9;0.9;0;0"/>
-  </rect>
-
-  <!-- ══════════════════════════════════════
-       BOTTOM PANELS — 3 rules
-       ══════════════════════════════════════ -->
-  <rect x="40" y="280" width="800" height="120" rx="8"
-        fill="#0d0d18" stroke="#313244" stroke-width="1"/>
-
-  <!-- Half-duplex row -->
-  <rect x="52" y="292" width="14" height="14" rx="2" fill="#f9e2af"/>
-  <text x="74" y="303" font-size="13" font-weight="bold" fill="#f9e2af">Half-duplex</text>
-  <text x="190" y="303" font-size="13" fill="#a6adc8">— only ONE direction at a time (like a walkie-talkie)</text>
-
-  <!-- Open-drain row -->
-  <rect x="52" y="318" width="14" height="14" rx="2" fill="#89b4fa"/>
-  <text x="74" y="329" font-size="13" font-weight="bold" fill="#89b4fa">Open-drain lines</text>
-  <text x="234" y="329" font-size="13" fill="#a6adc8">— devices can only PULL LOW, never push HIGH</text>
-
-  <!-- Pull-up row -->
-  <rect x="52" y="344" width="14" height="14" rx="2" fill="#a6e3a1"/>
-  <text x="74" y="355" font-size="13" font-weight="bold" fill="#a6e3a1">Pull-up resistors</text>
-  <text x="228" y="355" font-size="13" fill="#a6adc8">— naturally float back to HIGH when released</text>
-
-  <!-- divider -->
-  <line x1="52" y1="372" x2="828" y2="372" stroke="#313244" stroke-width="1"/>
-  <text x="440" y="388" text-anchor="middle" font-size="12" fill="#585b70">
-    ACK = slave pulls SDA LOW for 1 bit period  |  NACK = SDA stays HIGH (slave absent or busy)
+  <!-- ══ WHO'S TALKING labels (above cells) ══ -->
+  <text x="176" y="34" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft" opacity="0">
+    ← Master
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.14;0.16;0.42;0.44;1" values="0;0;0.7;0.7;0;0"/>
+  </text>
+  <text x="312" y="34" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft" opacity="0">
+    ← Slave 0x48
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.44;0.46;0.58;0.60;1" values="0;0;0.7;0.7;0;0"/>
   </text>
 
-  <!-- ══════════════════════════════════════
-       SILENT SLAVE INDICATOR
-       Two dim devices that stay silent
-       ══════════════════════════════════════ -->
-  <rect x="40" y="130" width="90" height="36" rx="4"
-        fill="#111118" stroke="#2a2a3a" stroke-width="1" opacity="0.6"/>
-  <text x="85" y="145" text-anchor="middle" font-size="11" fill="#313244">Slave 0x3C</text>
-  <text x="85" y="159" text-anchor="middle" font-size="10" fill="#313244">silent</text>
+  <!-- ══ ANNOTATION LINES ══ -->
+  <!-- 0x48 drop -->
+  <line x1="176" y1="84" x2="176" y2="136" class="ink hair soft" stroke-dasharray="3 2"/>
+  <line x1="176" y1="136" x2="450" y2="136" class="ink hair soft" stroke-dasharray="3 2"/>
+  <text x="455" y="138" font-family="PT Mono" font-size="10" class="dot soft">7-bit address → ALL devices</text>
+  <text x="455" y="152" font-family="PT Mono" font-size="10" class="dot soft">only 0x48 responds</text>
 
-  <rect x="140" y="130" width="90" height="36" rx="4"
-        fill="#111118" stroke="#2a2a3a" stroke-width="1" opacity="0.6"/>
-  <text x="185" y="145" text-anchor="middle" font-size="11" fill="#313244">Slave 0x72</text>
-  <text x="185" y="159" text-anchor="middle" font-size="10" fill="#313244">silent</text>
+  <!-- W drop -->
+  <line x1="248" y1="84" x2="248" y2="162" class="ink hair soft" stroke-dasharray="3 2"/>
+  <line x1="248" y1="162" x2="450" y2="168" class="ink hair soft" stroke-dasharray="3 2"/>
+  <text x="455" y="170" font-family="PT Mono" font-size="10" class="dot soft">Write(0) or Read(1)</text>
 
-  <!-- active slave 0x48 -->
-  <rect x="248" y="130" width="100" height="36" rx="4"
-        fill="#0e2a18" stroke="#a6e3a1" stroke-width="1.5" filter="url(#glow-sm)">
-    <animate attributeName="stroke-width" values="1.5;3;1.5" keyTimes="0;0.56;0.62" dur="5.6s" repeatCount="indefinite"/>
+  <!-- ACK drop -->
+  <line x1="312" y1="84" x2="312" y2="188" class="ink hair soft" stroke-dasharray="3 2"/>
+  <line x1="312" y1="188" x2="450" y2="194" class="ink hair soft" stroke-dasharray="3 2"/>
+  <text x="455" y="196" font-family="PT Mono" font-size="10" class="dot soft">Slave pulls SDA low:</text>
+  <text x="455" y="210" font-family="PT Mono" font-size="10" class="dot soft">"I'm here! Go ahead."</text>
+
+  <!-- ══ SLAVE RESPONSE BOXES ══ -->
+  <rect x="40" y="100" width="76" height="28" rx="4" class="fill-gray ink hair" opacity="0.5"/>
+  <text x="78" y="110" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">Slave 0x3C</text>
+  <text x="78" y="124" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">silent</text>
+
+  <rect x="122" y="100" width="76" height="28" rx="4" class="fill-gray ink hair" opacity="0.5"/>
+  <text x="160" y="110" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">Slave 0x72</text>
+  <text x="160" y="124" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot soft">silent</text>
+
+  <rect x="204" y="100" width="86" height="28" rx="4" class="fill-green ink hair">
+    <animate attributeName="opacity" dur="6s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.44;0.48;0.58;0.62;1" values="0.5;0.5;1;1;0.5;0.5"/>
   </rect>
-  <text x="298" y="145" text-anchor="middle" font-size="12" font-weight="bold" fill="#a6e3a1">Slave 0x48</text>
-  <text x="298" y="159" text-anchor="middle" font-size="11" fill="#a6e3a1">ACK ← match!</text>
+  <text x="247" y="110" text-anchor="middle" font-family="PT Mono" font-size="9" font-weight="500" class="dot">Slave 0x48</text>
+  <text x="247" y="124" text-anchor="middle" font-family="PT Mono" font-size="8" class="dot">ACK ← match!</text>
 
-  <text x="375" y="148" font-size="12" fill="#45475a">... all others stay silent</text>
+  <text x="310" y="114" font-family="PT Mono" font-size="9" class="dot soft">…others stay silent</text>
 
+  <!-- ══ BOTTOM PANEL ══ -->
+  <rect x="30" y="232" width="640" height="110" rx="6" class="fill-gray ink hair"/>
+
+  <rect x="42" y="244" width="10" height="10" rx="2" class="fill-amber ink hair"/>
+  <text x="58" y="252" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Half-duplex</text>
+  <text x="156" y="252" font-family="PT Mono" font-size="11" class="dot soft">— one direction at a time</text>
+
+  <rect x="42" y="264" width="10" height="10" rx="2" class="fill-blue ink hair"/>
+  <text x="58" y="272" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Open-drain</text>
+  <text x="148" y="272" font-family="PT Mono" font-size="11" class="dot soft">— devices only PULL LOW</text>
+
+  <rect x="42" y="284" width="10" height="10" rx="2" class="fill-green ink hair"/>
+  <text x="58" y="292" font-family="PT Mono" font-size="11" font-weight="500" class="dot">Pull-up R</text>
+  <text x="138" y="292" font-family="PT Mono" font-size="11" class="dot soft">— float back HIGH when released</text>
+
+  <line x1="42" y1="304" x2="658" y2="304" class="ink hair soft" stroke-dasharray="5 3"/>
+  <text x="350" y="322" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">ACK = slave pulls SDA LOW for 1 bit  ·  NACK = SDA stays HIGH (absent/busy)</text>
+
+  <!-- bottom text -->
+  <text x="350" y="358" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">I2C group-chat protocol · 7-bit address · up to 127 devices on 2 wires</text>
 </svg>

@@ -33,9 +33,9 @@
       .soft { opacity: 0.55; }
       .noiseLayer { opacity: var(--noise-opacity); }
 
-      .flow { animation: flow 10s linear infinite; }
-      .pulse { animation: pulse 4s ease-in-out infinite; }
-      .shake { animation: shake 0.2s linear infinite; }
+      .flow { animation: none !important; }
+      .pulse { animation: none !important; }
+      .shake { animation: none !important; }
 
       @keyframes flow {
         0% { stroke-dashoffset: 40; }
@@ -65,8 +65,8 @@
     <!-- Stage 1: Noise Source -->
     <g transform="translate(0 0)">
       <rect class="ink fine" width="250" height="200" rx="8" />
-      <text x="125" y="100" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Noise Source</text>
-      <text x="125" y="130" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot soft">(Oscillator Jitter)</text>
+      <text x="125" y="100" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot">Noise Source</text>
+      <text x="125" y="132" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">(Oscillator Jitter)</text>
       <path class="ink hair shake" d="M50 160 q 50 -20 150 0" />
     </g>
 
@@ -76,8 +76,8 @@
     <!-- Stage 2: Conditioner -->
     <g transform="translate(350 0)">
       <rect class="ink fine" width="250" height="200" rx="8" />
-      <text x="125" y="100" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Conditioner</text>
-      <text x="125" y="130" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot soft">(SHA-256 / AES)</text>
+      <text x="125" y="100" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot">Conditioner</text>
+      <text x="125" y="132" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">(SHA-256 / AES)</text>
     </g>
 
     <!-- Arrow 2 -->
@@ -86,7 +86,7 @@
     <!-- Stage 3: Health Monitor -->
     <g transform="translate(700 0)">
       <rect class="ink fine" width="250" height="200" rx="8" />
-      <text x="125" y="100" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Health Monitor</text>
+      <text x="125" y="100" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot">Health Monitor</text>
       <path class="ink fine pulse" d="M50 150 l20 -40 l30 80 l30 -100 l30 120 l20 -60" />
     </g>
 
@@ -96,8 +96,8 @@
     <!-- Output -->
     <g transform="translate(1050 0)">
       <rect class="ink fine" width="250" height="200" rx="8" />
-      <text x="125" y="100" font-family="PT Mono" font-size="20" text-anchor="middle" class="dot">Entropy Pool</text>
-      <text x="125" y="130" font-family="PT Mono" font-size="14" text-anchor="middle" class="dot soft">(Pure Randomness)</text>
+      <text x="125" y="100" font-family="PT Mono" font-size="22" text-anchor="middle" class="dot">Entropy Pool</text>
+      <text x="125" y="132" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">(Pure Randomness)</text>
     </g>
   </g>
 

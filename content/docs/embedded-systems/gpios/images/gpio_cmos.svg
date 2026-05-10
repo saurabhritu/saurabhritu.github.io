@@ -1,72 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 420" width="100%" height="420">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800" fill="none">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-path" />
-    </marker>
-    <marker id="arrow-signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-path-signal" />
-    </marker>
-    <style>
-      /* --- LIGHT MODE (Default) --- */
-      .wire { fill: none; stroke: #475569; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-      .wire-signal { fill: none; stroke: #3b82f6; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-      .node { fill: #475569; }
-      .node-signal { fill: #3b82f6; }
-      .pmos-box { fill: #fecdd3; stroke: #e11d48; stroke-width: 2; rx: 8; }
-      .nmos-box { fill: #bfdbfe; stroke: #2563eb; stroke-width: 2; rx: 8; }
-      .text-main { font-family: system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 14px; fill: #000000ff; }
-      .text-sub { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #64748b; }
-      .text-switch { font-family: system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 14px; fill: #0f172a; }
-      .arrow-path { fill: #475569; }
-      .arrow-path-signal { fill: #3b82f6; }
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="42" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise">
+        <feFuncA type="table" tableValues="0 0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
+    </filter>
 
-      /* --- DARK MODE (Activates based on system/browser theme) --- */
+    <style>
+      :root { --bg: #F7F4EE; --ink: #161616; --noise-opacity: 0.85; }
       @media (prefers-color-scheme: dark) {
-        .wire { stroke: #cbd5e1; }
-        .node { fill: #cbd5e1; }
-        .wire-signal { stroke: #60a5fa; }
-        .node-signal { fill: #60a5fa; }
-        .pmos-box { fill: #4c0519; stroke: #fb7185; }
-        .nmos-box { fill: #1e3a8a; stroke: #60a5fa; }
-        .text-main { fill: #7b6f6bff; }
-        .text-sub { fill: #94a3b8; }
-        .text-switch { fill: #ffffff; }
-        .arrow-path { fill: #cbd5e1; }
-        .arrow-path-signal { fill: #60a5fa; }
+        :root { --bg: #131313; --ink: #F3EFE7; --noise-opacity: 0.18; }
       }
+      .ink { stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+      .fine { stroke-width: 2.2; }
+      .hair { stroke-width: 1.6; }
+      .dot { fill: var(--ink); }
+      .bg { fill: var(--bg); }
+      .fade { opacity: 0.78; }
+      .soft { opacity: 0.55; }
+      .noiseLayer { opacity: var(--noise-opacity); }
     </style>
   </defs>
 
-  <text x="325" y="40" class="text-main" text-anchor="middle">VCC (Power: e.g., 3.3V or 5V)</text>
-  <line x1="325" y1="50" x2="325" y2="90" class="wire" />
+  <rect class="bg" width="1400" height="800"/>
+  <rect class="noiseLayer" width="1400" height="800" filter="url(#paperNoise)"/>
 
-  <rect x="250" y="90" width="150" height="70" class="pmos-box" />
-  <text x="325" y="120" class="text-switch" text-anchor="middle">PMOS (Switch 1)</text>
-  <text x="325" y="140" class="text-sub" text-anchor="middle">Turns ON when HIGH</text>
+  <text x="700" y="65" font-family="PT Mono" font-size="36" text-anchor="middle" class="dot">GPIO Push-Pull Output Stage</text>
 
-  <line x1="325" y1="160" x2="325" y2="260" class="wire" />
-  <circle cx="325" cy="210" r="5" class="node" />
+  <!-- VCC -->
+  <text x="600" y="155" font-family="PT Mono" font-size="26" text-anchor="middle" class="dot">VCC</text>
+  <path class="ink fine soft" d="M420 170 h360" stroke-dasharray="4 4" />
+  <line x1="600" y1="170" x2="600" y2="205" class="ink fine" />
 
-  <rect x="250" y="260" width="150" height="70" class="nmos-box" />
-  <text x="325" y="290" class="text-switch" text-anchor="middle">NMOS (Switch 2)</text>
-  <text x="325" y="310" class="text-sub" text-anchor="middle">Turns ON when LOW</text>
+  <!-- PMOS -->
+  <rect x="470" y="200" width="260" height="100" rx="10" class="ink fine" />
+  <text x="600" y="250" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">PMOS</text>
+  <text x="600" y="280" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot soft">Pull-Up</text>
 
-  <line x1="325" y1="330" x2="325" y2="370" class="wire" />
-  <text x="325" y="390" class="text-main" text-anchor="middle">GND (Ground: 0V)</text>
+  <!-- Mid node -->
+  <line x1="600" y1="300" x2="600" y2="370" class="ink fine" />
+  <circle cx="600" cy="370" r="4" class="dot" />
 
-  <line x1="325" y1="210" x2="490" y2="210" class="wire" marker-end="url(#arrow)" />
-  <text x="505" y="205" class="text-main" text-anchor="start">Physical GPIO Pin</text>
-  <text x="505" y="225" class="text-sub" text-anchor="start">(To outside world)</text>
+  <!-- GPIO Pin output -->
+  <line x1="600" y1="335" x2="860" y2="335" class="ink fine" />
+  <path class="ink fill-ink" d="M850 329 l12 6 l-12 6 z" />
 
-  <text x="20" y="205" class="text-main" text-anchor="start">Internal Logic Signal</text>
-  <text x="20" y="225" class="text-sub" text-anchor="start">(from Latch)</text>
-  
-  <line x1="160" y1="210" x2="210" y2="210" class="wire-signal" />
-  <circle cx="210" cy="210" r="5" class="node-signal" />
-  
-  <line x1="210" y1="210" x2="210" y2="125" class="wire-signal" />
-  <line x1="210" y1="125" x2="240" y2="125" class="wire-signal" marker-end="url(#arrow-signal)" />
+  <!-- NMOS -->
+  <rect x="470" y="370" width="260" height="100" rx="10" class="ink fine" />
+  <text x="600" y="420" font-family="PT Mono" font-size="28" text-anchor="middle" class="dot">NMOS</text>
+  <text x="600" y="448" font-family="PT Mono" font-size="18" text-anchor="middle" class="dot soft">Pull-Down</text>
 
-  <line x1="210" y1="210" x2="210" y2="295" class="wire-signal" />
-  <line x1="210" y1="295" x2="240" y2="295" class="wire-signal" marker-end="url(#arrow-signal)" />
+  <!-- GND -->
+  <line x1="600" y1="470" x2="600" y2="505" class="ink fine" />
+  <path class="ink fine soft" d="M420 505 h360" stroke-dasharray="4 4" />
+  <text x="600" y="530" font-family="PT Mono" font-size="26" text-anchor="middle" class="dot">GND</text>
+
+  <!-- Control signal -->
+  <line x1="70" y1="335" x2="600" y2="335" class="ink hair soft" stroke-dasharray="6 5" />
+  <text x="110" y="325" font-family="PT Mono" font-size="24" class="dot">Internal Logic</text>
+
+  <!-- Gate branches -->
+  <line x1="200" y1="370" x2="200" y2="250" class="ink hair soft" stroke-dasharray="4 4" />
+  <line x1="200" y1="250" x2="460" y2="250" class="ink hair soft" stroke-dasharray="4 4" />
+  <text x="330" y="242" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">Gate</text>
+
+  <line x1="200" y1="370" x2="200" y2="420" class="ink hair soft" stroke-dasharray="4 4" />
+  <line x1="200" y1="420" x2="460" y2="420" class="ink hair soft" stroke-dasharray="4 4" />
+  <text x="330" y="440" font-family="PT Mono" font-size="16" text-anchor="middle" class="dot soft">Gate</text>
+
+  <!-- Inverter -->
+  <circle cx="330" cy="250" r="6" class="ink hair" fill="var(--bg)" />
+  <text x="330" y="255" font-family="PT Mono" font-size="13" text-anchor="middle" class="dot">~</text>
+
+  <!-- Load -->
+  <g transform="translate(940 335)">
+    <line x1="0" y1="0" x2="30" y2="0" class="ink hair soft" />
+    <path class="ink fine" d="M30 0 l6 -10 l12 20 l12 -20 l12 20 l6 -10" />
+    <line x1="78" y1="0" x2="100" y2="0" class="ink hair soft" />
+    <path class="ink fine" d="M100 -14 l22 14 l-22 14 z" />
+    <line x1="100" y1="-14" x2="100" y2="14" class="ink fine" />
+    <line x1="130" y1="-8" x2="145" y2="-15" class="ink hair soft" />
+    <line x1="130" y1="0" x2="148" y2="0" class="ink hair soft" />
+    <line x1="130" y1="8" x2="145" y2="15" class="ink hair soft" />
+    <line x1="100" y1="14" x2="100" y2="135" class="ink hair soft" stroke-dasharray="4 4" />
+  </g>
+
+  <!-- Truth Table -->
+  <g transform="translate(100 600)">
+    <text x="0" y="0" font-family="PT Mono" font-size="22" class="dot">CMOS Truth Table</text>
+    <line x1="-10" y1="18" x2="300" y2="18" class="ink hair soft" />
+    <text x="10" y="44" font-family="PT Mono" font-size="17" class="dot">Latch Bit</text>
+    <text x="110" y="44" font-family="PT Mono" font-size="17" class="dot">PMOS</text>
+    <text x="195" y="44" font-family="PT Mono" font-size="17" class="dot">NMOS</text>
+    <text x="280" y="44" font-family="PT Mono" font-size="17" class="dot">Pin</text>
+    <line x1="-10" y1="56" x2="300" y2="56" class="ink hair soft" />
+    <text x="10" y="80" font-family="PT Mono" font-size="17" class="dot">1</text>
+    <text x="110" y="80" font-family="PT Mono" font-size="17" class="dot fade">OFF</text>
+    <text x="195" y="80" font-family="PT Mono" font-size="17" class="dot">ON</text>
+    <text x="280" y="80" font-family="PT Mono" font-size="17" class="dot">LOW</text>
+    <text x="10" y="104" font-family="PT Mono" font-size="17" class="dot">0</text>
+    <text x="110" y="104" font-family="PT Mono" font-size="17" class="dot">ON</text>
+    <text x="195" y="104" font-family="PT Mono" font-size="17" class="dot fade">OFF</text>
+    <text x="280" y="104" font-family="PT Mono" font-size="17" class="dot">HIGH</text>
+  </g>
 </svg>

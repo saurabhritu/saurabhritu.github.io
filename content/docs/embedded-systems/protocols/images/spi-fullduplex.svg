@@ -1,207 +1,122 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="100%" height="100%"
-     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
-
+<svg width="100%" viewBox="0 0 680 370" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise"><feFuncA type="table" tableValues="0 0.03"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
     </filter>
-    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="#89b4fa"/>
-    </marker>
-    <marker id="arr-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="#a6e3a1"/>
-    </marker>
-    <marker id="arr-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="#f38ba8"/>
-    </marker>
-    <marker id="arr-p-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M10 0 L0 5 L10 10 z" fill="#f38ba8"/>
-    </marker>
+    <style>
+      :root{--bg:#F7F4EE;--ink:#161616;--noise-opacity:0.85;--green:#E2EFED;--purple:#EBE6F5;--gray:#F0EFEC;--amber:#F5E9D0;--red:#F5E0E0;--blue:#E0EAF5}
+      @media(prefers-color-scheme:dark){:root{--bg:#131313;--ink:#F3EFE7;--noise-opacity:0.18;--green:#1A2E28;--purple:#221E33;--gray:#1A1A19;--amber:#2E2619;--red:#2E1919;--blue:#192633}}
+      .ink{stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}.fine{stroke-width:2}.hair{stroke-width:1.4}.dot{fill:var(--ink)}.bg{fill:var(--bg)}.soft{opacity:.5}.noiseLayer{opacity:var(--noise-opacity)}
+      .fill-green{fill:var(--green)}.fill-purple{fill:var(--purple)}.fill-gray{fill:var(--gray)}.fill-amber{fill:var(--amber)}.fill-red{fill:var(--red)}.fill-blue{fill:var(--blue)}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" class="ink hair soft" fill="none"/></marker>
+    <marker id="arrow-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M8 1L2 5L8 9" class="ink hair soft" fill="none"/></marker>
   </defs>
+  <rect class="bg" width="680" height="370"/>
+  <rect class="noiseLayer" width="680" height="370" filter="url(#paperNoise)"/>
 
-  <!-- ══════════════════════════════════════════
-       MASTER & SLAVE BOXES
-       ══════════════════════════════════════════ -->
+  <!-- ══ MASTER BOX ══ -->
+  <rect x="30" y="40" width="120" height="210" rx="8" class="fill-blue ink fine"/>
+  <text x="90" y="72" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="13" font-weight="600" class="dot">Master</text>
+  <text x="90" y="90" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="10" class="dot soft">MCU</text>
+  <text x="136" y="130" text-anchor="end" font-family="PT Mono" font-size="10" class="dot soft">SCLK</text>
+  <text x="136" y="168" text-anchor="end" font-family="PT Mono" font-size="10" class="dot soft">MOSI</text>
+  <text x="136" y="206" text-anchor="end" font-family="PT Mono" font-size="10" class="dot soft">MISO</text>
+  <text x="136" y="232" text-anchor="end" font-family="PT Mono" font-size="10" class="dot soft">CS</text>
 
-  <!-- Master -->
-  <rect x="40" y="60" width="150" height="260" rx="10"
-        fill="#0e2a40" stroke="#89b4fa" stroke-width="1.5"/>
-  <text x="115" y="100" text-anchor="middle" font-size="16" font-weight="bold" fill="#89b4fa">Master</text>
-  <text x="115" y="120" text-anchor="middle" font-size="12" fill="#6c9ecf">MCU</text>
-  <!-- pin labels on right edge -->
-  <text x="175" y="168" text-anchor="end" font-size="12" fill="#89b4fa">SCLK</text>
-  <text x="175" y="218" text-anchor="end" font-size="12" fill="#a6e3a1">MOSI</text>
-  <text x="175" y="268" text-anchor="end" font-size="12" fill="#f38ba8">MISO</text>
-  <text x="175" y="298" text-anchor="end" font-size="12" fill="#f9e2af">CS</text>
+  <!-- ══ SLAVE BOX ══ -->
+  <rect x="530" y="40" width="120" height="210" rx="8" class="fill-green ink fine"/>
+  <text x="590" y="72" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="13" font-weight="600" class="dot">Slave</text>
+  <text x="590" y="90" text-anchor="middle" dominant-baseline="central" font-family="PT Mono" font-size="10" class="dot soft">peripheral</text>
+  <text x="544" y="130" font-family="PT Mono" font-size="10" class="dot soft">SCLK</text>
+  <text x="544" y="168" font-family="PT Mono" font-size="10" class="dot soft">MOSI</text>
+  <text x="544" y="206" font-family="PT Mono" font-size="10" class="dot soft">MISO</text>
+  <text x="544" y="232" font-family="PT Mono" font-size="10" class="dot soft">CS</text>
 
-  <!-- Slave -->
-  <rect x="650" y="60" width="150" height="260" rx="10"
-        fill="#1a1a2e" stroke="#45475a" stroke-width="1.5"/>
-  <text x="725" y="100" text-anchor="middle" font-size="16" font-weight="bold" fill="#cdd6f4">Slave</text>
-  <text x="725" y="120" text-anchor="middle" font-size="12" fill="#585b70">Peripheral</text>
-  <!-- pin labels on left edge -->
-  <text x="665" y="168" font-size="12" fill="#89b4fa">SCLK</text>
-  <text x="665" y="218" font-size="12" fill="#a6e3a1">MOSI</text>
-  <text x="665" y="268" font-size="12" fill="#f38ba8">MISO</text>
-  <text x="665" y="298" font-size="12" fill="#f9e2af">CS</text>
+  <!-- ══ WIRE LINES ══ -->
+  <!-- SCLK: Master → Slave -->
+  <line x1="150" y1="128" x2="528" y2="128" class="ink hair" marker-end="url(#arrow)"/>
+  <text x="340" y="118" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">clock ticks on every bit</text>
 
-  <!-- ══════════════════════════════════════════
-       WIRE LINES
-       ══════════════════════════════════════════ -->
+  <!-- MOSI: Master → Slave -->
+  <line x1="150" y1="166" x2="528" y2="166" class="ink hair" marker-end="url(#arrow)"/>
+  <text x="340" y="156" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Master → Slave ("instructions")</text>
 
-  <!-- SCLK: Master → Slave  y=165 -->
-  <line x1="190" y1="165" x2="648" y2="165"
-        stroke="#89b4fa" stroke-width="2" marker-end="url(#arr-r)"/>
+  <!-- MISO: Slave → Master -->
+  <line x1="530" y1="204" x2="152" y2="204" class="ink hair" marker-end="url(#arrow-rev)"/>
+  <text x="340" y="194" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Slave → Master ("response")</text>
 
-  <!-- MOSI: Master → Slave  y=215 -->
-  <line x1="190" y1="215" x2="648" y2="215"
-        stroke="#a6e3a1" stroke-width="2" marker-end="url(#arr-g)"/>
+  <!-- CS: Master → Slave (dashed) -->
+  <line x1="150" y1="230" x2="528" y2="230" class="ink hair soft" stroke-dasharray="5 3"/>
 
-  <!-- MISO: Slave → Master  y=265 -->
-  <line x1="650" y1="265" x2="192" y2="265"
-        stroke="#f38ba8" stroke-width="2" marker-end="url(#arr-p-rev)"/>
+  <!-- ══ FULL DUPLEX CALLOUT ══ -->
+  <rect x="200" y="214" width="280" height="32" rx="5" fill="none" class="ink hair" stroke-dasharray="5 3"/>
+  <text x="340" y="224" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">↑ both directions simultaneously</text>
+  <text x="340" y="240" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">= FULL DUPLEX — like a two-way road</text>
 
-  <!-- CS: Master → Slave  y=295 -->
-  <line x1="190" y1="295" x2="648" y2="295"
-        stroke="#f9e2af" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <!-- ══ ANIMATED PACKETS — synchronized full-duplex ══ -->
 
-  <!-- ══════════════════════════════════════════
-       RIGHT-SIDE ANNOTATIONS
-       ══════════════════════════════════════════ -->
+  <!-- SCLK pulses (3 fast dots) -->
+  <circle cy="128" r="3" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="150;528" dur="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.08;0.88;1" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="128" r="3" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="150;528" dur="1s" begin="0.33s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.08;0.88;1" dur="1s" begin="0.33s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="128" r="3" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="150;528" dur="1s" begin="0.66s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.08;0.88;1" dur="1s" begin="0.66s" repeatCount="indefinite"/>
+  </circle>
 
-  <!-- SCLK annotation -->
-  <text x="420" y="148" text-anchor="middle" font-size="13" fill="#89b4fa">Clock ticks on every bit</text>
+  <!-- MOSI data packet Master→Slave (two dots staggered) -->
+  <circle cy="166" r="4" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="150;528" dur="1.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.88;1" dur="1.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="166" r="4" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="150;528" dur="1.4s" begin="0.7s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.88;1" dur="1.4s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
 
-  <!-- MOSI annotation -->
-  <text x="420" y="200" text-anchor="middle" font-size="13" fill="#a6e3a1">Master → Slave  ("instructions")</text>
+  <!-- MISO data packet Slave→Master (simultaneous) -->
+  <circle cy="204" r="4" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="530;152" dur="1.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.88;1" dur="1.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="204" r="4" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="530;152" dur="1.4s" begin="0.7s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.88;1" dur="1.4s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
 
-  <!-- MISO annotation -->
-  <text x="420" y="252" text-anchor="middle" font-size="13" fill="#f38ba8">Slave → Master  ("response")</text>
+  <!-- ══ CS PANEL ══ -->
+  <rect x="30" y="270" width="620" height="50" rx="6" class="fill-gray ink hair"/>
+  <text x="90" y="290" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">CS LOW</text>
+  <text x="190" y="290" font-family="PT Mono" font-size="11" class="dot soft">= "I'm talking to YOU"</text>
+  <text x="90" y="308" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">CS HIGH</text>
+  <text x="190" y="308" font-family="PT Mono" font-size="11" class="dot soft">= "You're dismissed"</text>
 
-  <!-- FULL DUPLEX label -->
-  <rect x="245" y="274" width="350" height="34" rx="5"
-        fill="none" stroke="#313244" stroke-width="1"/>
-  <text x="420" y="288" text-anchor="middle" font-size="12" fill="#a6adc8">↑ both directions simultaneously</text>
-  <text x="420" y="303" text-anchor="middle" font-size="12" fill="#a6adc8">= FULL DUPLEX, like a two-way road</text>
-
-  <!-- CS annotation row -->
-  <rect x="40" y="330" width="780" height="56" rx="6"
-        fill="#111120" stroke="#313244" stroke-width="1"/>
-  <text x="115" y="352" text-anchor="middle" font-size="13" fill="#f9e2af">CS LOW</text>
-  <text x="230" y="352" font-size="13" fill="#a6adc8">= "I'm talking to YOU"</text>
-  <text x="115" y="374" text-anchor="middle" font-size="13" fill="#585b70">CS HIGH</text>
-  <text x="230" y="374" font-size="13" fill="#585b70">= "You're dismissed"</text>
-
-  <!-- CS LOW/HIGH visual pulse -->
-  <rect x="540" y="337" width="260" height="22" rx="4" fill="#1a1820" stroke="#f9e2af" stroke-width="1">
-    <animate attributeName="fill" values="#1a1820;#2a2010;#1a1820" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="stroke" values="#f9e2af;#f9e2af;#313244;#313244;#f9e2af" keyTimes="0;0.3;0.31;0.8;1" dur="2s" repeatCount="indefinite"/>
+  <!-- CS state indicator (toggles LOW/HIGH) -->
+  <rect x="440" y="278" width="190" height="18" rx="4" class="fill-green ink hair">
+    <animate attributeName="opacity" values="0.9;0.9;0.3;0.3;0.9" keyTimes="0;0.4;0.41;0.8;0.81" dur="3s" repeatCount="indefinite"/>
   </rect>
-  <text x="670" y="353" text-anchor="middle" font-size="11" fill="#f9e2af">
-    CS:
-    <animate attributeName="fill" values="#f9e2af;#f9e2af;#585b70;#585b70;#f9e2af" keyTimes="0;0.3;0.31;0.8;1" dur="2s" repeatCount="indefinite"/>
-  </text>
-  <text x="710" y="353" font-size="11" fill="#a6e3a1">
-    LOW → active
-    <animate attributeName="fill" values="#a6e3a1;#a6e3a1;#585b70;#585b70;#a6e3a1" keyTimes="0;0.3;0.31;0.8;1" dur="2s" repeatCount="indefinite"/>
+  <text x="535" y="290" text-anchor="middle" font-family="PT Mono" font-size="9" font-weight="500" class="dot">
+    CS: LOW → active
+    <animate attributeName="opacity" values="1;1;0.3;0.3;1" keyTimes="0;0.4;0.41;0.8;0.81" dur="3s" repeatCount="indefinite"/>
   </text>
 
-  <rect x="540" y="362" width="260" height="22" rx="4" fill="#1a1820" stroke="#313244" stroke-width="1">
-    <animate attributeName="fill" values="#1a1820;#1a1820;#2a2010;#1a1820;#1a1820" keyTimes="0;0.3;0.31;0.8;1" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="stroke" values="#313244;#313244;#f9e2af;#f9e2af;#313244" keyTimes="0;0.3;0.31;0.8;1" dur="2s" repeatCount="indefinite"/>
+  <rect x="440" y="298" width="190" height="18" rx="4" class="fill-gray ink hair">
+    <animate attributeName="opacity" values="0.3;0.3;0.9;0.9;0.3" keyTimes="0;0.4;0.41;0.8;0.81" dur="3s" repeatCount="indefinite"/>
   </rect>
-  <text x="710" y="378" font-size="11" fill="#585b70">
-    HIGH → idle
-    <animate attributeName="fill" values="#585b70;#585b70;#a6e3a1;#a6e3a1;#585b70" keyTimes="0;0.3;0.31;0.8;1" dur="2s" repeatCount="indefinite"/>
+  <text x="535" y="310" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">
+    CS: HIGH → idle
+    <animate attributeName="opacity" values="0.3;0.3;0.8;0.8;0.3" keyTimes="0;0.4;0.41;0.8;0.81" dur="3s" repeatCount="indefinite"/>
   </text>
 
-  <!-- ══════════════════════════════════════════
-       ANIMATED DATA PACKETS
-       ══════════════════════════════════════════ -->
-
-  <!-- SCLK clock pulses (multiple, fast) travelling left→right y=165 -->
-  <circle cy="165" r="5" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="cx" values="190;648" dur="1.2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="165" r="5" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="cx" values="190;648" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="165" r="5" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="cx" values="190;648" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- MOSI packet Master→Slave y=215 -->
-  <circle cy="215" r="6" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="cx" values="190;648" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.8s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="215" r="6" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="cx" values="190;648" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- MISO packet Slave→Master y=265 (right to left) -->
-  <circle cy="265" r="6" fill="#f38ba8" filter="url(#glow)">
-    <animate attributeName="cx" values="648;190" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.8s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="265" r="6" fill="#f38ba8" filter="url(#glow)">
-    <animate attributeName="cx" values="648;190" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.92;1" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- CS pulse travelling Master→Slave y=295 (slower, one shot style) -->
-  <circle cy="295" r="5" fill="#f9e2af" filter="url(#glow)">
-    <animate attributeName="cx" values="190;648" dur="2.4s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.88;1" dur="2.4s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- ══════════════════════════════════════════
-       MASTER TX/RX PIN BLINK
-       ══════════════════════════════════════════ -->
-
-  <!-- Master SCLK pin -->
-  <circle cx="190" cy="165" r="4" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="r"       values="4;7;4;7;4" dur="1.2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1;0.3;1" dur="1.2s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Master MOSI pin -->
-  <circle cx="190" cy="215" r="4" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="r"       values="4;7;4" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Master MISO pin (receiving) -->
-  <circle cx="190" cy="265" r="4" fill="#f38ba8" filter="url(#glow)">
-    <animate attributeName="r"       values="4;7;4" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Slave SCLK pin -->
-  <circle cx="650" cy="165" r="4" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="r"       values="4;7;4;7;4" dur="1.2s" begin="0.6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1;0.3;1" dur="1.2s" begin="0.6s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Slave MOSI pin (receiving) -->
-  <circle cx="650" cy="215" r="4" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="r"       values="4;7;4" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Slave MISO pin (sending) -->
-  <circle cx="650" cy="265" r="4" fill="#f38ba8" filter="url(#glow)">
-    <animate attributeName="r"       values="4;7;4" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Slave CS pin -->
-  <circle cx="650" cy="295" r="4" fill="#f9e2af" filter="url(#glow)">
-    <animate attributeName="r"       values="4;8;4" dur="2.4s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.4;1;0.4" dur="2.4s" repeatCount="indefinite"/>
-  </circle>
-
+  <!-- bottom summary -->
+  <text x="340" y="346" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">MOSI + MISO carry data simultaneously — full duplex on every clock edge</text>
 </svg>

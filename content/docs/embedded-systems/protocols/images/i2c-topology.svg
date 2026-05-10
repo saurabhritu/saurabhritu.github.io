@@ -1,229 +1,161 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" width="100%" height="100%"
-     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
-
+<svg width="100%" viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise"><feFuncA type="table" tableValues="0 0.03"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
     </filter>
-    <filter id="glow-sm" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <style>
+      :root{--bg:#F7F4EE;--ink:#161616;--noise-opacity:0.85;--green:#E2EFED;--purple:#EBE6F5;--gray:#F0EFEC;--amber:#F5E9D0;--red:#F5E0E0;--blue:#E0EAF5}
+      @media(prefers-color-scheme:dark){:root{--bg:#131313;--ink:#F3EFE7;--noise-opacity:0.18;--green:#1A2E28;--purple:#221E33;--gray:#1A1A19;--amber:#2E2619;--red:#2E1919;--blue:#192633}}
+      .ink{stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}.fine{stroke-width:2}.hair{stroke-width:1.4}.dot{fill:var(--ink)}.bg{fill:var(--bg)}.soft{opacity:.5}.noiseLayer{opacity:var(--noise-opacity)}
+      .fill-green{fill:var(--green)}.fill-purple{fill:var(--purple)}.fill-gray{fill:var(--gray)}.fill-amber{fill:var(--amber)}.fill-red{fill:var(--red)}.fill-blue{fill:var(--blue)}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" class="ink hair soft" fill="none"/></marker>
   </defs>
+  <rect class="bg" width="700" height="370"/>
+  <rect class="noiseLayer" width="700" height="370" filter="url(#paperNoise)"/>
 
-  <!-- ══════════════════════════════════════
-       VCC RAIL  y=30
-       ══════════════════════════════════════ -->
-  <line x1="100" y1="30" x2="760" y2="30" stroke="#f9e2af" stroke-width="2"/>
-  <text x="50" y="35" font-size="13" fill="#f9e2af" text-anchor="middle">VCC</text>
-  <!-- VCC blink -->
-  <circle cx="100" cy="30" r="4" fill="#f9e2af" filter="url(#glow)">
-    <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
-  </circle>
+  <!-- ══ VCC RAIL ══ -->
+  <line x1="80" y1="20" x2="620" y2="20" class="ink hair soft"/>
+  <text x="46" y="24" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot soft">VCC</text>
 
-  <!-- ══════════════════════════════════════
-       PULL-UP RESISTORS
-       Left resistor: x=200, right: x=340
-       VCC y=30, top of resistor y=50, bottom y=90
-       ══════════════════════════════════════ -->
+  <!-- ══ PULL-UP RESISTORS ══ -->
+  <!-- Left pull-up (SDA) -->
+  <line x1="160" y1="20" x2="160" y2="36" class="ink hair soft"/>
+  <polyline points="160,36 154,42 166,50 154,58 166,66 160,72" fill="none" class="ink hair soft"/>
+  <line x1="160" y1="72" x2="160" y2="86" class="ink hair soft"/>
+  <text x="176" y="55" font-family="PT Mono" font-size="9" class="dot soft">R↑</text>
 
-  <!-- Left pull-up drop from VCC -->
-  <line x1="200" y1="30" x2="200" y2="50" stroke="#f9e2af" stroke-width="1.5"/>
-  <!-- Left resistor body (zigzag) -->
-  <polyline points="200,50 192,56 208,64 192,72 208,80 200,86"
-    fill="none" stroke="#f9e2af" stroke-width="1.5"/>
-  <line x1="200" y1="86" x2="200" y2="105" stroke="#f9e2af" stroke-width="1.5"/>
-  <text x="220" y="70" font-size="12" fill="#a6adc8">R</text>
-  <text x="218" y="82" font-size="10" fill="#585b70">pull-up</text>
+  <!-- Right pull-up (SCL) -->
+  <line x1="280" y1="20" x2="280" y2="36" class="ink hair soft"/>
+  <polyline points="280,36 274,42 286,50 274,58 286,66 280,72" fill="none" class="ink hair soft"/>
+  <line x1="280" y1="72" x2="280" y2="100" class="ink hair soft"/>
+  <text x="296" y="55" font-family="PT Mono" font-size="9" class="dot soft">R↑</text>
 
-  <!-- Right pull-up drop from VCC -->
-  <line x1="340" y1="30" x2="340" y2="50" stroke="#f9e2af" stroke-width="1.5"/>
-  <!-- Right resistor body -->
-  <polyline points="340,50 332,56 348,64 332,72 348,80 340,86"
-    fill="none" stroke="#f9e2af" stroke-width="1.5"/>
-  <line x1="340" y1="86" x2="340" y2="120" stroke="#f9e2af" stroke-width="1.5"/>
-  <text x="360" y="70" font-size="12" fill="#a6adc8">R</text>
-  <text x="358" y="82" font-size="10" fill="#585b70">pull-up</text>
+  <text x="350" y="48" font-family="PT Mono" font-size="9" class="dot soft">← pull-ups hold lines HIGH when idle</text>
 
-  <!-- Pull-up label -->
-  <text x="430" y="62" font-size="12" fill="#585b70">← pull-up resistors</text>
-  <text x="430" y="78" font-size="12" fill="#585b70">   (hold lines HIGH when idle)</text>
+  <!-- ══ BUS LINES ══ -->
+  <!-- SDA bus -->
+  <line x1="80" y1="86" x2="620" y2="86" class="ink fine"/>
+  <text x="636" y="90" font-family="PT Mono" font-size="10" font-weight="500" class="dot">SDA</text>
+  <text x="660" y="88" font-family="PT Mono" font-size="9" class="dot soft">(data)</text>
 
-  <!-- ══════════════════════════════════════
-       SDA BUS  y=105  (left pull-up connects here)
-       SCL BUS  y=120  (right pull-up connects here)
-       Both run x=100 → x=780
-       ══════════════════════════════════════ -->
+  <!-- SCL bus -->
+  <line x1="80" y1="100" x2="620" y2="100" class="ink fine"/>
+  <text x="636" y="104" font-family="PT Mono" font-size="10" font-weight="500" class="dot">SCL</text>
+  <text x="660" y="104" font-family="PT Mono" font-size="9" class="dot soft">(clock)</text>
 
-  <!-- SDA horizontal bus -->
-  <line x1="100" y1="105" x2="780" y2="105" stroke="#a6e3a1" stroke-width="2.5"/>
-  <text x="796" y="110" font-size="13" font-weight="bold" fill="#a6e3a1">SDA</text>
-  <text x="796" y="124" font-size="11" fill="#585b70">(data)</text>
+  <!-- ══ DEVICE TAPS ══ -->
+  <!-- Master taps -->
+  <line x1="120" y1="86" x2="120" y2="150" class="ink hair soft"/>
+  <line x1="134" y1="100" x2="134" y2="150" class="ink hair soft"/>
+  <circle cx="120" cy="86" r="3" fill="var(--ink)" opacity="0.4"/>
+  <circle cx="134" cy="100" r="3" fill="var(--ink)" opacity="0.4"/>
 
-  <!-- SCL horizontal bus -->
-  <line x1="100" y1="120" x2="780" y2="120" stroke="#89b4fa" stroke-width="2.5"/>
-  <text x="796" y="125" font-size="13" font-weight="bold" fill="#89b4fa">SCL</text>
-  <text x="796" y="139" font-size="11" fill="#585b70">(clock)</text>
+  <!-- Slave 0x48 taps -->
+  <line x1="350" y1="86" x2="350" y2="150" class="ink hair soft"/>
+  <line x1="364" y1="100" x2="364" y2="150" class="ink hair soft"/>
+  <circle cx="350" cy="86" r="3" fill="var(--ink)" opacity="0.4"/>
+  <circle cx="364" cy="100" r="3" fill="var(--ink)" opacity="0.4"/>
 
-  <!-- left pull-up connects to SDA at x=200 -->
-  <!-- already drawn above dropping to y=105 -->
+  <!-- Slave 0x3C taps -->
+  <line x1="520" y1="86" x2="520" y2="150" class="ink hair soft"/>
+  <line x1="534" y1="100" x2="534" y2="150" class="ink hair soft"/>
+  <circle cx="520" cy="86" r="3" fill="var(--ink)" opacity="0.4"/>
+  <circle cx="534" cy="100" r="3" fill="var(--ink)" opacity="0.4"/>
 
-  <!-- right pull-up connects to SCL at x=340 -->
-  <!-- line drawn to y=120 above -->
-  <!-- junction dots -->
-  <circle cx="200" cy="105" r="4" fill="#a6e3a1" filter="url(#glow-sm)"/>
-  <circle cx="340" cy="120" r="4" fill="#89b4fa" filter="url(#glow-sm)"/>
+  <!-- ══ DEVICE BOXES ══ -->
+  <!-- Master -->
+  <rect x="60" y="150" width="130" height="90" rx="8" class="fill-blue ink fine"/>
+  <text x="125" y="176" text-anchor="middle" font-family="PT Mono" font-size="13" font-weight="600" class="dot">Master</text>
+  <text x="125" y="196" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">(MCU)</text>
+  <text x="125" y="220" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">initiates all txns</text>
 
-  <!-- ══════════════════════════════════════
-       DEVICE TAP DROPS
-       Master: x=150  Slave1: x=420  Slave2: x=620
-       Devices top y=190, SDA y=105, SCL y=120
-       ══════════════════════════════════════ -->
-
-  <!-- Master taps: SDA drop x=150 y=105→190, SCL drop x=160 y=120→190 -->
-  <line x1="150" y1="105" x2="150" y2="190" stroke="#a6e3a1" stroke-width="1.5"/>
-  <line x1="165" y1="120" x2="165" y2="190" stroke="#89b4fa" stroke-width="1.5"/>
-  <circle cx="150" cy="105" r="4" fill="#a6e3a1" filter="url(#glow-sm)"/>
-  <circle cx="165" cy="120" r="4" fill="#89b4fa" filter="url(#glow-sm)"/>
-
-  <!-- Slave1 taps: x=420 SDA, x=435 SCL -->
-  <line x1="420" y1="105" x2="420" y2="190" stroke="#a6e3a1" stroke-width="1.5"/>
-  <line x1="435" y1="120" x2="435" y2="190" stroke="#89b4fa" stroke-width="1.5"/>
-  <circle cx="420" cy="105" r="4" fill="#a6e3a1" filter="url(#glow-sm)"/>
-  <circle cx="435" cy="120" r="4" fill="#89b4fa" filter="url(#glow-sm)"/>
-
-  <!-- Slave2 taps: x=630 SDA, x=645 SCL -->
-  <line x1="630" y1="105" x2="630" y2="190" stroke="#a6e3a1" stroke-width="1.5"/>
-  <line x1="645" y1="120" x2="645" y2="190" stroke="#89b4fa" stroke-width="1.5"/>
-  <circle cx="630" cy="105" r="4" fill="#a6e3a1" filter="url(#glow-sm)"/>
-  <circle cx="645" cy="120" r="4" fill="#89b4fa" filter="url(#glow-sm)"/>
-
-  <!-- ══════════════════════════════════════
-       DEVICE BOXES  y=190 h=120
-       ══════════════════════════════════════ -->
-
-  <!-- Master box x=80 w=140 -->
-  <rect x="80" y="190" width="140" height="110" rx="8"
-        fill="#0e2a40" stroke="#89b4fa" stroke-width="1.5"/>
-  <text x="150" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#89b4fa">Master</text>
-  <text x="150" y="238" text-anchor="middle" font-size="12" fill="#6c9ecf">(MCU)</text>
-  <text x="150" y="262" text-anchor="middle" font-size="11" fill="#585b70">initiates all</text>
-  <text x="150" y="277" text-anchor="middle" font-size="11" fill="#585b70">transactions</text>
-
-  <!-- Slave1 box x=390 w=150 -->
-  <rect x="390" y="190" width="150" height="110" rx="8"
-        fill="#1a1a2e" stroke="#a6e3a1" stroke-width="1.5"/>
-  <text x="465" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#cdd6f4">Slave</text>
-  <text x="465" y="238" text-anchor="middle" font-size="13" fill="#a6e3a1">Addr = 0x48</text>
-  <text x="465" y="260" text-anchor="middle" font-size="11" fill="#585b70">temp sensor</text>
-  <!-- address badge -->
-  <rect x="400" y="268" width="130" height="22" rx="4" fill="#1e3a28" stroke="#a6e3a1" stroke-width="0.5"/>
-  <text x="465" y="283" text-anchor="middle" font-size="11" fill="#a6e3a1">responds to 0x48 only</text>
-
-  <!-- Slave2 box x=600 w=150 -->
-  <rect x="600" y="190" width="150" height="110" rx="8"
-        fill="#1a1a2e" stroke="#cba6f7" stroke-width="1.5"/>
-  <text x="675" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#cdd6f4">Slave</text>
-  <text x="675" y="238" text-anchor="middle" font-size="13" fill="#cba6f7">Addr = 0x3C</text>
-  <text x="675" y="260" text-anchor="middle" font-size="11" fill="#585b70">OLED display</text>
-  <!-- address badge -->
-  <rect x="610" y="268" width="130" height="22" rx="4" fill="#2a1e3a" stroke="#cba6f7" stroke-width="0.5"/>
-  <text x="675" y="283" text-anchor="middle" font-size="11" fill="#cba6f7">responds to 0x3C only</text>
-
-  <!-- "...up to 127 devices" note -->
-  <text x="796" y="248" font-size="12" fill="#45475a">... up to</text>
-  <text x="796" y="263" font-size="12" fill="#45475a">127 devices</text>
-  <text x="796" y="278" font-size="12" fill="#45475a">on same</text>
-  <text x="796" y="293" font-size="12" fill="#45475a">2 wires</text>
-
-  <!-- ══════════════════════════════════════
-       ANIMATED PACKETS on SDA y=105
-       Data travels bidirectionally (half-duplex)
-       Master→Slave1 then Slave1→Master alternates
-       ══════════════════════════════════════ -->
-
-  <!-- SCL clock ticks continuously left→right on y=120 -->
-  <circle cy="120" r="5" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="cx" values="100;780;100" keyTimes="0;0.5;1" dur="1.6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="1.6s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="120" r="5" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="cx" values="100;780;100" keyTimes="0;0.5;1" dur="1.6s" begin="0.53s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="1.6s" begin="0.53s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="120" r="5" fill="#89b4fa" filter="url(#glow)">
-    <animate attributeName="cx" values="100;780;100" keyTimes="0;0.5;1" dur="1.6s" begin="1.06s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="1.6s" begin="1.06s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- SDA: address broadcast Master→Slave1 (half-duplex, so one direction at a time) -->
-  <!-- Phase 1 (0s–2s): Master sends address to Slave1 -->
-  <circle cy="105" r="6" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="cx" values="150;465;150" keyTimes="0;0.5;1" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.44;0.5" dur="4s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Phase 2 (2s–4s): Slave1 ACKs back to Master -->
-  <circle cy="105" r="6" fill="#a6e3a1" filter="url(#glow)">
-    <animate attributeName="cx" values="465;150;465" keyTimes="0;0.5;1" dur="4s" begin="2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.44;0.5" dur="4s" begin="2s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Master→Slave2 address broadcast (offset) -->
-  <circle cy="105" r="6" fill="#cba6f7" filter="url(#glow)">
-    <animate attributeName="cx" values="150;675;150" keyTimes="0;0.5;1" dur="4s" begin="1s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.44;0.5" dur="4s" begin="1s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Slave2 ACK back -->
-  <circle cy="105" r="6" fill="#cba6f7" filter="url(#glow)">
-    <animate attributeName="cx" values="675;150;675" keyTimes="0;0.5;1" dur="4s" begin="3s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.44;0.5" dur="4s" begin="3s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- ══════════════════════════════════════
-       SLAVE ADDRESS HIGHLIGHT (ACK glow)
-       Slave1 border glows when addressed
-       ══════════════════════════════════════ -->
-
-  <rect x="390" y="190" width="150" height="110" rx="8"
-        fill="none" stroke="#a6e3a1" stroke-width="3" opacity="0" filter="url(#glow)">
-    <animate attributeName="opacity" values="0;0;0.8;0;0" keyTimes="0;0.45;0.55;0.65;1" dur="4s" repeatCount="indefinite"/>
+  <!-- Slave 0x48 (target) -->
+  <rect x="300" y="150" width="140" height="90" rx="8" class="fill-green ink fine"/>
+  <text x="370" y="176" text-anchor="middle" font-family="PT Mono" font-size="13" font-weight="600" class="dot">Slave</text>
+  <text x="370" y="196" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot">Addr = 0x48</text>
+  <text x="370" y="216" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">temp sensor</text>
+  <!-- glow when addressed -->
+  <rect x="300" y="150" width="140" height="90" rx="8" fill="none" class="ink" stroke-width="3" opacity="0">
+    <animate attributeName="opacity" dur="5s" repeatCount="indefinite" calcMode="linear"
+      keyTimes="0;0.38;0.42;0.70;0.74;1" values="0;0;0.6;0.6;0;0"/>
   </rect>
 
-  <rect x="600" y="190" width="150" height="110" rx="8"
-        fill="none" stroke="#cba6f7" stroke-width="3" opacity="0" filter="url(#glow)">
-    <animate attributeName="opacity" values="0;0;0.8;0;0" keyTimes="0;0.20;0.30;0.40;1" dur="4s" begin="1s" repeatCount="indefinite"/>
+  <!-- Slave 0x3C -->
+  <rect x="480" y="150" width="140" height="90" rx="8" class="fill-purple ink fine"/>
+  <text x="550" y="176" text-anchor="middle" font-family="PT Mono" font-size="13" font-weight="600" class="dot">Slave</text>
+  <text x="550" y="196" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot">Addr = 0x3C</text>
+  <text x="550" y="216" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">OLED display</text>
+
+  <!-- "up to 127 devices" -->
+  <text x="640" y="190" font-family="PT Mono" font-size="10" class="dot soft">…up to</text>
+  <text x="640" y="202" font-family="PT Mono" font-size="10" class="dot soft">127 devs</text>
+  <text x="640" y="214" font-family="PT Mono" font-size="10" class="dot soft">on same</text>
+  <text x="640" y="226" font-family="PT Mono" font-size="10" class="dot soft">2 wires</text>
+
+  <!-- ══ ANIMATED DATA FLOW ══ -->
+
+  <!-- SCL clock ticks continuously -->
+  <circle cy="100" r="5" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="80;620" dur="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.4;0.4;0" keyTimes="0;0.06;0.88;1" dur="1.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="100" r="5" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="80;620" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.4;0.4;0" keyTimes="0;0.06;0.88;1" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="100" r="5" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="80;620" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.4;0.4;0" keyTimes="0;0.06;0.88;1" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- SDA continuous flow dots (bidirectional — data travels both ways) -->
+  <!-- Forward: Master → Slaves -->
+  <circle cy="86" r="5" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="120;620" dur="1.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.06;0.88;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cy="86" r="5" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="120;620" dur="1.6s" begin="0.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.06;0.88;1" dur="1.6s" begin="0.8s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Return: Slave → Master (ACK direction) -->
+  <circle cy="86" r="4" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="520;120" dur="1.6s" begin="0.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.35;0.35;0" keyTimes="0;0.06;0.88;1" dur="1.6s" begin="0.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Phase 1: Master sends address 0x48 packet → travels along SDA to all slaves -->
+  <rect rx="4" y="76" width="40" height="20" class="fill-amber ink hair" opacity="0">
+    <animate attributeName="x" values="120;350;350" keyTimes="0;0.5;1" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.36;0.40" dur="5s" repeatCount="indefinite"/>
   </rect>
+  <text y="90" text-anchor="middle" font-family="PT Mono" font-size="9" font-weight="600" class="dot" opacity="0">
+    0x48
+    <animate attributeName="x" values="140;370;370" keyTimes="0;0.5;1" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.36;0.40" dur="5s" repeatCount="indefinite"/>
+  </text>
 
-  <!-- ══════════════════════════════════════
-       BOTTOM ANNOTATION
-       ══════════════════════════════════════ -->
-  <rect x="80" y="320" width="700" height="50" rx="6"
-        fill="#111120" stroke="#313244" stroke-width="1"/>
-  <text x="430" y="341" text-anchor="middle" font-size="13" fill="#a6adc8">Half-duplex — only ONE direction at a time (like a walkie-talkie)</text>
-  <text x="430" y="360" text-anchor="middle" font-size="12" fill="#585b70">Master broadcasts 7-bit address → only the matching slave responds with ACK</text>
+  <!-- Phase 2: Slave 0x48 sends ACK back → green packet travels back on SDA -->
+  <rect rx="4" y="76" width="36" height="20" class="fill-green ink hair" opacity="0">
+    <animate attributeName="x" values="350;120;120" keyTimes="0;0.5;1" dur="5s" begin="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.36;0.40" dur="5s" begin="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <text y="90" text-anchor="middle" font-family="PT Mono" font-size="9" font-weight="600" class="dot" opacity="0">
+    ACK
+    <animate attributeName="x" values="368;138;138" keyTimes="0;0.5;1" dur="5s" begin="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.36;0.40" dur="5s" begin="2.2s" repeatCount="indefinite"/>
+  </text>
 
-  <!-- ══════════════════════════════════════
-       PIN BLINK DOTS on bus junction
-       ══════════════════════════════════════ -->
+  <!-- ══ BOTTOM NOTE ══ -->
+  <rect x="40" y="260" width="620" height="44" rx="6" class="fill-gray ink hair"/>
+  <text x="350" y="278" text-anchor="middle" font-family="PT Mono" font-size="11" class="dot">half-duplex — only ONE direction at a time (walkie-talkie)</text>
+  <text x="350" y="296" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Master broadcasts 7-bit address → only the matching slave responds with ACK</text>
 
-  <!-- Master SDA pin activity -->
-  <circle cx="150" cy="105" r="4" fill="#a6e3a1" filter="url(#glow-sm)">
-    <animate attributeName="r"       values="4;7;4" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <!-- Master SCL pin activity -->
-  <circle cx="165" cy="120" r="4" fill="#89b4fa" filter="url(#glow-sm)">
-    <animate attributeName="r"       values="4;7;4;7;4" dur="1.6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.6;1;0.6;1;0.6" dur="1.6s" repeatCount="indefinite"/>
-  </circle>
-
+  <!-- legend -->
+  <text x="350" y="328" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">open-drain lines · devices can only PULL LOW · pull-ups float back to HIGH</text>
+  <text x="350" y="348" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">SDA = data · SCL = clock · 2 wires for up to 127 devices</text>
 </svg>

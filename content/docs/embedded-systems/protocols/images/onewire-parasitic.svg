@@ -1,208 +1,156 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="100%" height="100%"
-     style="background-color:#0b0c10; font-family:'Courier New', Courier, monospace;">
-
+<svg width="100%" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" fill="none">
   <defs>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="softNoise"><feFuncA type="table" tableValues="0 0.03"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="multiply"/>
     </filter>
-    <filter id="glow-lg" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <style>
+      :root{--bg:#F7F4EE;--ink:#161616;--noise-opacity:0.85;--green:#E2EFED;--purple:#EBE6F5;--gray:#F0EFEC;--amber:#F5E9D0;--red:#F5E0E0;--blue:#E0EAF5}
+      @media(prefers-color-scheme:dark){:root{--bg:#131313;--ink:#F3EFE7;--noise-opacity:0.18;--green:#1A2E28;--purple:#221E33;--gray:#1A1A19;--amber:#2E2619;--red:#2E1919;--blue:#192633}}
+      .ink{stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}.fine{stroke-width:2}.hair{stroke-width:1.4}.dot{fill:var(--ink)}.bg{fill:var(--bg)}.soft{opacity:.5}.noiseLayer{opacity:var(--noise-opacity)}
+      .fill-green{fill:var(--green)}.fill-purple{fill:var(--purple)}.fill-gray{fill:var(--gray)}.fill-amber{fill:var(--amber)}.fill-red{fill:var(--red)}.fill-blue{fill:var(--blue)}
+    </style>
   </defs>
+  <rect class="bg" width="700" height="380"/>
+  <rect class="noiseLayer" width="700" height="380" filter="url(#paperNoise)"/>
 
-  <!-- ══════════════════════════════════════
-       SECTION LABELS
-       ══════════════════════════════════════ -->
-  <text x="30" y="26" font-size="13" font-weight="bold" fill="#f9e2af">Normal (idle) — parasitic charging</text>
-  <text x="30" y="156" font-size="13" font-weight="bold" fill="#94e2d5">Transmitting — wire pulled LOW</text>
-
-  <!-- ══════════════════════════════════════
-       SCENE 1 — IDLE: wire HIGH, capacitor charging
-       Wire HIGH at y=60, running x=80→600
-       ══════════════════════════════════════ -->
-
-  <!-- Wire label -->
-  <text x="52" y="64" font-size="13" fill="#585b70" text-anchor="middle">Wire</text>
+  <!-- ══ SCENE 1: IDLE — wire HIGH, capacitor charging ══ -->
+  <text x="24" y="18" font-family="PT Mono" font-size="11" font-weight="600" class="dot">Idle — parasitic charging</text>
+  <text x="44" y="50" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Wire</text>
 
   <!-- Static HIGH wire -->
-  <line x1="80" y1="60" x2="600" y2="60" stroke="#f9e2af" stroke-width="3"/>
-  <text x="340" y="48" text-anchor="middle" font-size="12" fill="#f9e2af">HIGH  (VCC via pull-up)</text>
+  <line x1="70" y1="46" x2="480" y2="46" class="ink fine"/>
+  <text x="275" y="36" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">HIGH (VCC via pull-up)</text>
 
-  <!-- VCC energy flowing along the wire (animated dots) -->
-  <circle cy="60" r="5" fill="#f9e2af" filter="url(#glow)">
-    <animate attributeName="cx" values="80;600;80" keyTimes="0;0.5;1" dur="1.8s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="1.8s" repeatCount="indefinite"/>
+  <!-- energy dots on wire -->
+  <circle cy="46" r="3" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="70;480;70" keyTimes="0;0.5;1" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.06;0.88;1" dur="1.8s" repeatCount="indefinite"/>
   </circle>
-  <circle cy="60" r="5" fill="#f9e2af" filter="url(#glow)">
-    <animate attributeName="cx" values="80;600;80" keyTimes="0;0.5;1" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
-  </circle>
-  <circle cy="60" r="5" fill="#f9e2af" filter="url(#glow)">
-    <animate attributeName="cx" values="80;600;80" keyTimes="0;0.5;1" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
+  <circle cy="46" r="3" fill="var(--ink)" opacity="0">
+    <animate attributeName="cx" values="70;480;70" keyTimes="0;0.5;1" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.5;0.5;0" keyTimes="0;0.06;0.88;1" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- Drop line to capacitor x=480 -->
-  <line x1="480" y1="60" x2="480" y2="80" stroke="#f9e2af" stroke-width="1.5"/>
-  <!-- Arrow down -->
-  <polygon points="474,78 486,78 480,86" fill="#94e2d5" opacity="0">
-    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
-  </polygon>
-  <text x="500" y="75" font-size="12" fill="#94e2d5">↓ capacitor charges</text>
+  <!-- Cap drop -->
+  <line x1="380" y1="46" x2="380" y2="60" class="ink hair soft"/>
+  <text x="400" y="58" font-family="PT Mono" font-size="9" class="dot soft">↓ cap charges</text>
+  <!-- Capacitor symbol -->
+  <line x1="366" y1="66" x2="394" y2="66" class="ink fine"/>
+  <line x1="366" y1="74" x2="394" y2="74" class="ink fine"/>
+  <line x1="380" y1="64" x2="380" y2="66" class="ink hair soft"/>
+  <line x1="380" y1="74" x2="380" y2="84" class="ink hair soft"/>
+  <!-- GND -->
+  <line x1="372" y1="84" x2="388" y2="84" class="ink hair soft"/>
+  <line x1="374" y1="88" x2="386" y2="88" class="ink hair soft" opacity="0.5"/>
+  <line x1="376" y1="92" x2="384" y2="92" class="ink hair soft" opacity="0.3"/>
 
-  <!-- Capacitor symbol [C]: two plates y=88 and y=100 -->
-  <line x1="460" y1="88" x2="500" y2="88" stroke="#94e2d5" stroke-width="3"/>
-  <line x1="460" y1="98" x2="500" y2="98" stroke="#94e2d5" stroke-width="3"/>
-  <line x1="480" y1="86" x2="480" y2="88" stroke="#94e2d5" stroke-width="1.5"/>
-  <line x1="480" y1="98" x2="480" y2="110" stroke="#94e2d5" stroke-width="1.5"/>
-  <!-- GND below cap -->
-  <line x1="468" y1="110" x2="492" y2="110" stroke="#45475a" stroke-width="1.5"/>
-  <line x1="472" y1="114" x2="488" y2="114" stroke="#45475a" stroke-width="1"/>
-  <line x1="476" y1="118" x2="484" y2="118" stroke="#45475a" stroke-width="0.5"/>
+  <text x="404" y="72" font-family="PT Mono" font-size="10" font-weight="500" class="dot">[C]</text>
+  <text x="424" y="72" font-family="PT Mono" font-size="9" class="dot soft">stored energy</text>
+  <circle cx="380" cy="46" r="3" fill="var(--ink)" opacity="0.4"/>
 
-  <!-- [C] label -->
-  <text x="510" y="95" font-size="13" font-weight="bold" fill="#94e2d5">[C]</text>
-  <text x="530" y="95" font-size="12" fill="#45475a">stored energy</text>
-
-  <!-- capacitor charge glow (pulses when idle) -->
-  <ellipse cx="480" cy="93" rx="22" ry="10" fill="none" stroke="#94e2d5" stroke-width="2" opacity="0" filter="url(#glow)">
-    <animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite"/>
-    <animate attributeName="rx" values="22;30;22" dur="1.5s" repeatCount="indefinite"/>
+  <!-- cap charge glow -->
+  <ellipse cx="380" cy="70" rx="18" ry="8" fill="none" class="ink hair" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="18;24;18" dur="1.5s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- junction dot -->
-  <circle cx="480" cy="60" r="4" fill="#f9e2af"/>
+  <!-- ══ SCENE 2: TRANSMITTING — wire LOW pulse ══ -->
+  <text x="24" y="124" font-family="PT Mono" font-size="11" font-weight="600" class="dot">Transmitting — wire pulled LOW</text>
+  <text x="44" y="154" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Wire</text>
 
-  <!-- ══════════════════════════════════════
-       SCENE 2 — TRANSMITTING: wire LOW pulse
-       Wire at y=175 (HIGH), dips to y=205 (LOW)
-       ══════════════════════════════════════ -->
+  <!-- Waveform: HIGH—LOW—HIGH -->
+  <line x1="70" y1="150" x2="168" y2="150" class="ink fine"/>
+  <line x1="168" y1="150" x2="168" y2="174" class="ink fine"/>
+  <line x1="168" y1="174" x2="300" y2="174" class="ink fine"/>
+  <line x1="300" y1="174" x2="300" y2="150" class="ink fine"/>
+  <line x1="300" y1="150" x2="480" y2="150" class="ink fine"/>
 
-  <text x="52" y="179" font-size="13" fill="#585b70" text-anchor="middle">Wire</text>
+  <text x="120" y="142" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">HIGH</text>
+  <text x="234" y="190" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">LOW</text>
+  <text x="390" y="142" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">HIGH</text>
 
-  <!-- Static waveform: HIGH─┐LOW┌─HIGH -->
-  <!-- left HIGH: x=80→200 y=175 -->
-  <line x1="80"  y1="175" x2="200" y2="175" stroke="#94e2d5" stroke-width="3"/>
-  <!-- drop edge x=200 y=175→205 -->
-  <line x1="200" y1="175" x2="200" y2="205" stroke="#94e2d5" stroke-width="3"/>
-  <!-- LOW pulse: x=200→360 y=205 -->
-  <line x1="200" y1="205" x2="360" y2="205" stroke="#94e2d5" stroke-width="3"/>
-  <!-- rise edge x=360 y=205→175 -->
-  <line x1="360" y1="205" x2="360" y2="175" stroke="#94e2d5" stroke-width="3"/>
-  <!-- right HIGH: x=360→600 y=175 -->
-  <line x1="360" y1="175" x2="600" y2="175" stroke="#94e2d5" stroke-width="3"/>
-
-  <!-- HIGH / LOW labels on waveform -->
-  <text x="140" y="168" text-anchor="middle" font-size="12" fill="#f9e2af">HIGH</text>
-  <text x="280" y="222" text-anchor="middle" font-size="12" fill="#585b70">LOW</text>
-  <text x="480" y="168" text-anchor="middle" font-size="12" fill="#f9e2af">HIGH</text>
-
-  <!-- animated dot tracing the waveform -->
-  <circle r="6" fill="#94e2d5" filter="url(#glow)">
+  <!-- signal dot -->
+  <circle r="4" fill="var(--ink)" opacity="0">
     <animate attributeName="cx" dur="2.4s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.17;0.21;0.30;0.38;0.42;1"
-      values="80;200;200;360;360;600;600"/>
+      values="70;168;168;300;300;480;480"/>
     <animate attributeName="cy" dur="2.4s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.17;0.21;0.30;0.38;0.42;1"
-      values="175;175;205;205;175;175;175"/>
-    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.04;0.96;1" dur="2.4s" repeatCount="indefinite"/>
+      values="150;150;174;174;150;150;150"/>
+    <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.88;1" dur="2.4s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- capacitor discharge annotation during LOW pulse -->
-  <!-- capacitor at x=480, y=188 (between rows) -->
-  <line x1="480" y1="175" x2="480" y2="193" stroke="#94e2d5" stroke-width="1.5"/>
-  <line x1="462" y1="194" x2="498" y2="194" stroke="#94e2d5" stroke-width="3"/>
-  <line x1="462" y1="202" x2="498" y2="202" stroke="#94e2d5" stroke-width="3"/>
-  <line x1="480" y1="202" x2="480" y2="212" stroke="#94e2d5" stroke-width="1.5"/>
-  <line x1="468" y1="212" x2="492" y2="212" stroke="#45475a" stroke-width="1.5"/>
-  <line x1="472" y1="216" x2="488" y2="216" stroke="#45475a" stroke-width="1"/>
-  <line x1="476" y1="220" x2="484" y2="220" stroke="#45475a" stroke-width="0.5"/>
-  <circle cx="480" cy="175" r="4" fill="#94e2d5"/>
-  <text x="506" y="198" font-size="12" fill="#94e2d5">[C]</text>
+  <!-- Cap during LOW -->
+  <line x1="380" y1="150" x2="380" y2="162" class="ink hair soft"/>
+  <line x1="368" y1="162" x2="392" y2="162" class="ink fine"/>
+  <line x1="368" y1="168" x2="392" y2="168" class="ink fine"/>
+  <line x1="380" y1="168" x2="380" y2="178" class="ink hair soft"/>
+  <line x1="372" y1="178" x2="388" y2="178" class="ink hair soft"/>
+  <circle cx="380" cy="150" r="3" fill="var(--ink)" opacity="0.4"/>
+  <text x="400" y="166" font-family="PT Mono" font-size="10" font-weight="500" class="dot">[C]</text>
 
-  <!-- discharge glow (pulses during LOW window only) -->
-  <ellipse cx="480" cy="198" rx="22" ry="10" fill="none" stroke="#f9e2af" stroke-width="2" opacity="0" filter="url(#glow)">
+  <!-- discharge glow during LOW -->
+  <ellipse cx="380" cy="165" rx="18" ry="8" fill="none" class="ink hair" opacity="0">
     <animate attributeName="opacity" dur="2.4s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.21;0.22;0.37;0.38;1" values="0;0;0.8;0.8;0;0"/>
+      keyTimes="0;0.21;0.22;0.37;0.38;1" values="0;0;0.4;0.4;0;0"/>
   </ellipse>
+  <text x="420" y="162" font-family="PT Mono" font-size="9" class="dot soft">← slave runs on [C]</text>
+  <text x="420" y="174" font-family="PT Mono" font-size="9" class="dot soft">   during LOW pulse</text>
 
-  <!-- "slave survives on [C]" annotation -->
-  <text x="530" y="194" font-size="12" fill="#585b70">← slave survives on [C]</text>
-  <text x="530" y="210" font-size="12" fill="#585b70">   during LOW pulse</text>
+  <!-- pulse duration -->
+  <line x1="168" y1="198" x2="300" y2="198" class="ink hair soft"/>
+  <polygon points="168,194 168,202 162,198" fill="var(--ink)" opacity="0.4"/>
+  <polygon points="300,194 300,202 306,198" fill="var(--ink)" opacity="0.4"/>
+  <text x="234" y="212" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">pulse duration = bit value</text>
 
-  <!-- pulse duration arrow -->
-  <line x1="200" y1="232" x2="360" y2="232" stroke="#f38ba8" stroke-width="1.5"/>
-  <polygon points="200,228 200,236 193,232" fill="#f38ba8"/>
-  <polygon points="360,228 360,236 367,232" fill="#f38ba8"/>
-  <text x="280" y="246" text-anchor="middle" font-size="12" fill="#f38ba8">pulse duration = bit value</text>
+  <!-- ══ DIVIDER ══ -->
+  <line x1="24" y1="230" x2="676" y2="230" class="ink hair soft" stroke-dasharray="4 6"/>
+  <text x="350" y="246" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="600" class="dot">64-bit ROM ID — burned at factory, unique forever</text>
 
-  <!-- ══════════════════════════════════════
-       DIVIDER
-       ══════════════════════════════════════ -->
-  <line x1="30" y1="262" x2="830" y2="262" stroke="#313244" stroke-width="1" stroke-dasharray="4 6"/>
-  <text x="430" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#cba6f7">64-bit ROM ID — burned at factory, mathematically unique forever</text>
-
-  <!-- ══════════════════════════════════════
-       ROM ID ROW  y=292 h=50
-       8-bit family | 48-bit serial | 8-bit CRC
-       x: family=30..130 (100px), serial=134..614 (480px), crc=618..718 (100px)
-       ══════════════════════════════════════ -->
-
-  <!-- family code cell -->
-  <rect x="30" y="292" width="110" height="50" rx="5"
-        fill="#1a1820" stroke="#cba6f7" stroke-width="1.5">
+  <!-- ══ ROM ID ROW ══ -->
+  <!-- Family -->
+  <rect x="24" y="260" width="96" height="42" rx="5" class="fill-purple ink hair">
     <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.00;0.04;0.20;0.24;1" values="0.4;1;1;1;0.4;0.4"/>
   </rect>
-  <text x="85" y="312" text-anchor="middle" font-size="12" font-weight="bold" fill="#cba6f7">8-bit</text>
-  <text x="85" y="328" text-anchor="middle" font-size="11" fill="#7a5a9a">family code</text>
-  <text x="85" y="342" text-anchor="middle" font-size="11" fill="#585b70">0x28 = temp</text>
+  <text x="72" y="278" text-anchor="middle" font-family="PT Mono" font-size="10" font-weight="500" class="dot">8-bit</text>
+  <text x="72" y="294" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">family code</text>
 
-  <!-- serial number cell (wide) -->
-  <rect x="144" y="292" width="480" height="50" rx="5"
-        fill="#0e1e2a" stroke="#94e2d5" stroke-width="1.5">
+  <!-- Serial -->
+  <rect x="124" y="260" width="400" height="42" rx="5" class="fill-green ink hair">
     <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.24;0.28;0.68;0.72;1" values="0.4;0.4;1;1;0.4;0.4"/>
   </rect>
-  <text x="384" y="312" text-anchor="middle" font-size="13" font-weight="bold" fill="#94e2d5">48-bit serial number</text>
-  <text x="384" y="330" text-anchor="middle" font-size="12" fill="#3a7a6a">unique per device, ever — no two devices share this ID</text>
-  <!-- animated bit scan across serial field -->
-  <rect x="145" y="293" width="0" height="48" rx="3" fill="#94e2d5" opacity="0.15">
+  <text x="324" y="278" text-anchor="middle" font-family="PT Mono" font-size="11" font-weight="500" class="dot">48-bit serial number</text>
+  <text x="324" y="294" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">unique per device, ever</text>
+  <!-- scan bar -->
+  <rect x="125" y="261" width="0" height="40" rx="3" fill="var(--ink)" opacity="0">
     <animate attributeName="width" dur="4s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.24;0.68;0.72;1" values="0;0;480;480;0"/>
+      keyTimes="0;0.24;0.68;0.72;1" values="0;0;400;400;0"/>
     <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
-      keyTimes="0;0.28;0.50;0.68;0.72;1" values="0;0.15;0.08;0.15;0"/>
+      keyTimes="0;0.28;0.50;0.68;0.72;1" values="0;0.08;0.04;0.08;0"/>
   </rect>
 
-  <!-- CRC cell -->
-  <rect x="628" y="292" width="110" height="50" rx="5"
-        fill="#1a0e1a" stroke="#f38ba8" stroke-width="1.5">
+  <!-- CRC -->
+  <rect x="528" y="260" width="96" height="42" rx="5" class="fill-red ink hair">
     <animate attributeName="opacity" dur="4s" repeatCount="indefinite" calcMode="linear"
       keyTimes="0;0.72;0.76;0.96;1" values="0.4;0.4;1;1;0.4"/>
   </rect>
-  <text x="683" y="312" text-anchor="middle" font-size="12" font-weight="bold" fill="#f38ba8">8-bit</text>
-  <text x="683" y="328" text-anchor="middle" font-size="11" fill="#8a3a3a">CRC</text>
-  <text x="683" y="342" text-anchor="middle" font-size="11" fill="#585b70">error check</text>
+  <text x="576" y="278" text-anchor="middle" font-family="PT Mono" font-size="10" font-weight="500" class="dot">8-bit</text>
+  <text x="576" y="294" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">CRC check</text>
 
-  <!-- bit count braces -->
-  <line x1="30"  y1="350" x2="140" y2="350" stroke="#cba6f7" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="85"   y="363" text-anchor="middle" font-size="10" fill="#585b70">8 bits</text>
-  <line x1="144" y1="350" x2="624" y2="350" stroke="#94e2d5" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="384"  y="363" text-anchor="middle" font-size="10" fill="#585b70">48 bits</text>
-  <line x1="628" y1="350" x2="738" y2="350" stroke="#f38ba8" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="683"  y="363" text-anchor="middle" font-size="10" fill="#585b70">8 bits</text>
+  <!-- bit counts -->
+  <line x1="24" y1="310" x2="120" y2="310" class="ink hair soft" stroke-dasharray="3 2"/>
+  <text x="72" y="322" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">8 bits</text>
+  <line x1="124" y1="310" x2="524" y2="310" class="ink hair soft" stroke-dasharray="3 2"/>
+  <text x="324" y="322" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">48 bits</text>
+  <line x1="528" y1="310" x2="624" y2="310" class="ink hair soft" stroke-dasharray="3 2"/>
+  <text x="576" y="322" text-anchor="middle" font-family="PT Mono" font-size="9" class="dot soft">8 bits</text>
 
-  <!-- total -->
-  <line x1="30" y1="370" x2="738" y2="370" stroke="#313244" stroke-width="1"/>
-  <text x="384" y="384" text-anchor="middle" font-size="12" fill="#585b70">= 64 bits total  ·  2⁴⁸ possible serial numbers  ·  281 trillion unique IDs</text>
-  <text x="384" y="400" text-anchor="middle" font-size="12" fill="#585b70">Master runs SEARCH ROM command to discover every connected device automatically</text>
-
+  <line x1="24" y1="330" x2="624" y2="330" class="ink hair soft"/>
+  <text x="324" y="346" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">= 64 bits total · 2⁴⁸ serial numbers · 281 trillion unique IDs</text>
+  <text x="324" y="364" text-anchor="middle" font-family="PT Mono" font-size="10" class="dot soft">Master runs SEARCH ROM to discover every device automatically</text>
 </svg>
